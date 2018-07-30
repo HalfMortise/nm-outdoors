@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 ALTER DATABASE nmoutdoors CHARACTER SET  utf8 COLLATE  utf8_unicode_ci;
 
 
@@ -29,6 +30,22 @@ CREATE TABLE profile (
 
 CREATE TABLE review (
 	reviewId BINARY(16) NOT NULL,
-	reviewProfileId
+	reviewProfileId BINARY(16) NOT NULL,
+	reviewRecAreaId BINARY(16) NOT NULL,
+	reviewContent VARCHAR(6000),
+	reviewDateTime DATETIME(6) NOT NULL,
+	reviewRating DECIMAL (5,1) NOT NULL,
+	INDEX(reviewProfileId),
+	FOREIGN KEY (reviewProfileId) REFERENCES profile(profileId),
+	INDEX(reviewRecAreaId),
+	FOREIGN KEY (reviewRecAreaId) REFERENCES recArea(recAreaId),
+	PRIMARY KEY (reviewId)
 );
+
+CREATE TABLE activity (
+	activityId BINARY(16) NOT NULL,
+	activityName VARCHAR(60),
+	PRIMARY KEY (activityId)
+);
+
 
