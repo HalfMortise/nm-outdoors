@@ -10,12 +10,12 @@
       <div>
          <ul>RecArea
             <li>recAreaId (Primary Key)</li>
-            <li>recAreaAddress</li>
             <li>recAreaDescription</li>
             <li>recAreaDirections</li>
+				<li>recAreaImgUrl</li>
             <li>recAreaLat</li>
-            <li>recAreaLocation</li>
             <li>recAreaLong</li>
+				<li>recAreaMap</li>
             <li>recAreaName</li>
          </ul>
          <ul>Profile
@@ -26,33 +26,27 @@
             <li>profileImage</li>
             <li>profileAtHandle</li>
          </ul>
-         <ul>Favorite (weak entity)
-            <li>favProfileId (Foreign Key)</li>
-            <li>favProfileRecAreaId (Foreign Key)</li>
-         </ul>
          <ul>Review
             <li>reviewId (Primary Key)</li>
             <li>reviewRecAreaId (Foreign Key)</li>
             <li>reviewProfileId (Foreign Key)</li>
-            <li>reviewContent</li>
+            <li>reviewContent</li><!--make this nullable-->
             <li>reviewDateTime</li>
             <li>reviewRating</li>
          </ul>
-         <ul>Activity
+         <ul>Activity<!--innummerator-->
             <li>activityId (Primary Key)</li>
-            <li>activityRecAreaId (Foreign Key)</li>
+            <li>activityName</li>
          </ul>
-         <ul>ActivityType
-            <li>activityTypeId (Primary Key)</li>
-            <li>activityTypeName (Foreign Key)</li>
+         <ul>ActivityType (weak entity)<!--bridge-->
+				<li>activityTypeActivityId (Foreign Key)</li>
+				<li>activityTypeRecId (Foreign Key)</li>
          </ul>
       </div>
       <div>
-         <ul>Relationships (TBA)
-				<li>One profile 'favorite' many rec areas (1-to-n)</li>
+         <ul>Relationships
 				<li>Many profiles can review many rec areas (m-to-n)</li>
-				<li>One rec area can have many activity types (1-to-n)</li>
-				<li>One activity has one activity type (1-to-1)</li>
+				<li>Many rec areas can have many activity types (m-to-n)</li>
 			</ul>
       </div>
       <div class="fixed-footer">
