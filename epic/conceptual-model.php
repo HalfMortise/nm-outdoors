@@ -12,7 +12,7 @@
             <li>recAreaId (Primary Key)</li>
             <li>recAreaDescription</li>
             <li>recAreaDirections</li>
-				<li>recAreaImgUrl</li>
+				<li>recAreaImageUrl</li>
             <li>recAreaLat</li>
             <li>recAreaLong</li>
 				<li>recAreaMap</li>
@@ -24,7 +24,7 @@
 				<li>profileAtHandle</li>
 				<li>profileEmail</li>
             <li>profileHash</li>
-            <li>profileImage</li>
+            <li>profileImageUrl</li>
          </ul>
          <ul>Review
             <li>reviewId (Primary Key)</li>
