@@ -49,6 +49,7 @@
 				<li>Many rec areas can have many activity types (m-to-n)</li>
 			</ul>
       </div>
+		<img src="images/ERD-NMOUTDOORS.svg" alt="image of ERD">
       <div class="fixed-footer">
          <div class="container"><a href="./index.html">Home</a></div>
       </div>
