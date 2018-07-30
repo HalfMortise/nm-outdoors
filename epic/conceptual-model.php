@@ -49,10 +49,12 @@
 				<li>Many rec areas can have many activity types (m-to-n)</li>
 				<li>Many profiles can write many reviews (m-to-n)</li>
 				<li>Many activities can have many activity types (m-to-n)</li>
-				<li></li>
 			</ul>
       </div>
-		<img src="images/ERD-NMOUTDOORS.svg" alt="image of ERD">
+		<h3>ERD</h3>
+		<div>
+			<a href="https://bootcamp-coders.cnm.edu/~ecorsi/nm-outdoors/epic/images/erd-nmoutdoors.svg" target="_blank"><img class="img" src="./images/erd-nmoutdoors.svg" alt="image of ERD" width="800px" /></a>
+		</div>
       <div class="fixed-footer">
          <div class="container"><a href="./index.html">Home</a></div>
       </div>
