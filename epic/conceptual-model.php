@@ -21,15 +21,15 @@
          <ul>Profile
             <li>profileId (Primary Key)</li>
             <li>profileActivationToken</li>
-            <li>profileEmail</li>
+				<li>profileAtHandle</li>
+				<li>profileEmail</li>
             <li>profileHash</li>
             <li>profileImage</li>
-            <li>profileAtHandle</li>
          </ul>
          <ul>Review
             <li>reviewId (Primary Key)</li>
-            <li>reviewRecAreaId (Foreign Key)</li>
-            <li>reviewProfileId (Foreign Key)</li>
+				<li>reviewProfileId (Foreign Key)</li>
+				<li>reviewRecAreaId (Foreign Key)</li>
             <li>reviewContent</li><!--make this nullable-->
             <li>reviewDateTime</li>
             <li>reviewRating</li>
