@@ -49,9 +49,11 @@
       </div>
       <div>
          <ul>Relationships (TBA)
-            <li></li>
-            <li></li>
-         </ul>
+				<li>One profile 'favorite' many rec areas (1-to-n)</li>
+				<li>Many profiles can review many rec areas (m-to-n)</li>
+				<li>One rec area can have many activity types (1-to-n)</li>
+				<li>One activity has one activity type (1-to-1)</li>
+			</ul>
       </div>
       <div class="fixed-footer">
          <div class="container"><a href="./index.html">Home</a></div>
