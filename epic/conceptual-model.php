@@ -53,7 +53,7 @@
       </div>
 		<h3>ERD</h3>
 		<div>
-		<img src="images/erd-nmoutdoors.svg" alt="image of ERD" width="1200px">
+			<a href="https://bootcamp-coders.cnm.edu/~ecorsi/nm-outdoors/epic/images/erd-nmoutdoors.svg" target="_blank"><img class="img" src="./images/erd-nmoutdoors.svg" alt="image of ERD" width="800px" /></a>
 		</div>
       <div class="fixed-footer">
          <div class="container"><a href="./index.html">Home</a></div>
