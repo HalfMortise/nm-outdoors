@@ -21,15 +21,15 @@
          <ul>Profile
             <li>profileId (Primary Key)</li>
             <li>profileActivationToken</li>
-            <li>profileEmail</li>
+				<li>profileAtHandle</li>
+				<li>profileEmail</li>
             <li>profileHash</li>
             <li>profileImage</li>
-            <li>profileAtHandle</li>
          </ul>
          <ul>Review
             <li>reviewId (Primary Key)</li>
-            <li>reviewRecAreaId (Foreign Key)</li>
-            <li>reviewProfileId (Foreign Key)</li>
+				<li>reviewProfileId (Foreign Key)</li>
+				<li>reviewRecAreaId (Foreign Key)</li>
             <li>reviewContent</li><!--make this nullable-->
             <li>reviewDateTime</li>
             <li>reviewRating</li>
@@ -45,8 +45,11 @@
       </div>
       <div>
          <ul>Relationships
-				<li>Many profiles can review many rec areas (m-to-n)</li>
+				<li>Many rec areas can have many reviews (m-to-n)</li>
 				<li>Many rec areas can have many activity types (m-to-n)</li>
+				<li>Many profiles can write many reviews (m-to-n)</li>
+				<li>Many activities can have many activity types (m-to-n)</li>
+				<li></li>
 			</ul>
       </div>
 		<img src="images/ERD-NMOUTDOORS.svg" alt="image of ERD">
