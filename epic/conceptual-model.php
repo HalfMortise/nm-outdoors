@@ -52,7 +52,7 @@
 				<li></li>
 			</ul>
       </div>
-		<img src="images/ERD-NMOUTDOORS.svg" alt="image of ERD">
+		<img src="images/erd-nmoutdoors.svg" alt="image of ERD">
       <div class="fixed-footer">
          <div class="container"><a href="./index.html">Home</a></div>
       </div>
