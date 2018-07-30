@@ -45,8 +45,11 @@
       </div>
       <div>
          <ul>Relationships
-				<li>Many profiles can review many rec areas (m-to-n)</li>
+				<li>Many rec areas can have many reviews (m-to-n)</li>
 				<li>Many rec areas can have many activity types (m-to-n)</li>
+				<li>Many profiles can write many reviews (m-to-n)</li>
+				<li>Many activities can have many activity types (m-to-n)</li>
+				<li></li>
 			</ul>
       </div>
       <div class="fixed-footer">
