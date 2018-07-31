@@ -11,8 +11,8 @@ CREATE TABLE recArea (
 	recAreaDescription VARCHAR (6000),
 	recAreaDirections VARCHAR(6000),
 	recAreaImageUrl VARCHAR(255),
-	recAreaLat DECIMAL,
-	recAreaLong DECIMAL,
+	recAreaLat DECIMAL (9, 6),
+	recAreaLong DECIMAL (9, 6),
 	recAreaMapUrl VARCHAR (255),
 	recAreaName VARCHAR (255),
 
@@ -40,8 +40,8 @@ CREATE TABLE review (
 	reviewDateTime DATETIME(6) NOT NULL,
 	reviewRating DECIMAL (5,1) NOT NULL,
 	INDEX(reviewProfileId),
-	FOREIGN KEY (reviewProfileId) REFERENCES profile(profileId),
 	INDEX(reviewRecAreaId),
+	FOREIGN KEY (reviewProfileId) REFERENCES profile(profileId),
 	FOREIGN KEY (reviewRecAreaId) REFERENCES recArea(recAreaId),
 	PRIMARY KEY (reviewId)
 );
