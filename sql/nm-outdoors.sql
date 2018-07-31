@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 ALTER DATABASE nmoutdoors CHARACTER SET  utf8 COLLATE  utf8_unicode_ci;
 
 DROP TABLE if EXISTS activityType;
@@ -12,8 +11,8 @@ CREATE TABLE recArea (
 	recAreaDescription VARCHAR (6000),
 	recAreaDirections VARCHAR(6000),
 	recAreaImageUrl VARCHAR(255),
-	recAreaLat FLOAT,
-	recAreaLong FLOAT,
+	recAreaLat DECIMAL,
+	recAreaLong DECIMAL,
 	recAreaMapUrl VARCHAR (255),
 	recAreaName VARCHAR (255),
 
@@ -57,7 +56,8 @@ CREATE TABLE activityType (
 	activityTypeActivityId BINARY(16) NOT NULL,
 	activityTypeRecId BINARY(16) NOT NULL,
 	INDEX (activityTypeActivityId),
-	FOREIGN KEY (activityTypeActivityId) REFERENCES activity(activityId),
 	INDEX (activityTypeRecId),
+	FOREIGN KEY (activityTypeActivityId) REFERENCES activity(activityId),
 	FOREIGN KEY (activityTypeRecId) REFERENCES recArea(recAreaId)
+	PRIMARY KEY (activityTypeActivityId, activityTypeRecId)
 );
