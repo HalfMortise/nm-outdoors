@@ -38,7 +38,7 @@ CREATE TABLE review (
 	reviewRecAreaId BINARY(16) NOT NULL,
 	reviewContent VARCHAR(6000),
 	reviewDateTime DATETIME(6) NOT NULL,
-	reviewRating DECIMAL (9,6) NOT NULL,
+	reviewRating INT NOT NULL,
 	INDEX(reviewProfileId),
 	INDEX(reviewRecAreaId),
 	FOREIGN KEY (reviewProfileId) REFERENCES profile(profileId),
