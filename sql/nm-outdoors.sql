@@ -8,8 +8,8 @@ DROP TABLE IF EXISTS recArea;
 
 CREATE TABLE recArea (
    recAreaId BINARY(16) NOT NULL,
-	recAreaDescription VARCHAR (6000),
-	recAreaDirections VARCHAR(6000),
+	recAreaDescription VARCHAR (2048),
+	recAreaDirections VARCHAR(512),
 	recAreaImageUrl VARCHAR(255),
 	recAreaLat DECIMAL (9, 6),
 	recAreaLong DECIMAL (9, 6),
@@ -36,9 +36,9 @@ CREATE TABLE review (
 	reviewId BINARY(16) NOT NULL,
 	reviewProfileId BINARY(16) NOT NULL,
 	reviewRecAreaId BINARY(16) NOT NULL,
-	reviewContent VARCHAR(6000),
+	reviewContent VARCHAR(512),
 	reviewDateTime DATETIME(6) NOT NULL,
-	reviewRating INT NOT NULL,
+	reviewRating TINYINT UNSIGNED NOT NULL,
 	INDEX(reviewProfileId),
 	INDEX(reviewRecAreaId),
 	FOREIGN KEY (reviewProfileId) REFERENCES profile(profileId),
