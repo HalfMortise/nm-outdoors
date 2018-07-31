@@ -1,8 +1,8 @@
 <<<<<<< Updated upstream
 ALTER DATABASE nmoutdoors CHARACTER SET  utf8 COLLATE  utf8_unicode_ci;
 
-DROP TABLE if EXISTS activityType;
-DROP TABLE if EXISTS activity;
+DROP TABLE IF EXISTS activityType;
+DROP TABLE IF EXISTS activity;
 DROP TABLE IF EXISTS review;
 DROP TABLE IF EXISTS profile;
 DROP TABLE IF EXISTS recArea;
