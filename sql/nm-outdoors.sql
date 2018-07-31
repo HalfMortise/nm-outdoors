@@ -58,6 +58,6 @@ CREATE TABLE activityType (
 	INDEX (activityTypeActivityId),
 	INDEX (activityTypeRecId),
 	FOREIGN KEY (activityTypeActivityId) REFERENCES activity(activityId),
-	FOREIGN KEY (activityTypeRecId) REFERENCES recArea(recAreaId)
+	FOREIGN KEY (activityTypeRecId) REFERENCES recArea(recAreaId),
 	PRIMARY KEY (activityTypeActivityId, activityTypeRecId)
 );
