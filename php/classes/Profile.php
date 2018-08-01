@@ -52,8 +52,38 @@ class Profile {
  */
    private $profileImageUrl;
 
+/**
+ * Constructor for this class
+ *
+ * @param Uuid $newProfileId Id of this Profile
+ * @param Uuid $newProfileActivationToken activation token for profile setup
+ * @param string $newProfileAtHandle handle used for profile
+ * @param string $newProfileEmail email used for profile setup
+ * @param Uuid $newProfileHash hash-password used for profile
+ * @param string $newProfileImageUrl URL for image used as profile avatar
+ * @throws \InvalidArgumentException if data types are not valid
+ * @throws \RangeException if data values are out of bounds (e.g., strings too long, negative integers)
+ * @throws \TypeError if data types violate type hints
+ * @throws \Exception if some other exception occurs
+ * @Documentation https://php.net/manual/en/language.oop5.decon.php
+ *
+ */
 
-
-
-
+   public function __construct($newProfileId, $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, $newProfileHash, string $newProfileImageUrl) {
+      try {
+         $this->setProfileId($newProfileId);
+         $this->setProfileActivationToken($newProfileActivationToken);
+         $this->setProfileAtHandle($newProfileAtHandle);
+         $this->setProfileEmail($newProfileEmail);
+         $this->setProfileHash($newProfileHash);
+         $this->setProfileImageUrl($newProfileImageUrl);
+      }
+      //determine exception thrown
+      catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+         $exceptionType = get_class($exception);
+         throw(new $exceptionType($exception->getMessage(), 0, $exception));
+      }
+      //end exception
+   }
+   //end constructor
 }
