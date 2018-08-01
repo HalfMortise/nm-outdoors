@@ -88,4 +88,34 @@ class ActivityType {
 		//convert and stores the ActivityTypeRecId
 		$this->activityTypeRecId = $uuid;
 	}
+	/**
+	 * inserts this ActivityType into mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert(\PDO $pdo) : void {
+		//create query template
+		$query = "INSERT INTO activityType(activityTypeActivityId, activityTypeRecId) VALUES(:activityTypeActivityId, :activityTypeRecId)";
+		$statement = $pdo->prepare($query);
+		//bind the member variables to the place holders in the template
+		$parameters = ["activityTypeActivityId" => $this->activityTypeActivityId->getBytes(), "activityTypeRecId" => $this->activityTypeRecId->getBytes()];
+		$statement->execute($parameters);
+	}
+	/**
+	 * deletes the ActivityType from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function delete(\PDO $pdo) : void {
+		// create query template
+		$query = "DELETE FROM activityType WHERE activityTypeActivityId = :activityTypeActivityId AND activityTypeRecId = :activityTypeRecId";
+		$statement = $pdo->prepare($query);
+		//bind the member variables to the place holder in the template
+		$parameters = ["activityTypeActivityId" => $this->activityTypeActivityId->getBytes(), "activityTypeRedId" => $this->activityTypeRecId->getBytes()];
+		$statement->execute($parameters);
+	}
 }
