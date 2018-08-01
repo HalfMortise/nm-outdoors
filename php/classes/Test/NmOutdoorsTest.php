@@ -83,8 +83,8 @@ abstract class NmOutdoorsTest extends TestCase {
       // if the connection hasn't been established, create it
       if($this->connection === null) {
          // connect to mySQL and provide the interface to PHPUnit
-         $config = readConfig("/etc/apache2/capstone-mysql/ddctwitter.ini");
-         $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddctwitter.ini");
+         $config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
+         $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
          $this->connection = $this->createDefaultDBConnection($pdo, $config["database"]);
       }
       return($this->connection);
