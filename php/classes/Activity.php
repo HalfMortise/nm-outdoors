@@ -92,5 +92,48 @@ class Activity {
 		}
 		$this->activityName = $newActivityName;
 	}
+	/**
+	 * inserts this activityId into mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function insert(\PDO $pdo): void {
+		// create query template
+		$query = "INSERT INTO activity(activityId, activityName) VALUES (:activityId, :activityName)";
+		$statement = $pdo->prepare($query);
+		$parameters = ["activityId" => $this->activityId->getBytes(), "activityName" => $this->activityName];
+		$statement->execute($parameters);
+	}
+	/**
+	 * deletes this activityId from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 **/
+	public function delete(\PDO $pdo): void {
+		// create query template
+		$query = "DELETE FROM activity WHERE activityId = :activityId";
+		$statement = $pdo->prepare($query);
+		//bind the member variables to the place holders in the template
+		$parameters = ["activityId" => $this->activityId->getBytes()];
+		$statement->execute($parameters);
+	}
+	/**
+	 * updates this Activity from mySQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 **/
+	public function update(\PDO $pdo): void {
+		// create query template
+		$query = "UPDATE activity SET activityName = :activityName WHERE activityId = :activityId";
+		$statement = $pdo->prepare($query);
+		// bind the member variables to the place holders in the template
+		$parameters = ["activityId" => $this->activityId->getBytes(), "activityName" => $this->activityName];
+		$statement->execute($parameters);
+	}
 
 }
