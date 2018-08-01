@@ -54,10 +54,10 @@ CREATE TABLE activity (
 
 CREATE TABLE activityType (
 	activityTypeActivityId BINARY(16) NOT NULL,
-	activityTypeRecId BINARY(16) NOT NULL,
+	activityTypeRecAreaId BINARY(16) NOT NULL,
 	INDEX (activityTypeActivityId),
-	INDEX (activityTypeRecId),
+	INDEX (activityTypeRecAreaId),
 	FOREIGN KEY (activityTypeActivityId) REFERENCES activity(activityId),
-	FOREIGN KEY (activityTypeRecId) REFERENCES recArea(recAreaId),
-	PRIMARY KEY (activityTypeActivityId, activityTypeRecId)
+	FOREIGN KEY (activityTypeRecAreaId) REFERENCES recArea(recAreaId),
+	PRIMARY KEY (activityTypeActivityId, activityTypeRecAreaId)
 );
