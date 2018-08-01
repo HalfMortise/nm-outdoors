@@ -3,7 +3,7 @@
  * Created as a unit test for the project
  */
 
-namespace HalfMortise\NMOutdoors\Test;
+namespace HalfMortise\NmOutdoors\Test;
 
 use PHPUnit\Framework\TestCase;
 use PHPUnit\DbUnit\TestCaseTrait;

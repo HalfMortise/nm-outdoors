@@ -125,16 +125,16 @@ class Profile {
    public function setProfileActivationToken(): ?string {
       return ($this->profileActivationToken);
    }
-/**end accessor method for profileActivationToken
- *
- *
- *
+/**end accessor method for profileActivationToken*/
+
+
+/**
  * mutator method for profileActivationToken
  *
  * @param string $newProfileActivationToken new value of profileActivationToken
  * @throws \InvalidArgumentException if the token is not a string or not secure
  * @throws \RangeException if $newProfileActivationToken is within the character range
- * @throws \TypeError if $newProfileId is not a string
+ * @throws \TypeError if $newProfileActivationToken is not a string
  **/
    public function getProfileActivationToken($newProfileActivationToken): void {
       if($newProfileActivationToken === null) {
@@ -154,6 +154,46 @@ class Profile {
       $this->profileActivationToken = $newProfileActivationToken;
    }
 /**end mutator method for profileActivationToken*/
+
+
+/**
+ * accessor method for profileAtHandle
+ *
+ * @return string value of profileAtHandle
+ **/
+   public function getProfileAtHandle(): string {
+      return ($this->profileAtHandle);
+   }
+/**end accessor method for profileAtHandle*/
+
+
+/**
+ * mutator method for profileAtHandle
+ *
+ * @param string $newProfileAtHandle new value of profileAtHandle
+ * @throws \InvalidArgumentException if $newProfileAtHandle is not secure
+ * @throws \RangeException if $newProfileAtHandle is > 32 characters
+ * @throws \TypeError if $newProfileAtHandle is not a string
+ **/
+   public function setProfileAtHandle(string $newProfileAtHandle) : void {
+      /**verifying security of the handle*/
+      $newProfileAtHandle = trim($newProfileAtHandle);
+      $newProfileAtHandle = filter_var($newProfileAtHandle, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+      if(empty($newProfileAtHandle) === true) {
+         throw(new \InvalidArgumentException("profile at handle is empty or insecure"));
+      }
+
+      /**verify the handle will fit in the database range*/
+      if(strlen($newProfileAtHandle) > 32) {
+         throw(new \RangeException("profile at handle is too large"));
+      }
+
+      /**store the at handle*/
+      $this->profileAtHandle = $newProfileAtHandle;
+   }
+/**end mutator method for profileAtHandle*/
+
+
 
 
 
