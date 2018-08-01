@@ -1,9 +1,6 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Joy
- * Date: 7/31/2018
- * Time: 9:10 PM
+ * Created as a unit test for the project
  */
 
 namespace HalfMortise\NMOutdoors\Test;
@@ -22,13 +19,15 @@ require_once(dirname(__DIR__, 3) . "/vendor/autoload.php");
  * This class is designed to lay the foundation of the unit tests per project. It loads the all the database
  * parameters about the project so that table specific tests can share the parameters in on place. To use it:
  *
- * 1. Modify DataDesignTest::getDataSet() to include all the tables in your project.
- * 2. Modify DataDesignTest::getConnection() to include the correct mySQL properties file.
- * 3. Have all table specific tests include this class.
+ * 1. Rename the class to reflect NM-Outdoors project name.
+ * 2. Rename the namespace.
+ * 3. Modify DataDesignTest::getDataSet() to include all the tables in your project.
+ * 4. Modify DataDesignTest::getConnection() to include the correct mySQL properties file.
+ * 5. Have all table specific tests include this class.
  *
  * *NOTE*: Tables must be added in the order they were created in step (2).
  *
- * @authors HalfMortise, SHeckendorn, RLambert, BShafii>
+ * @author Dylan McDonald <dmconald21@cnm.edu>
  **/
 abstract class NmOutdoorsTest extends TestCase {
    use TestCaseTrait;
@@ -50,8 +49,7 @@ abstract class NmOutdoorsTest extends TestCase {
       $dataset->profile("profile");
       $dataset->review("review");
       $dataset->activity("activity");
-      // the second parameter is required because like is also a SQL keyword and is the only way PHPUnit can query the like table
-      $dataset->activityType("activityType", "SELECT likeProfileId, likeTweetId, likeDate FROM `like`");
+      $dataset->activityType("activityType");
       return($dataset);
    }
    /**
