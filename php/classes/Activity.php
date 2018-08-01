@@ -135,5 +135,40 @@ class Activity {
 		$parameters = ["activityId" => $this->activityId->getBytes(), "activityName" => $this->activityName];
 		$statement->execute($parameters);
 	}
-
+	/**
+	 * gets the activity by activity id
+	 *
+	 * @param \PDO $pdo $pdo PDO connection object
+	 * @param string $activityId Activity Id to search for
+	 * @return Activity|null Tab or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when a variable are not the correct data type
+	 **/
+	public static function getActivityByActivityId(\PDO $pdo, string $activityId):?Activity {
+		// sanitize the activity id before searching
+		try {
+			$activityId = self::validateUuid($activityId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		// create query template
+		$query = "SELECT activityId, activityName FROM activity WHERE activityId = :activityId";
+		$statement = $pdo->prepare($query);
+		// bind the activity id to the place holder in the template
+		$parameters = ["activityId" => $activityId->getBytes()];
+		$statement->execute($parameters);
+		// grab the Activity from mySQL
+		try {
+			$activity = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$activity = new Activity($row["activityId"], $row["activityName"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($activity);
+	}
 }
