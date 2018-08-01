@@ -19,20 +19,20 @@ class ActivityType {
 	 * id for the ActivityTypeRecId; this is a foreign key
 	 * @var $activityTypeRecId
 	 */
-	private $activityTypeRecId;
+	private $activityTypeRecAreaId;
 
 	/**
 	 * ActivityType constructor.
 	 * @param string|UUID $newActivityTypeActivityId gives the id of ActivityTypeActivityID
-	 * @param string|UUID $newActivityTypeRecId gives the ID of ActivityTypeRecId
+	 * @param string|UUID $newActivityTypeRecAreaId gives the ID of ActivityTypeRecAreaId
 	 * @throws \InvalidArgumentException if data is not filled out
 	 * @throws \RangeException if data exceeds limit
 	 * @throws \Exception for any other exception
 	 */
-	public function __construct($newActivityTypeActivityId, $newActivityTypeRedId) {
+	public function __construct($newActivityTypeActivityId, $newActivityTypeRecAreaId) {
 		try {
 			$this->setActivityTypeActivityId($newActivityTypeActivityId);
-			$this->setActivityTypeRecId($newActivityTypeRedId);
+			$this->setActivityTypeRecAreaId($newActivityTypeRecAreaId);
 			//determines what exception type was thrown
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
@@ -65,29 +65,29 @@ class ActivityType {
 		$this->activityTypeActivityId = $uuid;
 	}
 	/**
-	 *Accessor method for activityTypeRecId
+	 *Accessor method for activityTypeRecAreaId
 	 *
-	 *@return Uuid value of activityTypeRecId
+	 *@return Uuid value of activityTypeRecAreaId
 	 */
-	public function getActivityTypeRecId() : Uuid {
-		return($this->activityTypeRecId);
+	public function getActivityTypeRecAreaId() : Uuid {
+		return($this->activityTypeRecAreaId);
 	}
 	/**
-	 * mutator method for activityTypeRecId
+	 * mutator method for activityTypeRecAreaId
 	 *
-	 * @param Uuid/string $newActivityTypeRecId new value of activityTypeRecId
-	 * @throws \RangeException if $newActivityTypeRecId is not alphanumeric
-	 * @throws \TypeError if $newActivityTypeRecId is not a uuid
+	 * @param Uuid/string $newActivityTypeRecAreaId new value of activityTypeRecAreaId
+	 * @throws \RangeException if $newActivityTypeRecAreaId is not alphanumeric
+	 * @throws \TypeError if $newActivityTypeRecAreaId is not a uuid
 	 */
-	public function setActivityTypeRecId($newActivityTypeRecId) : void {
+	public function setActivityTypeRecAreaId($newActivityTypeRecAreaId) : void {
 		try{
-			$uuid = self::validateUuid ($newActivityTypeRecId);
+			$uuid = self::validateUuid ($newActivityTypeRecAreaId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 		}
-		//convert and stores the ActivityTypeRecId
-		$this->activityTypeRecId = $uuid;
+		//convert and stores the ActivityTypeRecAreaId
+		$this->activityTypeRecAreaId = $uuid;
 	}
 	/**
 	 * inserts this ActivityType into mySQL
@@ -98,10 +98,10 @@ class ActivityType {
 	 **/
 	public function insert(\PDO $pdo) : void {
 		//create query template
-		$query = "INSERT INTO activityType(activityTypeActivityId, activityTypeRecId) VALUES(:activityTypeActivityId, :activityTypeRecId)";
+		$query = "INSERT INTO activityType(activityTypeActivityId, activityTypeRecAreaId) VALUES(:activityTypeActivityId, :activityTypeRecAreaId)";
 		$statement = $pdo->prepare($query);
 		//bind the member variables to the place holders in the template
-		$parameters = ["activityTypeActivityId" => $this->activityTypeActivityId->getBytes(), "activityTypeRecId" => $this->activityTypeRecId->getBytes()];
+		$parameters = ["activityTypeActivityId" => $this->activityTypeActivityId->getBytes(), "activityTypeRecAreaId" => $this->activityTypeRecAreaId->getBytes()];
 		$statement->execute($parameters);
 	}
 	/**
@@ -113,10 +113,10 @@ class ActivityType {
 	 **/
 	public function delete(\PDO $pdo) : void {
 		// create query template
-		$query = "DELETE FROM activityType WHERE activityTypeActivityId = :activityTypeActivityId AND activityTypeRecId = :activityTypeRecId";
+		$query = "DELETE FROM activityType WHERE activityTypeActivityId = :activityTypeActivityId AND activityTypeRecAreaId = :activityTypeRecAreaId";
 		$statement = $pdo->prepare($query);
 		//bind the member variables to the place holder in the template
-		$parameters = ["activityTypeActivityId" => $this->activityTypeActivityId->getBytes(), "activityTypeRedId" => $this->activityTypeRecId->getBytes()];
+		$parameters = ["activityTypeActivityId" => $this->activityTypeActivityId->getBytes(), "activityTypeRecAreaId" => $this->activityTypeRecAreaId->getBytes()];
 		$statement->execute($parameters);
 	}
 	/**
@@ -128,22 +128,22 @@ class ActivityType {
 	 **/
 	public function update(\PDO $pdo) : void {
 		// create query template
-		$query = "UPDATE activityType SET activityTypeActivityId = :activityTypeActivityId, activityTypeRecId = :activityTypeRecId WHERE activityTypeActivityId = :activityTypeActivityId AND activityTypeRecId = :activityTypeRecId";
+		$query = "UPDATE activityType SET activityTypeActivityId = :activityTypeActivityId, activityTypeRecAreaId = :activityTypeRecAreaId WHERE activityTypeActivityId = :activityTypeActivityId AND activityTypeRecAreaId = :activityTypeRecAreaId";
 		$statement = $pdo->prepare($query);
 		//binds variables to the place holders in the template
-		$parameters = ["activityTypeActivityId" => $this->activityTypeActivityId->getBytes(), "activityTypeRecId" => $this->activityTypeRecId->getBytes()];
+		$parameters = ["activityTypeActivityId" => $this->activityTypeActivityId->getBytes(), "activityTypeRecAreaId" => $this->activityTypeRecAreaId->getBytes()];
 		$statement->execute($parameters);
 	}
 	/**
-	 * gets the ActivityType by activityTypeActivityId and activityTypeRecId
+	 * gets the ActivityType by activityTypeActivityId and activityTypeRecAreaId
 	 *
 	 * @param \PDO $pdo PDO connection object
-	 * @param Uuid|string $activityTypeActivityId and $activityTypeRecId to search for
+	 * @param Uuid|string $activityTypeActivityId and $activityTypeRecAreaId to search for
 	 * @return ActivityType|null ActivityType found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
-	public static function getActivityTypeByActivityTypeActivityIdAndActivityTypeRecId(\PDO $pdo, string $activityTypeActivityId, string $acitivityTypeRecId) : ?ActivityType {
+	public static function getActivityTypeByActivityTypeActivityIdAndActivityTypeRecAreaId(\PDO $pdo, string $activityTypeActivityId, string $acitivityTypeRecAreaId) : ?ActivityType {
 		//sanitize the string before searching
 		try {
 			$activityTypeActivityId = self::validateUuid($activityTypeActivityId);
@@ -151,15 +151,15 @@ class ActivityType {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		try {
-			$acitivityTypeRecId = self::validateUuid($acitivityTypeRecId);
+			$acitivityTypeRecAreaId = self::validateUuid($acitivityTypeRecAreaId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//create query template
-		$query = "SELECT activityTypeActivityId, activityTypeRecId FROM activityType WHERE activityTypeActivityId = :activityTypeActivityId AND activityTypeRecId = :activityTypeRecId";
+		$query = "SELECT activityTypeActivityId, activityTypeRecAreaId FROM activityType WHERE activityTypeActivityId = :activityTypeActivityId AND activityTypeRecAreaId = :activityTypeRecAreaId";
 		$statement = $pdo->prepare($query);
-		//bind the activityTypeActivityId and activityTypeRecId to the place holder in the template
-		$parameters = ["activityTypeActivityId" => $activityTypeActivityId->getBytes(), "activityTypeRecId" => $acitivityTypeRecId->getBytes()];
+		//bind the activityTypeActivityId and activityTypeRecAreaId to the place holder in the template
+		$parameters = ["activityTypeActivityId" => $activityTypeActivityId->getBytes(), "activityTypeRecAreaId" => $acitivityTypeRecAreaId->getBytes()];
 		$statement->execute($parameters);
 		// grab the ActivityType from mySQL
 		try {
@@ -167,7 +167,7 @@ class ActivityType {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$activityType = new ActivityType($row["activityTypeActivityId"], $row["activityTypeRecId"]);
+				$activityType = new ActivityType($row["activityTypeActivityId"], $row["activityTypeRecAreaId"]);
 			}
 		} catch(\Exception $exception) {
 			// if the row couldn't be converted, rethrow it
@@ -190,7 +190,7 @@ class ActivityType {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		// create query template
-		$query = "SELECT activityTypeActivityId, activityTypeRecId FROM activityType WHERE activityTypeActivityId = :activityTypeActivityId";
+		$query = "SELECT activityTypeActivityId, activityTypeRecAreaId FROM activityType WHERE activityTypeActivityId = :activityTypeActivityId";
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
 		$parameters = ["activityTypeActivityId" => $activityTypeActivityId->getBytes()];
@@ -200,7 +200,7 @@ class ActivityType {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				$activityType = new ActivityType($row["activityTypeActivityId"], $row["activityTypeRecId"]);
+				$activityType = new ActivityType($row["activityTypeActivityId"], $row["activityTypeRecAreaId"]);
 				$activityTypes[$activityTypes->key()] = $activityType;
 				$activityTypes->next();
 			} catch(\Exception $exception) {
