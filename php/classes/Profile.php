@@ -24,7 +24,7 @@ class Profile {
 
 /**
  * Activation token for profile
- * @var \Uuid $profileActivationToken
+ * @var \string $profileActivationToken
  */
    private $profileActivationToken;
 
@@ -56,7 +56,7 @@ class Profile {
  * Constructor for this class
  *
  * @param Uuid $newProfileId Id of this Profile
- * @param Uuid $newProfileActivationToken activation token for profile setup
+ * @param string $newProfileActivationToken activation token for profile setup
  * @param string $newProfileAtHandle handle used for profile
  * @param string $newProfileEmail email used for profile setup
  * @param Uuid $newProfileHash hash-password used for profile
@@ -69,7 +69,7 @@ class Profile {
  *
  */
 
-   public function __construct($newProfileId, $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, $newProfileHash, string $newProfileImageUrl) {
+   public function __construct($newProfileId, ?string $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, $newProfileHash, string $newProfileImageUrl) {
       try {
          $this->setProfileId($newProfileId);
          $this->setProfileActivationToken($newProfileActivationToken);
@@ -77,11 +77,10 @@ class Profile {
          $this->setProfileEmail($newProfileEmail);
          $this->setProfileHash($newProfileHash);
          $this->setProfileImageUrl($newProfileImageUrl);
-      }
-      //determine exception thrown
-      catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+      } catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+         //determine exception thrown
          $exceptionType = get_class($exception);
-         throw(new $exceptionType($exception->getMessage("This is not a valid profile Id"), 0, $exception));
+         throw(new $exceptionType($exception->getMessage(), 0, $exception));
       }
       /**end exception*/
    }
@@ -95,26 +94,67 @@ class Profile {
    public function getProfileId(): Uuid {
       return ($this->profileId);
    }
-   /**end accessor method for profileId*/
+/**end accessor method for profileId*/
+
 
 /**
  * mutator method for profileId
  *
- * @param Uuid $newProfileId new value of profile id
- * @throws \RangeException if $newProfileId is not unique
- * @throws \TypeError if $newProfileId is not a uuid
+ * @param Uuid $newProfileId new value of new profile id
+ * @throws \RangeException if $newProfileId is not positive
+ * @throws \TypeError if $newProfileId is not unique
  **/
    public function setProfileId($newProfileId): void {
       try {
          $uuid = self::validateUuid($newProfileId);
       } catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
          $exceptionType = get_class($exception);
-         throw(new $exceptionType($exception->getMessage("This is not a valid profile Id"), 0, $exception));
+         throw(new $exceptionType($exception->getMessage(), 0, $exception));
       }
       /**convert and store the profile id*/
       $this->profileId = $uuid;
    }
-   /**end accessor method for profileId*/
+/**end mutator method for profileId*/
+
+
+/**
+ * accessor method for profileActivationToken
+ *
+ * @return string value of profileActivationToken
+ **/
+   public function setProfileActivationToken(): ?string {
+      return ($this->profileActivationToken);
+   }
+/**end accessor method for profileActivationToken
+ *
+ *
+ *
+ * mutator method for profileActivationToken
+ *
+ * @param string $newProfileActivationToken new value of profileActivationToken
+ * @throws \InvalidArgumentException if the token is not a string or not secure
+ * @throws \RangeException if $newProfileActivationToken is within the character range
+ * @throws \TypeError if $newProfileId is not a string
+ **/
+   public function getProfileActivationToken($newProfileActivationToken): void {
+      if($newProfileActivationToken === null) {
+         $this->profileActivationToken = null;
+         return;
+      }
+
+      $newProfileActivationToken = strtolower(trim($newProfileActivationToken));
+      if(ctype_xdigit($newProfileActivationToken) === false) {
+         throw(new\RangeException("user activation is not valid"));
+      }
+
+      /**make sure the user activation token is only 32 characters*/
+      if(strlen($newProfileActivationToken) !== 32) {
+         throw (new\RangeException("user activation token must be under 32 characters"));
+      }
+      $this->profileActivationToken = $newProfileActivationToken;
+   }
+/**end mutator method for profileActivationToken*/
+
 
 
 }
