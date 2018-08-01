@@ -81,9 +81,40 @@ class Profile {
       //determine exception thrown
       catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
          $exceptionType = get_class($exception);
-         throw(new $exceptionType($exception->getMessage(), 0, $exception));
+         throw(new $exceptionType($exception->getMessage("This is not a valid profile Id"), 0, $exception));
       }
-      //end exception
+      /**end exception*/
    }
-   //end constructor
+   /**end constructor*/
+
+/**
+ * accessor method for profileId
+ *
+ * @return Uuid value of profile id
+ **/
+   public function getProfileId(): Uuid {
+      return ($this->profileId);
+   }
+   /**end accessor method for profileId*/
+
+/**
+ * mutator method for profileId
+ *
+ * @param Uuid $newProfileId new value of profile id
+ * @throws \RangeException if $newProfileId is not unique
+ * @throws \TypeError if $newProfileId is not a uuid
+ **/
+   public function setProfileId($newProfileId): void {
+      try {
+         $uuid = self::validateUuid($newProfileId);
+      } catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+         $exceptionType = get_class($exception);
+         throw(new $exceptionType($exception->getMessage("This is not a valid profile Id"), 0, $exception));
+      }
+      /**convert and store the profile id*/
+      $this->profileId = $uuid;
+   }
+   /**end accessor method for profileId*/
+
+
 }
