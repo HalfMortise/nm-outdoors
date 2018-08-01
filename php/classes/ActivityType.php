@@ -210,4 +210,39 @@ class ActivityType {
 		}
 		return ($activityTypes);
 	}
+	/**
+	 * gets the ActivityType by activityTypeRecAreaId
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param string $sactivityTypeRecAreaId RecAreaId to search for
+	 * @return \SplFixedArray SplFixedArray of ActivityTypes found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 **/
+	public static function getActivityTypeByActivityTypeRecAreaId(\PDO $pdo, string $activityTypeRecAreaId) : \SPLFixedArray {
+		try {
+			$activityTypeRecAreaId = self::validateUuid($activityTypeRecAreaId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		// create query template
+		$query = "SELECT activityTypeActivityId, activityTypeRecAreaId FROM activityType WHERE activityTypeRecAreaId = :activityTypeRecAreaId";
+		$statement = $pdo->prepare($query);
+		// bind the member variables to the place holders in the template
+		$parameters = ["activityTypeRecAreaId" => $activityTypeRecAreaId->getBytes()];
+		$statement->execute($parameters);
+		// build an array of activityTypes
+		$activityTypes = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$activityType = new ActivityType($row["activityTypeActivityId"], $row["activityTypeRecAreaId"]);
+				$activityTypes[$activityTypes->key()] = $activityType;
+				$activityTypes->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($activityTypes);
+	}
 }
