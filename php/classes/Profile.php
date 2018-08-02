@@ -480,8 +480,48 @@ class Profile {
    }
 
 
+/**
+ * gets the Profile by at handle
+ *
+ * @param \PDO $pdo PDO connection object
+ * @param string $profileAtHandle at handle to search for
+ * @return \SPLFixedArray of all profiles found
+ * @throws \PDOException when mySQL related errors occur
+ * @throws \TypeError when variables are not the correct data type
+ **/
+   public static function getProfileByProfileAtHandle(\PDO $pdo, string $profileAtHandle) : SPLFixedArray {
 
+      /**sanitize the at handle before searching*/
+      $profileAtHandle = trim($profileAtHandle);
+      $profileAtHandle = filter_var($profileAtHandle, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+      if(empty($profileAtHandle) === true) {
+         throw(new \PDOException("not a valid at handle"));
+      }
 
+      /**create a query template*/
+      $query = "SELECT  profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl FROM profile WHERE profileAtHandle = :profileAtHandle";
+      $statement = $pdo->prepare($query);
+
+      /**bind the profile at handle to the place holder in the template*/
+      $parameters = ["profileAtHandle" => $profileAtHandle];
+      $statement->execute($parameters);
+
+      $profiles = new \SPLFixedArray($statement->rowCount());
+      $statement->setFetchMode(\PDO::FETCH_ASSOC);
+
+      while (($row = $statement->fetch()) !== false) {
+         try {
+            $profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profileImageUrl"]);
+            $profiles[$profiles->key()] = $profile;
+            $profiles->next();
+         } catch(\Exception $exception) {
+
+            /**if the row couldn't be converted, rethrow it*/
+            throw(new \PDOException($exception->getMessage(), 0, $exception));
+         }
+      }
+      return ($profiles);
+   }
 
 
 }
