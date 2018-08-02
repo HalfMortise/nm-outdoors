@@ -381,6 +381,10 @@ class Profile {
       $query = "SELECT profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl FROM profile WHERE profileId = :profileId";
       $statement = $pdo->prepare($query);
 
+      /**bind the profile id to the place holder in the template*/
+      $parameters = ["profileId" => $profileId->getBytes()];
+      $statement->execute($parameters);
+
       /**grab the profile from MySQL*/
       try {
          $profile = null;
