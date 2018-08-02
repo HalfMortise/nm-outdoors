@@ -72,7 +72,7 @@ use HalfMortise\NmOutdoors\Profile;
          //count the number of rows and save the result for later
          $numRows = $this->getConnection()->getRowCount("profile");
          $profileId = generateUuidV4();
-         $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_PROFILE_AVATAR_URL, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PHONE);
+         $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PROFILE_IMAGE_URL);
          $profile->insert($this->getPDO());
          //grab the data from MySQL and enforce the fields match our expectations
          $pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
@@ -85,6 +85,30 @@ use HalfMortise\NmOutdoors\Profile;
          $this->assertEquals($pdoProfile->getProfileImageUrl(), $this->VALID_PROFILE_IMAGE_URL);
       }
 
+
+/**
+ * test to insert a Profile, edit it, and then update it
+ */
+      public function testUpdateValidProfile() {
+         // count the number of rows and save it for later
+         $numRows = $this->getConnection()->getRowCount("profile");
+         // create a new Profile and insert to into MySQL
+         $profileId = generateUuidV4();
+         $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_EMAIL, $this->VALID_HASH,$this->VALID_PROFILE_IMAGE_URL);
+         $profile->insert($this->getPDO());
+         // edit the Profile and update it in MySQL
+         $profile->setProfileAtHandle($this->VALID_ATHANDLE2);
+         $profile->update($this->getPDO());
+         // grab the data from MySQL and enforce the fields match our expectations
+         $pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
+         $this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
+         $this->assertEquals($pdoProfile->getProfileId(), $profileId);
+         $this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
+         $this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE2);
+         $this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
+         $this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
+         $this->assertEquals($pdoProfile->getProfileImageUrl(), $this->VALID_PROFILE_IMAGE_URL);
+      }
 
 
    }
