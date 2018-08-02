@@ -289,7 +289,7 @@ class Profile {
  * @throws \RangeException if $newProfileImageUrl is > 97 characters
  * @throws \TypeError if $newProfileImageUrl is not a string
  **/
-   public function setProfileImageUrl(): void {
+   public function setProfileImageUrl(string $newProfileImageUrl): void {
       $newProfileImageUrl = trim($newProfileImageUrl);
       $newProfileImageUrl = filter_var($newProfileImageUrl, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
