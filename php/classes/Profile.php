@@ -1,8 +1,7 @@
 <?php
 namespace HalfMortise\NmOutdoors;
 require_once("autoload.php"); //autoload.php file in Classes directory
-require_once(dirname(__DIR__, 2) . "./vendor/autoload.php"); //composer-generated autoload
-use http\Exception\BadQueryStringException;
+require_once(dirname(__DIR__, 2) . "../vendor/autoload.php"); //composer-generated autoload
 use Ramsey\Uuid\Uuid;
 /**
  * Small cross section of a web application for outdoor enthusiasts that enables users
@@ -31,13 +30,13 @@ class Profile {
 
 /**
  * Handle for profile
- * @var \SplString $profileAtHandle
+ * @var \String $profileAtHandle
  */
    private $profileAtHandle;
 
 /**
  * Email provided for profile setup
- * @var \SplString $profileEmail
+ * @var \String $profileEmail
  */
    private $profileEmail;
 
@@ -49,7 +48,7 @@ class Profile {
 
 /**
  * Image-avatar provided for profile
- * @var \SplString $profileImageUrl
+ * @var \String $profileImageUrl
  */
    private $profileImageUrl;
 
@@ -70,7 +69,7 @@ class Profile {
  *
  */
 
-   public function __construct($newProfileId, ?string $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, $newProfileHash, string $newProfileImageUrl) {
+   public function __construct($newProfileId, string $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, $newProfileHash, string $newProfileImageUrl) {
       try {
          $this->setProfileId($newProfileId);
          $this->setProfileActivationToken($newProfileActivationToken);
@@ -90,7 +89,7 @@ class Profile {
 /**
  * accessor method for profileId
  *
- * @return Uuid value of profile id
+ * @return uuid value of profile id
  **/
    public function getProfileId(): Uuid {
       return ($this->profileId);
@@ -123,7 +122,7 @@ class Profile {
  *
  * @return string value of profileActivationToken
  **/
-   public function setProfileActivationToken(): ?string {
+   public function getProfileActivationToken(): string {
       return ($this->profileActivationToken);
    }
 /**end accessor method for profileActivationToken*/
@@ -137,7 +136,7 @@ class Profile {
  * @throws \RangeException if $newProfileActivationToken is > 32 characters
  * @throws \TypeError if $newProfileActivationToken is not a string
  **/
-   public function getProfileActivationToken($newProfileActivationToken): void {
+   public function setProfileActivationToken($newProfileActivationToken): void {
       if($newProfileActivationToken === null) {
          $this->profileActivationToken = null;
          return;
@@ -304,8 +303,24 @@ class Profile {
 /**end mutator method for profileImageUrl*/
 
 
+/******************PDOs**********************/
 
+/**
+ * inserts this Profile into mySQL
+ *
+ * @param \PDO $pdo PDO connection object
+ * @throws \PDOException when mySQL related errors occur
+ * @throws \TypeError if $pdo is not a PDO connection object
+ **/
+   public function insert(\PDO $pdo): void {
 
+      /**create query template*/
+      $query = "INSERT INTO profile(profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl) VALUES (:profileId, :profileActivationToken, :profileAtHandle, :profileEmail, :profileHash, :profileImageUrl)";
+      $statement = $pdo->prepare($query);
+
+      $parameters = ["profileId" => $this->profileId->getBytes(), "profileActivationToken" => $this->profileActivationToken, "profileAtHandle" => $this->profileAtHandle, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileImageUrl" => $this->profileHash];
+      $statement->execute($parameters);
+   }
 
 
 }
