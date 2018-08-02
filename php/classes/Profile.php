@@ -176,7 +176,7 @@ class Profile {
  * @throws \TypeError if $newProfileAtHandle is not a string
  **/
    public function setProfileAtHandle(string $newProfileAtHandle) : void {
-      /**verifying security of the handle*/
+      /**verify security of the handle*/
       $newProfileAtHandle = trim($newProfileAtHandle);
       $newProfileAtHandle = filter_var($newProfileAtHandle, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
       if(empty($newProfileAtHandle) === true) {
@@ -194,7 +194,37 @@ class Profile {
 /**end mutator method for profileAtHandle*/
 
 
+/**
+ * accessor method for profileAtHandle
+ *
+ * @return string value of profileEmail
+ **/
+   public function getProfileEmail(): string {
+      return ($this->profileEmail);
+   }
+/**end accessor method for profileEmail*/
 
+
+/**
+ * mutator method for profileEmail
+ *
+ * @param string $newProfileEmail new value of profile Email
+ * @throws \InvalidArgumentException if $newProfileEmail is not valid or secure
+ * @throws \RangeException if $newProfileEmail is > 128 characters
+ * @throws \TypeError if $newProfileEmail is not a string
+ **/
+   public function setProfileEmail(string $newProfileEmail): void {
+      /**verify the email is secure*/
+      $newProfileEmail = trim($newProfileEmail);
+      $newProfileEmail = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
+      if(empty($newProfileEmail) === true) {
+         throw(new \InvalidArgumentException("profile email is empty or insecure"));
+      }
+
+      /**store the email*/
+      $this->profileEmail = $newProfileEmail;
+   }
+/**end mutator method for profileEmail*/
 
 
 }
