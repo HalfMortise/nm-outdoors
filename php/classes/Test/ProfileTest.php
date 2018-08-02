@@ -55,5 +55,36 @@ use HalfMortise\NmOutdoors\Profile;
       protected $VALID_PROFILE_IMAGE_URL = "https://i.pinimg.com/736x/9d/ee/44/9dee44874ccde3a64da97bdac18dd9c8.jpg";
 
 
+      /**this runs the default setup operation to create the argon password and hash*/
+
+      public final function setUp() : void {
+         parent::setUp();
+
+         $password = "abc123";
+         $this->VALID_HASH = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
+         $this->VALID_ACTIVATION = bin2hex(random_bytes(16));
+      }
+
+      /**
+       * test inserting a valid Profile and verify that the actual MySQL data matches
+       */
+      public function testInsertValidProfile() : void {
+         //count the number of rows and save the result for later
+         $numRows = $this->getConnection()->getRowCount("profile");
+         $profileId = generateUuidV4();
+         $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_PROFILE_AVATAR_URL, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PHONE);
+         $profile->insert($this->getPDO());
+         //grab the data from MySQL and enforce the fields match our expectations
+         $pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
+         $this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
+         $this->assertEquals($pdoProfile->getProfileId(), $profileId);
+         $this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
+         $this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE );
+         $this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
+         $this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
+         $this->assertEquals($pdoProfile->getProfileImageUrl(), $this->VALID_PROFILE_IMAGE_URL);
+      }
+
+
 
    }
