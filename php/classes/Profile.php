@@ -1,7 +1,7 @@
 <?php
 namespace HalfMortise\NmOutdoors;
-require_once("autoload.php"); //autoload.php file in Classes directory
-require_once(dirname(__DIR__, 2) . "../vendor/autoload.php"); //composer-generated autoload
+require_once("autoload.php");
+require_once(dirname(__DIR__, 3) . "../vendor/autoload.php");
 use Ramsey\Uuid\Uuid;
 /**
  * Small cross section of a web application for outdoor enthusiasts that enables users
@@ -289,7 +289,7 @@ class Profile {
  * @throws \RangeException if $newProfileImageUrl is > 97 characters
  * @throws \TypeError if $newProfileImageUrl is not a string
  **/
-   public function setProfileImageUrl(): void {
+   public function setProfileImageUrl(string $newProfileImageUrl): void {
       $newProfileImageUrl = trim($newProfileImageUrl);
       $newProfileImageUrl = filter_var($newProfileImageUrl, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
@@ -368,9 +368,178 @@ class Profile {
     * @throws \PDOException when mySQL related errors occur
     * @throws \TypeError when a variable are not the correct data type
     **/
+   public static function getProfileByProfileId(\PDO $pdo, string $profileId):?Profile {
+
+      /**sanitize the profileId before searching*/
+      try {
+         $profileId = self::validateUuid($profileId);
+      } catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+         throw(new \PDOException($exception->getMessage(), 0, $exception));
+      }
+
+      /**create query template*/
+      $query = "SELECT profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl FROM profile WHERE profileId = :profileId";
+      $statement = $pdo->prepare($query);
+
+      /**bind the profile id to the place holder in the template*/
+      $parameters = ["profileId" => $profileId->getBytes()];
+      $statement->execute($parameters);
+
+      /**grab the profile from MySQL*/
+      try {
+         $profile = null;
+         $statement->setFetchMode(\PDO::FETCH_ASSOC);
+         $row = $statement->fetch();
+         if($row !== false) {
+            $profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profileImageUrl"]);
+         }
+      } catch(\Exception $exception) {
+         /**if the row couldn't be converted, rethrow it*/
+         throw(new \PDOException($exception->getMessage(), 0, $exception));
+      }
+      return ($profile);
+   }
 
 
+/**
+ * gets the Profile by email
+ *
+ * @param \PDO $pdo PDO connection object
+ * @param string $profileEmail email to search for
+ * @return Profile|null Profile or null if not found
+ * @throws \PDOException when mySQL related errors occur
+ * @throws \TypeError when variables are not the correct data type
+ **/
+   public static function getProfileByProfileEmail(\PDO $pdo, string $profileEmail): ?Profile {
+
+      /**sanitize the profileId before searching*/
+      $profileEmail = trim($profileEmail);
+      $profileEmail = filter_var($profileEmail, FILTER_VALIDATE_EMAIL);
+
+      if(empty($profileEmail) === true) {
+         throw(new \PDOException("not a valid email"));
+      }
+
+      /**create a query template*/
+      $query = "SELECT profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl FROM profile WHERE profileEmail = :profileEmail";
+      $statement = $pdo->prepare($query);
+
+      /**bind the profileId to the place holder in the template*/
+      $parameters = ["profileEmail" => $profileEmail];
+      $statement->execute($parameters);
+
+      /**grab the profile from MySQL*/
+      try {
+         $profile = null;
+         $statement->setFetchMode(\PDO::FETCH_ASSOC);
+         $row = $statement->fetch();
+            $profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profileImageUrl"]);
+      } catch(\Exception $exception) {
+         /**if the row couldn't be converted, rethrow it*/
+         throw(new \PDOException($exception->getMessage(), 0, $exception));
+      }
+      return ($profile);
+   }
 
 
+/**
+ * get the profile by profile activation token
+ *
+ * @param string $profileActivationToken
+ * @param \PDO object $pdo
+ * @return Profile|null Profile or null if not found
+ * @throws \PDOException when mySQL related errors occur
+ * @throws \TypeError when variables are not the correct data type
+ **/
+   public static function getProfileByProfileActivationToken(\PDO $pdo, string $profileActivationToken) : ?Profile {
+
+      /**make sure the activation token is in the right format and that it is a string representation of a hexadecimal*/
+      $profileActivationToken = trim($profileActivationToken);
+      if(ctype_xdigit($profileActivationToken) === false) {
+         throw(new \InvalidArgumentException("profile activation token is empty or in the wrong format"));
+      }
+
+      /**create the query template*/
+      $query = "SELECT  profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl FROM profile WHERE profileActivationToken = :profileActivationToken";
+      $statement = $pdo->prepare($query);
+
+      /**bind the profile activation token to the place holder in the template*/
+      $parameters = ["profileActivationToken" => $profileActivationToken];
+      $statement->execute($parameters);
+
+      /**grab the Profile from MySQL*/
+      try {
+         $profile = null;
+         $statement->setFetchMode(\PDO::FETCH_ASSOC);
+         $row = $statement->fetch();
+         if($row !== false) {
+            $profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profileImageUrl"]);
+         }
+      } catch(\Exception $exception) {
+
+         /**if the row couldn't be converted, rethrow it*/
+         throw(new \PDOException($exception->getMessage(), 0, $exception));
+      }
+         return ($profile);
+   }
+
+
+/**
+ * gets the Profile by at handle
+ *
+ * @param \PDO $pdo PDO connection object
+ * @param string $profileAtHandle at handle to search for
+ * @return \SPLFixedArray of all profiles found
+ * @throws \PDOException when mySQL related errors occur
+ * @throws \TypeError when variables are not the correct data type
+ **/
+   public static function getProfileByProfileAtHandle(\PDO $pdo, string $profileAtHandle) : SPLFixedArray {
+
+      /**sanitize the at handle before searching*/
+      $profileAtHandle = trim($profileAtHandle);
+      $profileAtHandle = filter_var($profileAtHandle, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+      if(empty($profileAtHandle) === true) {
+         throw(new \PDOException("not a valid at handle"));
+      }
+
+      /**create a query template*/
+      $query = "SELECT  profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl FROM profile WHERE profileAtHandle = :profileAtHandle";
+      $statement = $pdo->prepare($query);
+
+      /**bind the profile at handle to the place holder in the template*/
+      $parameters = ["profileAtHandle" => $profileAtHandle];
+      $statement->execute($parameters);
+
+      $profiles = new \SPLFixedArray($statement->rowCount());
+      $statement->setFetchMode(\PDO::FETCH_ASSOC);
+
+      while (($row = $statement->fetch()) !== false) {
+         try {
+            $profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profileImageUrl"]);
+            $profiles[$profiles->key()] = $profile;
+            $profiles->next();
+         } catch(\Exception $exception) {
+
+            /**if the row couldn't be converted, rethrow it*/
+            throw(new \PDOException($exception->getMessage(), 0, $exception));
+         }
+      }
+      return ($profiles);
+   }
+
+/**
+ * formats the state variables for JSON serialization
+ * this defines the contract and enforces consistent behavior
+ *
+ * @return array resulting state variables to serialize
+ **/
+   public function jsonSerialize() {
+      $fields = get_object_vars($this);
+      $fields["profileId"] = $this->profileId->toString();
+      /**using unset excludes these fields from being publicly visible*/
+      unset($fields["profileActivationToken"]);
+      unset($fields["profileHash"]);
+      return ($fields);
+   }
 
 }
