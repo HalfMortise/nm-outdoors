@@ -369,7 +369,33 @@ class Profile {
     * @throws \TypeError when a variable are not the correct data type
     **/
 
+   public static function getProfileByProfileId(\PDO $pdo, string $profileId):?Profile {
 
+      /**sanitize the profileId before searching*/
+      try {
+         $profileId = self::validateUuid($profileId);
+      } catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+         throw(new \PDOException($exception->getMessage(), 0, $exception));
+      }
+
+      /**create query template*/
+      $query = "SELECT profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl FROM profile WHERE profileId = :profileId";
+      $statement = $pdo->prepare($query);
+
+      /**grab the profile from MySQL*/
+      try {
+         $profile = null;
+         $statement->setFetchMode(\PDO::FETCH_ASSOC);
+         $row = $statement->fetch();
+         if($row !== false) {
+            $profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profileImageUrl"]);
+         }
+      } catch(\Exception $exception) {
+         /**if the row couldn't be converted, rethrow it*/
+         throw(new \PDOException($exception->getMessage(), 0, $exception));
+      }
+      return ($profile);
+   }
 
 
 
