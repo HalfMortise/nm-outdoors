@@ -133,7 +133,7 @@ class Profile {
  *
  * @param string $newProfileActivationToken new value of profileActivationToken
  * @throws \InvalidArgumentException if the token is not a string or not secure
- * @throws \RangeException if $newProfileActivationToken is within the character range
+ * @throws \RangeException if $newProfileActivationToken is > 32 characters
  * @throws \TypeError if $newProfileActivationToken is not a string
  **/
    public function getProfileActivationToken($newProfileActivationToken): void {
@@ -225,6 +225,52 @@ class Profile {
       $this->profileEmail = $newProfileEmail;
    }
 /**end mutator method for profileEmail*/
+
+
+/**
+ * accessor method for profileHash
+ *
+ * @return string value of profileHash
+ **/
+   public function getProfileHash(): string {
+      return ($this->profileHash);
+   }
+/**end accessor method for profileHash*/
+
+
+/**
+ * mutator method for profileHash password
+ *
+ * @param string $newProfileHash
+ * @throws \InvalidArgumentException if $newProfileHash is not secure
+ * @throws \RangeException if $newProfileHash is > 97 characters
+ * @throws \TypeError if $newProfileHash is not a string
+ **/
+   public function setProfileHash(string $newProfileHash): void {
+      /**enforce that the hash is properly formatted*/
+      $newProfileHash = trim($newProfileHash);
+      if(empty($newProfileHash) === true) {
+         throw(new \InvalidArgumentException("profile password hash is empty or insecure"));
+      }
+
+      /**enforce the hash is really an Argon hash*/
+      $profileHashInfo = password_get_info($newProfileHash);
+      if($profileHashInfo["algoName"] !== "argon2i") {
+         throw(new \InvalidArgumentException("profile hash is not a valid hash"));
+      }
+
+      /**enforce that the hash is exactly 97 characters*/
+      if(strlen($newProfileHash) !== 97) {
+         throw(new \RangeException("profile hash must be 97 characters"));
+      }
+
+      /**store the hash*/
+      $this->profileHash = $newProfileHash;
+   }
+/**end mutator method for profileHash*/
+
+
+
 
 
 }
