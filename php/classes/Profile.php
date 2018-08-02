@@ -340,8 +340,19 @@ class Profile {
       $statement->execute($parameters);
    }
 
+/**
+ * UPDATEs this Profile from mySQL
+ *
+ * @param \PDO $pdo PDO connection object
+ * @throws \PDOException when mySQL related errors occur
+ * @throws \TypeError if $pdo is not a PDO connection object
+ **/
+   public function update(\PDO $pdo): void {
 
-
+      /**create query template*/
+      $query = "UPDATE profile SET profileActivationToken = :profileActivationToken, profileAtHandle = :profileAtHandle, profileImageUrl = :profileImageUrl, profileEmail = :profileEmail, profileHash = :profileHash, WHERE profileId = :profileId";
+      $statement->execute($parameters);
+   }
 
 
 }
