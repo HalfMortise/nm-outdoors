@@ -2,6 +2,7 @@
 namespace HalfMortise\NmOutdoors;
 require_once("autoload.php"); //autoload.php file in Classes directory
 require_once(dirname(__DIR__, 2) . "./vendor/autoload.php"); //composer-generated autoload
+use http\Exception\BadQueryStringException;
 use Ramsey\Uuid\Uuid;
 /**
  * Small cross section of a web application for outdoor enthusiasts that enables users
@@ -268,6 +269,40 @@ class Profile {
       $this->profileHash = $newProfileHash;
    }
 /**end mutator method for profileHash*/
+
+
+/**
+ * accessor method for profileImageUrl
+ *
+ * @return string value of profileImageUrl
+ **/
+   public function getProfileImageUrl(): string {
+      return ($this->profileImageUrl);
+   }
+/**end accessor method for profileImageUrl*/
+
+
+/**
+ * mutator method for profileImageUrl
+ *
+ * @param string $newProfileImageUrl
+ * @throws \InvalidArgumentException if $newProfileImageUrl is not a string or is insecure
+ * @throws \RangeException if $newProfileImageUrl is > 97 characters
+ * @throws \TypeError if $newProfileImageUrl is not a string
+ **/
+   public function setProfileImageUrl(): void {
+      $newProfileImageUrl = trim($newProfileImageUrl);
+      $newProfileImageUrl = filter_var($newProfileImageUrl, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+      /**verify the image url will fit in the database*/
+      if(strlen($newProfileImageUrl) > 255) {
+         throw(new \RangeException("image url content is too large"));
+      }
+      /**store the image url content*/
+      $this->profileImageUrl = $newProfileImageUrl;
+   }
+/**end mutator method for profileImageUrl*/
+
 
 
 
