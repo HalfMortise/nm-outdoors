@@ -18,37 +18,37 @@ class Profile {
 
 /**
  * Id for profile; this is the primary key for the class
- * @var \Uuid $profileId
+ * @var string|Uuid $profileId
  */
    private $profileId;
 
 /**
  * Activation token for profile
- * @var \string $profileActivationToken
+ * @var string $profileActivationToken
  */
    private $profileActivationToken;
 
 /**
  * Handle for profile
- * @var \String $profileAtHandle
+ * @var string $profileAtHandle
  */
    private $profileAtHandle;
 
 /**
  * Email provided for profile setup
- * @var \String $profileEmail
+ * @var string $profileEmail
  */
    private $profileEmail;
 
 /**
  * Hash-password for profile
- * @var \Uuid $profileHash
+ * @var string|Uuid $profileHash
  */
    private $profileHash;
 
 /**
  * Image-avatar provided for profile
- * @var \String $profileImageUrl
+ * @var string $profileImageUrl
  */
    private $profileImageUrl;
 
@@ -351,8 +351,26 @@ class Profile {
 
       /**create query template*/
       $query = "UPDATE profile SET profileActivationToken = :profileActivationToken, profileAtHandle = :profileAtHandle, profileImageUrl = :profileImageUrl, profileEmail = :profileEmail, profileHash = :profileHash, WHERE profileId = :profileId";
+      $statement = $pdo->prepare($query);
+
+      /**bind the member variables to the place holders in the template*/
+      $parameters = ["profileId" => $this->profileId->getBytes(), "profileActivationToken" => $this->profileActivationToken, "profileAtHandle" => $this->profileAtHandle, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileImageUrl" => $this->profileImageUrl];
       $statement->execute($parameters);
    }
+
+
+   /**
+    * gets the Profile by profile id
+    *
+    * @param \PDO $pdo $pdo PDO connection object
+    * @param string $profileId profile Id to search for
+    * @return Profile|null Profile or null if not found
+    * @throws \PDOException when mySQL related errors occur
+    * @throws \TypeError when a variable are not the correct data type
+    **/
+
+
+
 
 
 }
