@@ -12,11 +12,11 @@ class Activity {
 	use ValidateUuid;
 	/**
 	 * id for the activity; this is the primary key
-	 * @var $activityId
+	 * @var Uuid|string $activityId
 	 */
 	private $activityId;
 	/**
-	 * @var $activityName
+	 * @var string $activityName
 	 */
 	private $activityName;
 	/**
