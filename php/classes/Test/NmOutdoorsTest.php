@@ -11,8 +11,8 @@ use PHPUnit\DbUnit\DataSet\QueryDataSet;
 use PHPUnit\DbUnit\Database\Connection;
 use PHPUnit\DbUnit\Operation\{Composite, Factory, Operation};
 // grab the encrypted properties file
-require_once("../classes/autoload.php");
-require_once(dirname(__DIR__, 3) . "../vendor/autoload.php");
+require_once("../autoload.php");
+require_once(dirname(__DIR__, 3) . "../../vendor/autoload.php");
 /**
  * Abstract class containing universal and project specific mySQL parameters
  *
