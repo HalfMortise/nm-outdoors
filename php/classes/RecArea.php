@@ -5,18 +5,69 @@
  * Date: 7/31/18
  * Time: 5:58 PM
  */
-class RecArea{
+
+namespace HalfMortise\NmOutdoors;
+
+require_once("autoload.php");
+require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
+
+use http\Exception\InvalidArgumentException;
+use Ramsey\Uuid\Uuid;
+
+
+class RecArea {
+	use ValidateUuid;
+	/**
+	 * id for the rec area ; this is the primary key
+	 * @var Uuid| $recAreaId
+	 */
 
 		private $recAreaId;
+	/**
+	 * rec area description
+	 * @var string $recAreaDescription
+	 */
 		private $recAreaDescription;
+
+	/**
+	 * Good Map Directions to rec area
+	 * @var string $recAreaDirections
+	 */
+
 		private $recAreaDirections;
+	/**
+	 * a url string holding a stock image of rec area
+	 * @var string $recAreaImageUrl
+	 */
 		private $recAreaImageUrl;
+	/**
+	 * Latitude position  of a rec area
+	 * @var double $recAreaLat
+	 */
 		private $recAreaLat;
+
+	/**
+	 * longitude position of rec area
+	 * @var double $recAreaLong
+	 */
 		private $recAreaLong;
+
+	/**
+	 * url of the rec area map
+	 * @var string $recAreaMapUrl
+	 */
 		private $recAreaMapUrl;
+
+	/**
+	 * rec area name
+	 * @var string $recAreaName
+	 */
 		private $recAreaName;
 
-		//constructor for the RecArea class
+		/**
+		 * constructor for the RecArea class
+		 * @throws InvalidArgumentException
+		 **/
 
 
 		public function __construct($newRecAreaId, $newRecAreaDescription, $newRecAreaDirections, $newRecAreaImageUrl, $newRecAreaLat, $newRecAreaLong, $newRecAreaMapUrl, $newRecAreaName){
