@@ -2,6 +2,7 @@
 namespace HalfMortise\NmOutdoors;
 require_once("autoload.php"); //autoload.php file in Classes directory
 require_once(dirname(__DIR__, 2) . "./vendor/autoload.php"); //composer-generated autoload
+use http\Exception\BadQueryStringException;
 use Ramsey\Uuid\Uuid;
 /**
  * Small cross section of a web application for outdoor enthusiasts that enables users
@@ -133,7 +134,7 @@ class Profile {
  *
  * @param string $newProfileActivationToken new value of profileActivationToken
  * @throws \InvalidArgumentException if the token is not a string or not secure
- * @throws \RangeException if $newProfileActivationToken is within the character range
+ * @throws \RangeException if $newProfileActivationToken is > 32 characters
  * @throws \TypeError if $newProfileActivationToken is not a string
  **/
    public function getProfileActivationToken($newProfileActivationToken): void {
@@ -176,7 +177,7 @@ class Profile {
  * @throws \TypeError if $newProfileAtHandle is not a string
  **/
    public function setProfileAtHandle(string $newProfileAtHandle) : void {
-      /**verifying security of the handle*/
+      /**verify security of the handle*/
       $newProfileAtHandle = trim($newProfileAtHandle);
       $newProfileAtHandle = filter_var($newProfileAtHandle, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
       if(empty($newProfileAtHandle) === true) {
@@ -192,6 +193,116 @@ class Profile {
       $this->profileAtHandle = $newProfileAtHandle;
    }
 /**end mutator method for profileAtHandle*/
+
+
+/**
+ * accessor method for profileAtHandle
+ *
+ * @return string value of profileEmail
+ **/
+   public function getProfileEmail(): string {
+      return ($this->profileEmail);
+   }
+/**end accessor method for profileEmail*/
+
+
+/**
+ * mutator method for profileEmail
+ *
+ * @param string $newProfileEmail new value of profile Email
+ * @throws \InvalidArgumentException if $newProfileEmail is not valid or secure
+ * @throws \RangeException if $newProfileEmail is > 128 characters
+ * @throws \TypeError if $newProfileEmail is not a string
+ **/
+   public function setProfileEmail(string $newProfileEmail): void {
+      /**verify the email is secure*/
+      $newProfileEmail = trim($newProfileEmail);
+      $newProfileEmail = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
+      if(empty($newProfileEmail) === true) {
+         throw(new \InvalidArgumentException("profile email is empty or insecure"));
+      }
+
+      /**store the email*/
+      $this->profileEmail = $newProfileEmail;
+   }
+/**end mutator method for profileEmail*/
+
+
+/**
+ * accessor method for profileHash
+ *
+ * @return string value of profileHash
+ **/
+   public function getProfileHash(): string {
+      return ($this->profileHash);
+   }
+/**end accessor method for profileHash*/
+
+
+/**
+ * mutator method for profileHash password
+ *
+ * @param string $newProfileHash
+ * @throws \InvalidArgumentException if $newProfileHash is not secure
+ * @throws \RangeException if $newProfileHash is > 97 characters
+ * @throws \TypeError if $newProfileHash is not a string
+ **/
+   public function setProfileHash(string $newProfileHash): void {
+      /**enforce that the hash is properly formatted*/
+      $newProfileHash = trim($newProfileHash);
+      if(empty($newProfileHash) === true) {
+         throw(new \InvalidArgumentException("profile password hash is empty or insecure"));
+      }
+
+      /**enforce the hash is really an Argon hash*/
+      $profileHashInfo = password_get_info($newProfileHash);
+      if($profileHashInfo["algoName"] !== "argon2i") {
+         throw(new \InvalidArgumentException("profile hash is not a valid hash"));
+      }
+
+      /**enforce that the hash is exactly 97 characters*/
+      if(strlen($newProfileHash) !== 97) {
+         throw(new \RangeException("profile hash must be 97 characters"));
+      }
+
+      /**store the hash*/
+      $this->profileHash = $newProfileHash;
+   }
+/**end mutator method for profileHash*/
+
+
+/**
+ * accessor method for profileImageUrl
+ *
+ * @return string value of profileImageUrl
+ **/
+   public function getProfileImageUrl(): string {
+      return ($this->profileImageUrl);
+   }
+/**end accessor method for profileImageUrl*/
+
+
+/**
+ * mutator method for profileImageUrl
+ *
+ * @param string $newProfileImageUrl
+ * @throws \InvalidArgumentException if $newProfileImageUrl is not a string or is insecure
+ * @throws \RangeException if $newProfileImageUrl is > 97 characters
+ * @throws \TypeError if $newProfileImageUrl is not a string
+ **/
+   public function setProfileImageUrl(): void {
+      $newProfileImageUrl = trim($newProfileImageUrl);
+      $newProfileImageUrl = filter_var($newProfileImageUrl, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+      /**verify the image url will fit in the database*/
+      if(strlen($newProfileImageUrl) > 255) {
+         throw(new \RangeException("image url content is too large"));
+      }
+      /**store the image url content*/
+      $this->profileImageUrl = $newProfileImageUrl;
+   }
+/**end mutator method for profileImageUrl*/
+
 
 
 
