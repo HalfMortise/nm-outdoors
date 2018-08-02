@@ -527,5 +527,19 @@ class Profile {
       return ($profiles);
    }
 
+/**
+ * formats the state variables for JSON serialization
+ * this defines the contract and enforces consistent behavior
+ *
+ * @return array resulting state variables to serialize
+ **/
+   public function jsonSerialize() {
+      $fields = get_object_vars($this);
+      $fields["profileId"] = $this->profileId->toString();
+      /**using unset excludes these fields from being publicly visible*/
+      unset($fields["profileActivationToken"]);
+      unset($fields["profileHash"]);
+      return ($fields);
+   }
 
 }
