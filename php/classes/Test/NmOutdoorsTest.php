@@ -45,11 +45,11 @@ abstract class NmOutdoorsTest extends TestCase {
       $dataset = new QueryDataSet($this->getConnection());
       // add all the tables for the project here
       // THESE TABLES *MUST* BE LISTED IN THE SAME ORDER THEY WERE CREATED!!!!
-      $dataset->recArea("recArea");
-      $dataset->profile("profile");
-      $dataset->review("review");
-      $dataset->activity("activity");
-      $dataset->activityType("activityType");
+      $dataset->addTable("recArea");
+      $dataset->addTable("profile");
+      $dataset->addTable("review");
+      $dataset->addTable("activity");
+      $dataset->addTable("activityType");
       return($dataset);
    }
    /**
