@@ -54,4 +54,57 @@ class ActivityTest extends NmOutdoorsTest {
 		$this->assertEquals($pdoActivity->getActivityId(), $activityId);
 		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME);
 	}
+	/**
+	 * test inserting a Tweet, editing it, and then updating it
+	 **/
+	public function testUpdateValidActivity() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("activity");
+
+		// create a new Activity and insert to into mySQL
+		$activityId = generateUuidV4();
+		$activity = new Activity($activityId, $this->VALID_NAME);
+		$activity->insert($this->getPDO());
+
+		// edit the Activity and update it in mySQL
+		$activity->setActivityName($this->VALID_NAME2);
+		$activity->update($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoActivity = Activity::getActivityByActivityId($this->getPDO(), $activity->getActivityId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activity"));
+		$this->assertEquals($pdoActivity->getActivityId(), $activityId);
+		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME);
+	}
+
+
+	/**
+	 * test creating a Activity and then deleting it
+	 **/
+	public function testDeleteValidActivity() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("activity");
+
+		// create a new Activity and insert to into mySQL
+		$activityId = generateUuidV4();
+		$activity = new Activity($activityId, $this->VALID_NAME);
+		$activity->insert($this->getPDO());
+
+		// delete the Activity from mySQL
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activity"));
+		$activity->delete($this->getPDO());
+
+		// grab the data from mySQL and enforce the Activity does not exist
+		$pdoActivity = Activity::getActivityByActivityId($this->getPDO(), $activity->getActivityId());
+		$this->assertNull($pdoActivity);
+		$this->assertEquals($numRows, $this->getConnection()->getRowCount("activity"));
+	}
+	/**
+	 * test grabbing an Activity that does not exist
+	 **/
+	public function testGetInvalidActivityByActivityId() : void {
+		// grab an activity id that exceeds the maximum allowable activity id
+		$activity = Activity::getActivityByActivityId($this->getPDO(), generateUuidV4());
+		$this->assertNull($activity);
+	}
 }
