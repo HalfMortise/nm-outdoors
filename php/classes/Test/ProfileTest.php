@@ -161,32 +161,6 @@ use HalfMortise\NmOutdoors\Profile;
 
 
 /**
- * test for grabbing a profile by at handle
- **/
-      public function testGetValidProfileByAtHandle() {
-         //count the number of rows and save the result for later
-         $numRows = $this->getConnection()->getRowCount("profile");
-         $profileId = generateUuidV4();
-         $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PROFILE_IMAGE_URL);
-         $profile->insert($this->getPDO());
-         //grab the profile from MySQL
-         $results = Profile::getProfileByProfileAtHandle($this->getPDO(), $this->VALID_ATHANDLE);
-         $this->assertEquals($numRows +1, $this->getConnection()->getRowCount("profile"));
-         //enforce no other objects are bleeding into profile
-         $this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Profile", $results);
-         //enforce the results meet expectations
-         $pdoProfile = $results[0];
-         $this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
-         $this->assertEquals($pdoProfile->getProfileId(), $profileId);
-         $this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
-         $this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE2);
-         $this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
-         $this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
-         $this->assertEquals($pdoProfile->getProfileImageUrl(), $this->VALID_PROFILE_IMAGE_URL);
-      }
-
-
-/**
  * test for grabbing a profile by an at handle that does not exist
  **/
 
