@@ -67,7 +67,7 @@ use HalfMortise\NmOutdoors\Profile;
 
       /**
        * test inserting a valid Profile and verify that the actual MySQL data matches
-       */
+       **/
       public function testInsertValidProfile() : void {
          //count the number of rows and save the result for later
          $numRows = $this->getConnection()->getRowCount("profile");
