@@ -212,9 +212,12 @@ use HalfMortise\NmOutdoors\Profile;
       }
 
 
-
-
-
-
-
+/**
+ * test for grabbing a profile by an invalid (nonexistent) activation token
+ **/
+      public function testGetInvalidProfileActivation() : void {
+         //grab an activation token that does not exist or is invalid
+         $profile = Profile::getProfileByProfileActivationToken($this->getPDO(), "7b26311cb4ba4a3daad612f9985c2fe4");
+         $this->assertNull($profile);
+      }
    }
