@@ -55,7 +55,7 @@ class ActivityTest extends NmOutdoorsTest {
 		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME);
 	}
 	/**
-	 * test inserting a Tweet, editing it, and then updating it
+	 * test inserting an Activity, editing it, and then updating it
 	 **/
 	public function testUpdateValidActivity() : void {
 		// count the number of rows and save it for later
@@ -106,58 +106,19 @@ class ActivityTest extends NmOutdoorsTest {
 		$this->assertNull($activity);
 	}
 	/**
-	 * test grabbing a Activity by activity Name
-	 **/
-	public function testGetValidActivityByActivityName() : void {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("tweet");
-
-		// create a new Activity and insert to into mySQL
-		$activityId = generateUuidV4();
-		$activity = new Activity($activityId, $this->VALID_NAME);
-		$activity->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Activity::getActivityByActivityName($this->getPDO(), $activity->getActivityName());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activity"));
-		$this->assertCount(1, $results);
-
-		// enforce no other objects are bleeding into the test
-		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Activity", $results);
-
-		// grab the result from the array and validate it
-		$pdoActivity = $results[0];
-		$this->assertEquals($pdoActivity->getActivityId(), $activityId);
-		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME);
-	}
-	/**
-	 * test grabbing an Activity by content that does not exist
-	 **/
-	public function testGetInvalidActivityByActivityName() : void {
-		// grab an activity by content that does not exist
-		$activity = Activity::getActivityByActivityId($this->getPDO(), "activity");
-		$this->assertCount(0, $activity);
-	}
-	/**
 	 * test grabbing all Activities
 	 **/
 	public function testGetAllValidActivities() : void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("activity");
 
-		// create a new Tweet and insert to into mySQL
+		// create a new Activity and insert to into mySQL
 		$activityId = generateUuidV4();
 		$activity = new Activity($activityId, $this->VALID_NAME);
 		$activity->insert($this->getPDO());
 
-		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Activity::getActivityByActivityName($this->getPDO(), $activity->getActivityName());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activity"));
-		$this->assertCount(1, $results);
-
 		// grab the result from the array and validate it
 		$pdoActivity = $results[0];
 		$this->assertEquals($pdoActivity->getActivityId(), $activityId);
-		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME);
 	}
 }
