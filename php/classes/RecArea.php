@@ -66,7 +66,18 @@ class RecArea {
 
 		/**
 		 * constructor for the RecArea class
-		 * @throws InvalidArgumentException
+		 * @param string Uuid $newRecAreaId Id of of the rec area
+		 * @param string $newRecAreaDescription string containing description of the rec area
+		 * @param string $newRecAreaDirections string containing google map directions to the rec area
+		 * @param string $newRecAreaImageUrl string link containing a stock photo of the rec area
+		 * @param double  $newRecAreaLat double  containing the latitude value of the rec area location
+		 * @param double $newRecAreaLong double  containing the longitude  value of the rec area location
+		 * @param string $newRecAreaMapUrl string containing link to the rec area map
+		 * @param string $newRecAreaName string containing the name of the rec area
+		 * @throws \InvalidArgumentException if data type is not valid
+		 * @throws \RangeException if data values are out of bounds
+		 * @throws \TypeError if data type violates data hint
+		 * @throws \Exception if some other exceptions occur
 		 **/
 
 
@@ -79,7 +90,7 @@ class RecArea {
 		        				$this->setRecAreaImageUrl($newRecAreaImageUrl);
 		        				$this->setRecAreaLat($newRecAreaLat);
 		        				$this->setRecAreaLong($newRecAreaLong);
-		        				$this->setAreaMapUrl($newRecAreaMapUrl);
+		        				$this->setRecAreaMapUrl($newRecAreaMapUrl);
 		        				$this->setRecAreaName($newRecAreaName);
 
 				  } catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception){
