@@ -161,7 +161,7 @@ use HalfMortise\NmOutdoors\Profile;
 
 
 /**
- * test for grabbing a profile by an at handle that does not exist
+ * test for grabbing a profile by a valid email
  **/
       public function testGetValidProfileByEmail() : void {
          //count the number of rows and save the result for later
@@ -179,6 +179,19 @@ use HalfMortise\NmOutdoors\Profile;
          $this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
          $this->assertEquals($pdoProfile->getProfileImageUrl(), $this->VALID_PROFILE_IMAGE_URL);
       }
+
+
+/**
+ * test for grabbing a profile by an email not tied to an existent profile
+ **/
+      public function testGetInvalidProfileByEmail() : void {
+         //grab an email not tied to an existent profile
+         $profile = Profile::getProfileByProfileEmail($this->getPDO(), "email@non.existent");
+         $this->assertNull($profile);
+      }
+
+
+
 
 
 
