@@ -191,7 +191,25 @@ use HalfMortise\NmOutdoors\Profile;
       }
 
 
-
+/**
+ * test for grabbing a profile by its activation token
+ **/
+      public function testGetProfileByActivationToken() : void {
+         //count the number of rows and save the result for later
+         $numRows = $this->getConnection()->getRowCount("profile");
+         $profileId = generateUuidV4();
+         $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PROFILE_IMAGE_URL);
+         $profile->insert($this->getPDO());
+         //grab the data from MySQL and enforce the fields match expectations
+         $pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
+         $this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
+         $this->assertEquals($pdoProfile->getProfileId(), $profileId);
+         $this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
+         $this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE2);
+         $this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
+         $this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
+         $this->assertEquals($pdoProfile->getProfileImageUrl(), $this->VALID_PROFILE_IMAGE_URL);
+      }
 
 
 
