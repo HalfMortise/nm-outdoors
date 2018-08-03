@@ -105,6 +105,7 @@ class RecArea {
 
 		/**
 		 * accessor method for recArea id
+		 * @return Uuid value of rec area id
 		 *
 		 */
 
@@ -116,17 +117,27 @@ class RecArea {
 		 * mutator method for recArea Id
 		 */
 	/**
-	 * @param mixed $recAreaId
+	 * @param Uuid $recAreaId
+	 * @throws \RangeException if the $recAreaId is not positive
+	 * @throws \TypeError if $recAreaId is not unique (valid Uuid)
 	 */
-	public function setRecAreaId($recAreaId): void {
-		$this->recAreaId = $recAreaId;
+	public function setRecAreaId($newRecAreaId): void {
+
+		try { $uuid = self::validateUuid($newRecAreaId);
+
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception){
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0 , $exception));
+
+		}
+		$this->recAreaId = $uuid;
 	}
 
 	/**
 	 * accessor method for rec Area Description
 	 */
 	/**
-	 * @return mixed
+	 * @return string value of the recAreaId
 	 */
 	public function getRecAreaDescription() {
 		return $this->recAreaDescription;
