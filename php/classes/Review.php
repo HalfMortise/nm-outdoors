@@ -238,6 +238,7 @@ class review implements \JsonSerializable {
 			throw(new \RangeException("review rating is too small"));
 		}
 		if($newReviewRating >= 5) {
+
 			throw(new \RangeException("review rating is too large"));
 		}
 
@@ -261,6 +262,7 @@ class review implements \JsonSerializable {
 		$parameters = ["reviewId" => $this->reviewId->getBytes(), "reviewRecAreaId" => $this->reviewRecAreaId->getBytes(), "reviewProfileId" => $this->reviewProfileId->getBytes(), "reviewContent" => $this->reviewContent, "reviewDateTime" => $formattedDate, "reviewRating" => $this->reviewRating];
 		$statement->execute($parameters);
 	}
+
 	/**
 	 * deletes this review from mySQL
 	 *
@@ -276,6 +278,7 @@ class review implements \JsonSerializable {
 		$parameters = ["reviewId" => $this->reviewId->getBytes()];
 		$statement->execute($parameters);
 	}
+
 	/**
 	 * updates this review in mySQL
 	 *
@@ -291,6 +294,7 @@ class review implements \JsonSerializable {
 		$parameters = ["reviewId" => $this->reviewId->getBytes(), "reviewRecAreaId" => $this->reviewRecAreaId->getBytes(), "reviewProfileId" => $this->reviewProfileId->getBytes(), "reviewContent" => $this->reviewContent, "reviewDateTime" => $formattedDate, "reviewRating" => $this->reviewRating];
 		$statement->execute($parameters);
 	}
+
 	/**
 	 * gets the review by reviewId
 	 *
@@ -327,6 +331,7 @@ class review implements \JsonSerializable {
 		}
 		return ($review);
 	}
+
 	/**
 	 * gets the review by reviewRecAreaId
 	 *
@@ -364,6 +369,7 @@ class review implements \JsonSerializable {
 		}
 		return ($reviews);
 	}
+
 	/**
 	 * gets the review by reviewProfileId
 	 *
@@ -401,6 +407,7 @@ class review implements \JsonSerializable {
 		}
 		return ($reviews);
 	}
+
 	/**
 	 * formats the state variables for JSON serialization
 	 *
