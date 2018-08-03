@@ -90,7 +90,7 @@ use HalfMortise\NmOutdoors\Profile;
  * test to insert a Profile, edit it, and then update it
  */
       public function testUpdateValidProfile() {
-         // count the number of rows and save it for later
+         // count the number of rows and save the result for later
          $numRows = $this->getConnection()->getRowCount("profile");
          // create a new Profile and insert to into MySQL
          $profileId = generateUuidV4();
@@ -109,6 +109,32 @@ use HalfMortise\NmOutdoors\Profile;
          $this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
          $this->assertEquals($pdoProfile->getProfileImageUrl(), $this->VALID_PROFILE_IMAGE_URL);
       }
+
+
+/**
+ * test to create a Profile, then delete it
+ */
+      public function testDeleteValidProfile() : void {
+         //count the number of rows and save the result for later
+         $numRows = $this->getConnection()->getRowCount("profile");
+         $profileId = generateUuidV4();
+         $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PROFILE_IMAGE_URL);
+         $profile->insert($this0>getPDO());
+         //delete the Profile from MySQL
+         $this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
+         //grab the data from MySQL and enforce the profile does not exist
+         $pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
+         $this->assertNull($pdoProfile);
+         $this->assertEquals($numRows, $this->getConnection()->getRowCount("profile"));
+      }
+
+
+
+
+
+
+
+
 
 
    }
