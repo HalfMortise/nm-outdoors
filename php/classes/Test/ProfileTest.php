@@ -161,6 +161,19 @@ use HalfMortise\NmOutdoors\Profile;
       }
 
 
+/**
+ * test for grabbing a profile by at handle
+ */
+      public function testGetValidProfileByAtHandle() {
+         //count the number of rows and save the result for later
+         $numRows = $this->getConnection()->getRowCount("profile");
+         $profileId = generateUuidV4();
+         $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PROFILE_IMAGE_URL);
+         $profile->insert($this->getPDO());
+         //grab the profile from MySQL
+         $results = Profile::getProfileByProfileAtHandle($this->getPDO(), $this->VALID_ATHANDLE);
+
+      }
 
 
 
