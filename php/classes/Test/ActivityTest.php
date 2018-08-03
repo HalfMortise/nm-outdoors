@@ -76,8 +76,6 @@ class ActivityTest extends NmOutdoorsTest {
 		$this->assertEquals($pdoActivity->getActivityId(), $activityId);
 		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME);
 	}
-
-
 	/**
 	 * test creating a Activity and then deleting it
 	 **/
@@ -106,5 +104,30 @@ class ActivityTest extends NmOutdoorsTest {
 		// grab an activity id that exceeds the maximum allowable activity id
 		$activity = Activity::getActivityByActivityId($this->getPDO(), generateUuidV4());
 		$this->assertNull($activity);
+	}
+	/**
+	 * test grabbing a Activity by activity Name
+	 **/
+	public function testGetValidActivityByActivityName() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("tweet");
+
+		// create a new Activity and insert to into mySQL
+		$activityId = generateUuidV4();
+		$activity = new Activity($activityId, $this->VALID_NAME);
+		$activity->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$results = Activity::getActivityByActivityName($this->getPDO(), $activity->getActivityName());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activity"));
+		$this->assertCount(1, $results);
+
+		// enforce no other objects are bleeding into the test
+		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Activity", $results);
+
+		// grab the result from the array and validate it
+		$pdoActivity = $results[0];
+		$this->assertEquals($pdoActivity->getActivityId(), $activityId);
+		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME);
 	}
 }
