@@ -1,5 +1,5 @@
 <?php
-namespace HalfMortise\NmOutdoors;
+namespace HalfMortise\NmOutdoors\Test;
 require_once("../autoload.php");
 require_once(dirname(__DIR__, 3) . "../../vendor/autoload.php");
 require_once(dirname(__DIR__, 3) . "./ValidateUuid.php");
