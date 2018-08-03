@@ -13,12 +13,12 @@ class ActivityType {
 	/**
 	 * id for the ActivityTypeActivityId; this is a foreign key
 	 * @var $songTabSongId
-	 */
+	 **/
 	private $activityTypeActivityId;
 	/**
 	 * id for the ActivityTypeRecId; this is a foreign key
 	 * @var $activityTypeRecId
-	 */
+	 **/
 	private $activityTypeRecAreaId;
 
 	/**
@@ -28,7 +28,7 @@ class ActivityType {
 	 * @throws \InvalidArgumentException if data is not filled out
 	 * @throws \RangeException if data exceeds limit
 	 * @throws \Exception for any other exception
-	 */
+	 **/
 	public function __construct($newActivityTypeActivityId, $newActivityTypeRecAreaId) {
 		try {
 			$this->setActivityTypeActivityId($newActivityTypeActivityId);
@@ -43,7 +43,7 @@ class ActivityType {
 	 * Accessor method for activityTypeActivityId
 	 *
 	 * @return Uuid value of activityTypeActivityId
-	 */
+	 **/
 	public function getActivityTypeActivityId() : Uuid {
 		return($this->activityTypeActivityId);
 	}
@@ -53,7 +53,7 @@ class ActivityType {
 	 * @param Uuid/string $newActivityTypeActivityId new value of activityTypeActivityId
 	 * @throws \RangeException if $newActivityTypeActivityId is not alphanumeric
 	 * @throws \TypeError if $newActivityTypeActivityId is not a uuid
-	 */
+	 **/
 	public function setActivityTypeActivityId($newActivityTypeActivityId) : void {
 		try{
 			$uuid = self::validateUuid ($newActivityTypeActivityId);
@@ -68,7 +68,7 @@ class ActivityType {
 	 *Accessor method for activityTypeRecAreaId
 	 *
 	 *@return Uuid value of activityTypeRecAreaId
-	 */
+	 **/
 	public function getActivityTypeRecAreaId() : Uuid {
 		return($this->activityTypeRecAreaId);
 	}
@@ -78,7 +78,7 @@ class ActivityType {
 	 * @param Uuid/string $newActivityTypeRecAreaId new value of activityTypeRecAreaId
 	 * @throws \RangeException if $newActivityTypeRecAreaId is not alphanumeric
 	 * @throws \TypeError if $newActivityTypeRecAreaId is not a uuid
-	 */
+	 **/
 	public function setActivityTypeRecAreaId($newActivityTypeRecAreaId) : void {
 		try{
 			$uuid = self::validateUuid ($newActivityTypeRecAreaId);

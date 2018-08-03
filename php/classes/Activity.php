@@ -13,11 +13,11 @@ class Activity {
 	/**
 	 * id for the activity; this is the primary key
 	 * @var Uuid|string $activityId
-	 */
+	 **/
 	private $activityId;
 	/**
 	 * @var string $activityName
-	 */
+	 **/
 	private $activityName;
 	/**
 	 * Activity constructor.
@@ -26,7 +26,7 @@ class Activity {
 	 * @throws \InvalidArgumentException if data is not filled out
 	 * @throws \RangeException if data exceeds limit
 	 * @throws \Exception for any other exception
-	 */
+	 **/
 	public function __construct($newActivityId, string $newActivityName) {
 		try{
 			$this->setActivityId($newActivityId);
@@ -41,7 +41,7 @@ class Activity {
 	 * accessor method for activity Id
 	 *
 	 * @return Uuid value of activity id
-	 */
+	 **/
 	public function getActivityId() :Uuid {
 		return ($this->activityId);
 	}
@@ -51,7 +51,7 @@ class Activity {
 	 * @param Uuid/string $newActivityId new value of activityId
 	 * @throws \RangeException if $newActivityId is not alphanumeric
 	 * @throws \TypeError if $newActivityId is not uuid
-	 */
+	 **/
 	public function setActivityId($newActivityId) : void {
 		try {
 			$uuid = self::validateUuid($newActivityId);
@@ -67,7 +67,7 @@ class Activity {
 	 * accessor method for activityName
 	 *
 	 * @return string value of Activity Name
-	 */
+	 **/
 	public function getActivityName() :string {
 		return($this->activityName);
 	}
@@ -78,7 +78,7 @@ class Activity {
 	 * @throws \InvalidArgumentException if $newActivityName is not a string or insecure
 	 * @throws \RangeException if $newActivityName is > 60 characters
 	 * @throws \TypeError if $newActivityName is not a string
-	 */
+	 **/
 	public function setActivityName(string $newActivityName) : void {
 		//verify that activity Name is secure
 		$newActivityName = trim($newActivityName);
