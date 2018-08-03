@@ -222,24 +222,23 @@ class review implements \JsonSerializable {
 	/**
 	 * mutator method for clap Number
 	 *
-	 * @param int $newReviewRating new value of clap Number
-	 * @throws \InvalidArgumentException if $newreviewRating is not an int or insecure
-	 * @throws \RangeException if $newreviewRating is > 51 claps
-	 * @throws \TypeError if $newreviewRating is not an int
+	 * @param int $newReviewRating new value of review rating
+	 * @throws \InvalidArgumentException if $newReviewRating is not an int or insecure
+	 * @throws \RangeException if $newReviewRating is > 51 claps
+	 * @throws \TypeError if $newReviewRating is not an int
 	 **/
 	public function setReviewRating(int $newReviewRating): void {
 // verify the clap Number is secure
-		$newReviewRating = trim($newReviewRating);
-		$newReviewRating = filter_var($newReviewRating, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newreviewRating) === true) {
 			throw(new \InvalidArgumentException("review rating is empty or insecure"));
 		}
 
 // verify the review rating will fit in the database
-		if($newReviewRating < 1) {
+		if($newReviewRating <= 1) {
 			throw(new \RangeException("review rating is too small"));
 		}
-		if($newReviewRating > 5) {
+		if($newReviewRating >= 5) {
+
 			throw(new \RangeException("review rating is too large"));
 		}
 
@@ -263,6 +262,7 @@ class review implements \JsonSerializable {
 		$parameters = ["reviewId" => $this->reviewId->getBytes(), "reviewRecAreaId" => $this->reviewRecAreaId->getBytes(), "reviewProfileId" => $this->reviewProfileId->getBytes(), "reviewContent" => $this->reviewContent, "reviewDateTime" => $formattedDate, "reviewRating" => $this->reviewRating];
 		$statement->execute($parameters);
 	}
+
 	/**
 	 * deletes this review from mySQL
 	 *
@@ -278,6 +278,7 @@ class review implements \JsonSerializable {
 		$parameters = ["reviewId" => $this->reviewId->getBytes()];
 		$statement->execute($parameters);
 	}
+
 	/**
 	 * updates this review in mySQL
 	 *
@@ -293,6 +294,7 @@ class review implements \JsonSerializable {
 		$parameters = ["reviewId" => $this->reviewId->getBytes(), "reviewRecAreaId" => $this->reviewRecAreaId->getBytes(), "reviewProfileId" => $this->reviewProfileId->getBytes(), "reviewContent" => $this->reviewContent, "reviewDateTime" => $formattedDate, "reviewRating" => $this->reviewRating];
 		$statement->execute($parameters);
 	}
+
 	/**
 	 * gets the review by reviewId
 	 *
@@ -329,6 +331,7 @@ class review implements \JsonSerializable {
 		}
 		return ($review);
 	}
+
 	/**
 	 * gets the review by reviewRecAreaId
 	 *
@@ -356,7 +359,7 @@ class review implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while (($row = $statement->fetch()) !== false) {
 			try {
-				$review = new review($row["reviewId"], $row["reviewRecAreaId"], $row["reviewProfileId"], $row["reviewContent"], $row["reviewDateTime"]);
+				$review = new review($row["reviewId"], $row["reviewRecAreaId"], $row["reviewProfileId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
 				$reviews[$reviews->key()] = $review;
 				$reviews->next();
 			} catch(\Exception $exception) {
@@ -366,6 +369,7 @@ class review implements \JsonSerializable {
 		}
 		return ($reviews);
 	}
+
 	/**
 	 * gets the review by reviewProfileId
 	 *
@@ -403,6 +407,7 @@ class review implements \JsonSerializable {
 		}
 		return ($reviews);
 	}
+
 	/**
 	 * formats the state variables for JSON serialization
 	 *
