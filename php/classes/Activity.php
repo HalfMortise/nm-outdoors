@@ -1,6 +1,6 @@
 <?php
 
-namespace HalfMortise\NmOutdoors;
+namespace HalfMortise\NmOutdoors\Test;
 
 require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
@@ -170,5 +170,39 @@ class Activity {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		return ($activity);
+	}
+
+	public static function getActivityByActivityName(\PDO $pdo, string $activityName):?Activity {
+		// sanitize the activity name before searching
+		try {
+			$activityName = self::validateUuid($activityName);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		// create query template
+		$query = "SELECT activityName FROM activity WHERE activityId = :activityId";
+		$statement = $pdo->prepare($query);
+		// bind the activity id to the place holder in the template
+		$parameters = ["activityName" => $activityName->getBytes()];
+		$statement->execute($parameters);
+		// grab the Activity from mySQL
+		try {
+			$activity = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$activity = new Activity($row["activityId"], $row["activityName"]);
+			}
+		} catch(\Exception $exception) {
+			// if the row couldn't be converted, rethrow it
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($activity);
+	}
+
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+		$fields["activityId"] = $this->activityId->toString();
+		return ($fields);
 	}
 }

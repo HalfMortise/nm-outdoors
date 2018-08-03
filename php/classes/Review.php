@@ -232,11 +232,14 @@ class review implements \JsonSerializable {
 		$newReviewRating = trim($newReviewRating);
 		$newReviewRating = filter_var($newReviewRating, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($newreviewRating) === true) {
-			throw(new \InvalidArgumentException("clap Number is empty or insecure"));
+			throw(new \InvalidArgumentException("review rating is empty or insecure"));
 		}
 
 // verify the review rating will fit in the database
-		if($newReviewRating > 6) {
+		if($newReviewRating < 1) {
+			throw(new \RangeException("review rating is too small"));
+		}
+		if($newReviewRating > 5) {
 			throw(new \RangeException("review rating is too large"));
 		}
 
@@ -257,7 +260,7 @@ class review implements \JsonSerializable {
 		$statement = $pdo->prepare($query);
 		// bind the member variables to the place holders in the template
 		$formattedDate = $this->reviewDateTime->format("Y-m-d H:i:s.u");
-		$parameters = ["reviewId" => $this->reviewId->getBytes(), "reviewRecAreaId" => $this->reviewRecAreaId->getBytes(), "reviewProfileId" => $this->reviewProfileId->getBytes(), "reviewContent" => $this->reviewContent, "reviewDateTime" => $formattedDate];
+		$parameters = ["reviewId" => $this->reviewId->getBytes(), "reviewRecAreaId" => $this->reviewRecAreaId->getBytes(), "reviewProfileId" => $this->reviewProfileId->getBytes(), "reviewContent" => $this->reviewContent, "reviewDateTime" => $formattedDate, "reviewRating" => $this->reviewRating];
 		$statement->execute($parameters);
 	}
 	/**
@@ -284,10 +287,10 @@ class review implements \JsonSerializable {
 	 **/
 	public function update(\PDO $pdo): void {
 		//create a query template
-		$query = "UPDATE review SET reviewRecAreaId = :reviewRecAreaId, reviewProfileId = :reviewProfileId, reviewContent = :reviewContent, reviewDateTime = :reviewDateTime WHERE reviewId = :reviewId";
+		$query = "UPDATE review SET reviewRecAreaId = :reviewRecAreaId, reviewProfileId = :reviewProfileId, reviewContent = :reviewContent, reviewDateTime = :reviewDateTime, reviewRating = :reviewRating WHERE reviewId = :reviewId";
 		$statement = $pdo->prepare($query);
 		$formattedDate = $this->reviewDateTime->format("Y-m-d H:i:s.u");
-		$parameters = ["reviewId" => $this->reviewId->getBytes(), "reviewRecAreaId" => $this->reviewRecAreaId->getBytes(), "reviewProfileId" => $this->reviewProfileId->getBytes(), "reviewContent" => $this->reviewContent, "reviewDateTime" => $formattedDate];
+		$parameters = ["reviewId" => $this->reviewId->getBytes(), "reviewRecAreaId" => $this->reviewRecAreaId->getBytes(), "reviewProfileId" => $this->reviewProfileId->getBytes(), "reviewContent" => $this->reviewContent, "reviewDateTime" => $formattedDate, "reviewRating" => $this->reviewRating];
 		$statement->execute($parameters);
 	}
 	/**
@@ -307,7 +310,7 @@ class review implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//create query template
-		$query = "SELECT reviewId, reviewRecAreaId, reviewProfileId, reviewContent, reviewDateTime FROM review WHERE reviewId = :reviewId";
+		$query = "SELECT reviewId, reviewRecAreaId, reviewProfileId, reviewContent, reviewDateTime, reviewRating FROM review WHERE reviewId = :reviewId";
 		$statement = $pdo->prepare($query);
 		//bind the review id to the place holder in the template
 		$parameters = ["reviewId" => $reviewId->getBytes()];
@@ -318,7 +321,7 @@ class review implements \JsonSerializable {
 			$statement->setFetchMode(\PDO::FETCH_ASSOC);
 			$row = $statement->fetch();
 			if($row !== false) {
-				$review = new review($row["reviewId"], $row["reviewProfileId"],  $row["reviewRecAreaId"], $row["reviewContent"], $row["reviewDateTime"]);
+				$review = new review($row["reviewId"], $row["reviewProfileId"],  $row["reviewRecAreaId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
 			}
 		} catch(\Exception $exception) {
 			//if the row couldn't be converted, rethrow it
@@ -335,7 +338,7 @@ class review implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable is not the correct data type
 	 **/
-	public static function getReviewByreviewRecAreaId(\PDO $pdo, $reviewRecAreaId): \SplFixedArray {
+	public static function getReviewByReviewRecAreaId(\PDO $pdo, $reviewRecAreaId): \SplFixedArray {
 		// sanitize the reviewRecAreaId before searching
 		try {
 			$reviewRecAreaId = self::validateUuid($reviewRecAreaId);
@@ -390,7 +393,7 @@ class review implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while (($row = $statement->fetch()) !== false) {
 			try {
-				$review = new review($row["reviewId"], $row["reviewRecAreaId"], $row["reviewProfileId"], $row["reviewContent"], $row["reviewDateTime"]);
+				$review = new review($row["reviewId"], $row["reviewRecAreaId"], $row["reviewProfileId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
 				$reviews[$reviews->key()] = $review;
 				$reviews->next();
 			} catch(\Exception $exception) {
@@ -412,6 +415,7 @@ class review implements \JsonSerializable {
 		$fields["reviewRecAreaId"] = $this->reviewRecAreaId->toString();
 		//format the date so that the front end can consume it
 		$fields["reviewDateTime"] = round(floatval($this->reviewDateTime->format("U.u")) * 1000);
+		$fields["reviewRating"] = $this->reviewRating->toString();
 		return ($fields);
 	}
 }

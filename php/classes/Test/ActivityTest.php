@@ -1,5 +1,5 @@
 <?php
-namespace HalfMortise\NmOutdoors;
+namespace HalfMortise\NmOutdoors\Test;
 
 use HalfMortise\NmOutdoors\Activity;
 
