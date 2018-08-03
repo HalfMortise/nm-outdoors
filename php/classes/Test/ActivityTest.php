@@ -1,5 +1,5 @@
 <?php
-namespace HalfMortise\NmOutdoors\Test;
+namespace HalfMortise\NmOutdoors;
 
 use HalfMortise\NmOutdoors\Activity;
 
@@ -136,7 +136,7 @@ class ActivityTest extends NmOutdoorsTest {
 	public function testGetInvalidActivityByActivityName() : void {
 		// grab an activity by content that does not exist
 		$activity = Activity::getActivityByActivityId($this->getPDO(), "activity");
-		$this->assertCount(0, $ctivity);
+		$this->assertCount(0, $activity);
 	}
 	/**
 	 * test grabbing all Activities
