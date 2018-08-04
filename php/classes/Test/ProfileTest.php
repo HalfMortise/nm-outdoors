@@ -161,21 +161,16 @@ use HalfMortise\NmOutdoors\Profile;
 
 
 /**
- * test for grabbing a profile by at handle
+ * test for grabbing a profile by a valid email
  **/
-      public function testGetValidProfileByAtHandle() {
+      public function testGetValidProfileByEmail() : void {
          //count the number of rows and save the result for later
          $numRows = $this->getConnection()->getRowCount("profile");
          $profileId = generateUuidV4();
          $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PROFILE_IMAGE_URL);
          $profile->insert($this->getPDO());
-         //grab the profile from MySQL
-         $results = Profile::getProfileByProfileAtHandle($this->getPDO(), $this->VALID_ATHANDLE);
-         $this->assertEquals($numRows +1, $this->getConnection()->getRowCount("profile"));
-         //enforce no other objects are bleeding into profile
-         $this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Profile", $results);
-         //enforce the results meet expectations
-         $pdoProfile = $results[0];
+         //grab the data from MySQL and enforce the fields match expectations
+         $pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
          $this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
          $this->assertEquals($pdoProfile->getProfileId(), $profileId);
          $this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
@@ -187,14 +182,42 @@ use HalfMortise\NmOutdoors\Profile;
 
 
 /**
- * test for grabbing a profile by an at handle that does not exist
+ * test for grabbing a profile by an email not tied to an existent profile
  **/
+      public function testGetInvalidProfileByEmail() : void {
+         //grab an email not tied to an existent profile
+         $profile = Profile::getProfileByProfileEmail($this->getPDO(), "email@non.existent");
+         $this->assertNull($profile);
+      }
 
 
+/**
+ * test for grabbing a profile by its activation token
+ **/
+      public function testGetProfileByActivationToken() : void {
+         //count the number of rows and save the result for later
+         $numRows = $this->getConnection()->getRowCount("profile");
+         $profileId = generateUuidV4();
+         $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PROFILE_IMAGE_URL);
+         $profile->insert($this->getPDO());
+         //grab the data from MySQL and enforce the fields match expectations
+         $pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
+         $this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
+         $this->assertEquals($pdoProfile->getProfileId(), $profileId);
+         $this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
+         $this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE2);
+         $this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
+         $this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
+         $this->assertEquals($pdoProfile->getProfileImageUrl(), $this->VALID_PROFILE_IMAGE_URL);
+      }
 
 
-
-
-
-
+/**
+ * test for grabbing a profile by an invalid (nonexistent) activation token
+ **/
+      public function testGetInvalidProfileActivation() : void {
+         //grab an activation token that does not exist or is invalid
+         $profile = Profile::getProfileByProfileActivationToken($this->getPDO(), "7b26311cb4ba4a3daad612f9985c2fe4");
+         $this->assertNull($profile);
+      }
    }

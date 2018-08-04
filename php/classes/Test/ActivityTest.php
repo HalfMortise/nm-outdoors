@@ -7,15 +7,15 @@ use HalfMortise\NmOutdoors\Activity;
 require_once(dirname(__DIR__) . "/autoload.php");
 
 // grab the uuid generator
-require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
+require_once(dirname(__DIR__, 2) . "../lib/uuid.php");
 
 /**
  * Full PHPUnit test for the Activity class
  *
- * This is a complete PHPUnit test of the Tweet class. It is complete because *ALL* mySQL/PDO enabled methods
+ * This is a complete PHPUnit test of the Activity class. It is complete because *ALL* mySQL/PDO enabled methods
  * are tested for both invalid and valid inputs.
  *
- *
+ * @see Activity
  **/
 class ActivityTest extends NmOutdoorsTest {
 	/**
