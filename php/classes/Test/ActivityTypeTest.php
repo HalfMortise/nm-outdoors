@@ -81,5 +81,22 @@ class ActivityTypeTest extends NmOutdoorsTest {
 		$this->assertNull($pdoActivityType);
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("activityType"));
 	}
+	/**
+	 * test inserting an ActivityType and regrabbing it from mySQL
+	 **/
+	public function testGetValidActivityTypeByActivityIdAndRecAreaId(): void {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("activityType");
+
+		//create a new ActivityType and insert it into mySQL
+		$activityType = new ActivityType($this->activity->getActivityId(), $this->recArea->getRecAreaId());
+		$activityType->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$pdoActivityType = ActivityType::getActivityTypeByActivityTypeActivityIdAndActivityTypeRecAreaId($this->getPDO(), $this->activity->getActivityId(), $this->recArea->getRecAreaId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activityType"));
+		$this->assertEquals($pdoActivityType->getActivityTypeActivityId(), $this->activity->getActivityId());
+		$this->assertEquals($pdoActivityType->getActivityTypeRecAreaId(), $this->recArea->getRecAreaId());
+	}
 
 }
