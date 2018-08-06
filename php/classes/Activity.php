@@ -1,14 +1,14 @@
 <?php
 
-namespace HalfMortise\NmOutdoors\Test;
+namespace HalfMortise\NmOutdoors;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
+require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
 
-class Activity {
+class Activity implements \JsonSerializable {
 	use ValidateUuid;
 	/**
 	 * id for the activity; this is the primary key
@@ -172,32 +172,33 @@ class Activity {
 		return ($activity);
 	}
 
-	public static function getActivityByActivityName(\PDO $pdo, string $activityName):?Activity {
-		// sanitize the activity name before searching
-		try {
-			$activityName = self::validateUuid($activityName);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
-		}
+	/**
+	 * gets all Activities
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of Tweets found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getAllActivities(\PDO $pdo) : \SPLFixedArray {
 		// create query template
-		$query = "SELECT activityName FROM activity WHERE activityId = :activityId";
+		$query = "SELECT activityId, activityName FROM activity";
 		$statement = $pdo->prepare($query);
-		// bind the activity id to the place holder in the template
-		$parameters = ["activityName" => $activityName->getBytes()];
-		$statement->execute($parameters);
-		// grab the Activity from mySQL
-		try {
-			$activity = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row !== false) {
+		$statement->execute();
+		// build an array of activities
+		$activities = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
 				$activity = new Activity($row["activityId"], $row["activityName"]);
+				$activities[$activities->key()] = $activity;
+				$activities->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception) {
-			// if the row couldn't be converted, rethrow it
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return ($activity);
+		return ($activities);
 	}
 
 	public function jsonSerialize() {

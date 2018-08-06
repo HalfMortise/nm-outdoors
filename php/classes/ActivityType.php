@@ -1,6 +1,6 @@
 <?php
 
-namespace Sarahheckendorn\DataDesign;
+namespace HalfMortise\NmOutdoors;
 
 require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
@@ -56,7 +56,7 @@ class ActivityType {
 	 **/
 	public function setActivityTypeActivityId($newActivityTypeActivityId) : void {
 		try{
-			$uuid = self::validateUuid ($newActivityTypeActivityId);
+			$uuid = self::ValidateUuid ($newActivityTypeActivityId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -81,7 +81,7 @@ class ActivityType {
 	 **/
 	public function setActivityTypeRecAreaId($newActivityTypeRecAreaId) : void {
 		try{
-			$uuid = self::validateUuid ($newActivityTypeRecAreaId);
+			$uuid = self::ValidateUuid ($newActivityTypeRecAreaId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
 			throw(new $exceptionType($exception->getMessage(), 0, $exception));
@@ -146,12 +146,12 @@ class ActivityType {
 	public static function getActivityTypeByActivityTypeActivityIdAndActivityTypeRecAreaId(\PDO $pdo, string $activityTypeActivityId, string $acitivityTypeRecAreaId) : ?ActivityType {
 		//sanitize the string before searching
 		try {
-			$activityTypeActivityId = self::validateUuid($activityTypeActivityId);
+			$activityTypeActivityId = self::ValidateUuid($activityTypeActivityId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		try {
-			$acitivityTypeRecAreaId = self::validateUuid($acitivityTypeRecAreaId);
+			$acitivityTypeRecAreaId = self::ValidateUuid($acitivityTypeRecAreaId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
@@ -185,7 +185,7 @@ class ActivityType {
 	 **/
 	public static function getActivityTypeByActivityTypeAcivityId(\PDO $pdo, string $activityTypeActivityId) : \SPLFixedArray {
 		try {
-			$activityTypeActivityId = self::validateUuid($activityTypeActivityId);
+			$activityTypeActivityId = self::ValidateUuid($activityTypeActivityId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
@@ -220,7 +220,7 @@ class ActivityType {
 	 **/
 	public static function getActivityTypeByActivityTypeRecAreaId(\PDO $pdo, string $activityTypeRecAreaId) : \SPLFixedArray {
 		try {
-			$activityTypeRecAreaId = self::validateUuid($activityTypeRecAreaId);
+			$activityTypeRecAreaId = self::ValidateUuid($activityTypeRecAreaId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}

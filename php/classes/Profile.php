@@ -2,7 +2,7 @@
 
 namespace HalfMortise\NmOutdoors;
 require_once("autoload.php");
-require_once(dirname(__DIR__, 3) . "../vendor/autoload.php");
+require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -14,44 +14,44 @@ use Ramsey\Uuid\Uuid;
  *
  * @author HalfMortise
  * @version 1.0
- */
+ **/
 class Profile {
    use ValidateUuid;
 
    /**
     * Id for profile; this is the primary key for the class
     * @var string|Uuid $profileId
-    */
+    **/
    private $profileId;
 
    /**
     * Activation token for profile
     * @var string $profileActivationToken
-    */
+    **/
    private $profileActivationToken;
 
    /**
     * Handle for profile
     * @var string $profileAtHandle
-    */
+    **/
    private $profileAtHandle;
 
    /**
     * Email provided for profile setup
     * @var string $profileEmail
-    */
+    **/
    private $profileEmail;
 
    /**
     * Hash-password for profile
     * @var string|Uuid $profileHash
-    */
+    **/
    private $profileHash;
 
    /**
     * Image-avatar provided for profile
     * @var string $profileImageUrl
-    */
+    **/
    private $profileImageUrl;
 
    /**
@@ -69,7 +69,7 @@ class Profile {
     * @throws \Exception if some other exception occurs
     * @Documentation https://php.net/manual/en/language.oop5.decon.php
     *
-    */
+    **/
 
    public function __construct($newProfileId, string $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, $newProfileHash, string $newProfileImageUrl) {
       try {
@@ -84,9 +84,9 @@ class Profile {
          $exceptionType = get_class($exception);
          throw(new $exceptionType($exception->getMessage(), 0, $exception));
       }
-      /**end exception*/
+      /**end exception**/
    }
-   /**end constructor*/
+   /**end constructor**/
 
    /**
     * accessor method for profileId
@@ -96,7 +96,7 @@ class Profile {
    public function getProfileId(): Uuid {
       return ($this->profileId);
    }
-   /**end accessor method for profileId*/
+   /**end accessor method for profileId**/
 
 
    /**
@@ -113,10 +113,10 @@ class Profile {
          $exceptionType = get_class($exception);
          throw(new $exceptionType($exception->getMessage(), 0, $exception));
       }
-      /**convert and store the profile id*/
+      /**convert and store the profile id**/
       $this->profileId = $uuid;
    }
-   /**end mutator method for profileId*/
+   /**end mutator method for profileId**/
 
 
    /**
@@ -127,7 +127,7 @@ class Profile {
    public function getProfileActivationToken(): string {
       return ($this->profileActivationToken);
    }
-   /**end accessor method for profileActivationToken*/
+   /**end accessor method for profileActivationToken**/
 
 
    /**
@@ -149,13 +149,13 @@ class Profile {
          throw(new\RangeException("user activation is not valid"));
       }
 
-      /**make sure the user activation token is only 32 characters*/
+      /**make sure the user activation token is only 32 characters**/
       if(strlen($newProfileActivationToken) !== 32) {
          throw (new\RangeException("user activation token must be under 32 characters"));
       }
       $this->profileActivationToken = $newProfileActivationToken;
    }
-   /**end mutator method for profileActivationToken*/
+   /**end mutator method for profileActivationToken**/
 
 
    /**
@@ -166,7 +166,7 @@ class Profile {
    public function getProfileAtHandle(): string {
       return ($this->profileAtHandle);
    }
-   /**end accessor method for profileAtHandle*/
+   /**end accessor method for profileAtHandle**/
 
 
    /**
@@ -178,33 +178,33 @@ class Profile {
     * @throws \TypeError if $newProfileAtHandle is not a string
     **/
    public function setProfileAtHandle(string $newProfileAtHandle): void {
-      /**verify security of the handle*/
+      /**verify security of the handle**/
       $newProfileAtHandle = trim($newProfileAtHandle);
       $newProfileAtHandle = filter_var($newProfileAtHandle, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
       if(empty($newProfileAtHandle) === true) {
          throw(new \InvalidArgumentException("profile at handle is empty or insecure"));
       }
 
-      /**verify the handle will fit in the database range*/
+      /**verify the handle will fit in the database range**/
       if(strlen($newProfileAtHandle) > 32) {
          throw(new \RangeException("profile at handle is too large"));
       }
 
-      /**store the at handle*/
+      /**store the at handle**/
       $this->profileAtHandle = $newProfileAtHandle;
    }
-   /**end mutator method for profileAtHandle*/
+   /**end mutator method for profileAtHandle**/
 
 
    /**
     * accessor method for profileAtHandle
     *
     * @return string value of profileEmail
-    **/
+    ***/
    public function getProfileEmail(): string {
       return ($this->profileEmail);
    }
-   /**end accessor method for profileEmail*/
+   /**end accessor method for profileEmail**/
 
 
    /**
@@ -216,17 +216,17 @@ class Profile {
     * @throws \TypeError if $newProfileEmail is not a string
     **/
    public function setProfileEmail(string $newProfileEmail): void {
-      /**verify the email is secure*/
+      /**verify the email is secure**/
       $newProfileEmail = trim($newProfileEmail);
       $newProfileEmail = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
       if(empty($newProfileEmail) === true) {
          throw(new \InvalidArgumentException("profile email is empty or insecure"));
       }
 
-      /**store the email*/
+      /**store the email**/
       $this->profileEmail = $newProfileEmail;
    }
-   /**end mutator method for profileEmail*/
+   /**end mutator method for profileEmail**/
 
 
    /**
@@ -237,7 +237,7 @@ class Profile {
    public function getProfileHash(): string {
       return ($this->profileHash);
    }
-   /**end accessor method for profileHash*/
+   /**end accessor method for profileHash**/
 
 
    /**
@@ -249,38 +249,38 @@ class Profile {
     * @throws \TypeError if $newProfileHash is not a string
     **/
    public function setProfileHash(string $newProfileHash): void {
-      /**enforce that the hash is properly formatted*/
+      /**enforce that the hash is properly formatted**/
       $newProfileHash = trim($newProfileHash);
       if(empty($newProfileHash) === true) {
          throw(new \InvalidArgumentException("profile password hash is empty or insecure"));
       }
 
-      /**enforce the hash is really an Argon hash*/
+      /**enforce the hash is really an Argon hash**/
       $profileHashInfo = password_get_info($newProfileHash);
       if($profileHashInfo["algoName"] !== "argon2i") {
          throw(new \InvalidArgumentException("profile hash is not a valid hash"));
       }
 
-      /**enforce that the hash is exactly 97 characters*/
+      /**enforce that the hash is exactly 97 characters**/
       if(strlen($newProfileHash) !== 97) {
          throw(new \RangeException("profile hash must be 97 characters"));
       }
 
-      /**store the hash*/
+      /**store the hash**/
       $this->profileHash = $newProfileHash;
    }
-   /**end mutator method for profileHash*/
+   /**end mutator method for profileHash**/
 
 
    /**
     * accessor method for profileImageUrl
     *
     * @return string value of profileImageUrl
-    **/
+    ***/
    public function getProfileImageUrl(): string {
       return ($this->profileImageUrl);
    }
-   /**end accessor method for profileImageUrl*/
+   /**end accessor method for profileImageUrl**/
 
 
    /**
@@ -295,17 +295,17 @@ class Profile {
       $newProfileImageUrl = trim($newProfileImageUrl);
       $newProfileImageUrl = filter_var($newProfileImageUrl, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
-      /**verify the image url will fit in the database*/
+      /**verify the image url will fit in the database**/
       if(strlen($newProfileImageUrl) > 255) {
          throw(new \RangeException("image url content is too large"));
       }
-      /**store the image url content*/
+      /**store the image url content**/
       $this->profileImageUrl = $newProfileImageUrl;
    }
-   /**end mutator method for profileImageUrl*/
+   /**end mutator method for profileImageUrl**/
 
 
-   /******************PDOs**********************/
+   /******************PDOs***********************/
 
    /**
     * INSERTs this Profile into mySQL
@@ -316,7 +316,7 @@ class Profile {
     **/
    public function insert(\PDO $pdo): void {
 
-      /**create query template*/
+      /**create query template**/
       $query = "INSERT INTO profile(profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl) VALUES (:profileId, :profileActivationToken, :profileAtHandle, :profileEmail, :profileHash, :profileImageUrl)";
       $statement = $pdo->prepare($query);
 
@@ -333,11 +333,11 @@ class Profile {
     **/
    public function delete(\PDO $pdo): void {
 
-      /**create query template*/
+      /**create query template**/
       $query = "DELETE FROM profile WHERE profileId = :profileId";
       $statement = $pdo->prepare($query);
 
-      /**bind the member variables to the place holders in the template*/
+      /**bind the member variables to the place holders in the template**/
       $parameters = ["profileId" => $this->profileId->getBytes()];
       $statement->execute($parameters);
    }
@@ -351,11 +351,11 @@ class Profile {
     **/
    public function update(\PDO $pdo): void {
 
-      /**create query template*/
+      /**create query template**/
       $query = "UPDATE profile SET profileActivationToken = :profileActivationToken, profileAtHandle = :profileAtHandle, profileImageUrl = :profileImageUrl, profileEmail = :profileEmail, profileHash = :profileHash, WHERE profileId = :profileId";
       $statement = $pdo->prepare($query);
 
-      /**bind the member variables to the place holders in the template*/
+      /**bind the member variables to the place holders in the template**/
       $parameters = ["profileId" => $this->profileId->getBytes(), "profileActivationToken" => $this->profileActivationToken, "profileAtHandle" => $this->profileAtHandle, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileImageUrl" => $this->profileImageUrl];
       $statement->execute($parameters);
    }
@@ -372,22 +372,22 @@ class Profile {
     **/
    public static function getProfileByProfileId(\PDO $pdo, string $profileId): ?Profile {
 
-      /**sanitize the profileId before searching*/
+      /**sanitize the profileId before searching**/
       try {
          $profileId = self::validateUuid($profileId);
       } catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
          throw(new \PDOException($exception->getMessage(), 0, $exception));
       }
 
-      /**create query template*/
+      /**create query template**/
       $query = "SELECT profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl FROM profile WHERE profileId = :profileId";
       $statement = $pdo->prepare($query);
 
-      /**bind the profile id to the place holder in the template*/
+      /**bind the profile id to the place holder in the template**/
       $parameters = ["profileId" => $profileId->getBytes()];
       $statement->execute($parameters);
 
-      /**grab the profile from MySQL*/
+      /**grab the profile from MySQL**/
       try {
          $profile = null;
          $statement->setFetchMode(\PDO::FETCH_ASSOC);
@@ -396,7 +396,7 @@ class Profile {
             $profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profileImageUrl"]);
          }
       } catch(\Exception $exception) {
-         /**if the row couldn't be converted, rethrow it*/
+         /**if the row couldn't be converted, rethrow it**/
          throw(new \PDOException($exception->getMessage(), 0, $exception));
       }
       return ($profile);
@@ -414,7 +414,7 @@ class Profile {
     **/
    public static function getProfileByProfileEmail(\PDO $pdo, string $profileEmail): ?Profile {
 
-      /**sanitize the profileId before searching*/
+      /**sanitize the profileId before searching**/
       $profileEmail = trim($profileEmail);
       $profileEmail = filter_var($profileEmail, FILTER_VALIDATE_EMAIL);
 
@@ -422,22 +422,22 @@ class Profile {
          throw(new \PDOException("not a valid email"));
       }
 
-      /**create a query template*/
+      /**create a query template**/
       $query = "SELECT profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl FROM profile WHERE profileEmail = :profileEmail";
       $statement = $pdo->prepare($query);
 
-      /**bind the profileId to the place holder in the template*/
+      /**bind the profileId to the place holder in the template**/
       $parameters = ["profileEmail" => $profileEmail];
       $statement->execute($parameters);
 
-      /**grab the profile from MySQL*/
+      /**grab the profile from MySQL**/
       try {
          $profile = null;
          $statement->setFetchMode(\PDO::FETCH_ASSOC);
          $row = $statement->fetch();
          $profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profileImageUrl"]);
       } catch(\Exception $exception) {
-         /**if the row couldn't be converted, rethrow it*/
+         /**if the row couldn't be converted, rethrow it**/
          throw(new \PDOException($exception->getMessage(), 0, $exception));
       }
       return ($profile);
@@ -455,21 +455,21 @@ class Profile {
     **/
    public static function getProfileByProfileActivationToken(\PDO $pdo, string $profileActivationToken): ?Profile {
 
-      /**make sure the activation token is in the right format and that it is a string representation of a hexadecimal*/
+      /**make sure the activation token is in the right format and that it is a string representation of a hexadecimal**/
       $profileActivationToken = trim($profileActivationToken);
       if(ctype_xdigit($profileActivationToken) === false) {
          throw(new \InvalidArgumentException("profile activation token is empty or in the wrong format"));
       }
 
-      /**create the query template*/
+      /**create the query template**/
       $query = "SELECT  profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl FROM profile WHERE profileActivationToken = :profileActivationToken";
       $statement = $pdo->prepare($query);
 
-      /**bind the profile activation token to the place holder in the template*/
+      /**bind the profile activation token to the place holder in the template**/
       $parameters = ["profileActivationToken" => $profileActivationToken];
       $statement->execute($parameters);
 
-      /**grab the Profile from MySQL*/
+      /**grab the Profile from MySQL**/
       try {
          $profile = null;
          $statement->setFetchMode(\PDO::FETCH_ASSOC);
@@ -479,7 +479,7 @@ class Profile {
          }
       } catch(\Exception $exception) {
 
-         /**if the row couldn't be converted, rethrow it*/
+         /**if the row couldn't be converted, rethrow it**/
          throw(new \PDOException($exception->getMessage(), 0, $exception));
       }
       return ($profile);
@@ -495,7 +495,7 @@ class Profile {
    public function jsonSerialize() {
       $fields = get_object_vars($this);
       $fields["profileId"] = $this->profileId->toString();
-      /**using unset excludes these fields from being publicly visible*/
+      /**using unset excludes these fields from being publicly visible**/
       unset($fields["profileActivationToken"]);
       unset($fields["profileHash"]);
       return ($fields);
