@@ -33,9 +33,43 @@ class ReviewTest extends NmOutdoorsTest {
 	protected $recArea = null;
 
 	/**
-	 * @var
+	 * @var string derivative from Oauth
 	 */
 	protected $VALID_PROFILE_REFRESH_TOKEN;
 
+	/**
+	 * content of the Comment
+	 * @var string $VALID_COMMENT_CONTENT
+	 */
+	protected $VALID_REVIEWCONTENT = "PHPUnit test passing";
 
+	/**
+	 * content of the updated Comment
+	 * @var string
+	 */
+	protected $VALID_REVIEWCONTENT2 = "PHPUnit test still passing";
+
+	/**
+	 * timestamp of the review; this starts as null and is assigned later
+	 * @var null
+	 */
+	protected $VALID_REVIEWDATETIME = null;
+
+	/**
+	 * Valid timestamp to use as sunriseReviewDate
+	 */
+	protected $VALID_SUNRISEDATE = null;
+
+	/**
+	 * Valid timestamp to use as sunsetReviewDate
+	 */
+	protected $VALID_SUNSETDATE = null;
+
+	protected final function setUp(): void {
+		// run setUp() method
+		parent::setUp();
+		$this->VALID_PROFILE_REFRESH_TOKEN = bin2hex(random_bytes(16));
+		// create and insert a Profile to own the test (write the review)
+		// order: profileId email image Refresh token username
+	}
 }
