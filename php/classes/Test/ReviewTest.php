@@ -22,15 +22,22 @@ require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
 class ReviewTest extends NmOutdoorsTest {
 
 	/**
-	 * Profile that created comment for foreign key relations
+	 * Profile that created review for foreign key relations
 	 * @var Profile profile
 	 **/
 	protected $profile = null;
 
 	/**
+	 * RecArea that is reviewed: this is for foreign key relations
 	 * @var RecArea recArea
 	 */
 	protected $recArea = null;
+
+	/**
+	 * valid profile has to create the profile object to own the test
+	 * @var $VALID_HASH
+	 */
+	protected $VALID_PROFILE_HASH;
 
 	/**
 	 * @var string derivative from Oauth
@@ -68,6 +75,8 @@ class ReviewTest extends NmOutdoorsTest {
 	protected final function setUp(): void {
 		// run setUp() method
 		parent::setUp();
+		$password = "abc123";
+		$this->VALID_PROFILE_SALT = bin2hex(random_bytes(32));
 		$this->VALID_PROFILE_REFRESH_TOKEN = bin2hex(random_bytes(16));
 		// create and insert a Profile to own the test (write the review)
 		// order: profileId email image Refresh token username
