@@ -97,6 +97,27 @@ class ActivityTest extends NmOutdoorsTest {
 		$this->assertNull($pdoActivity);
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("activity"));
 	}
+
+	/**
+	 * test inserting an Activity and regrabbing it from mySQL
+	 **/
+	public function testGetValidActivityByActivityId() {
+		//count the number  of rows and saves it for later
+		$numRows = $this->getConnection()->getRowCount("activity");
+
+		//create a new Activity and insert into mySQL
+		$activityId = generateUuidV4();
+		$activity = new Activity($activityId, $this->activityName);
+		$activity->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$pdoActivity = Activity::getActivityByActivityId($this->getPDO(), $activity->getActivityId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activity"));
+		$this->assertEquals($pdoActivity->getActivityId(), $activityId);
+		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME);
+	}
+
+
 	/**
 	 * test grabbing an Activity that does not exist
 	 **/
@@ -111,6 +132,12 @@ class ActivityTest extends NmOutdoorsTest {
 	public function testGetAllValidActivities() : void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("activity");
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$results = Activity::getAllActivities($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("Activity"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Test", $results);
 
 		// create a new Activity and insert to into mySQL
 		$activityId = generateUuidV4();

@@ -1,7 +1,7 @@
 <phpunit>
 	<testsuites>
 		<testsuite name="NM Outdoors Data Design">
-			<file>ProfileTest.php</file>
+			<file>ActivityTest.php</file>
 			<!--<file>TweetTest.php</file>-->
 			<!--<file>FavoriteTest.php</file>-->
 		</testsuite>
