@@ -98,5 +98,13 @@ class ActivityTypeTest extends NmOutdoorsTest {
 		$this->assertEquals($pdoActivityType->getActivityTypeActivityId(), $this->activity->getActivityId());
 		$this->assertEquals($pdoActivityType->getActivityTypeRecAreaId(), $this->recArea->getRecAreaId());
 	}
+	/**
+	 * test grabbing an ActivityType that does not exist
+	 **/
+	public function testGetInvalidActivityTypeByActivityIdAndRecAreaId() {
+		//grab an ActivityId and RecAreaId that exceeds the maximum allowable ActivityId and RecAreaId
+		$activityType = ActivityType::getActivityTypeByActivityTypeActivityIdAndActivityTypeRecAreaId($this->getPDO(), generateUuidV4(), generateUuidV4());
+		$this->assertNull($activityType);
+	}
 
 }
