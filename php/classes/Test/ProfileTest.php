@@ -1,8 +1,9 @@
 <?php
 namespace HalfMortise\NmOutdoors\Test;
-require_once("../autoload.php");
-require_once(dirname(__DIR__, 3) . "../../vendor/autoload.php");
-require_once(dirname(__DIR__, 3) . "./ValidateUuid.php");
+//require_once("/autoload.php");
+require_once(dirname(__DIR__) . "/autoload.php");//pulling from Classes dir.
+require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
+
 use HalfMortise\NmOutdoors\Profile;
 
 /**

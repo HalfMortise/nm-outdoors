@@ -15,7 +15,7 @@ use Ramsey\Uuid\Uuid;
  * @author HalfMortise
  * @version 1.0
  **/
-class Profile {
+class Profile implements \JsonSerializable {
    use ValidateUuid;
 
    /**
