@@ -106,5 +106,27 @@ class ActivityTypeTest extends NmOutdoorsTest {
 		$activityType = ActivityType::getActivityTypeByActivityTypeActivityIdAndActivityTypeRecAreaId($this->getPDO(), generateUuidV4(), generateUuidV4());
 		$this->assertNull($activityType);
 	}
+	/**
+	 * test grabbing an ActivityType by ActivityId
+	 **/
+	public function testGetValidActivityTypeByActivityId() : void {
+		//count number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("activityType");
+
+		//create a new ActivityType and insert it into mySQL
+		$activityType = new ActivityType($this->activity->getActivityId(), $this->recArea->getRecAreaId());
+		$activityType->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$results = ActivityType::getActivityTypeByActivityTypeActivityId($this->getPDO(), $this->activity->getActivityId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activityType"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Activity", $results);
+
+		//grab the result from the array and validate it
+		$pdoActivityType = $results[0];
+		$this->assertEquals($pdoActivityType->getActivityTypeActivityId(), $this->activity-getActivityId());
+		$this->assertEquals($pdoActivityType->getActivityTypeActivityRecAreaId(), $this->recArea-getRecAreaId());
+	}
 
 }
