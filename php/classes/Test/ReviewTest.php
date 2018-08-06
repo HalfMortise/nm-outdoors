@@ -99,4 +99,11 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->VALID_SUNSETDATE->add(new \DateInterval("P10D"));
 	}
 
+	public function testInsertValidReview(): void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("Review");
+		// create a new Review and insert it into mySQL
+		$reviewId = generateUuidV4();
+		$review = new Review($reviewId, )
+	}
 }
