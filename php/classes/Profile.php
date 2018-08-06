@@ -2,7 +2,7 @@
 
 namespace HalfMortise\NmOutdoors;
 require_once("autoload.php");
-require_once(dirname(__DIR__, 3) . "../vendor/autoload.php");
+require_once(dirname(__DIR__, 3) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
@@ -15,7 +15,7 @@ use Ramsey\Uuid\Uuid;
  * @author HalfMortise
  * @version 1.0
  **/
-class Profile {
+class Profile implements \JsonSerializable {
    use ValidateUuid;
 
    /**
