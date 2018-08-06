@@ -22,110 +22,110 @@ class RecArea {
 	 * @var Uuid| $recAreaId
 	 **/
 
-		private $recAreaId;
+	private $recAreaId;
 	/**
 	 * rec area description
 	 * @var string $recAreaDescription
 	 **/
-		private $recAreaDescription;
+	private $recAreaDescription;
 
 	/**
 	 * Good Map Directions to rec area
 	 * @var string $recAreaDirections
 	 **/
 
-		private $recAreaDirections;
+	private $recAreaDirections;
 	/**
 	 * a url string holding a stock image of rec area
 	 * @var string $recAreaImageUrl
 	 **/
-		private $recAreaImageUrl;
+	private $recAreaImageUrl;
 	/**
 	 * Latitude position  of a rec area
 	 * @var double $recAreaLat
 	 **/
-		private $recAreaLat;
+	private $recAreaLat;
 
 	/**
 	 * longitude position of rec area
 	 * @var double $recAreaLong
 	 **/
-		private $recAreaLong;
+	private $recAreaLong;
 
 	/**
 	 * url of the rec area map
 	 * @var string $recAreaMapUrl
 	 **/
-		private $recAreaMapUrl;
+	private $recAreaMapUrl;
 
 	/**
 	 * rec area name
 	 * @var string $recAreaName
 	 **/
-		private $recAreaName;
-
-		/**
-		 * constructor for the RecArea class
-		 * @param string Uuid $newRecAreaId Id of of the rec area
-		 * @param string $newRecAreaDescription string containing description of the rec area
-		 * @param string $newRecAreaDirections string containing google map directions to the rec area
-		 * @param string $newRecAreaImageUrl string link containing a stock photo of the rec area
-		 * @param double  $newRecAreaLat double  containing the latitude value of the rec area location
-		 * @param double $newRecAreaLong double  containing the longitude  value of the rec area location
-		 * @param string $newRecAreaMapUrl string containing link to the rec area map
-		 * @param string $newRecAreaName string containing the name of the rec area
-		 * @throws \InvalidArgumentException if data type is not valid
-		 * @throws \RangeException if data values are out of bounds
-		 * @throws \TypeError if data type violates data hint
-		 * @throws \Exception if some other exceptions occur
-		 **/
-
-
-		public function __construct($newRecAreaId, string $newRecAreaDescription, string $newRecAreaDirections, string $newRecAreaImageUrl, float $newRecAreaLat, float $newRecAreaLong, string $newRecAreaMapUrl, string $newRecAreaName){
-
-		        try{
-		        				$this->setRecAreaId($newRecAreaId);
-		        				$this->setRecAreaDescription($newRecAreaDescription);
-		        				$this->setRecAreaDirections($newRecAreaDirections);
-		        				$this->setRecAreaImageUrl($newRecAreaImageUrl);
-		        				$this->setRecAreaLat($newRecAreaLat);
-		        				$this->setRecAreaLong($newRecAreaLong);
-		        				$this->setRecAreaMapUrl($newRecAreaMapUrl);
-		        				$this->setRecAreaName($newRecAreaName);
-
-				  } catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception){
-		        				$exceptionType = get_class($exception);
-		        				throw(new $exceptionType($exception->getMessage(), 0 , $exception));
-
-				  }
-
-
-
-		}
-
-		/**
-		 * accessor method for recArea id
-		 * @return Uuid value of rec area id
-		 *
-		 **/
-
-		public function getRecAreaId() : Uuid {
-			return ($this->recAreaId);
-		}
+	private $recAreaName;
 
 	/**
-		 * mutator method for recArea Id
+	 * constructor for the RecArea class
+	 * @param string Uuid $newRecAreaId Id of of the rec area
+	 * @param string $newRecAreaDescription string containing description of the rec area
+	 * @param string $newRecAreaDirections string containing google map directions to the rec area
+	 * @param string $newRecAreaImageUrl string link containing a stock photo of the rec area
+	 * @param double $newRecAreaLat double  containing the latitude value of the rec area location
+	 * @param double $newRecAreaLong double  containing the longitude  value of the rec area location
+	 * @param string $newRecAreaMapUrl string containing link to the rec area map
+	 * @param string $newRecAreaName string containing the name of the rec area
+	 * @throws \InvalidArgumentException if data type is not valid
+	 * @throws \RangeException if data values are out of bounds
+	 * @throws \TypeError if data type violates data hint
+	 * @throws \Exception if some other exceptions occur
+	 **/
+
+
+	public function __construct($newRecAreaId, string $newRecAreaDescription, string $newRecAreaDirections, string $newRecAreaImageUrl, float $newRecAreaLat, float $newRecAreaLong, string $newRecAreaMapUrl, string $newRecAreaName) {
+
+		try {
+			$this->setRecAreaId($newRecAreaId);
+			$this->setRecAreaDescription($newRecAreaDescription);
+			$this->setRecAreaDirections($newRecAreaDirections);
+			$this->setRecAreaImageUrl($newRecAreaImageUrl);
+			$this->setRecAreaLat($newRecAreaLat);
+			$this->setRecAreaLong($newRecAreaLong);
+			$this->setRecAreaMapUrl($newRecAreaMapUrl);
+			$this->setRecAreaName($newRecAreaName);
+
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			$exceptionType = get_class($exception);
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
+
+		}
+
+
+	}
+
+	/**
+	 * accessor method for recArea id
+	 * @return Uuid value of rec area id
+	 *
+	 **/
+
+	public function getRecAreaId(): Uuid {
+		return ($this->recAreaId);
+	}
+
+	/**
+	 * mutator method for recArea Id
 	 * @param Uuid $recAreaId
 	 * @throws \RangeException if the $recAreaId is not positive
 	 * @throws \TypeError if $recAreaId is not unique (valid Uuid)
 	 **/
-	public function setRecAreaId(string  $newRecAreaId): void {
+	public function setRecAreaId(string $newRecAreaId): void {
 
-		try { $uuid = self::validateUuid($newRecAreaId);
+		try {
+			$uuid = self::validateUuid($newRecAreaId);
 
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception){
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
 			$exceptionType = get_class($exception);
-			throw(new $exceptionType($exception->getMessage(), 0 , $exception));
+			throw(new $exceptionType($exception->getMessage(), 0, $exception));
 
 		}
 		//convert and store rec area id
@@ -136,7 +136,7 @@ class RecArea {
 	 * accessor method for rec Area Description
 	 * @return string value of the rec Area Description
 	 **/
-	public function getRecAreaDescription() : string {
+	public function getRecAreaDescription(): string {
 		return ($this->recAreaDescription);
 	}
 
@@ -148,7 +148,7 @@ class RecArea {
 	 * @throws \TypeError if rec area description is not string
 	 **/
 	public function setRecAreaDescription(string $recAreaDescription): void {
-		if(strlen($recAreaDescription)> 2048) {
+		if(strlen($recAreaDescription) > 2048) {
 			throw(new\RangeException("Description can't be longer than 2048 characters"));
 		}
 
@@ -159,7 +159,7 @@ class RecArea {
 	 * accessor method for rec area directions
 	 * @return string
 	 **/
-	public function getRecAreaDirections() : string  {
+	public function getRecAreaDirections(): string {
 		return ($this->recAreaDirections);
 	}
 
@@ -175,7 +175,7 @@ class RecArea {
 	 * accessor method for rec area image url
 	 * @return mixed
 	 **/
-	public function getRecAreaImageUrl() :string  {
+	public function getRecAreaImageUrl(): string {
 		return $this->recAreaImageUrl;
 	}
 
@@ -186,21 +186,21 @@ class RecArea {
 	 * @param mixed $recAreaImageUrl
 	 */
 	public function setRecAreaImageUrl(string $recAreaImageUrl): void {
-		if(strlen($recAreaImageUrl)> 255) {
+		if(strlen($recAreaImageUrl) > 255) {
 			throw(new\RangeException("Image Url can't be longer than 255 characters"));
 		}
 		$this->recAreaImageUrl = $recAreaImageUrl;
 	}
 
 
-
 	/**
 	 * accessor method for rec area Latitude location
 	 * @returns float value of the latitudinal location
 	 **/
-	public function getRecAreaLat() : float {
+	public function getRecAreaLat(): float {
 		return $this->recAreaLat;
 	}
+
 	/**
 	 * mutator method for rec area Latitude location
 	 * @param float $newRecAreaLat is a float object
@@ -214,6 +214,7 @@ class RecArea {
 		//Store new rec area Latitude value
 		$this->recAreaLat = $newRecAreaLat;
 	}
+
 	/**
 	 * accessor method for new rec area Longitude location
 	 * @returns float value of the Longitudinal location
@@ -221,6 +222,7 @@ class RecArea {
 	public function getRecAreaLong(): float {
 		return $this->recAreaLong;
 	}
+
 	/**
 	 * mutator method for the new rec area Longitude location
 	 * @param float $newrecAreaLong is a float object
@@ -240,7 +242,7 @@ class RecArea {
 	/**
 	 * @return mixed
 	 */
-	public function getRecAreaMapUrl() : string  {
+	public function getRecAreaMapUrl(): string {
 
 		return $this->recAreaMapUrl;
 	}
@@ -252,7 +254,7 @@ class RecArea {
 	 * @param mixed $recAreaMapUrl
 	 */
 	public function setRecAreaMapUrl(string $recAreaMapUrl): void {
-		if(strlen($recAreaMapUrl)> 255) {
+		if(strlen($recAreaMapUrl) > 255) {
 			throw(new\RangeException("Map Url can't be longer than 255 characters"));
 		}
 		$this->recAreaMapUrl = $recAreaMapUrl;
@@ -264,7 +266,7 @@ class RecArea {
 	/**
 	 * @return mixed
 	 */
-	public function getRecAreaName() : string {
+	public function getRecAreaName(): string {
 		return $this->recAreaName;
 	}
 
@@ -275,67 +277,69 @@ class RecArea {
 	 * @param mixed $recAreaName
 	 */
 	public function setRecAreaName(string $recAreaName): void {
-		if(strlen($recAreaName)> 255) {
+		if(strlen($recAreaName) > 255) {
 			throw(new\RangeException("Rec Area name  can't be longer than 255 characters"));
 		}
 		$this->recAreaName = $recAreaName;
 	}
 
 
-}
 
-/**
- * Begin PDO Methods
- */
-/**
- * inserts rec area into SQL
- *
- * @param \PDO $pdo PDO connection object
- * @throws \PDOException when mySQL relations error occurs
- * @throws \TypeError if $pdo is not a PDO connection object
- */
-public function insert(\PDO $pdo): void {
-	//create a query template for the insert method
-	$query = "INSERT INTO recArea(recAreaId,recAreaDescription,recAreaDirections,recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,
+
+	/**
+	 * Begin PDO Methods
+	 */
+	/**
+	 * inserts rec area into SQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL relations error occurs
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 */
+	public function insert(\PDO $pdo): void {
+		//create a query template for the insert method
+		$query = "INSERT INTO recArea(recAreaId,recAreaDescription,recAreaDirections,recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,
 	recAreaName) VALUES (:recAreaId,:recAreaDescription,:recAreaDirections,:recAreaImageUrl,:recAreaLat,:recAreaLong,:recAreaMapUrl,:recAreaName)";
-	$statement = $pdo->prepare($query);
-	//bind variables to their place in the query template
-	$parameters =
-		["recAreaId" => $this->recAreaId->getBytes(),
-			"recAreaDescription" => $this->recAreaDescription,
-			"recAreaDirections" => $this->recAreaDirections,
-			"recAreaImageUrl"=>$this->recAreaImageUrl,
-			"recAreaLat" => $this->recAreaLat,
-			"recAreaLong" => $this->recAreaLong,
-			"recAreaMapUrl" => $this->recAreaMapUrl,
-			"recAreaName" => $this->recAreaName];
-	$statement->execute($parameters);
-}
-/**
- * deletes the rec area from SQL
- *
- * @param \PDO $pdo PDO connection object
- * @throws \PDOException when mySQL related errors occur
- * @throws \TypeError if $pdo is not a PDO connection object
- */
-public function delete(\PDO $pdo): void {
-	//create query template for the delete method
-	$query = "DELETE FROM recArea WHERE recAreaId = :recAreaId";
-	$statement = $pdo->prepare($query);
-	//bind variables to their place in the query template
-	$parameters = ["recAreaId" => $this->recAreaId->getBytes()];
-	$statement->execute($parameters);
-}
-/**
- * updates the rec area  in SQL
- *
- * @param \PDO $pdo PDO connection object
- * @throws \PDOException when mySQL related errors occur
- * @throws \TypeError if $pdo is not a PDO connection object
- */
-public function update(\PDO $pdo): void {
-	//create query template for the update method
-	$query = "UPDATE recArea SET 
+		$statement = $pdo->prepare($query);
+		//bind variables to their place in the query template
+		$parameters =
+			["recAreaId" => $this->recAreaId->getBytes(),
+				"recAreaDescription" => $this->recAreaDescription,
+				"recAreaDirections" => $this->recAreaDirections,
+				"recAreaImageUrl" => $this->recAreaImageUrl,
+				"recAreaLat" => $this->recAreaLat,
+				"recAreaLong" => $this->recAreaLong,
+				"recAreaMapUrl" => $this->recAreaMapUrl,
+				"recAreaName" => $this->recAreaName];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * deletes the rec area from SQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 */
+	public function delete(\PDO $pdo): void {
+		//create query template for the delete method
+		$query = "DELETE FROM recArea WHERE recAreaId = :recAreaId";
+		$statement = $pdo->prepare($query);
+		//bind variables to their place in the query template
+		$parameters = ["recAreaId" => $this->recAreaId->getBytes()];
+		$statement->execute($parameters);
+	}
+
+	/**
+	 * updates the rec area  in SQL
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError if $pdo is not a PDO connection object
+	 */
+	public function update(\PDO $pdo): void {
+		//create query template for the update method
+		$query = "UPDATE recArea SET 
 	recAreaId = :recAreaId,
 	recAreaDescription = :recAreaDescription,
 	recAreaDirections = :recAreaDirections,
@@ -345,16 +349,47 @@ public function update(\PDO $pdo): void {
 	recAreaMapUrl = :recAreaMapUrl,
 	recAreaName = :recAreaName
 	WHERE recAreaId = :recAreaId";
-	$statement = $pdo->prepare($query);
-	//bind variable to their place in the query template
-	$parameters =
-		["recAreaId" => $this->recAreaId->getBytes(),
-			"recAreaDescription" => $this->recAreaDescription,
-			"recAreaDirections" => $this->recAreaDirections,
-			"recAreaImageUrl" => $this->recAreaImageUrl,
-			"recAreaLat" => $this->recAreaLat,
-			"recAreaLong" => $this->recAreaLong,
-			"recAreaMapUrl" => $this->recAreaMapUrl,
-			"recAreaName" => $this->recAreaName,];
-	$statement->execute($parameters);
+		$statement = $pdo->prepare($query);
+		//bind variable to their place in the query template
+		$parameters =
+			["recAreaId" => $this->recAreaId->getBytes(),
+				"recAreaDescription" => $this->recAreaDescription,
+				"recAreaDirections" => $this->recAreaDirections,
+				"recAreaImageUrl" => $this->recAreaImageUrl,
+				"recAreaLat" => $this->recAreaLat,
+				"recAreaLong" => $this->recAreaLong,
+				"recAreaMapUrl" => $this->recAreaMapUrl,
+				"recAreaName" => $this->recAreaName,];
+		$statement->execute($parameters);
+	}
+
+	public static function getrecAreaByRecAreaId(\PDO $pdo, $recAreaId): ? recArea {
+		//sanitize the recAreaId before searching
+		try {
+			$recAreaId = self::validateUuid($recAreaId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		// creating query template
+		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections,
+	recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName 
+	FROM recArea WHERE recAreaId = :recAreaId";
+		$statement = $pdo->prepare($query);
+		//binding the recAreaId to the placeholders in the template
+		$parameters = ["recAreaId" => $recAreaId->getBytes()];
+		$statement->execute($parameters);
+		//retrieve the recArea from mySQL
+		try {
+			$recArea = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$recArea = new RecArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
+			}
+		} catch(\Exception $exception) {
+			//if the new row cannot be converted, throw it again
+			throw (new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($recArea);
+	}
 }
