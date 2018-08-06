@@ -392,4 +392,13 @@ class RecArea {
 		}
 		return ($recArea);
 	}
+	public static function getDistanceToRecArea(\PDO $pdo, $recAreaLat1, $recAreaLong1, $recAreaLat2, $recAreaLong2){
+		// convert lat1 and lat2 into radians now, to avoid doing it twice below
+		$lat1rad = deg2rad($recAreaLat1);
+		$lat2rad = deg2rad($recAreaLat2);
+		// apply the spherical law of cosines to our latitudes and longitudes, and set the result appropriately
+		// 6378.1 is the approximate radius of the earth in kilometres
+		return acos( sin($lat1rad) * sin($lat2rad) + cos($lat1rad) * cos($lat2rad) * cos( deg2rad($recAreaLong2) - deg2rad($recAreaLong1) ) ) * 6378.1;
+
+	}
 }
