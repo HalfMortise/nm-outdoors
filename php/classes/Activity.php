@@ -3,12 +3,12 @@
 namespace HalfMortise\NmOutdoors;
 
 require_once("autoload.php");
-require_once(dirname(__DIR__, 2) . "../vendor/autoload.php");
+require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
 
-class Activity {
+class Activity implements \JsonSerializable {
 	use ValidateUuid;
 	/**
 	 * id for the activity; this is the primary key
@@ -170,6 +170,35 @@ class Activity {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		return ($activity);
+	}
+
+	/**
+	 * gets all Activities
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of Tweets found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getAllActivities(\PDO $pdo) : \SPLFixedArray {
+		// create query template
+		$query = "SELECT activityId, activityName FROM activity";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+		// build an array of activities
+		$activities = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$activity = new Activity($row["activityId"], $row["activityName"]);
+				$activities[$activities->key()] = $activity;
+				$activities->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($activities);
 	}
 
 	public function jsonSerialize() {

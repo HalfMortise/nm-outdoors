@@ -39,7 +39,131 @@ class ActivityTypeTest extends NmOutdoorsTest {
 		//run the default setUp() method first
 		parent::setUp();
 
-		//create and insert the mocked profile
-		$this->activity = new Activity(generateUuidV4(), null, "@phpunit",)
+		//create and insert the mocked Activity
+		$this->activity = new Activity(generateUuidV4(), null, "@phpunit",);
+		$this->activity->insert($this->getPDO());
+	}
+
+	/**
+	 * test inserting a valid ActivityType and verify that the actual mySQL data matches
+	 **/
+	public function testInsertValidActivityType(): void {
+		//count the number od rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("activityType");
+
+		//create a new activityType and insert it into mySQL
+		$activityType = new ActivityType($this->recArea->getRecAreaId(), $this->activity->getActivityId);
+		$activityType->insert($this->getPDO());
+
+		//grab the data from mySQL and enfore the fields match our expectations
+		$pdoActivityType = ActivityType::getActivityTypeByActivityTypeActivityIdAndActivityTypeRecAreaId($this->getPDO(), $this->activity->getActivityId(), $this->recArea->getRecAreaId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activityType"));
+		$this->assertEquals($pdoActivityType->getActivityTypeActivityId(), $this->activity->getActivityId());
+		$this->assertEquals($pdoActivityType->getActivityTypeRecAreaId(), $this->recArea->getRecAreaId());
+	}
+	/**
+	 * test creating a valid activityType and then deleting it
+	 **/
+	public function testDeleteValidActivityType(): void {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("activityType");
+
+		//create a new ActivityType and insert it into mySQL
+		$activityType = new ActivityType($this->activity->getActivityId(), $this->recArea->getRecAreaId());
+		$activityType->insert($this->getPDO());
+
+		//delete the activityType from mySQL
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activityType"));
+		$activityType->delete($this->getPDO());
+
+		//grab the data from mySQL and enforce the ActivityType does not exist
+		$pdoActivityType = ActivityType::getActivityTypeByActivityTypeActivityIdAndActivityTypeRecAreaId($this->getPDO(), $this->activity->getActivityId(), $this->recArea->getRecAreaId());
+		$this->assertNull($pdoActivityType);
+		$this->assertEquals($numRows, $this->getConnection()->getRowCount("activityType"));
+	}
+	/**
+	 * test inserting an ActivityType and regrabbing it from mySQL
+	 **/
+	public function testGetValidActivityTypeByActivityIdAndRecAreaId(): void {
+		//count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("activityType");
+
+		//create a new ActivityType and insert it into mySQL
+		$activityType = new ActivityType($this->activity->getActivityId(), $this->recArea->getRecAreaId());
+		$activityType->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$pdoActivityType = ActivityType::getActivityTypeByActivityTypeActivityIdAndActivityTypeRecAreaId($this->getPDO(), $this->activity->getActivityId(), $this->recArea->getRecAreaId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activityType"));
+		$this->assertEquals($pdoActivityType->getActivityTypeActivityId(), $this->activity->getActivityId());
+		$this->assertEquals($pdoActivityType->getActivityTypeRecAreaId(), $this->recArea->getRecAreaId());
+	}
+	/**
+	 * test grabbing an ActivityType that does not exist
+	 **/
+	public function testGetInvalidActivityTypeByActivityIdAndRecAreaId() {
+		//grab an ActivityId and RecAreaId that exceeds the maximum allowable ActivityId and RecAreaId
+		$activityType = ActivityType::getActivityTypeByActivityTypeActivityIdAndActivityTypeRecAreaId($this->getPDO(), generateUuidV4(), generateUuidV4());
+		$this->assertNull($activityType);
+	}
+	/**
+	 * test grabbing an ActivityType by ActivityId
+	 **/
+	public function testGetValidActivityTypeByActivityId() : void {
+		//count number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("activityType");
+
+		//create a new ActivityType and insert it into mySQL
+		$activityType = new ActivityType($this->activity->getActivityId(), $this->recArea->getRecAreaId());
+		$activityType->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$results = ActivityType::getActivityTypeByActivityTypeActivityId($this->getPDO(), $this->activity->getActivityId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activityType"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Activity", $results);
+
+		//grab the result from the array and validate it
+		$pdoActivityType = $results[0];
+		$this->assertEquals($pdoActivityType->getActivityTypeActivityId(), $this->activity-getActivityId());
+		$this->assertEquals($pdoActivityType->getActivityTypeActivityRecAreaId(), $this->recArea-getRecAreaId());
+	}
+	/**
+	 * test grabbing an ActivityType by an ActivityId that does not exist
+	 **/
+	public function testGetInvalidActivityTypeByActivityId(): void {
+		//grab an activity Id that exceeds the maximum allowable activityId
+		$activityType = ActivityType::getActivityTypeByActivityId($this->getPDO(), generateUuidV4());
+		$this->assertCount(0, $activityType);
+	}
+	/**
+	 * test grabbing an activityType by RecAreaId
+	 **/
+	public function testGetValidActivityTypeByRecAreaId() : void {
+		//count number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("activityType");
+
+		//create a new ActivityType and insert it into mySQL
+		$activityType = new ActivityType($this->activity->getActivityId(), $this->recArea->getRecAreaId());
+		$activityType->insert($this->getPDO());
+
+		//grab the data from mySQL and enforce the fields match our expectations
+		$results = ActivityType::getActivityTypeByActivityTypeRecAreaId($this->getPDO(), $this->activity->getActivityId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activityType"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Activity", $results);
+
+		//grab the result from the array and validate it
+		$pdoActivityType = $results[0];
+		$this->assertEquals($pdoActivityType->getActivityTypeActivityId(), $this->activity-getActivityId());
+		$this->assertEquals($pdoActivityType->getActivityTypeActivityRecAreaId(), $this->recArea-getRecAreaId());
+	}
+	/**
+	 * test grabbing an ActivityType by an RecAreaId that does not exist
+	 **/
+	public function testGetInvalidActivityTypeByRecAreaId(): void {
+		//grab an RecAreaId that exceeds the maximum allowable recAreaId
+		$activityType = ActivityType::getActivityTypeByRecAreaId($this->getPDO(), generateUuidV4());
+		$this->assertCount(0, $activityType);
 	}
 }
