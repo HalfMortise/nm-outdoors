@@ -312,7 +312,7 @@ class review implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//create query template
-		$query = "SELECT reviewId, reviewRecAreaId, reviewProfileId, reviewContent, reviewDateTime, reviewRating FROM review WHERE reviewId = :reviewId";
+		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime, reviewRating FROM review WHERE reviewId = :reviewId";
 		$statement = $pdo->prepare($query);
 		//bind the review id to the place holder in the template
 		$parameters = ["reviewId" => $reviewId->getBytes()];
@@ -349,7 +349,7 @@ class review implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//create query template
-		$query = "SELECT reviewId, reviewRecAreaId, reviewProfileId, reviewContent, reviewDateTime FROM review WHERE reviewRecAreaId = :reviewRecAreaId";
+		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime FROM review WHERE reviewRecAreaId = :reviewRecAreaId";
 		$statement = $pdo->prepare($query);
 		//bind the review id to the place holder in the template
 		$parameters = ["reviewRecAreaId" => $reviewRecAreaId->getBytes()];
@@ -359,7 +359,7 @@ class review implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while (($row = $statement->fetch()) !== false) {
 			try {
-				$review = new review($row["reviewId"], $row["reviewRecAreaId"], $row["reviewProfileId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
+				$review = new review($row["reviewId"], $row["reviewProfileId"], $row["reviewRecAreaId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
 				$reviews[$reviews->key()] = $review;
 				$reviews->next();
 			} catch(\Exception $exception) {
@@ -387,7 +387,7 @@ class review implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//create query template
-		$query = "SELECT reviewId, reviewRecAreaId, reviewProfileId, reviewContent, reviewDateTime FROM review WHERE reviewProfileId = :reviewProfileId";
+		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime FROM review WHERE reviewProfileId = :reviewProfileId";
 		$statement = $pdo->prepare($query);
 		//bind the review id to the place holder in the template
 		$parameters = ["reviewProfileId" => $reviewProfileId->getBytes()];
@@ -397,7 +397,7 @@ class review implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while (($row = $statement->fetch()) !== false) {
 			try {
-				$review = new review($row["reviewId"], $row["reviewRecAreaId"], $row["reviewProfileId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
+				$review = new review($row["reviewId"], $row["reviewProfileId"], $row["reviewRecAreaId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
 				$reviews[$reviews->key()] = $review;
 				$reviews->next();
 			} catch(\Exception $exception) {
