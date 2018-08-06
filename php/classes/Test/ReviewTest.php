@@ -21,4 +21,21 @@ require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
  **/
 class ReviewTest extends NmOutdoorsTest {
 
+	/**
+	 * Profile that created comment for foreign key relations
+	 * @var Profile profile
+	 **/
+	protected $profile = null;
+
+	/**
+	 * @var RecArea recArea
+	 */
+	protected $recArea = null;
+
+	/**
+	 * @var
+	 */
+	protected $VALID_PROFILE_REFRESH_TOKEN;
+
+
 }
