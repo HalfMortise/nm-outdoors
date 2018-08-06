@@ -392,13 +392,46 @@ class RecArea {
 		}
 		return ($recArea);
 	}
-	public static function getDistanceToRecArea(\PDO $pdo, $recAreaLat1, $recAreaLong1, $recAreaLat2, $recAreaLong2){
-		// convert lat1 and lat2 into radians now, to avoid doing it twice below
-		$lat1rad = deg2rad($recAreaLat1);
-		$lat2rad = deg2rad($recAreaLat2);
-		// apply the spherical law of cosines to our latitudes and longitudes, and set the result appropriately
-		// 6378.1 is the approximate radius of the earth in kilometres
-		return acos( sin($lat1rad) * sin($lat2rad) + cos($lat1rad) * cos($lat2rad) * cos( deg2rad($recAreaLong2) - deg2rad($recAreaLong1) ) ) * 6378.1;
-
+//	public static function getDistanceToRecArea(\PDO $pdo, $recAreaLat1, $recAreaLong1, $recAreaLat2, $recAreaLong2){
+//		// convert lat1 and lat2 into radians now, to avoid doing it twice below
+//		$lat1rad = deg2rad($recAreaLat1);
+//		$lat2rad = deg2rad($recAreaLat2);
+//		// apply the spherical law of cosines to our latitudes and longitudes, and set the result appropriately
+//		// 6378.1 is the approximate radius of the earth in kilometres
+//		return acos( sin($lat1rad) * sin($lat2rad) + cos($lat1rad) * cos($lat2rad) * cos( deg2rad($recAreaLong2) - deg2rad($recAreaLong1) ) ) * 6378.1;
+//
+//	}
+	/**
+	 * gets the recArea by distance
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @param float $userLat latitude coordinate of where user is
+	 * @param float $userLong longitude coordinate of where user is
+	 * @param float $distance distance in miles that the user is searching by
+	 * @return \SplFixedArray SplFixedArray of pieces of recArea found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 * **/
+	public static function getRecAreaByDistance(\PDO $pdo, float $userLong, float $userLat, float $distance) : \SplFixedArray {
+		// create query template
+		$query = "SELECT recAreaId, recAreaDescription, recAreaDirections, recAreaImageUrl, recAreaLat, recAreaLong, recAreaMapUrl, recAreaName FROM recArea WHERE haversine(:userLong, :userLat, recAreaLong, recAreaLat) < :distance";
+		$statement = $pdo->prepare($query);
+		// bind the recArea distance to the place holder in the template
+		$parameters = ["distance" => $distance, "userLat" => $userLat, "userLong" => $userLong];
+		$statement->execute($parameters);
+		// build an array of recArea
+		$recAreas = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$recArea = new recArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
+				$recAreas[$recAreas->key()] = $recArea;
+				$recAreas->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($recAreas);
 	}
 }
