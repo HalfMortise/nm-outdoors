@@ -22,20 +22,63 @@ require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
 class ReviewTest extends NmOutdoorsTest {
 
 	/**
-	 * Profile that created comment for foreign key relations
+	 * Profile that created review for foreign key relations
 	 * @var Profile profile
 	 **/
 	protected $profile = null;
 
 	/**
+	 * RecArea that is reviewed: this is for foreign key relations
 	 * @var RecArea recArea
 	 */
 	protected $recArea = null;
 
 	/**
-	 * @var
+	 * valid profile has to create the profile object to own the test
+	 * @var $VALID_HASH
+	 */
+	protected $VALID_PROFILE_HASH;
+
+	/**
+	 * @var string derivative from Oauth
 	 */
 	protected $VALID_PROFILE_REFRESH_TOKEN;
 
+	/**
+	 * content of the Comment
+	 * @var string $VALID_COMMENT_CONTENT
+	 */
+	protected $VALID_REVIEWCONTENT = "PHPUnit test passing";
 
+	/**
+	 * content of the updated Comment
+	 * @var string
+	 */
+	protected $VALID_REVIEWCONTENT2 = "PHPUnit test still passing";
+
+	/**
+	 * timestamp of the review; this starts as null and is assigned later
+	 * @var null
+	 */
+	protected $VALID_REVIEWDATETIME = null;
+
+	/**
+	 * Valid timestamp to use as sunriseReviewDate
+	 */
+	protected $VALID_SUNRISEDATE = null;
+
+	/**
+	 * Valid timestamp to use as sunsetReviewDate
+	 */
+	protected $VALID_SUNSETDATE = null;
+
+	protected final function setUp(): void {
+		// run setUp() method
+		parent::setUp();
+		$password = "abc123";
+		$this->VALID_PROFILE_SALT = bin2hex(random_bytes(32));
+		$this->VALID_PROFILE_REFRESH_TOKEN = bin2hex(random_bytes(16));
+		// create and insert a Profile to own the test (write the review)
+		// order: profileId email image Refresh token username
+	}
 }
