@@ -122,7 +122,7 @@ class ReviewTest extends NmOutdoorsTest {
 		$review->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields to match our expectations
-		$pdoReview = Review::getReviewByReviewId($this->getPDO()), $comment->getReviewId());
+		$pdoReview = Review::getReviewByReviewId($this->getPDO(), $review->getReviewId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("review"));
 		$this->assertEquals($pdoReview->getReviewId(), $reviewId);
 		$this->assertEquals($pdoReview->getReviewProfileId(), $this->profile->getProfileId());
@@ -153,7 +153,7 @@ class ReviewTest extends NmOutdoorsTest {
 		$review->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields to match out expectations
-		$pdoReview = Review::getReviewByReviewId($this->getPDO()), $comment->getReviewId());
+		$pdoReview = Review::getReviewByReviewId($this->getPDO(), $review->getReviewId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("review"));
 		$this->assertEquals($pdoReview->getReviewId(), $reviewId);
 		$this->assertEquals($pdoReview->getReviewProfileId(), $this->profile->getProfileId());
