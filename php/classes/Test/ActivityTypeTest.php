@@ -40,7 +40,7 @@ class ActivityTypeTest extends NmOutdoorsTest {
 		parent::setUp();
 
 		//create and insert the mocked Activity
-		$this->activity = new Activity(generateUuidV4(), null, "@phpunit",);
+		$this->activity = new Activity(generateUuidV4(), null, "@phpunit");
 		$this->activity->insert($this->getPDO());
 	}
 
