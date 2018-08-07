@@ -8,6 +8,15 @@ require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 use HalfMortise\NmOutdoors\Activity;
 use Ramsey\Uuid\Uuid;
 
+/**
+ * This is database construct intermediary bridge between the Activity class and RecArea class
+ *
+ * Class identified as ActivityType
+ *
+ * @package HalfMortise\NmOutdoors
+ * @author sarahheckendorn
+ * @version 1.0
+ **/
 class ActivityType {
 	use ValidateUuid;
 	/**
