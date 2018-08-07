@@ -146,7 +146,6 @@ class ReviewTest extends NmOutdoorsTest {
 		$reviewId = generateUuidV4();
 		$review = new Review($reviewId, $this->profile->getProfileId(), $this->recArea->getRecAreaId(), $this->VALID_REVIEWCONTENT, $this->VALID_REVIEWDATETIME, $this->VALID_REVIEWRATING);
 		$review->insert($this->getPDO());
-		$review->insert($this->getPDO());
 
 		// edit the Review and update it in mySQL
 		$review->setReviewContent($this->VALID_REVIEWCONTENT2);
@@ -164,6 +163,28 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->assertEquals($pdoReview->getReviewDateTime()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
 
 		$this->assertEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
+	}
+
+	/**
+	 * test creating a Review and then deleting it
+	 **/
+	public function testDeleteValidReview(): void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("review");
+
+		// create a new Review and insert it into mySQL
+		$reviewId = generateUuidV4();
+		$review = new Review($reviewId, $this->profile->getProfileId(), $this->recArea->getRecAreaId(), $this->VALID_REVIEWCONTENT, $this->VALID_REVIEWDATETIME, $this->VALID_REVIEWRATING);
+		$review->insert($this->getPDO());
+
+		// delete the Review from mySQL
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("review"));
+		$review->delete($this->getPDO());
+
+		// take the data from mySQL and enforce that the Review does not exist
+		$pdoReview = Review::getReviewByReviewId($this->getPDO(), $review->getReviewId());
+		$this->assertNull($pdoComment);
+		$this->assertEquals($numRows, $this->getConnection()->getRowCount("review"));
 	}
 
 }
