@@ -115,7 +115,7 @@ class ReviewTest extends NmOutdoorsTest {
 	 */
 	public function testInsertValidReview(): void {
 		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("Review");
+		$numRows = $this->getConnection()->getRowCount("review");
 		// create a new Review and insert it into mySQL
 		$reviewId = generateUuidV4();
 		$review = new Review($reviewId, $this->profile->getProfileId(), $this->recArea->getRecAreaId(), $this->VALID_REVIEWCONTENT, $this->VALID_REVIEWDATETIME, $this->VALID_REVIEWRATING);
@@ -188,7 +188,7 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("review"));
 	}
 
-	/**
+	/**d
 	 * test grabbing a Review that does not exist
 	 **/
 	public function testGetInvalidReviewByReviewProfileId(): void {

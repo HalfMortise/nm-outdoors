@@ -363,7 +363,7 @@ class RecArea {
 		$statement->execute($parameters);
 	}
 
-	public static function getrecAreaByRecAreaId(\PDO $pdo, $recAreaId): ? recArea {
+	public static function getRecAreaByRecAreaId(\PDO $pdo, $recAreaId): ? recArea {
 		//sanitize the recAreaId before searching
 		try {
 			$recAreaId = self::validateUuid($recAreaId);
