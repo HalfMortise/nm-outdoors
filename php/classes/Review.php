@@ -349,7 +349,7 @@ class review implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//create query template
-		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime FROM review WHERE reviewRecAreaId = :reviewRecAreaId";
+		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime,reviewRating FROM review WHERE reviewRecAreaId = :reviewRecAreaId";
 		$statement = $pdo->prepare($query);
 		//bind the review id to the place holder in the template
 		$parameters = ["reviewRecAreaId" => $reviewRecAreaId->getBytes()];
@@ -387,7 +387,7 @@ class review implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//create query template
-		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime FROM review WHERE reviewProfileId = :reviewProfileId";
+		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime, reviewRating FROM review WHERE reviewProfileId = :reviewProfileId";
 		$statement = $pdo->prepare($query);
 		//bind the review id to the place holder in the template
 		$parameters = ["reviewProfileId" => $reviewProfileId->getBytes()];
@@ -407,6 +407,37 @@ class review implements \JsonSerializable {
 		}
 		return ($reviews);
 	}
+
+	/**
+	 * gets all Reviews
+	 *
+	 * @param \PDO $pdo PDO connection object
+	 * @return \SplFixedArray SplFixedArray of Reviews found or null if not found
+	 * @throws \PDOException when mySQL related errors occur
+	 * @throws \TypeError when variables are not the correct data type
+	 **/
+	public static function getAllReviews(\PDO $pdo) : \SPLFixedArray {
+		// create query template
+		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime, reviewRating FROM review";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		// build an array of Reviews
+		$reviews = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$review = new review($row["reviewId"], $row["reviewProfileId"], $row["reviewRecAreaId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
+				$reviews[$reviews->key()] = $review;
+				$reviews->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($reviews);
+	}
+
 
 	/**
 	 * formats the state variables for JSON serialization
