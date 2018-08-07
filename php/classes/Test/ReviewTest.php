@@ -205,4 +205,17 @@ class ReviewTest extends NmOutdoorsTest {
 		$review = Review::getReviewByReviewRecAreaId($this->getPDO(), generateUuidV4());
 		$this->assertEmpty($review);
 	}
+
+	/**
+	 * test grabbing a Review that does not exist
+	 **/
+	public function testGetInvalidReviewByReviewId(): void {
+		// grab a comment id that exceeds the maximum allowable review id
+		$review = Review::getReviewByReviewId($this->getPDO(), generateUuidV4());
+		$this->assertEmpty($review);
+	}
+
+
+
+
 }
