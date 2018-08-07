@@ -44,13 +44,29 @@ class RecAreaTest extends NmOutdoorsTest {
 	 * Latitude position  of a rec area
 	 * @var double $recAreaLat
 	 **/
-	protected $VALID_recAreaLat = null;
+	protected $VALID_recAreaLat = 42.123456;
+
+
+	/**
+	 * Latitude position  of a rec area
+	 * @var double $recAreaLat2
+	 **/
+	protected $VALID_recAreaLat2 = -39.987654;
+
 
 	/**
 	 * longitude position of rec area
 	 * @var double $recAreaLong
 	 **/
-	protected $VALID_recAreaLong = null;
+	protected $VALID_recAreaLong = 122.765678;
+
+
+	/**
+	 * longitude position of rec area
+	 * @var double $recAreaLong2
+	 **/
+	protected $VALID_recAreaLong2 = -165.789543;
+
 
 	/**
 	 * url of the rec area map
