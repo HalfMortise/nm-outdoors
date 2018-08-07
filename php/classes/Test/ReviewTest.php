@@ -212,7 +212,7 @@ class ReviewTest extends NmOutdoorsTest {
 	public function testGetInvalidReviewByReviewId(): void {
 		// grab a comment id that exceeds the maximum allowable review id
 		$review = Review::getReviewByReviewId($this->getPDO(), generateUuidV4());
-		$this->assertEmpty($review);
+		$this->assertNull($review);
 	}
 
 	/**
@@ -252,7 +252,7 @@ class ReviewTest extends NmOutdoorsTest {
 	public function testGetInvalidReviewByProfileId(): void {
 		// grab a profile id that exceeds the maximum allowable profile id
 		$review = Review::getReviewByReviewProfileId($this->getPDO(), generateUuidV4());
-		$this->assertEmpty($review);
+		$this->assertCount(0, $review);
 	}
 
 	/**
@@ -294,7 +294,7 @@ class ReviewTest extends NmOutdoorsTest {
 	public function testGetInvalidReviewByRecAreaId(): void {
 		// grab a profile id that exceeds the maximum allowable profile id
 		$review = Review::getReviewByReviewRecAreaId($this->getPDO(), generateUuidV4());
-		$this->assertEmpty($review);
+		$this->assertCount(0, $review);
 	}
 
 	/**
@@ -328,5 +328,14 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->assertEquals($pdoReview->getReviewDate()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
 
 		$this->assertsEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
+	}
+
+	/**
+	 * test grabbing a Review by content that does not exist
+	 **/
+	public function testGetInvalidReviewByReviewContent(): void {
+		// grab a profile id that exceeds the maximum allowable profile id
+		$review = Review::getReviewByReviewRecAreaId($this->getPDO(), "Invalid Review Content Test");
+		$this->assertCount(0, $review);
 	}
 }
