@@ -149,6 +149,7 @@ class ReviewTest extends NmOutdoorsTest {
 
 		// edit the Review and update it in mySQL
 		$review->setReviewContent($this->VALID_REVIEWCONTENT2);
+		$review->setReviewRating($this->VALID_REVIEWRATING2);
 		$review->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields to match out expectations
@@ -162,7 +163,7 @@ class ReviewTest extends NmOutdoorsTest {
 		// format the date to seconds since the beginning of time to avoid round off error
 		$this->assertEquals($pdoReview->getReviewDateTime()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
 
-		$this->assertEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
+		$this->assertEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING2);
 	}
 
 	/**
@@ -186,5 +187,15 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->assertNull($pdoReview);
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("review"));
 	}
+
+	/**
+	 * test grabbing a Review that does not exist
+	 **/
+	public function testGetInvalidReviewByReviewProfileId(): void {
+		// grab a profile id that exceeds the maximum allowable profile id
+		$review = Review::getReviewByReviewProfileId($this->getPDO(), generateUuidV4());
+		$this->assertEmpty($review);
+	}
+
 
 }
