@@ -7,6 +7,15 @@ require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 
 use Ramsey\Uuid\Uuid;
 
+/**
+ * This is the placeholder for all of the activities users can find on our interactive site
+ *
+ * Class identified as Activity
+ *
+ * @package HalfMortise\NmOutdoors
+ * @author sarahheckendorn
+ * @version 1.0
+ **/
 
 class Activity implements \JsonSerializable {
 	use ValidateUuid;
