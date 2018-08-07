@@ -183,7 +183,7 @@ class ReviewTest extends NmOutdoorsTest {
 
 		// take the data from mySQL and enforce that the Review does not exist
 		$pdoReview = Review::getReviewByReviewId($this->getPDO(), $review->getReviewId());
-		$this->assertNull($pdoComment);
+		$this->assertNull($pdoReview);
 		$this->assertEquals($numRows, $this->getConnection()->getRowCount("review"));
 	}
 
