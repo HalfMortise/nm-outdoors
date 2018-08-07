@@ -107,7 +107,7 @@ class ActivityTest extends NmOutdoorsTest {
 
 		//create a new Activity and insert into mySQL
 		$activityId = generateUuidV4();
-		$activity = new Activity($activityId, $this->activityName);
+		$activity = new Activity($activityId, $this->VALID_NAME);
 		$activity->insert($this->getPDO());
 
 		//grab the data from mySQL and enforce the fields match our expectations
@@ -135,7 +135,7 @@ class ActivityTest extends NmOutdoorsTest {
 
 		//grab the data from mySQL and enforce the fields match our expectations
 		$results = Activity::getAllActivities($this->getPDO());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("Activity"));
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activity"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Test", $results);
 

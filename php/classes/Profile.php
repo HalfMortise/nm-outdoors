@@ -352,7 +352,7 @@ class Profile implements \JsonSerializable {
    public function update(\PDO $pdo): void {
 
       /**create query template**/
-      $query = "UPDATE profile SET profileActivationToken = :profileActivationToken, profileAtHandle = :profileAtHandle, profileImageUrl = :profileImageUrl, profileEmail = :profileEmail, profileHash = :profileHash, WHERE profileId = :profileId";
+      $query = "UPDATE profile SET profileActivationToken = :profileActivationToken, profileAtHandle = :profileAtHandle, profileImageUrl = :profileImageUrl, profileEmail = :profileEmail, profileHash = :profileHash WHERE profileId = :profileId";
       $statement = $pdo->prepare($query);
 
       /**bind the member variables to the place holders in the template**/
