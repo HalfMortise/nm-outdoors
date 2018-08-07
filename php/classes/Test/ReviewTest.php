@@ -30,46 +30,57 @@ class ReviewTest extends NmOutdoorsTest {
 	/**
 	 * RecArea that is reviewed: this is for foreign key relations
 	 * @var RecArea recArea
-	 */
+	 **/
 	protected $recArea = null;
 
 	/**
 	 * valid profile has to create the profile object to own the test
 	 * @var $VALID_HASH
-	 */
+	 **/
 	protected $VALID_PROFILE_HASH;
 
 	/**
 	 * @var string derivative from Oauth
-	 */
+	 **/
 	protected $VALID_PROFILE_REFRESH_TOKEN;
 
 	/**
 	 * content of the Comment
 	 * @var string $VALID_COMMENT_CONTENT
-	 */
+	 **/
 	protected $VALID_REVIEWCONTENT = "PHPUnit test passing";
 
 	/**
 	 * content of the updated Comment
 	 * @var string
-	 */
+	 **/
 	protected $VALID_REVIEWCONTENT2 = "PHPUnit test still passing";
 
 	/**
 	 * timestamp of the review; this starts as null and is assigned later
 	 * @var null
-	 */
-	protected $VALID_REVIEWDATE = null;
+	 **/
+	protected $VALID_REVIEWDATETIME = null;
 
 	/**
+	 * rating of the Review
+	 * @var int
+	 **/
+	protected $VALID_REVIEWRATING = 1;
+
+	/**
+	 * rating of the updated Review
+	 * @var int
+	 **/
+	protected $VALID_REVIEWRATING2 = 2;
+	/**
 	 * Valid timestamp to use as sunriseReviewDate
-	 */
+	 **/
 	protected $VALID_SUNRISEDATE = null;
 
 	/**
 	 * Valid timestamp to use as sunsetReviewDate
-	 */
+	 **/
 	protected $VALID_SUNSETDATE = null;
 
 	/**
@@ -88,7 +99,7 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->profile->insert($this->getPDO());
 
 		// calculate the date (just use the time the unit test was setup...)
-		$this->VALID_REVIEWDATE = new \DateTime();
+		$this->VALID_REVIEWDATETIME = new \DateTime();
 
 		//format the sunrise date to use for testing
 		$this->VALID_SUNRISEDATE = new \DateTime();
@@ -104,6 +115,20 @@ class ReviewTest extends NmOutdoorsTest {
 		$numRows = $this->getConnection()->getRowCount("Review");
 		// create a new Review and insert it into mySQL
 		$reviewId = generateUuidV4();
-		$review = new Review($reviewId, )
+		$review = new Review($reviewId, $this->profile->getProfileId(), $this->recArea->getRecAreaId(), $this->VALID_REVIEWCONTENT, $this->VALID_REVIEWDATETIME,$this->VALID_REVIEWRATING);
+		$review->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields to match our expectations
+		$pdoReview = Review::getReviewByReviewId($this->getPDO()), $comment->getReviewId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("review"));
+		$this->assertEquals($pdoReview->getReviewId(), $reviewId);
+		$this->assertEquals($pdoReview->getReviewProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoReview->getReviewRecAreaId(), $this->recArea->getRecAreaId());
+		$this->assertEquals($pdoReview->getReviewContent(), $this->VALID_REVIEWCONTENT);
+
+		// format the date to seconds since the beginning of time to avoid round off error
+		$this->assertEquals($pdoReview->getReviewDateTime()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
+
+		$this->assertEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
 	}
 }
