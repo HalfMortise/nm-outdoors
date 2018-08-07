@@ -19,7 +19,7 @@ require_once(dirname(__DIR__, 2) . "/lib/uuid.php");
  **/
 class ActivityTest extends NmOutdoorsTest {
 	/**
-	 * valid name to create the profile object to own the test
+	 * valid name to create the activity object to own the test
 	 * @var string $VALID_NAME
 	 */
 	protected $VALID_NAME= "PHPUnit First Test";
