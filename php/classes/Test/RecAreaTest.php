@@ -31,15 +31,15 @@ class RecAreaTest extends NmOutdoorsTest {
 	 * Description of RecArea
 	 * @var string $recAreaDescription
 	 **/
-	protected $VALID_recAreaDescription = null;
+	protected $VALID_recAreaDescription = "This 5,200 surface acre reservoir offers some of the finest fishing in northern New Mexico. Reptile fossils 200 million years old have been found in the area. The area includes a fine panoramic view of the Cerro Pedernal from the dam. It is surrounded by red sandstone formations on Hwy 84 and adjacent to historical Pedernal Mountain to the south on Hwy 96.";
 
 
-	protected $VALID_recAreaDirections = null;
+	protected $VALID_recAreaDirections = "Abiquiu Lake is located in northern New Mexico, 61 miles north of Santa Fe on Highway 84 at the intersection of Highway 96. From Espanola, 30 miles west on US 84, 2 miles south on NM 96.";
 	/**
 	 * a url string holding a stock image of rec area
 	 * @var string $recAreaImageUrl
 	 **/
-	protected $VALID_recAreaImageUrl = null;
+	protected $VALID_recAreaImageUrl = "https://ridb.recreation.gov/images/2315.jpg";
 	/**
 	 * Latitude position  of a rec area
 	 * @var double $recAreaLat
@@ -72,13 +72,13 @@ class RecAreaTest extends NmOutdoorsTest {
 	 * url of the rec area map
 	 * @var string $recAreaMapUrl
 	 **/
-	protected $VALID_recAreaMapUrl = null;
+	protected $VALID_recAreaMapUrl = "http://www.emnrd.state.nm.us/prd/ParksPages/documents/brantleylake.pdf";
 
 	/**
 	 * rec area name
 	 * @var string $recAreaName
 	 **/
-	protected $VALID_recAreaName= null;
+	protected $VALID_recAreaName= "Brantley Reservoir";
 
 
 
