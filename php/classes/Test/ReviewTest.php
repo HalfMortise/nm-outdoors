@@ -216,7 +216,7 @@ class ReviewTest extends NmOutdoorsTest {
 	}
 
 	/**
-	 *
+	 * test grabbing a Review by profile id
 	 **/
 	public function testGetValidReviewByProfileId() {
 		// count the number of rows and save it for later
@@ -245,5 +245,17 @@ class ReviewTest extends NmOutdoorsTest {
 
 		$this->assertsEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
 	}
+
+	/**
+	 * test grabbing a Review by a profile id that does not exist
+	 **/
+	public function testGetInvalidReviewByProfileId(): void {
+		// grab a profile id that exceeds the maximum allowable profile id
+		$review = Review::getReviewByReviewProfileId($this->getPDO(), generateUuidV4());
+		$this->assertEmpty($review);
+	}
+
+
+
 
 }
