@@ -110,12 +110,15 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->VALID_SUNSETDATE->add(new \DateInterval("P10D"));
 	}
 
+	/**
+	 * test inserting a valid Review and verify that mySQL data matches
+	 */
 	public function testInsertValidReview(): void {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("Review");
 		// create a new Review and insert it into mySQL
 		$reviewId = generateUuidV4();
-		$review = new Review($reviewId, $this->profile->getProfileId(), $this->recArea->getRecAreaId(), $this->VALID_REVIEWCONTENT, $this->VALID_REVIEWDATETIME,$this->VALID_REVIEWRATING);
+		$review = new Review($reviewId, $this->profile->getProfileId(), $this->recArea->getRecAreaId(), $this->VALID_REVIEWCONTENT, $this->VALID_REVIEWDATETIME, $this->VALID_REVIEWRATING);
 		$review->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields to match our expectations
@@ -131,4 +134,36 @@ class ReviewTest extends NmOutdoorsTest {
 
 		$this->assertEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
 	}
+
+	/**
+	 * test inserting a Review, editing it, and then updating it
+	 */
+	public function testUpdateValidReview(): void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("review");
+
+		// create a new Review and insert it into mySQL
+		$reviewId = generateUuidV4();
+		$review = new Review($reviewId, $this->profile->getProfileId(), $this->recArea->getRecAreaId(), $this->VALID_REVIEWCONTENT, $this->VALID_REVIEWDATETIME, $this->VALID_REVIEWRATING);
+		$review->insert($this->getPDO());
+		$review->insert($this->getPDO());
+
+		// edit the Review and update it in mySQL
+		$review->setReviewContent($this->VALID_REVIEWCONTENT2);
+		$review->update($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields to match out expectations
+		$pdoReview = Review::getReviewByReviewId($this->getPDO()), $comment->getReviewId());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("review"));
+		$this->assertEquals($pdoReview->getReviewId(), $reviewId);
+		$this->assertEquals($pdoReview->getReviewProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoReview->getReviewRecAreaId(), $this->recArea->getRecAreaId());
+		$this->assertEquals($pdoReview->getReviewContent(), $this->VALID_REVIEWCONTENT2);
+
+		// format the date to seconds since the beginning of time to avoid round off error
+		$this->assertEquals($pdoReview->getReviewDateTime()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
+
+		$this->assertEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
+	}
+
 }
