@@ -402,7 +402,6 @@ class Profile implements \JsonSerializable {
       return ($profile);
    }
 
-
    /**
     * gets the Profile by email
     *
@@ -412,6 +411,7 @@ class Profile implements \JsonSerializable {
     * @throws \PDOException when mySQL related errors occur
     * @throws \TypeError when variables are not the correct data type
     **/
+
    public static function getProfileByProfileEmail(\PDO $pdo, string $profileEmail): ?Profile {
 
       /**sanitize the profileId before searching**/
@@ -431,18 +431,22 @@ class Profile implements \JsonSerializable {
       $statement->execute($parameters);
 
       /**grab the profile from MySQL**/
+
+
+
       try {
          $profile = null;
          $statement->setFetchMode(\PDO::FETCH_ASSOC);
          $row = $statement->fetch();
-         $profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profileImageUrl"]);
+         if($row !== false) {
+            $profile = new Profile($row["profileId"], $row["profileActivationToken"], $row["profileAtHandle"], $row["profileEmail"], $row["profileHash"], $row["profileImageUrl"]);
+         }
       } catch(\Exception $exception) {
          /**if the row couldn't be converted, rethrow it**/
          throw(new \PDOException($exception->getMessage(), 0, $exception));
       }
       return ($profile);
    }
-
 
    /**
     * get the profile by profile activation token
