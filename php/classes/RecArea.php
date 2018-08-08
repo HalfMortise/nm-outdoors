@@ -392,6 +392,68 @@ class RecArea {
 		}
 		return ($recArea);
 	}
+
+	public static function getRecAreaByRecAreaName(\PDO $pdo, $recAreaId): ? recArea {
+		//sanitize the recAreaId before searching
+		try {
+			$recAreaId = self::validateUuid($recAreaId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		// creating query template
+		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections,
+	recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName 
+	FROM recArea WHERE recAreaName = :recAreaName";
+		$statement = $pdo->prepare($query);
+		//binding the recAreaId to the placeholders in the template
+		$parameters = ["recAreaId" => $recAreaId->getBytes()];
+		$statement->execute($parameters);
+		//retrieve the recArea from mySQL
+		try {
+			$recArea = null;
+			$statement->setFetchMode(\PDO::FETCH_ASSOC);
+			$row = $statement->fetch();
+			if($row !== false) {
+				$recArea = new RecArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
+			}
+		} catch(\Exception $exception) {
+			//if the new row cannot be converted, throw it again
+			throw (new \PDOException($exception->getMessage(), 0, $exception));
+		}
+		return ($recArea);
+	}
+
+	public static function getAllActivities(\PDO $pdo) : \SPLFixedArray {
+		// create query template
+		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections,
+	recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName 
+	FROM recArea";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+		// build an array of rec areas
+		$recArea = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$recArea = new RecArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
+				$recArea[$recArea->key()] = $recArea;
+				$recArea->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($recArea);
+	}
+
+	public function jsonSerialize(){
+		$fields =get_object_vars($this);
+		$fields = ["recAreaId"] = $this->recAreaId->toString();
+		return($fields);
+	}
+
+
+
 //	public static function getDistanceToRecArea(\PDO $pdo, $recAreaLat1, $recAreaLong1, $recAreaLat2, $recAreaLong2){
 //		// convert lat1 and lat2 into radians now, to avoid doing it twice below
 //		$lat1rad = deg2rad($recAreaLat1);

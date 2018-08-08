@@ -204,7 +204,7 @@ public function testGetAllRecAreas() : void {
 
 	//receive the results from the array and validate it
 	$pdoRecArea = $results[0];
-	$this->assertEquals($pdoRecArea)->getRecAreaId(), $recAreaId);
+	$this->assertEquals($pdoRecArea->getRecAreaId(), $recAreaId);
 
 }
 
