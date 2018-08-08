@@ -7,8 +7,6 @@
 			<file>ProfileTest.php</file>
 			<file>RecAreaTest.php</file>
 			<file>ReviewTest.php</file>
-			<file>ActivityTest.php</file>
-			<file>ActivityTypeTest.php</file>
 		</testsuite>
 	</testsuites>
 	<filter>
