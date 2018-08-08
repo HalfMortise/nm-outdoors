@@ -184,4 +184,28 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 
 }
 
+	/**
+	 * test returning all rec Areas
+	 **/
+public function testGetAllRecAreas() : void {
+	//count the number of rows of rec areas
+
+	$numRows = $this->getConnection()->getRowCount("recArea");
+	//grab the data from mySQL and enforce the fields match our expectations
+	$results = RecArea::getAllActivities($this->getPDO());
+	$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("recArea"));
+	$this->assertCount(1, $results);
+	$this->assertContainsOnlyInstanceOf("HalfMortise\\NmOutdoors\\Test", $results);
+
+	//create a new recArea and insert it into mySQl
+	$recAreaId = generateUuidV4();
+	$recArea = new RecArea($recAreaId, $this->VALID_RECAREADESCRIPTION, $this->VALID_RECAREADIRECTIONS,$this->VALID_RECAREAIMAGEURL,$this->VALID_RECAREALAT,$this->VALID_RECAREALONG,$this->VALID_RECAREAMAPURL,$this->VALID_RECAREANAME);
+	$recArea->insert($this->getPDO());
+
+	//receive the results from the array and validate it
+	$pdoRecArea = $results[0];
+	$this->assertEquals($pdoRecArea)->getRecAreaId(), $recAreaId);
+
+}
+
 }
