@@ -74,7 +74,7 @@ class ActivityTest extends NmOutdoorsTest {
 		$pdoActivity = Activity::getActivityByActivityId($this->getPDO(), $activity->getActivityId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activity"));
 		$this->assertEquals($pdoActivity->getActivityId(), $activityId);
-		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME);
+		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME2);
 	}
 	/**
 	 * test creating a Activity and then deleting it
