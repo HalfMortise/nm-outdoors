@@ -439,12 +439,6 @@ class RecArea {
 		return ($recArea);
 	}
 
-	public function jsonSerialize(){
-		$fields =get_object_vars($this);
-		$fields = ["recAreaId"] = $this->recAreaId->toString();
-		return($fields);
-	}
-
 
 
 //	public static function getDistanceToRecArea(\PDO $pdo, $recAreaLat1, $recAreaLong1, $recAreaLat2, $recAreaLong2){
@@ -488,5 +482,11 @@ class RecArea {
 			}
 		}
 		return($recAreas);
+	}
+
+	public function jsonSerialize(){
+		$fields =get_object_vars($this);
+		$fields ["recAreaId"] = $this->recAreaId->toString();
+		return($fields);
 	}
 }
