@@ -320,7 +320,7 @@ class Profile implements \JsonSerializable {
       $query = "INSERT INTO profile(profileId, profileActivationToken, profileAtHandle, profileEmail, profileHash, profileImageUrl) VALUES (:profileId, :profileActivationToken, :profileAtHandle, :profileEmail, :profileHash, :profileImageUrl)";
       $statement = $pdo->prepare($query);
 
-      $parameters = ["profileId" => $this->profileId->getBytes(), "profileActivationToken" => $this->profileActivationToken, "profileAtHandle" => $this->profileAtHandle, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileImageUrl" => $this->profileHash];
+      $parameters = ["profileId" => $this->profileId->getBytes(), "profileActivationToken" => $this->profileActivationToken, "profileAtHandle" => $this->profileAtHandle, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileImageUrl" => $this->profileImageUrl];
       $statement->execute($parameters);
    }
 
@@ -338,7 +338,7 @@ class Profile implements \JsonSerializable {
       $statement = $pdo->prepare($query);
 
       /**bind the member variables to the place holders in the template**/
-      $parameters = ["profileId" => $this->profileId->getBytes()];
+		$parameters = ["profileId" => $this->profileId->getBytes(), "profileActivationToken" => $this->profileActivationToken, "profileAtHandle" => $this->profileAtHandle, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileImageUrl" => $this->profileImageUrl];
       $statement->execute($parameters);
    }
 
