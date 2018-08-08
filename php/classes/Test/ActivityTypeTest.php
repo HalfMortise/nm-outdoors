@@ -1,7 +1,7 @@
 <?php
 namespace HalfMortise\NmOutdoors\Test;
 
-use HalfMortise\NmOutdoors\Test\{ActivityType, Activity, RecArea};
+use HalfMortise\NmOutdoors\{ActivityType, Activity, recArea};
 
 // grab the class under scrutiny
 require_once(dirname(__DIR__) . "/autoload.php");
