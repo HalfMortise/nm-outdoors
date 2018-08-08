@@ -93,6 +93,8 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->VALID_PROFILE_HASH = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
 		$this->VALID_ACTIVATION = bin2hex(random_bytes(16));
 
+		// create and insert a RecArea to own the test Review
+		$this->recArea = new RecArea(generateUuidV4(), "Random rec area test description", "Take a left, a right, then test.", "https://morganfillman.space/g/300/300", 35.084386, -106.650422, "https://morganfillman.space/g/300/300", "Test Location 1");
 
 		// create and insert a Profile to own the test REVIEW
 		$this->profile = new Profile(generateUuidV4(), $this->VALID_ACTIVATION, "@handle", "email@gmail.com", $this->VALID_PROFILE_HASH, "https://morganfillman.space/g/300/300");
@@ -294,48 +296,6 @@ class ReviewTest extends NmOutdoorsTest {
 	public function testGetInvalidReviewByRecAreaId(): void {
 		// grab a profile id that exceeds the maximum allowable profile id
 		$review = Review::getReviewByReviewRecAreaId($this->getPDO(), generateUuidV4());
-		$this->assertCount(0, $review);
-	}
-
-	/**
-	 * test grabbing a Review by review content
-	 **/
-	public function testGetValidReviewByReviewContent() : void {
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("review");
-
-		// create a new Review and insert to into mySQL
-		$reviewId = generateUuidV4();
-		$review = new Review($reviewId, $this->profile->getProfileId(), $this->recArea->getRecAreaId(), $this->VALID_REVIEWCONTENT, $this->VALID_REVIEWDATETIME, $this->VALID_REVIEWRATING);
-		$review->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$results = Review::getReviewByReviewContent($this->getPDO(), $review->getReviewContent());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("review"));
-		$this->assertCount(1, $results);
-
-		// enforce no other objects are bleeding into the test
-		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Php\\Classes\\Review", $results);
-
-		// grab the result from the array and validate it
-		$pdoReview = $results[0];
-		$this->assertEquals($pdoReview->getReviewId(), $reviewId);
-		$this->assertEquals($pdoReview->getReviewProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoReview->getReviewRecAreId(), $this->recArea->getRecAreaId());
-		$this->assertEquals($pdoReview->getReviewContent(), $this->VALID_REVIEWCONTENT);
-
-		//format the date too seconds since the beginning of time to avoid round off error
-		$this->assertEquals($pdoReview->getReviewDate()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
-
-		$this->assertsEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
-	}
-
-	/**
-	 * test grabbing a Review by content that does not exist
-	 **/
-	public function testGetInvalidReviewByReviewContent(): void {
-		// grab a profile id that exceeds the maximum allowable profile id
-		$review = Review::getReviewByReviewRecAreaId($this->getPDO(), "Invalid Review Content Test");
 		$this->assertCount(0, $review);
 	}
 

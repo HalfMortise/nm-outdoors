@@ -229,12 +229,12 @@ class review implements \JsonSerializable {
 	 **/
 	public function setReviewRating(int $newReviewRating): void {
 // verify the clap Number is secure
-		if(empty($newreviewRating) === true) {
+		if(empty($newReviewRating) === true) {
 			throw(new \InvalidArgumentException("review rating is empty or insecure"));
 		}
 
 // verify the review rating will fit in the database
-		if($newReviewRating <= 1) {
+		if($newReviewRating < 1) {
 			throw(new \RangeException("review rating is too small"));
 		}
 		if($newReviewRating >= 5) {
@@ -254,12 +254,14 @@ class review implements \JsonSerializable {
 	 * @throws \TypeError if $pdo is not a PDO connection object
 	 **/
 	public function insert(\PDO $pdo): void {
+
 		// create query template
 		$query = "INSERT INTO review(reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime, reviewRating) VALUES(:reviewId, :reviewProfileId, :reviewRecAreaId, :reviewContent, :reviewDateTime, :reviewRating)";
 		$statement = $pdo->prepare($query);
+
 		// bind the member variables to the place holders in the template
 		$formattedDate = $this->reviewDateTime->format("Y-m-d H:i:s.u");
-		$parameters = ["reviewId" => $this->reviewId->getBytes(), "reviewRecAreaId" => $this->reviewRecAreaId->getBytes(), "reviewProfileId" => $this->reviewProfileId->getBytes(), "reviewContent" => $this->reviewContent, "reviewDateTime" => $formattedDate, "reviewRating" => $this->reviewRating];
+		$parameters = ["reviewId" => $this->reviewId->getBytes(), "reviewProfileId" => $this->reviewProfileId->getBytes(), "reviewRecAreaId" => $this->reviewRecAreaId->getBytes(), "reviewContent" => $this->reviewContent, "reviewDateTime" => $formattedDate, "reviewRating" => $this->reviewRating];
 		$statement->execute($parameters);
 	}
 
