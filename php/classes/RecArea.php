@@ -422,6 +422,7 @@ class RecArea implements \JsonSerializable {
 	FROM recArea";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
+
 		// build an array of rec areas
 		$recAreas = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
