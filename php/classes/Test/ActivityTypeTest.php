@@ -23,12 +23,13 @@ class ActivityTypeTest extends NmOutdoorsTest {
  * Activity that created the ActivityType; this is for foreign key relations
  * @var Activity $activity
  **/
-	protected $activity;
+	protected $activity = null;
 	/**
 	 * RecArea that was referenced; this if for foreign key relations
 	 * @var RecArea $recArea
 	 */
-	protected $recArea;
+	protected $recArea = null;
+
 
 
 	/**
@@ -41,6 +42,7 @@ class ActivityTypeTest extends NmOutdoorsTest {
 		//create and insert the mocked Activity
 		$this->activity = new Activity(generateUuidV4(), "biking");
 		$this->activity->insert($this->getPDO());
+
 		$this->recArea = new RecArea(generateUuidV4(), "This 5,200 surface acre reservoir offers some of the finest fishing in northern New Mexico. Reptile fossils 200 million years old have been found in the area. The area includes a fine panoramic view of the Cerro Pedernal from the dam. It is surrounded by red sandstone formations on Hwy 84 and adjacent to historical Pedernal Mountain to the south on Hwy 96.", "Abiquiu Lake is located in northern New Mexico, 61 miles north of Santa Fe on Highway 84 at the intersection of Highway 96. From Espanola, 30 miles west on US 84, 2 miles south on NM 96.", "https://ridb.recreation.gov/images/2315.jpg", "42.123456", "122.765678", "http://www.emnrd.state.nm.us/prd/ParksPages/documents/brantleylake.pdf", "Brantley Reservoir");
 		$this->recArea->insert($this->getPDO());
 	}
