@@ -221,5 +221,11 @@ public function testGetAllRecAreas() : void {
 	$this->assertEquals($pdoRecArea->getRecAreaName(),$this->VALID_RECAREANAME);
 
 }
-
+/**
+ * TODO
+ * 1. testGetValidRecAreaByDistance
+ * 2. testGetInvalidRecAreaByDistance
+ * 3. testGetValidRecAreaByRecAreaName
+ * 4. testGetInvalidRecAreaByRecAreaName
+ */
 }
