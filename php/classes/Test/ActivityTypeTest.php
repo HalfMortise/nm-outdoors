@@ -122,12 +122,12 @@ class ActivityTypeTest extends NmOutdoorsTest {
 		$results = ActivityType::getActivityTypeByActivityTypeActivityId($this->getPDO(), $this->activity->getActivityId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activityType"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Activity", $results);
+		$this->assertContainsOnlyInstancesOf("HalfMortise\NmOutdoors\ActivityType", $results);
 
 		//grab the result from the array and validate it
 		$pdoActivityType = $results[0];
-		$this->assertEquals($pdoActivityType->getActivityTypeActivityId(), $this->activity-getActivityId());
-		$this->assertEquals($pdoActivityType->getActivityTypeActivityRecAreaId(), $this->recArea-getRecAreaId());
+		$this->assertEquals($pdoActivityType->getActivityTypeActivityId(), $this->activity->getActivityId());
+		$this->assertEquals($pdoActivityType->getActivityTypeRecAreaId(), $this->recArea->getRecAreaId());
 	}
 	/**
 	 * test grabbing an ActivityType by an ActivityId that does not exist
