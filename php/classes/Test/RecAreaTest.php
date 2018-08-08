@@ -115,7 +115,7 @@ class RecAreaTest extends NmOutdoorsTest {
 		// create a new recArea and insert to into mySQL
 		$recAreaId = generateUuidV4();
 		$recArea = new RecArea($recAreaId, $this->VALID_RECAREADESCRIPTION, $this->VALID_RECAREADIRECTIONS,$this->VALID_RECAREAIMAGEURL,$this->VALID_RECAREALAT2,$this->VALID_RECAREALONG2,$this->VALID_RECAREAMAPURL,$this->VALID_RECAREANAME);
-		$recArea->insert($this->getPDO());
+		$recArea->update($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$pdoRecArea = RecArea::getRecAreaByRecAreaId($this->getPDO(), $recArea->getRecAreaId());
@@ -129,6 +129,27 @@ class RecAreaTest extends NmOutdoorsTest {
 		$this->assertEquals($pdoRecArea->getRecAreaMapUrl(),$this->VALID_RECAREAMAPURL);
 		$this->assertEquals($pdoRecArea->getRecAreaName(),$this->VALID_RECAREANAME);
 	}
+
+	public function testDeleteValidRecArea() : void {
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("recArea");
+
+		// create a new recArea and insert to into mySQL
+		$recAreaId = generateUuidV4();
+		$recArea = new RecArea($recAreaId, $this->VALID_RECAREADESCRIPTION, $this->VALID_RECAREADIRECTIONS,$this->VALID_RECAREAIMAGEURL,$this->VALID_RECAREALAT,$this->VALID_RECAREALONG,$this->VALID_RECAREAMAPURL,$this->VALID_RECAREANAME);
+		$recArea->insert($this->getPDO());
+
+		// delete recArea from mySQl
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("recArea"));
+		$recArea->delete($this->getPDO());
+
+		// grab the data from mySQL and enforce the recArea doesn't exist
+		$pdoRecArea = RecArea::getRecAreaByRecAreaId($this->getPDO(), $recArea->getRecAreaId());
+		$this->assertNull($pdoRecArea);
+		$this->assertEquals($numRows,$this->getConnection()->getRowCount("recArea"));
+
+	}
+
 
 
 
