@@ -212,7 +212,7 @@ class Activity implements \JsonSerializable {
 
 	public function jsonSerialize() {
 		$fields = get_object_vars($this);
-		$fields["activityId"] = $this->activityId;
+		$fields["activityId"] = $this->activityId->toString();
 		return ($fields);
 	}
 }
