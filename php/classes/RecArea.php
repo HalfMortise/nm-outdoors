@@ -11,7 +11,7 @@ namespace HalfMortise\NmOutdoors;
 require_once("autoload.php");
 require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 
-use http\Exception\InvalidArgumentException;
+
 use Ramsey\Uuid\Uuid;
 
 
@@ -440,15 +440,9 @@ class RecArea implements \JsonSerializable {
 		return ($recAreas);
 	}
 
-<<<<<<< HEAD
-=======
-	public function jsonSerialize(){
-		$fields = get_object_vars($this);
-		$fields = ["recAreaId"] = $this->recAreaId->toString();
-		return($fields);
-	}
 
->>>>>>> added inheritance from JsonSerializable in RecArea class and installed composer on both server and phpStorm
+
+
 
 
 //	public static function getDistanceToRecArea(\PDO $pdo, $recAreaLat1, $recAreaLong1, $recAreaLat2, $recAreaLong2){
