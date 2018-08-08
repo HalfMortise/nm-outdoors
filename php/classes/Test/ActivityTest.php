@@ -133,19 +133,20 @@ class ActivityTest extends NmOutdoorsTest {
 		// count the number of rows and save it for later
 		$numRows = $this->getConnection()->getRowCount("activity");
 
-		//grab the data from mySQL and enforce the fields match our expectations
-		$results = Activity::getAllActivities($this->getPDO());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activity"));
-		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Test", $results);
-
 		// create a new Activity and insert to into mySQL
 		$activityId = generateUuidV4();
 		$activity = new Activity($activityId, $this->VALID_NAME);
 		$activity->insert($this->getPDO());
 
+		//grab the data from mySQL and enforce the fields match our expectations
+		$results = Activity::getAllActivities($this->getPDO());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("activity"));
+		$this->assertCount(1, $results);
+		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Activity", $results);
+
 		// grab the result from the array and validate it
 		$pdoActivity = $results[0];
 		$this->assertEquals($pdoActivity->getActivityId(), $activityId);
+		$this->assertEquals($pdoActivity->getActivityName(), $this->VALID_NAME);
 	}
 }

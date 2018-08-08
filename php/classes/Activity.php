@@ -189,7 +189,7 @@ class Activity implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 **/
-	public static function getAllActivities(\PDO $pdo) : \SPLFixedArray {
+	public static function getAllActivities(\PDO $pdo) : \SplFixedArray {
 		// create query template
 		$query = "SELECT activityId, activityName FROM activity";
 		$statement = $pdo->prepare($query);
