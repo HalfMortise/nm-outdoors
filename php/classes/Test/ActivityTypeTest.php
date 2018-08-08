@@ -24,7 +24,6 @@ class ActivityTypeTest extends NmOutdoorsTest {
  * @var Activity $activity
  **/
 	protected $activity;
-
 	/**
 	 * RecArea that was referenced; this if for foreign key relations
 	 * @var RecArea $recArea
@@ -54,7 +53,7 @@ class ActivityTypeTest extends NmOutdoorsTest {
 		$numRows = $this->getConnection()->getRowCount("activityType");
 
 		//create a new activityType and insert it into mySQL
-		$activityType = new ActivityType($this->recArea->getRecAreaId(), $this->activity->getActivityId);
+		$activityType = new ActivityType($this->activity->getActivityId(), $this->recArea->getRecAreaId());
 		$activityType->insert($this->getPDO());
 
 		//grab the data from mySQL and enfore the fields match our expectations
@@ -135,7 +134,7 @@ class ActivityTypeTest extends NmOutdoorsTest {
 	 **/
 	public function testGetInvalidActivityTypeByActivityId(): void {
 		//grab an activity Id that exceeds the maximum allowable activityId
-		$activityType = ActivityType::getActivityTypeByActivityId($this->getPDO(), generateUuidV4());
+		$activityType = ActivityType::getActivityTypeByActivityTypeActivityId($this->getPDO(), generateUuidV4());
 		$this->assertCount(0, $activityType);
 	}
 	/**

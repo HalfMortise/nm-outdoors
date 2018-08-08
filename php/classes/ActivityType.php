@@ -193,7 +193,7 @@ class ActivityType {
 	 * @return \SplFixedArray SplFixedArray of ActivityTypes found or null if not found
 	 * @throws \PDOException when mySQL related errors occur
 	 **/
-	public static function getActivityTypeByActivityTypeAcivityId(\PDO $pdo, string $activityTypeActivityId) : \SPLFixedArray {
+	public static function getActivityTypeByActivityTypeActivityId(\PDO $pdo, string $activityTypeActivityId) : \SPLFixedArray {
 		try {
 			$activityTypeActivityId = self::ValidateUuid($activityTypeActivityId);
 		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
