@@ -164,7 +164,7 @@ class ActivityTypeTest extends NmOutdoorsTest {
 	 **/
 	public function testGetInvalidActivityTypeByRecAreaId(): void {
 		//grab an RecAreaId that exceeds the maximum allowable recAreaId
-		$activityType = ActivityType::getActivityTypeByRecAreaId($this->getPDO(), generateUuidV4());
+		$activityType = ActivityType::getActivityTypeByActivityTypeRecAreaId($this->getPDO(), generateUuidV4());
 		$this->assertCount(0, $activityType);
 	}
 }
