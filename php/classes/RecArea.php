@@ -15,8 +15,9 @@ use http\Exception\InvalidArgumentException;
 use Ramsey\Uuid\Uuid;
 
 
-class RecArea {
+class RecArea implements \JsonSerializable {
 	use ValidateUuid;
+
 	/**
 	 * id for the rec area ; this is the primary key
 	 * @var Uuid| $recAreaId
@@ -416,7 +417,7 @@ class RecArea {
 		return($recAreas);
 	}
 
-	public static function getAllActivities(\PDO $pdo) : \SPLFixedArray {
+	public static function getAllRecAreas(\PDO $pdo) : \SPLFixedArray {
 		// create query template
 		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections,
 	recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName 
@@ -424,21 +425,30 @@ class RecArea {
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 		// build an array of rec areas
-		$recArea = new \SplFixedArray($statement->rowCount());
+		$recAreas = new \SplFixedArray($statement->rowCount());
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
 				$recArea = new RecArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
-				$recArea[$recArea->key()] = $recArea;
-				$recArea->next();
+				$recAreas[$recAreas->key()] = $recArea;
+				$recAreas->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
 				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
 		}
-		return ($recArea);
+		return ($recAreas);
 	}
 
+<<<<<<< HEAD
+=======
+	public function jsonSerialize(){
+		$fields = get_object_vars($this);
+		$fields = ["recAreaId"] = $this->recAreaId->toString();
+		return($fields);
+	}
+
+>>>>>>> added inheritance from JsonSerializable in RecArea class and installed composer on both server and phpStorm
 
 
 //	public static function getDistanceToRecArea(\PDO $pdo, $recAreaLat1, $recAreaLong1, $recAreaLat2, $recAreaLong2){
