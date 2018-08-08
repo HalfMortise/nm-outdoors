@@ -93,13 +93,13 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->VALID_PROFILE_HASH = password_hash($password, PASSWORD_ARGON2I, ["time_cost" => 384]);
 		$this->VALID_ACTIVATION = bin2hex(random_bytes(16));
 
-		// create and insert a RecArea to own the test Review
-		$this->recArea = new RecArea(generateUuidV4(), "Random rec area test description", "Take a left, a right, then test.", "https://morganfillman.space/g/300/300", 35.084386, -106.650422, "https://morganfillman.space/g/300/300", "Test Location 1");
-		$this->recArea->insert($this->getPDO());
-
 		// create and insert a Profile to own the test REVIEW
 		$this->profile = new Profile(generateUuidV4(), $this->VALID_ACTIVATION, "@handle", "email@gmail.com", $this->VALID_PROFILE_HASH, "https://morganfillman.space/g/300/300");
 		$this->profile->insert($this->getPDO());
+
+		// create and insert a RecArea to own the test Review
+		$this->recArea = new RecArea(generateUuidV4(), "Random rec area test description", "Take a left, a right, then test.", "https://morganfillman.space/g/300/300", 35.084386, -106.650422, "https://morganfillman.space/g/300/300", "Test Location 1");
+		$this->recArea->insert($this->getPDO());
 
 		// calculate the date (just use the time the unit test was setup...)
 		$this->VALID_REVIEWDATETIME = new \DateTime();
