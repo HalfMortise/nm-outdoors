@@ -18,7 +18,7 @@ use Ramsey\Uuid\Uuid;
  * @author sarahheckendorn
  * @version 1.0
  **/
-class ActivityType {
+class ActivityType implements \JsonSerializable {
 	use ValidateUuid;
 	/**
 	 * id for the ActivityTypeActivityId; this is a foreign key
@@ -254,5 +254,14 @@ class ActivityType {
 			}
 		}
 		return ($activityTypes);
+	}
+
+	public function jsonSerialize() {
+		$fields = get_object_vars($this);
+
+		$fields["activityTypeActivityId"] = $this->activityTypeActivityId;
+		$fields["activityTypeRecAreaId"] = $this->activityTypeRecAreaId;
+
+		return ($fields);
 	}
 }
