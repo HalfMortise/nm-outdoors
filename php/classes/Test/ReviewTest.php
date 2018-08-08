@@ -95,6 +95,7 @@ class ReviewTest extends NmOutdoorsTest {
 
 		// create and insert a RecArea to own the test Review
 		$this->recArea = new RecArea(generateUuidV4(), "Random rec area test description", "Take a left, a right, then test.", "https://morganfillman.space/g/300/300", 35.084386, -106.650422, "https://morganfillman.space/g/300/300", "Test Location 1");
+		$this->recArea->insert($this->getPDO());
 
 		// create and insert a Profile to own the test REVIEW
 		$this->profile = new Profile(generateUuidV4(), $this->VALID_ACTIVATION, "@handle", "email@gmail.com", $this->VALID_PROFILE_HASH, "https://morganfillman.space/g/300/300");
@@ -122,7 +123,6 @@ class ReviewTest extends NmOutdoorsTest {
 		$reviewId = generateUuidV4();
 		$review = new Review($reviewId, $this->profile->getProfileId(), $this->recArea->getRecAreaId(), $this->VALID_REVIEWCONTENT, $this->VALID_REVIEWDATETIME, $this->VALID_REVIEWRATING);
 		$review->insert($this->getPDO());
-
 		// grab the data from mySQL and enforce the fields to match our expectations
 		$pdoReview = Review::getReviewByReviewId($this->getPDO(), $review->getReviewId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("review"));
@@ -233,19 +233,19 @@ class ReviewTest extends NmOutdoorsTest {
 		$results = Review::getReviewByReviewProfileId($this->getPDO(), $review->getReviewProfileId());
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("review"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Php\\Classes\\Review", $results);
+		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Review", $results);
 
 		// grab the result from the array and validate it
 		$pdoReview = $results[0];
 		$this->assertEquals($pdoReview->getReviewId(), $reviewId);
 		$this->assertEquals($pdoReview->getReviewProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoReview->getReviewRecAreId(), $this->recArea->getRecAreaId());
+		$this->assertEquals($pdoReview->getReviewRecAreaId(), $this->recArea->getRecAreaId());
 		$this->assertEquals($pdoReview->getReviewContent(), $this->VALID_REVIEWCONTENT);
 
 		//format the date too seconds since the beginning of time to avoid round off error
-		$this->assertEquals($pdoReview->getReviewDate()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
+		$this->assertEquals($pdoReview->getReviewDateTime()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
 
-		$this->assertsEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
+		$this->assertEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
 	}
 
 	/**
@@ -275,19 +275,19 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->assertCount(1, $results);
 
 		// enforce no other objects are bleeding into the test
-		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Php\\Classes\\Review", $results);
+		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Review", $results);
 
 		// grab the result from the array and validate it
 		$pdoReview = $results[0];
 		$this->assertEquals($pdoReview->getReviewId(), $reviewId);
 		$this->assertEquals($pdoReview->getReviewProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoReview->getReviewRecAreId(), $this->recArea->getRecAreaId());
+		$this->assertEquals($pdoReview->getReviewRecAreaId(), $this->recArea->getRecAreaId());
 		$this->assertEquals($pdoReview->getReviewContent(), $this->VALID_REVIEWCONTENT);
 
 		//format the date too seconds since the beginning of time to avoid round off error
-		$this->assertEquals($pdoReview->getReviewDate()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
+		$this->assertEquals($pdoReview->getReviewDateTime()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
 
-		$this->assertsEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
+		$this->assertEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
 	}
 
 	/**
@@ -317,18 +317,18 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->assertCount(1, $results);
 
 		// enforce no other objects are bleeding into the test
-		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Php\\Classes\\Review", $results);
+		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Review", $results);
 
 		// grab the result from the array and validate it
 		$pdoReview = $results[0];
 		$this->assertEquals($pdoReview->getReviewId(), $reviewId);
 		$this->assertEquals($pdoReview->getReviewProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoReview->getReviewRecAreId(), $this->recArea->getRecAreaId());
+		$this->assertEquals($pdoReview->getReviewRecAreaId(), $this->recArea->getRecAreaId());
 		$this->assertEquals($pdoReview->getReviewContent(), $this->VALID_REVIEWCONTENT);
 
 		//format the date too seconds since the beginning of time to avoid round off error
-		$this->assertEquals($pdoReview->getReviewDate()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
+		$this->assertEquals($pdoReview->getReviewDateTime()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
 
-		$this->assertsEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
+		$this->assertEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
 	}
 }
