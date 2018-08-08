@@ -393,34 +393,27 @@ class RecArea {
 		return ($recArea);
 	}
 
-	public static function getRecAreaByRecAreaName(\PDO $pdo, $recAreaId): ? recArea {
-		//sanitize the recAreaId before searching
-		try {
-			$recAreaId = self::validateUuid($recAreaId);
-		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
-			throw(new \PDOException($exception->getMessage(), 0, $exception));
-		}
-		// creating query template
-		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections,
-	recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName 
-	FROM recArea WHERE recAreaName = :recAreaName";
+	public static function getRecAreaByRecAreaName(\PDO $pdo, string $recAreaName){
+		// create query template
+		$query = "SELECT recAreaId, recAreaDescription, recAreaDirections, recAreaImageUrl, recAreaLat, recAreaLong, recAreaMapUrl, recAreaName FROM recArea WHERE recAreaName = :recAreaName";
 		$statement = $pdo->prepare($query);
-		//binding the recAreaId to the placeholders in the template
-		$parameters = ["recAreaId" => $recAreaId->getBytes()];
+		// bind the recArea distance to the place holder in the template
+		$parameters = ["recAreaName" => $recAreaName];
 		$statement->execute($parameters);
-		//retrieve the recArea from mySQL
-		try {
-			$recArea = null;
-			$statement->setFetchMode(\PDO::FETCH_ASSOC);
-			$row = $statement->fetch();
-			if($row !== false) {
-				$recArea = new RecArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
+		// build an array of recArea
+		$recAreas = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$recArea = new recArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
+				$recAreas[$recAreas->key()] = $recArea;
+				$recAreas->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
 			}
-		} catch(\Exception $exception) {
-			//if the new row cannot be converted, throw it again
-			throw (new \PDOException($exception->getMessage(), 0, $exception));
 		}
-		return ($recArea);
+		return($recAreas);
 	}
 
 	public static function getAllActivities(\PDO $pdo) : \SPLFixedArray {
