@@ -189,6 +189,33 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 
 }
 
+
+	public function testGetValidRecAreaByRecName(){
+		// count the number of rows and save it for later
+		$numRows = $this->getConnection()->getRowCount("recArea");
+
+		// create a new recArea and insert to into mySQL
+		$recAreaId = generateUuidV4();
+		$recArea = new RecArea($recAreaId, $this->VALID_RECAREADESCRIPTION, $this->VALID_RECAREADIRECTIONS,$this->VALID_RECAREAIMAGEURL,$this->VALID_RECAREALAT,$this->VALID_RECAREALONG,$this->VALID_RECAREAMAPURL,$this->VALID_RECAREANAME);
+		$recArea->insert($this->getPDO());
+
+		// grab the data from mySQL and enforce the fields match our expectations
+		$pdoRecArea = RecArea::getRecAreaByRecAreaName($this->getPDO(), $recArea->getRecAreaName());
+		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("recArea"));
+		$this->assertEquals($pdoRecArea->getRecAreaId(), $recAreaId);
+		$this->assertEquals($pdoRecArea->getRecAreaDescription(), $this->VALID_RECAREADESCRIPTION);
+		$this->assertEquals($pdoRecArea->getRecAreaDirections(),$this->VALID_RECAREADIRECTIONS);
+		$this->assertEquals($pdoRecArea->getRecAreaImageUrl(),$this->VALID_RECAREAIMAGEURL);
+		$this->assertEquals($pdoRecArea->getRecAreaLat(),$this->VALID_RECAREALAT);
+		$this->assertEquals($pdoRecArea->getRecAreaLong(),$this->VALID_RECAREALONG);
+		$this->assertEquals($pdoRecArea->getRecAreaMapUrl(),$this->VALID_RECAREAMAPURL);
+		$this->assertEquals($pdoRecArea->getRecAreaName(),$this->VALID_RECAREANAME);
+
+
+	}
+
+
+
 	/**
 	 * test returning all rec Areas
 	 **/

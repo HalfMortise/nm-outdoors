@@ -415,29 +415,6 @@ class RecArea implements \JsonSerializable {
 		return($recAreas);
 	}
 
-	public static function getAllRecAreas(\PDO $pdo) : \SPLFixedArray {
-		// create query template
-		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections,
-	recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName 
-	FROM recArea";
-		$statement = $pdo->prepare($query);
-		$statement->execute();
-
-		// build an array of rec areas
-		$recAreas = new \SplFixedArray($statement->rowCount());
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		while(($row = $statement->fetch()) !== false) {
-			try {
-				$recArea = new RecArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
-				$recAreas[$recAreas->key()] = $recArea;
-				$recAreas->next();
-			} catch(\Exception $exception) {
-				// if the row couldn't be converted, rethrow it
-				throw(new \PDOException($exception->getMessage(), 0, $exception));
-			}
-		}
-		return ($recAreas);
-	}
 
 
 
@@ -485,6 +462,31 @@ class RecArea implements \JsonSerializable {
 			}
 		}
 		return($recAreas);
+	}
+
+
+	public static function getAllRecAreas(\PDO $pdo) : \SPLFixedArray {
+		// create query template
+		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections,
+	recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName 
+	FROM recArea";
+		$statement = $pdo->prepare($query);
+		$statement->execute();
+
+		// build an array of rec areas
+		$recAreas = new \SplFixedArray($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				$recArea = new RecArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
+				$recAreas[$recAreas->key()] = $recArea;
+				$recAreas->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return ($recAreas);
 	}
 
 	public function jsonSerialize(){
