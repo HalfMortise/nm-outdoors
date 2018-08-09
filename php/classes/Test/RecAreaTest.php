@@ -241,8 +241,8 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 	 **/
 	public function  testGetInvalidRecAreaByRecAreaName() : void {
 		//grab a recArea id that is invalid or exceeds the maximum allowable length
-		$recArea = RecArea::getRecAreaByRecAreaName($this->getPDO(),generateUuidV4());
-		$this->assertNull($recArea);
+		$recArea = RecArea::getRecAreaByRecAreaName($this->getPDO(),"Bashir");
+		$this->assertCount(0,$recArea);
 
 	}
 
