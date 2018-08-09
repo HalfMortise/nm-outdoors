@@ -80,6 +80,25 @@ class RecAreaTest extends NmOutdoorsTest {
 	 **/
 	protected $VALID_RECAREANAME = "Brantley Reservoir";
 
+	/**
+	 * origin of where distance is measured from
+	 * @var array $VALID_ORIGIN
+	 **/
+	protected $VALID_ORIGIN = [36.12, -86.67];
+	/**
+	 * destination of where distance is measured to
+	 * @var array $VALID_DESTINATION
+	 **/
+	protected $VALID_DESTINATION = [33.94, -118.4];
+	/**
+	 * distance from the origin to the destination
+	 * @var float $VALID_DISTANCE
+	 **/
+	protected $VALID_DISTANCE = 1793.55595844;
+	/**
+	 * test the haversine algorithm against known inputs
+	 **/
+
 
 	public final function setUp()  : void {
 		// run the default setUp() method first
@@ -231,30 +250,25 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 	 * test valid recArea distance
 	 */
 
-	public function testGetValidRecAreaByRecAreaDistance(){
-		// count the number of rows and save it for later
-		$numRows = $this->getConnection()->getRowCount("recArea");
-
-		// create a new recArea and insert to into mySQL
-		$recAreaId = generateUuidV4();
-		$recArea = new RecArea($recAreaId, $this->VALID_RECAREADESCRIPTION, $this->VALID_RECAREADIRECTIONS,$this->VALID_RECAREAIMAGEURL,$this->VALID_RECAREALAT,$this->VALID_RECAREALONG,$this->VALID_RECAREAMAPURL,$this->VALID_RECAREANAME);
-		$recArea->insert($this->getPDO());
-
-		// grab the data from mySQL and enforce the fields match our expectations
-		$pdoRecArea = RecArea::getRecAreaByDistance($this->getPDO(), $recArea->getRecAreaByDistance());
-		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("recArea"));
-		$this->assertEquals($pdoRecArea->getRecAreaId(), $recAreaId);
-		$this->assertEquals($pdoRecArea->getRecAreaDescription(), $this->VALID_RECAREADESCRIPTION);
-		$this->assertEquals($pdoRecArea->getRecAreaDirections(),$this->VALID_RECAREADIRECTIONS);
-		$this->assertEquals($pdoRecArea->getRecAreaImageUrl(),$this->VALID_RECAREAIMAGEURL);
-		$this->assertEquals($pdoRecArea->getRecAreaLat(),$this->VALID_RECAREALAT);
-		$this->assertEquals($pdoRecArea->getRecAreaLong(),$this->VALID_RECAREALONG);
-		$this->assertEquals($pdoRecArea->getRecAreaMapUrl(),$this->VALID_RECAREAMAPURL);
-		$this->assertEquals($pdoRecArea->getRecAreaName(),$this->VALID_RECAREANAME);
+//
 
 
+
+	public function testHaversine() {
+		// create a query template to CALL the stored procedure
+		$pdo = $this->getPDO();
+		$query = "SELECT haversine(:originLong, :originLat, :destinationLong, :destinationLat) AS distance";
+		$statement = $pdo->prepare($query);
+		// bind the parameters to the stored procedure
+		$parameters = array("originLat" => $this->VALID_ORIGIN[0], "originLong" => $this->VALID_ORIGIN[1],
+			"destinationLat" => $this->VALID_DESTINATION[0], "destinationLong" => $this->VALID_DESTINATION[1]);
+		$statement->execute($parameters);
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		$result = $statement->fetch();
+		$distance = $result["distance"];
+		// assert the answer is the expected answer within a margin of error (needed for doubles)
+		$this->assertEquals($distance, $this->VALID_DISTANCE, "", 0.0001);
 	}
-
 	/**
 	 * test grabbing an invalid  recArea distance
 	 **/

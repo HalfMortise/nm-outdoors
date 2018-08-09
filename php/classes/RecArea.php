@@ -465,6 +465,7 @@ class RecArea implements \JsonSerializable {
 	}
 
 
+
 	public static function getAllRecAreas(\PDO $pdo) : \SPLFixedArray {
 		// create query template
 		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections,
