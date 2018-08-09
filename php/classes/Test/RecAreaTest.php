@@ -282,8 +282,8 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 	 **/
 	public function  testGetInvalidRecAreaByRecAreaDistance() : void {
 		//grab a recArea id that is invalid or exceeds the maximum allowable length
-		$recArea = RecArea::getRecAreaByDistance($this->getPDO(),generateUuidV4());
-		$this->assertNull($recArea);
+		$recArea = RecArea::getRecAreaByDistance($this->getPDO(),"invalid longitude");
+		$this->assertCount(0,$recArea);
 
 	}
 
