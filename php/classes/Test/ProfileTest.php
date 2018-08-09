@@ -121,6 +121,7 @@ use HalfMortise\NmOutdoors\Profile;
          $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_EMAIL, $this->VALID_HASH, $this->VALID_PROFILE_IMAGE_URL);
          $profile->insert($this->getPDO());
          //delete the Profile from MySQL
+         $this->delete($this->getPDO());
          $this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
          //grab the data from MySQL and enforce the profile does not exist
          $pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());

@@ -1,6 +1,6 @@
 <?php
-namespace HalfMortise\NmOutdoors\Test;
 
+namespace HalfMortise\NmOutdoors\Test;
 use HalfMortise\NmOutdoors\Activity;
 
 // grab the class under scrutiny
