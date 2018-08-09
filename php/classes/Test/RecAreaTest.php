@@ -254,14 +254,13 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 		$recAreaId = generateUuidV4();
 		$recArea = new RecArea($recAreaId, $this->VALID_RECAREADESCRIPTION, $this->VALID_RECAREADIRECTIONS,$this->VALID_RECAREAIMAGEURL,$this->VALID_RECAREALAT,$this->VALID_RECAREALONG,$this->VALID_RECAREAMAPURL,$this->VALID_RECAREANAME);
 		$recArea->insert($this->getPDO());
-		$distance =
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = RecArea::getRecAreaByDistance($this->getPDO(),122.1,45.4,107);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("recArea"));
-		$this->assertCount(0, $results);
+		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("HalfMortise\NmOutdoors\RecArea",$results);
-		$pdoRecArea = $results[0];
+		$pdoRecArea = $results[1];
 		$this->assertEquals($pdoRecArea->getRecAreaId(), $recAreaId);
 		$this->assertEquals($pdoRecArea->getRecAreaDescription(), $this->VALID_RECAREADESCRIPTION);
 		$this->assertEquals($pdoRecArea->getRecAreaDirections(),$this->VALID_RECAREADIRECTIONS);
