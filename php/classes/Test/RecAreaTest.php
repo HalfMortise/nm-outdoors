@@ -95,9 +95,6 @@ class RecAreaTest extends NmOutdoorsTest {
 	 * @var float $VALID_DISTANCE
 	 **/
 	protected $VALID_DISTANCE = 1793.55595844;
-	/**
-	 * test the haversine algorithm against known inputs
-	 **/
 
 
 	public final function setUp()  : void {
@@ -257,6 +254,7 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 		$recAreaId = generateUuidV4();
 		$recArea = new RecArea($recAreaId, $this->VALID_RECAREADESCRIPTION, $this->VALID_RECAREADIRECTIONS,$this->VALID_RECAREAIMAGEURL,$this->VALID_RECAREALAT,$this->VALID_RECAREALONG,$this->VALID_RECAREAMAPURL,$this->VALID_RECAREANAME);
 		$recArea->insert($this->getPDO());
+		$distance =
 
 		// grab the data from mySQL and enforce the fields match our expectations
 		$results = RecArea::getRecAreaByDistance($this->getPDO(), $recArea->getRecAreaLong(),$recArea->getRecAreaLat());
