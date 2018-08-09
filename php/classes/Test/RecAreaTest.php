@@ -214,6 +214,17 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 
 	}
 
+	/**
+	 * test grabbing a recArea that doesn't exist by name
+	 **/
+	public function  testGetInvalidRecAreaByRecAreaName() : void {
+		//grab a recArea id that is invalid or exceeds the maximum allowable length
+		$recArea = RecArea::getRecAreaByRecAreaId($this->getPDO(),generateUuidV4());
+		$this->assertNull($recArea);
+
+	}
+
+
 
 
 	/**
