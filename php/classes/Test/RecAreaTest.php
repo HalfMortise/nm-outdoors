@@ -252,23 +252,6 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 
 //
 
-
-
-	public function testHaversine() {
-		// create a query template to CALL the stored procedure
-		$pdo = $this->getPDO();
-		$query = "SELECT haversine(:originLong, :originLat, :destinationLong, :destinationLat) AS distance";
-		$statement = $pdo->prepare($query);
-		// bind the parameters to the stored procedure
-		$parameters = array("originLat" => $this->VALID_ORIGIN[0], "originLong" => $this->VALID_ORIGIN[1],
-			"destinationLat" => $this->VALID_DESTINATION[0], "destinationLong" => $this->VALID_DESTINATION[1]);
-		$statement->execute($parameters);
-		$statement->setFetchMode(\PDO::FETCH_ASSOC);
-		$result = $statement->fetch();
-		$distance = $result["distance"];
-		// assert the answer is the expected answer within a margin of error (needed for doubles)
-		$this->assertEquals($distance, $this->VALID_DISTANCE, "", 0.0001);
-	}
 	/**
 	 * test grabbing an invalid  recArea distance
 	 **/
