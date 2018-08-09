@@ -30,12 +30,6 @@ use HalfMortise\NmOutdoors\Profile;
  **/
       protected $VALID_ATHANDLE = "@phpunit";
 
-/**
- * second valid at handle to use
- * @var string $VALID_ATHANDLE2
- **/
-      protected $VALID_ATHANDLE2 = "@passingtests";
-
 
 /**
  * valid email to use
@@ -97,14 +91,14 @@ use HalfMortise\NmOutdoors\Profile;
          $profile = new Profile($profileId, $this->VALID_ACTIVATION, $this->VALID_ATHANDLE, $this->VALID_EMAIL, $this->VALID_HASH,$this->VALID_PROFILE_IMAGE_URL);
          $profile->insert($this->getPDO());
          // edit the Profile and update it in MySQL
-         $profile->setProfileAtHandle($this->VALID_ATHANDLE2);
+         $profile->setProfileAtHandle($this->VALID_ATHANDLE);
          $profile->update($this->getPDO());
          // grab the data from MySQL and enforce the fields match our expectations
          $pdoProfile = Profile::getProfileByProfileId($this->getPDO(), $profile->getProfileId());
          $this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("profile"));
          $this->assertEquals($pdoProfile->getProfileId(), $profileId);
          $this->assertEquals($pdoProfile->getProfileActivationToken(), $this->VALID_ACTIVATION);
-         $this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE2);
+         $this->assertEquals($pdoProfile->getProfileAtHandle(), $this->VALID_ATHANDLE);
          $this->assertEquals($pdoProfile->getProfileEmail(), $this->VALID_EMAIL);
          $this->assertEquals($pdoProfile->getProfileHash(), $this->VALID_HASH);
          $this->assertEquals($pdoProfile->getProfileImageUrl(), $this->VALID_PROFILE_IMAGE_URL);

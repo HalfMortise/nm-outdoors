@@ -338,11 +338,12 @@ class Profile implements \JsonSerializable {
       $statement = $pdo->prepare($query);
 
       /**bind the member variables to the place holders in the template**/
-		$parameters = ["profileId" => $this->profileId->getBytes(), "profileActivationToken" => $this->profileActivationToken, "profileAtHandle" => $this->profileAtHandle, "profileEmail" => $this->profileEmail, "profileHash" => $this->profileHash, "profileImageUrl" => $this->profileImageUrl];
+		$parameters = ["profileId" => $this->profileId->getBytes()];
       $statement->execute($parameters);
    }
 
-   /**
+
+      /**
     * UPDATEs this Profile from mySQL
     *
     * @param \PDO $pdo PDO connection object
