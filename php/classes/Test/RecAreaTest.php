@@ -259,7 +259,7 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 		$results = RecArea::getRecAreaByDistance($this->getPDO(),122.1,45.4,107);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("recArea"));
 		$this->assertCount(1, $results);
-		$this->assertContainsOnlyInstancesOf("HalfMortise\NmOutdoors\RecArea",$results);
+		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\RecArea", $results);
 		$pdoRecArea = $results[0];
 		$this->assertEquals($pdoRecArea->getRecAreaId(), $recAreaId);
 		$this->assertEquals($pdoRecArea->getRecAreaDescription(), $this->VALID_RECAREADESCRIPTION);
