@@ -446,7 +446,7 @@ class RecArea implements \JsonSerializable {
 		$query = "SELECT recAreaId, recAreaDescription, recAreaDirections, recAreaImageUrl, recAreaLat, recAreaLong, recAreaMapUrl, recAreaName FROM recArea WHERE haversine(recAreaLat, recAreaLong, :userLat :userLong) < :distance";
 		$statement = $pdo->prepare($query);
 		// bind the recArea distance to the place holder in the template
-		$parameters = ["distance" => $distance, "recAreaLat" => $recAreaLat, "recAreaLong" => $recAreaLong, "userLat" => $userLat, "userLong" => $userLong];
+		$parameters = ["recAreaLat" => $recAreaLat, "recAreaLong" => $recAreaLong, "userLat" => $userLat, "userLong" => $userLong, "distance" => $distance];
 		$statement->execute($parameters);
 		// build an array of recArea
 		$recAreas = new \SplFixedArray($statement->rowCount());

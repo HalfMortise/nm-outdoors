@@ -11,14 +11,15 @@ CREATE TABLE recArea (
 	recAreaDescription VARCHAR (2048),
 	recAreaDirections VARCHAR(512),
 	recAreaImageUrl VARCHAR(255),
-	recAreaLat DECIMAL (9, 6),
-	recAreaLong DECIMAL (9, 6),
+	recAreaLat DECIMAL (12, 9),
+	recAreaLong DECIMAL (12, 9),
 	recAreaMapUrl VARCHAR (255),
 	recAreaName VARCHAR (255),
 
 	PRIMARY KEY(recAreaId)
-);
 
+);
+TRUNCATE TABLE recArea;
 
 CREATE TABLE profile (
 
@@ -61,3 +62,9 @@ CREATE TABLE activityType (
 	FOREIGN KEY (activityTypeRecAreaId) REFERENCES recArea(recAreaId),
 	PRIMARY KEY (activityTypeActivityId, activityTypeRecAreaId)
 );
+
+
+# INSERT INTO recArea(recAreaId, recAreaDescription, recAreaDirections, recAreaImageUrl, recAreaLat, recAreaLong, recAreaMapUrl, recAreaName) VALUES ("1234567890123456", "Rec Area Test", "Go here", "http://haml.amdn.com", 30.15624, 110.78958, "http://sraco.coan", "Cool place");
+
+# select *
+# from recArea;

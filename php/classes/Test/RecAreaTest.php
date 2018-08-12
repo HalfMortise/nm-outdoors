@@ -279,7 +279,7 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 	 **/
 	public function  testGetInvalidRecAreaByRecAreaDistance() : void {
 		//grab a recArea id that is invalid or exceeds the maximum allowable length
-		$recArea = RecArea::getRecAreaByDistance($this->getPDO(),272.5, 101.3, -200);
+		$recArea = RecArea::getRecAreaByDistance($this->getPDO(),36.245525,-106.427714, 35.159, -106.5761, 75.531951);
 		$this->assertCount(0,$recArea);
 
 	}
