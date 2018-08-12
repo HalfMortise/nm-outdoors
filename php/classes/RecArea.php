@@ -441,7 +441,7 @@ class RecArea implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when variables are not the correct data type
 	 * **/
-	public static function getRecAreaByDistance(\PDO $pdo, float $recAreaLat, float $recAreaLong, float $userLong, float $userLat, float $distance) : \SplFixedArray {
+	public static function getRecAreaByDistance(\PDO $pdo, float $recAreaLat, float $recAreaLong, float $userLat, float $userLong, float $distance) : \SplFixedArray {
 		// create query template
 		$query = "SELECT recAreaId, recAreaDescription, recAreaDirections, recAreaImageUrl, recAreaLat, recAreaLong, recAreaMapUrl, recAreaName FROM recArea WHERE haversine(:userLong, :userLat, recAreaLong, recAreaLat) < :distance";
 		$statement = $pdo->prepare($query);

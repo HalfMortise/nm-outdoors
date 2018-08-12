@@ -256,7 +256,7 @@ public function  testGetInvalidRecAreaByRecAreaId() : void {
 		$recArea->insert($this->getPDO());
 
 		// grab the data from mySQL and enforce the fields match our expectations
-		$results = RecArea::getRecAreaByDistance($this->getPDO(),-106.5761,35.159,107);
+		$results = RecArea::getRecAreaByDistance($this->getPDO(),36.245525,-106.427714, 35.159, -106.5761, 75.531951);
 		$this->assertEquals($numRows + 1, $this->getConnection()->getRowCount("recArea"));
 		$this->assertCount(1, $results);
 		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\RecArea", $results);
