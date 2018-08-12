@@ -443,7 +443,7 @@ class RecArea implements \JsonSerializable {
 	 * **/
 	public static function getRecAreaByDistance(\PDO $pdo, float $recAreaLat, float $recAreaLong, float $userLat, float $userLong, float $distance) : \SplFixedArray {
 		// create query template
-		$query = "SELECT recAreaId, recAreaDescription, recAreaDirections, recAreaImageUrl, recAreaLat, recAreaLong, recAreaMapUrl, recAreaName FROM recArea WHERE haversine(:userLong, :userLat, recAreaLong, recAreaLat) < :distance";
+		$query = "SELECT recAreaId, recAreaDescription, recAreaDirections, recAreaImageUrl, recAreaLat, recAreaLong, recAreaMapUrl, recAreaName FROM recArea WHERE haversine(recAreaLat, recAreaLong, :userLat :userLong) < :distance";
 		$statement = $pdo->prepare($query);
 		// bind the recArea distance to the place holder in the template
 		$parameters = ["distance" => $distance, "recAreaLat" => $recAreaLat, "recAreaLong" => $recAreaLong, "userLat" => $userLat, "userLong" => $userLong];
