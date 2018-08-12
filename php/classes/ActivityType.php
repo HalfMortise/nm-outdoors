@@ -129,21 +129,7 @@ class ActivityType implements \JsonSerializable {
 		$parameters = ["activityTypeActivityId" => $this->activityTypeActivityId->getBytes(), "activityTypeRecAreaId" => $this->activityTypeRecAreaId->getBytes()];
 		$statement->execute($parameters);
 	}
-	/**
-	 * updates this ActivityType in mySQL
-	 *
-	 * @param \PDO $pdo PDO connection object
-	 * @throws \PDOException when mySQL related errors occur
-	 * @throws \TypeError if $pdo is not a PDO connection object
-	 **/
-	public function update(\PDO $pdo) : void {
-		// create query template
-		$query = "UPDATE activityType SET activityTypeActivityId = :activityTypeActivityId, activityTypeRecAreaId = :activityTypeRecAreaId WHERE activityTypeActivityId = :activityTypeActivityId AND activityTypeRecAreaId = :activityTypeRecAreaId";
-		$statement = $pdo->prepare($query);
-		//binds variables to the place holders in the template
-		$parameters = ["activityTypeActivityId" => $this->activityTypeActivityId->getBytes(), "activityTypeRecAreaId" => $this->activityTypeRecAreaId->getBytes()];
-		$statement->execute($parameters);
-	}
+
 	/**
 	 * gets the ActivityType by activityTypeActivityId and activityTypeRecAreaId
 	 *
