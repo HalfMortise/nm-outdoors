@@ -124,6 +124,7 @@ class Activity implements \JsonSerializable {
 	 *
 	 * @param \PDO $pdo PDO connection object
 	 * @throws \PDOException when mySQL related errors occur
+	 *
 	 **/
 	public function update(\PDO $pdo): void {
 		// create query template
