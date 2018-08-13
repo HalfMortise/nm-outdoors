@@ -453,7 +453,6 @@ class Review implements \JsonSerializable {
 		$fields["reviewRecAreaId"] = $this->reviewRecAreaId->toString();
 		//format the date so that the front end can consume it
 		$fields["reviewDateTime"] = round(floatval($this->reviewDateTime->format("U.u")) * 1000);
-		$fields["reviewRating"] = $this->reviewRating->toString();
 		return ($fields);
 	}
 }
