@@ -338,8 +338,7 @@ class RecArea implements \JsonSerializable {
 	 */
 	public function update(\PDO $pdo): void {
 		//create query template for the update method
-		$query = "UPDATE recArea SET 
-	recAreaId = :recAreaId,
+		$query = "UPDATE recArea SET recAreaId = :recAreaId,
 	recAreaDescription = :recAreaDescription,
 	recAreaDirections = :recAreaDirections,
 	recAreaImageUrl = :recAreaImageUrl,
