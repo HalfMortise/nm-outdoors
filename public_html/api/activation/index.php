@@ -26,7 +26,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
    session_start();
 }
 
-// \session check
+// end session check
 
 //prepare an empty reply
 
@@ -51,45 +51,43 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
       }
       //handle the GET HTTP request
       if($method === "GET") {
-         //set XSRF cookie
+         ///set the XSRF cookie
          setXsrfCookie();
-         //find the profile associated with the activation token
+         //find profile associated with the activation token
          $profile = Profile::getProfileByProfileActivationToken($pdo, $activation);
          //verify that the profile is not null
          if($profile !== null) {
             //make sure the activation token matches
-            if($activation === $profile->getProfileActvationToken()) {
+            if($activation === $profile->getProfileActivationToken()) {
                //set activation to null
-               $profile->setProfileActivationToken(null);
+               profile->setProfileActivationToken(null);
                //update the profile in the database
                $profile->update($pdo);
-               //set the reply for the end user
                $reply->data = "Thank you for activating your account; you will now be redirected to your profile.";
-            } else {
-               //throw an exception if the activation token does not exist
-               throw(new \RuntimeException("Profile with this activation token does not exist", 404));
-            } else {
-               //throw an exception if the HTTP request is not a GET
-               throw(new \InvalidArgumentException("Invalid HTTP method request", 403));
             }
-            //update the reply object's status and message state variables if an exception or type exception was thrown
-         } catch (\Exception $exception) {
-            $reply->status = $exception->getCode();
-            $reply->message = $exception->getMessage();
-         } catch (\TypeError $typeError) {
-            $reply->status = $typeError->getCode();
-            $reply->message = $typeError->getMessage();
+         } else {
+            //throw an exception if the activation token does not exist
+            throw(new \RuntimeException("Profile with this activation token does not exist", 404));
          }
-         //prepare and send the reply
-         header("Content-type: application/json");
-         if($reply->data === null) {
-            unset($reply->data);
-         }
+      } else {
+         //throw an exception if the HTTP request is not  GET
+         throw(new \InvalidArgumentException("Invalid HTTP method request", 403));
       }
+      //update the reply object's status and message state variables if an exception or type exception was thrown;
+   } catch (\Exception $exception) {
+      $reply->status = $exception->getCode();
+      $reply->message = $exception->getMessage();
+   } catch(\TypeError $typeError) {
+      $reply->status = $typeError->getCode();
+      $reply->status = $typeError->getMessage();
+   }
+   //prepare and send the reply
+header("Content-type: application/json");
+   if($reply->data === null) {
+      unset($reply->data);
    }
 
-
-
+   echo json_encode($reply);
 
 
 
