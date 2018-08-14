@@ -24,7 +24,7 @@ class DataDownloader {
     * @throws \RuntimeException if stream cant be opened.
     **/
    public static function getMetaData(string $url, string $eTag) {
-      if($eTag !== "art") {
+      if($eTag !== "rec area") {
          throw(new \RuntimeException("not a valid etag", 400));
       }
       $options = [];
@@ -52,7 +52,7 @@ class DataDownloader {
       }
       $config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
       $eTags = json_decode($config["etags"]);
-      $previousETag = $eTags->art;
+      $previousETag = $eTags->recArea;
       if($previousETag < $eTag) {
          return ($eTag);
       } else {
@@ -60,18 +60,18 @@ class DataDownloader {
       }
    }
    public static function compareRecAreaAndDownload() {
-      $artUrl = "http://coagisweb.cabq.gov/arcgis/rest/services/public/PublicArt/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=pjson";
+      $recAreaUrl = "http://coagisweb.cabq.gov/arcgis/rest/services/public/PublicArt/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=pjson";
       /**
        *run getMetaData and catch exception if the data hasn't changed
        **/
       $features = null;
       try {
-         DataDownloader::getMetaData($artUrl, "art");
-         $features = DataDownloader::readDataJson($artUrl);
-         $artETag = DataDownloader::getMetaData($artUrl, "art");
+         DataDownloader::getMetaData($recAreaUrl, "rec area");
+         $features = DataDownloader::readDataJson($recAreaUrl);
+         $recAreaETag = DataDownloader::getMetaData($recAreaUrl, "rec area");
          $config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
          $eTags = json_decode($config["etags"]);
-         $eTags->art = $artETag;
+         $eTags->recArea = $recAreaETag;
          $config["etags"] = json_encode($eTags);
 //			writeConfig($config, "/etc/apache2/capstone-mysql/nmoutdoors.ini");
       } catch(\OutOfBoundsException $outOfBoundsException) {
@@ -94,8 +94,8 @@ class DataDownloader {
          $recAreaMapUrl = $feature->attributes->MAPURL;
          $recAreaName = $feature->attributes->NAME;
          try {
-            $art = new RecArea($recAreaId, $recAreaDescription, $recAreaDirections, $recAreaImageUrl, $recAreaLat, $recAreaLong, $recAreaMapUrl, $recAreaName);
-            $art->insert($pdo);
+            $recArea = new RecArea($recAreaId, $recAreaDescription, $recAreaDirections, $recAreaImageUrl, $recAreaLat, $recAreaLong, $recAreaMapUrl, $recAreaName);
+            $recArea->insert($pdo);
          }
          catch (\TypeError $typeError) {
             echo ("input a message here");
@@ -132,8 +132,8 @@ class DataDownloader {
    }
 }
 try {
-   $features = DataDownloader::compareArtAndDownload();
-   DataDownloader::getArtData($features);
+   $features = DataDownloader::compareRecAreaAndDownload();
+   DataDownloader::getRecAreaData($features);
 } catch(\Exception $exception) {
    echo $exception->getMessage() . PHP_EOL;
 }
