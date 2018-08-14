@@ -98,7 +98,7 @@ EOF;
 		$swiftMessage->setFrom(["nm.outdoors.webapp@gmail.com" => "NM Outdoors 🌄"]);
 
 		/**
-		 * attach reciepients to the message
+		 * attach recipients to the message
 		 * notice this is an array that can include or omit the recipient's name
 		 * use the recipient's real name where possible
 		 * this reduces the probability of the email is marked as spam
@@ -108,5 +108,25 @@ EOF;
 
 		//attach the subject line to the email message
 		$swiftMessage->setSubject($messageSubject);
+
+		/**
+		 * attach the message to the email
+		 * set two versions of the message: a html formatted version and a filter_var()ed version of the message, plain text
+		 * notice the tactic used is to display the entire $confirmLink to plain text
+		 * this lets users who are not viewing the html content to still access the link
+		 **/
+		//attach the html version for the message
+		$swiftMessage->setBody($message, "text/html");
+
+		//attach the plain text version of the message
+		$swiftMessage->addPart(html_entity_decode($message), "text/plain");
+
+		/**
+		 * send the Email vis SMTP; the SMTP server here is configred to relay everyting upstream via CNM
+		 * this default may or may not be available on all web hosts; consult their documentation/support for details
+		 * SwiftMailer supports many different transport methods; SMTP was chosen because it's the most compatibile and has the best error handling
+		 * @see http://swiftmailer.org/docs/sending.html Sending Messages - Documentation - SwiftMailer
+		 **/
+		//setup smtp
 
 	}
