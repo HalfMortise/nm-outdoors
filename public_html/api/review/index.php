@@ -13,5 +13,27 @@ use HalfMortise\NmOutdoors\{
 /**
  * API for the Review Class
  *
- * @author Ryo Lambert
+ * @author Ryo Lambert <ryolambert@gmail.com>
+ * @author George Kephart <gkephart@cnm.edu>
  **/
+
+//verify the session, start if not active
+if(session_status() !==PHP_SESSION_ACTIVE) {
+	session_start();
+}
+
+//prepare an empty reply
+$reply = new stdClass();
+$reply->status = 200;
+$reply->data = null;
+
+try{
+	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
+
+	//determin which HTTP method was used
+	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
+
+	//sanitize the search parameters
+	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+	$commentProfileId = $id = filter_input(INPUT_GET, "commentProfileId", FILTER_SANITIZE_STRING)
+}
