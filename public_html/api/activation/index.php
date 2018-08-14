@@ -72,7 +72,18 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
                //throw an exception if the HTTP request is not a GET
                throw(new \InvalidArgumentException("Invalid HTTP method request", 403));
             }
-            //
+            //update the reply object's status and message state variables if an exception or type exception was thrown
+         } catch (\Exception $exception) {
+            $reply->status = $exception->getCode();
+            $reply->message = $exception->getMessage();
+         } catch (\TypeError $typeError) {
+            $reply->status = $typeError->getCode();
+            $reply->message = $typeError->getMessage();
+         }
+         //prepare and send the reply
+         header("Content-type: application/json");
+         if($reply->data === null) {
+            unset($reply->data);
          }
       }
    }
