@@ -128,5 +128,23 @@ EOF;
 		 * @see http://swiftmailer.org/docs/sending.html Sending Messages - Documentation - SwiftMailer
 		 **/
 		//setup smtp
+		$smtp = new Swift_SmtpTransport(
+			"localhost", 25);
+		$mailer = new Swift_Mailer($smtp);
 
+		//send the message
+		$numSent = $mailer->send($swiftMessage, $failedRecipients);
+
+		/**
+		 * the send method returns the number of recipients that accepted the Email
+		 * so, if the number attempted is not the number accepted, this is an Exception
+		 **/
+		if($numSent !== count($recipients)) {
+				// the $failedRecipients parameter passed in the send() method now contains an aray of the Emails that failed
+			throw(new RuntimeException(("unable to send email", 400));
+		}
+
+
+	}
+		)
 	}
