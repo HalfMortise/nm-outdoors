@@ -5,7 +5,9 @@ require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 require_once dirname(__DIR__, 3) . "/php/lib/jwt.php";
+
 use HalfMortise\NmOutdoors\Profile;
+
 /**
  * api for signing up for ABQ Street Art
  *
@@ -56,7 +58,7 @@ try {
 		}
 
 		//make sure the password and confirm password match
-		if ($requestObject->profilePassword !== $requestObject->profilePasswordConfirm) {
+		if($requestObject->profilePassword !== $requestObject->profilePasswordConfirm) {
 			throw(new \InvalidArgumentException("Passwords do not match"));
 		}
 
@@ -65,3 +67,46 @@ try {
 
 		//create the profile object and prepare to insert into the database
 		$profile = new Profile(generateUuidV4(), $profileActivationToken, $requestObject->profileEmail, $hash, $salt, $requestObject->profileUserName);
+
+		//insert the profile into the database
+		$profile->insert($pdo);
+
+		//compose the email message to send with the activation token
+		$messageSubject = "Thnak you for signing up with NM-Outdoors🌄! Please confirm your email in order to sign in.";
+
+		//building the activation link that can travel to another server and still work. This is the link that will be clicked to confirm the account.
+		//make sure URL is /public_html/api/activation/$activation
+		$basePath = dirname($_SERVER["SCRIPT_NAME"], 3);
+
+		//create the path
+		$urlglue = $basePath . "/api/activation/?activation=" . $profileActivationToken;
+
+		//create the redirect link
+		$confirmLink = "https://" . $_SERVER["SERVER_NAME"] . $urlglue;
+
+		//compose message to send with email
+		$message = <<< EOF
+<h2>🌄 Welcome to NM-Outdoors 🌄</h2>
+<p>Adventure awaits you here in the Land of Enchantment! Before we get started please confirm your account activation to sign and leave reviews 👍</p>
+<p><a href="$confirmLink">$confirmLink</a></p>
+EOF;
+		//create swift email
+		$swiftMessage = new Swift_Message();
+
+		//attach the sender to the message
+		//this takes the form of an associative array where the email is the key to a real name
+		$swiftMessage->setFrom(["nm.outdoors.webapp@gmail.com" => "NM Outdoors 🌄"]);
+
+		/**
+		 * attach reciepients to the message
+		 * notice this is an array that can include or omit the recipient's name
+		 * use the recipient's real name where possible
+		 * this reduces the probability of the email is marked as spam
+		 **/
+		//define who the recipient is
+		$recipients = [$requestObject->profileEmail];
+
+		//attach the subject line to the email message
+		$swiftMessage->setSubject($messageSubject);
+
+	}
