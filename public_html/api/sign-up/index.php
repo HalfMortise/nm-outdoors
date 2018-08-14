@@ -140,9 +140,22 @@ EOF;
 		 * so, if the number attempted is not the number accepted, this is an Exception
 		 **/
 		if($numSent !== count($recipients)) {
-				// the $failedRecipients parameter passed in the send() method now contains an aray of the Emails that failed
-			throw(new RuntimeException(("unable to send email", 400));
+			// the $failedRecipients parameter passed in the send() method now contains an aray of the Emails that failed😁
+			throw(new RuntimeException("unable to send email", 400));
 		}
+
+		//update the reply
+		$reply->message = "Thank you  for creating a profile with NM-Outdoors 🌄";
+	} else {
+		throw (new InvalidArgumentException("invalid http request"));
+	}
+} catch(\Exception |\TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
+	$reply->trace = $exception->getTraceAsString();
+}
+
+
 
 
 	}
