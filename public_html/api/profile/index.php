@@ -12,7 +12,7 @@ require_once(dirname(__DIR__, 3) . "/php/lib/jwt.php");
 require_once(dirname(__DIR__, 3) . "/php/lib/xsrf.php");
 require_once(dirname(__DIR__, 3) . "/php/lib/uuid.php");
 
-require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
+//require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
 use HalfMortise\NmOutdoors; {
 	Profile;
@@ -42,13 +42,13 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	// sanitize input
-	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$profileId = filter_input(INPUT_GET, "profileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profileAtHandle = filter_input(INPUT_GET, "profileAtHandle", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profileEmail = filter_input(INPUT_GET, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 
 	// make sure the id is valid for methods that require it
-	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true )) {
+	if(($method === "DELETE" || $method === "PUT") && (empty($ProfileId) === true )) {
 		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
 	}
 
@@ -57,8 +57,8 @@ try {
 		setXsrfCookie();
 
 		//gets a post by content
-		if(empty($id) === false) {
-			$profile = Profile::getProfileByProfileId($pdo, $id);
+		if(empty($ProfileId) === false) {
+			$profile = Profile::getProfileByProfileId($pdo, $profileId);
 			if($profile !== null) {
 				$reply->data = $profile;
 			}
@@ -83,7 +83,7 @@ try {
 		//validateJwtHeader();
 
 		//enforce the user is signed in and only trying to edit their own profile
-		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $id) {
+		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $profileId) {
 			throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
 		}
 
@@ -94,7 +94,7 @@ try {
 		$requestObject = json_decode($requestContent);
 
 		//retrieve the profile to be updated
-		$profile = Profile::getProfileByProfileId($pdo, $id);
+		$profile = Profile::getProfileByProfileId($pdo, $profileId);
 		if($profile === null) {
 			throw(new RuntimeException("Profile does not exist", 404));
 		}
@@ -110,14 +110,14 @@ try {
 			throw(new \InvalidArgumentException ("No profile email present", 405));
 		}
 
-		//profile phone # | if null use the profile phone that is in the database
-		if(empty($requestObject->profilePhone) === true) {
-			$requestObject->ProfilePhone = $profile->getProfilePhone();
-		}
+//		//profile phone # | if null use the profile phone that is in the database
+//		if(empty($requestObject->profilePhone) === true) {
+//			$requestObject->ProfilePhone = $profile->getProfilePhone();
+//		}
 
 		$profile->setProfileAtHandle($requestObject->profileAtHandle);
 		$profile->setProfileEmail($requestObject->profileEmail);
-		$profile->setProfilePhone($requestObject->profilePhone);
+		//$profile->setProfilePhone($requestObject->profilePhone);
 		$profile->update($pdo);
 
 		// update reply
@@ -132,7 +132,7 @@ try {
 		//enforce the end user has a JWT token
 		//validateJwtHeader();
 
-		$profile = Profile::getProfileByProfileId($pdo, $id);
+		$profile = Profile::getProfileByProfileId($pdo, $profileId);
 		if($profile === null) {
 			throw (new RuntimeException("Profile does not exist"));
 		}
