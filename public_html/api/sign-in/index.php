@@ -26,3 +26,64 @@ try {
 	//determine which HTTP method is being used
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
+	//if method is post handle the sign in logic
+	if($method === "POST") {
+
+		//make sure the XSRF token is valid
+		verifyXsrf();
+
+		//process the request content and decode the json object into a php object
+		$requestContent = file_get_contents("php://input");
+		$requestObject = json_decode($requestContent);
+
+		//check to make sure the password and email field is not empty
+		if(empty($requestObject->profileEmail) === true) {
+			throw(new \InvalidArgumentException("Must Enter Password", 401));
+		} else {
+			$profilePassword = $requestObject->profilePassword;
+		}
+
+		//grab the profile from the database by the email provided
+		$profile = Profile::getProfileByProfileEmail($pdo, $profileEmail);
+		if(empty($profile) === true) {
+			throw(new \InvalidArgumentException("Invalid Email", 401));
+		}
+		$profile->setProfileActivationToken(null);
+		$profile->update($pdo);
+
+		//if the profile activiation is not null throw an erro
+		if($profile->getProfileActivationToken() !== null) {
+			throw (new \InvalidArgumentException("You cannot sign in until you have activated your account", 403));
+		}
+
+		//verify hash is correct
+		if(password_verify($requestObject->profilePassword, $profile->getProfileHash()) === false) {
+			throw(new \InvalidArgumentException("Password or email is Incorrect", 401));
+		}
+
+		//grab profile from database and put into a session
+		$profile = Profile::getProfileByProfileId($pdo, $profile->getProfileId());
+
+		$_SESSION["profile"] = $profile;
+
+		//create the Auth payload
+		$authObject = (object) [
+			"profileId" => $profile->getProfileId(),
+			"profileAtHandle" => $profile->getProfileAtHandle()
+		];
+
+		//create and set the JWT TOKEN
+		setJwtAndAuthHeader("auth", $authObject);
+
+		$reply->message = "Sign in was successful.";
+	} else {
+		throw(new \InvalidArgumentException("Invalid HTTP method request", 418));
+	}
+
+	//if an exception is thrown update the message
+} catch(Exception | TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
+}
+header("Content-type: application/json");
+echo json_encode($reply);
