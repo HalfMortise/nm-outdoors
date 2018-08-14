@@ -9,7 +9,7 @@ require_once dirname(__DIR__, 3) . "/php/lib/jwt.php";
 use HalfMortise\NmOutdoors\Profile;
 
 /**
- * api for signing up for ABQ Street Art
+ * api for signing up for NM-Outdoors
  *
  * @author Ryo Lambert <ryolambert@gmail.com>
  * @author Gkephart <GKephart@cnm.edu>

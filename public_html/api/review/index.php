@@ -10,3 +10,8 @@ use HalfMortise\NmOutdoors\{
 	Review, Profile, RecArea
 };
 
+/**
+ * API for the Review Class
+ *
+ * @author Ryo Lambert
+ **/
