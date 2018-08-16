@@ -19,7 +19,7 @@ use HalfMortise\NmOutdoors; {
 };
 
 /**
- * API for Tweet
+ * API for user profile
  *
  * @author Bashir Shafii
  * @version 1.0
