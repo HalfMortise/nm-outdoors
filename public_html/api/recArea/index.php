@@ -49,20 +49,25 @@ try {
 		//set XSRF cookie
 		setXsrfCookie();
 
-		//gets a post by content
+		//gets area by Id
 		if(empty($recAreaId) === false) {
-			$reply->data = RecArea::getRecAreaByRecAreaId($pdo,$recAreaId);
+			$reply->data = RecArea::getRecAreaByRecAreaId($pdo, $recAreaId);
 
 		} else if(empty($recAreaName) === false) {
 			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName);
 
-//		} else if(empty($profileEmail) === false) {
-//
-//			$reply->data = Profile::getProfileByProfileEmail($pdo, $profileEmail);
-//		}
+		} else {
+			throw (new InvalidArgumentException("Invalid HTTP request", 400));
 
-
-
-
+		// catch any exceptions that were thrown and update the status and message state variable fields
+	} catch
+	(\Exception | \TypeError $exception) {
+		$reply->status = $exception->getCode();
+		$reply->message = $exception->getMessage();
+	}
+header("Content-type: application/json");
+if($reply->data === null) {
+	unset($reply->data);
+}
 // encode and return reply to front end caller
-echo json_encode($reply);
+echo json_encode($reply);json_encode($reply);
