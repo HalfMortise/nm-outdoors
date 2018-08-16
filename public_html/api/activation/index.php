@@ -61,7 +61,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
             //make sure the activation token matches
             if($activation === $profile->getProfileActivationToken()) {
                //set activation to null
-               profile:setProfileActivationToken(null);
+               $profile->setProfileActivationToken(null);
                //update the profile in the database
                $profile->update($pdo);
                $reply->data = "Thank you for activating your account; you will now be redirected to your profile.";
