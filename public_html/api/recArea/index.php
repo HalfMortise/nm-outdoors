@@ -29,19 +29,19 @@ $reply->data = null;
 
 try {
 	//grab the mySQL connection
-	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddctwitter.ini");
+	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutddors.ini");
 
 	//determine which HTTP method was used
 	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
 
 	// sanitize input
-	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$profileAtHandle = filter_input(INPUT_GET, "profileAtHandle", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$profileEmail = filter_input(INPUT_GET, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$recAreaId = filter_input(INPUT_GET, "recAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$recAreaName = filter_input(INPUT_GET, "recAreaName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	//$profileEmail = filter_input(INPUT_GET, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 
 	// make sure the id is valid for methods that require it
-	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
+	if(($method === "DELETE" || $method === "PUT") && (empty($recAreaId) === true)) {
 		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
 	}
 
@@ -50,16 +50,16 @@ try {
 		setXsrfCookie();
 
 		//gets a post by content
-		if(empty($id) === false) {
-			$reply->data = Profile::getProfileByProfileId($pdo, $id);
+		if(empty($recAreaId) === false) {
+			$reply->data = RecArea::getRecAreaByRecAreaId($pdo,$recAreaId);
 
-		} else if(empty($profileAtHandle) === false) {
-			$reply->data = Profile::getProfileByProfileAtHandle($pdo, $profileAtHandle);
+		} else if(empty($recAreaName) === false) {
+			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName);
 
-		} else if(empty($profileEmail) === false) {
-
-			$reply->data = Profile::getProfileByProfileEmail($pdo, $profileEmail);
-		}
+//		} else if(empty($profileEmail) === false) {
+//
+//			$reply->data = Profile::getProfileByProfileEmail($pdo, $profileEmail);
+//		}
 
 	} elseif($method === "PUT") {
 
