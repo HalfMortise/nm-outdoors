@@ -36,7 +36,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 
    try {
       //grab the MySQL connection
-      $pdo = connectToEncryptedMySql("/etc/apache2/capstone-mysql/nmoutdoors.in");
+      $pdo = connectToEncryptedMySql("/etc/apache2/capstone-mysql/nmoutdoors.ini");
       //check the HTTP method being used
       $method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
       //sanitize input for security purposes
@@ -88,16 +88,3 @@ header("Content-type: application/json");
    }
 
    echo json_encode($reply);
-
-
-
-
-
-
-
-
-
-
-
-
-
