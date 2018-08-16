@@ -5,13 +5,14 @@
  * Date: 8/14/2018
  * Time: 2:48 PM
  */
-
+//TO DO: add xsrf.php to lib dir
 
 namespace HalfMortise\NmOutdoors\Profile;
 
-use http\Exception\InvalidArgumentException;
+//use http\Exception\InvalidArgumentException;
 
 require_once dirname(__DIR__,3)."/php/classes/autoload.php";
+require_once(dirname(__DIR__, 3) . "/php/lib/jwt.php");
 require_once dirname(__DIR__,3)."/php/lib/xsrf.php";
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
@@ -60,7 +61,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
             //make sure the activation token matches
             if($activation === $profile->getProfileActivationToken()) {
                //set activation to null
-               profile->setProfileActivationToken(null);
+               profile:setProfileActivationToken(null);
                //update the profile in the database
                $profile->update($pdo);
                $reply->data = "Thank you for activating your account; you will now be redirected to your profile.";
