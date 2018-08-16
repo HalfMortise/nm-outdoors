@@ -137,7 +137,7 @@ try {
 		}
 
 		//enforce the user is signed in and only trying to edit their own profile
-		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $profile->getProfileId()->toString()) {
+		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $profileId->getProfileId()->toString()) {
 			throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
 		}
 
