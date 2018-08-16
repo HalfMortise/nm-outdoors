@@ -49,25 +49,33 @@ try {
 		//set XSRF cookie
 		setXsrfCookie();
 
-		//gets area by Id
+		//gets rec area by Id
 		if(empty($recAreaId) === false) {
 			$reply->data = RecArea::getRecAreaByRecAreaId($pdo, $recAreaId);
-
+		//get rec area by name
 		} else if(empty($recAreaName) === false) {
 			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName);
+
+		} else if(empty() === false) {
+			$reply->data = RecArea::getRecAreaByDistance($pdp,);
+
+		} else if(empty($pdo) === false) {
+			$reply->data = RecArea::getAllRecAreas($pdo);
 
 		} else {
 			throw (new InvalidArgumentException("Invalid HTTP request", 400));
 
-		// catch any exceptions that were thrown and update the status and message state variable fields
+			// catch any exceptions that were thrown and update the status and message state variable fields
+
 	} catch
-	(\Exception | \TypeError $exception) {
-		$reply->status = $exception->getCode();
-		$reply->message = $exception->getMessage();
-	}
+		(\Exception \TypeError $exception) {
+			$reply->status = $exception->getCode();
+			$reply->message = $exception->getMessage();
+		}
 header("Content-type: application/json");
 if($reply->data === null) {
 	unset($reply->data);
 }
 // encode and return reply to front end caller
-echo json_encode($reply);json_encode($reply);
+echo json_encode($reply);
+
