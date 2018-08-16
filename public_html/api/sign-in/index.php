@@ -51,7 +51,7 @@ try {
 		$profile->setProfileActivationToken(null);
 		$profile->update($pdo);
 
-		//if the profile activiation is not null throw an erro
+		//if the profile activation is not null throw an error
 		if($profile->getProfileActivationToken() !== null) {
 			throw (new \InvalidArgumentException("You cannot sign in until you have activated your account", 403));
 		}
