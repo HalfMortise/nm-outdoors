@@ -46,7 +46,7 @@ try {
 		//grab the profile from the database by the email provided
 		$profile = Profile::getProfileByProfileEmail($pdo, $profileEmail);
 		if(empty($profile) === true) {
-			throw(new \InvalidArgumentException("Invalid Email", 401));
+			throw(new \InvalidArgumentException("Profile does not exist", 401));
 		}
 		$profile->setProfileActivationToken(null);
 		$profile->update($pdo);
