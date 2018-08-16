@@ -71,7 +71,7 @@ class Profile implements \JsonSerializable {
     *
     **/
 
-   public function __construct($newProfileId, string $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, $newProfileHash, string $newProfileImageUrl) {
+   public function __construct($newProfileId, ?string $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, $newProfileHash, string $newProfileImageUrl) {
       try {
          $this->setProfileId($newProfileId);
          $this->setProfileActivationToken($newProfileActivationToken);
@@ -124,7 +124,7 @@ class Profile implements \JsonSerializable {
     *
     * @return string value of profileActivationToken
     **/
-   public function getProfileActivationToken(): string {
+   public function getProfileActivationToken(): ?string {
       return ($this->profileActivationToken);
    }
    /**end accessor method for profileActivationToken**/
@@ -138,7 +138,7 @@ class Profile implements \JsonSerializable {
     * @throws \RangeException if $newProfileActivationToken is > 32 characters
     * @throws \TypeError if $newProfileActivationToken is not a string
     **/
-   public function setProfileActivationToken(string $newProfileActivationToken): void {
+   public function setProfileActivationToken(?string $newProfileActivationToken): void {
       if($newProfileActivationToken === null) {
          $this->profileActivationToken = null;
          return;
