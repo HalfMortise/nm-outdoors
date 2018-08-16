@@ -71,7 +71,7 @@ class Profile implements \JsonSerializable {
     *
     **/
 
-   public function __construct($newProfileId, ?string $newProfileActivationToken, string $newProfileAtHandle, ?string $newProfileEmail, $newProfileHash, string $newProfileImageUrl) {
+   public function __construct($newProfileId, ?string $newProfileActivationToken, string $newProfileAtHandle, string $newProfileEmail, $newProfileHash, string $newProfileImageUrl) {
       try {
          $this->setProfileId($newProfileId);
          $this->setProfileActivationToken($newProfileActivationToken);
@@ -201,7 +201,7 @@ class Profile implements \JsonSerializable {
     *
     * @return string value of profileEmail
     ***/
-   public function getProfileEmail(): ?string {
+   public function getProfileEmail(): string {
       return ($this->profileEmail);
    }
    /**end accessor method for profileEmail**/
@@ -215,7 +215,7 @@ class Profile implements \JsonSerializable {
     * @throws \RangeException if $newProfileEmail is > 128 characters
     * @throws \TypeError if $newProfileEmail is not a string
     **/
-   public function setProfileEmail(?string $newProfileEmail): void {
+   public function setProfileEmail(string $newProfileEmail): void {
       /**verify the email is secure**/
       $newProfileEmail = trim($newProfileEmail);
       $newProfileEmail = filter_var($newProfileEmail, FILTER_VALIDATE_EMAIL);
@@ -413,7 +413,7 @@ class Profile implements \JsonSerializable {
     * @throws \TypeError when variables are not the correct data type
     **/
 
-   public static function getProfileByProfileEmail(\PDO $pdo, ?string $profileEmail): ?Profile {
+   public static function getProfileByProfileEmail(\PDO $pdo, string $profileEmail): ?Profile {
 
       /**sanitize the profileId before searching**/
       $profileEmail = trim($profileEmail);
