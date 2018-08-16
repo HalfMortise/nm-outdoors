@@ -56,9 +56,10 @@ try {
 		} else if(empty($recAreaName) === false) {
 			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName);
 
-		} else if(empty() === false) {
-			$reply->data = RecArea::getRecAreaByDistance($pdp,);
-
+        //get rec area by distance
+		} else if(empty($recAreaLat|| $recAreaLong||$userLat ||$userLong ||$distance) === false) {
+			$reply->data = RecArea::getRecAreaByDistance($pdp,$recAreaLat, $recAreaLong, $userLat, $userLong, $distance);
+        //return all rec areas in the database
 		} else if(empty($pdo) === false) {
 			$reply->data = RecArea::getAllRecAreas($pdo);
 
