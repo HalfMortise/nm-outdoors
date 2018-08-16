@@ -7,7 +7,7 @@
  */
 //TO DO: add xsrf.php to lib dir
 
-namespace HalfMortise\NmOutdoors\Profile;
+use HalfMortise\NmOutdoors\Profile;
 
 //use http\Exception\InvalidArgumentException;
 
