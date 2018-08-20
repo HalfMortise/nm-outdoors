@@ -7,7 +7,9 @@ require_once dirname(__DIR__, 3) . "/php/lib/jwt.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
 
 use HalfMortise\NmOutdoors\{
-	Review
+	Review, 
+	// profile is for testing
+	Profile
 };
 
 /**
@@ -30,13 +32,14 @@ try{
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 
 	//determine which HTTP method was used
-	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
+	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
 
 	//sanitize the search parameters
 	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 	$reviewProfileId = $id = filter_input(INPUT_GET, "reviewProfileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$reviewRecAreaId = $id = filter_input(INPUT_GET, "reviewRecAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	
+	// handle GET request - if id is present, that tweet is returned, otherwise all tweets are returned
 	if($method === "GET") {
 
 		//set XSRF cookie
