@@ -47,9 +47,19 @@ try{
 			if($activity !== null) {
 				$reply->data = $activity;
 			}
-		} else {
+		} 
+	} else {
 			throw new InvalidArgumentException("incorrect search parameters ", 404);
 		}
-		}
+} catch(\Exception | \TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
 }
+
+header("Content-type: application/json");
+if($reply->data === null){
+	unset($reply->data);
 }
+
+// encode and return reply to front end caller
+echo json_encode($reply);
