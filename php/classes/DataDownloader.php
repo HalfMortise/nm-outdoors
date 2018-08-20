@@ -61,7 +61,7 @@ class DataDownloader {
       }
    }
    public static function compareRecAreaAndDownload() {
-      $recAreaUrl = "";
+      $recAreaUrl = "https://ridb.recreation.gov/api/v1/recareas?state=NM";
       /**
        *run getMetaData and catch exception if the data hasn't changed
        **/
