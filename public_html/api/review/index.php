@@ -84,3 +84,27 @@ try{
 //			$requestObject->reviewDateTime = date("y-m-d H:i:s");
 		}
 
+		// enforce the user is signed in
+		if(empty($_SESSION["profile"]) === true) {
+			throw(new \InvalidArgumentException("you must be logged in to review on RecArea", 403));
+		}
+		$reviewId = generateUuidV4();
+		$review = new Review($reviewId, $_SESSION["profile"]->getProfileId(),$requestObject->reviewRecAreaId, $requestObject->reviewContent, $requestObject->reviewDateTime, $requestObject->reviewRating);
+		$review->insert($pdo);
+		$reply->message = "review posted successfully";
+
+		// if any other HTTP request is sent throw an exception
+	} else {
+		throw new \InvalidArgumentException("invalid http request", 400);
+	}
+	//catch any exceptions that is thrown and update the reply status and message
+} catch(\Exception | \TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
+}
+header("Content-type: application/json");
+if($reply->data === null) {
+	unset($reply->data);
+}
+// encode and return reply to front end caller
+echo json_encode($reply);
