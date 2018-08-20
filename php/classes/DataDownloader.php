@@ -3,6 +3,7 @@
 
 namespace HalfMortise\NmOutdoors;
 require_once("autoload.php");
+require_once(dirname (__DIR__, 1) . "/lib/uuid.php");
 require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
@@ -66,13 +67,13 @@ class DataDownloader {
        **/
       $features = null;
       try {
-         DataDownloader::getMetaData($recAreaUrl, "rec area");
+//         DataDownloader::getMetaData($recAreaUrl, "rec area");
          $features = DataDownloader::readDataJson($recAreaUrl);
-         $recAreaETag = DataDownloader::getMetaData($recAreaUrl, "rec area");
+//         $recAreaETag = DataDownloader::getMetaData($recAreaUrl, "rec area");
          $config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
-         $eTags = json_decode($config["etags"]);
-         $eTags->recArea = $recAreaETag;
-         $config["etags"] = json_encode($eTags);
+//         $eTags = json_decode($config["etags"]);
+//         $eTags->recArea = $recAreaETag;
+//         $config["etags"] = json_encode($eTags);
 //			writeConfig($config, "/etc/apache2/capstone-mysql/nmoutdoors.ini");
       } catch(\OutOfBoundsException $outOfBoundsException) {
          echo("no new rec area data found");
@@ -81,10 +82,12 @@ class DataDownloader {
    }
    /**
     *assigns data from object->features->attributes
+    * @param $features
     **/
    public static function getRecAreaData(\SplFixedArray $features) {
       $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
       foreach($features as $feature) {
+         var_dump($feature);
          $recAreaId = generateUuidV4();
          $recAreaDescription = $feature->attributes->DESCRIPTION;
          $recAreaDirections = $feature->attributes->DIRECTIONS;
@@ -135,5 +138,5 @@ try {
    $features = DataDownloader::compareRecAreaAndDownload();
    DataDownloader::getRecAreaData($features);
 } catch(\Exception $exception) {
-   echo $exception->getMessage() . PHP_EOL;
+   echo $exception->getTraceAsString() . PHP_EOL;
 }
