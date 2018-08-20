@@ -37,7 +37,11 @@ try {
 	// sanitize input
 	$recAreaId = filter_input(INPUT_GET, "recAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$recAreaName = filter_input(INPUT_GET, "recAreaName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	//$profileEmail = filter_input(INPUT_GET, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$recAreaLat = filter_input(INPUT_GET, "recAreaLat", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$recAreaLong = filter_input(INPUT_GET, "recAreaLong", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$userLat = filter_input(INPUT_GET, "userLat", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$userLong = filter_input(INPUT_GET, "userLong", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$distance = filter_input(INPUT_GET, "distance", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 
 	// make sure the id is valid for methods that require it
@@ -57,7 +61,7 @@ try {
 			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName);
 
 			//get rec area by distance
-		} else if(empty($recAreaLat || $recAreaLong || $userLat || $userLong || $distance) === false) {
+		} else if(empty($recAreaLat|| $recAreaLong|| $userLat|| $userLong || $distance === false)) {
 			$reply->data = RecArea::getRecAreaByDistance($pdo, $recAreaLat, $recAreaLong, $userLat, $userLong, $distance);
 			//return all rec areas in the database
 		} else if(empty($pdo) === false) {
