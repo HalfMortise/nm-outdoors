@@ -36,9 +36,14 @@ try {
 		$requestContent = file_get_contents("php://input");
 		$requestObject = json_decode($requestContent);
 
-		//check to make sure the password and email field is not empty
+		//check to make sure the password and email field is not empty.s
 		if(empty($requestObject->profileEmail) === true) {
-			throw(new \InvalidArgumentException("Must Enter Password", 401));
+			throw(new \InvalidArgumentException("Wrong email address.", 401));
+		} else {
+			$profileEmail = filter_var($requestObject->profileEmail, FILTER_SANITIZE_EMAIL);
+		}
+		if(empty($requestObject->profilePassword) === true) {
+			throw(new \InvalidArgumentException("Must enter a password.", 401));
 		} else {
 			$profilePassword = $requestObject->profilePassword;
 		}
@@ -48,8 +53,7 @@ try {
 		if(empty($profile) === true) {
 			throw(new \InvalidArgumentException("Profile does not exist", 401));
 		}
-		$profile->setProfileActivationToken(null);
-		$profile->update($pdo);
+
 
 		//if the profile activation is not null throw an error
 		if($profile->getProfileActivationToken() !== null) {
