@@ -52,31 +52,36 @@ try {
 		//gets rec area by Id
 		if(empty($recAreaId) === false) {
 			$reply->data = RecArea::getRecAreaByRecAreaId($pdo, $recAreaId);
-		//get rec area by name
+			//get rec area by name
 		} else if(empty($recAreaName) === false) {
 			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName);
 
-        //get rec area by distance
-		} else if(empty($recAreaLat|| $recAreaLong||$userLat ||$userLong ||$distance) === false) {
-			$reply->data = RecArea::getRecAreaByDistance($pdo,$recAreaLat, $recAreaLong, $userLat, $userLong, $distance);
-        //return all rec areas in the database
+			//get rec area by distance
+		} else if(empty($recAreaLat || $recAreaLong || $userLat || $userLong || $distance) === false) {
+			$reply->data = RecArea::getRecAreaByDistance($pdo, $recAreaLat, $recAreaLong, $userLat, $userLong, $distance);
+			//return all rec areas in the database
 		} else if(empty($pdo) === false) {
 			$reply->data = RecArea::getAllRecAreas($pdo);
 
-		} else {
-			throw (new InvalidArgumentException("Invalid HTTP request", 400));
-
-			// catch any exceptions that were thrown and update the status and message state variable fields
-
-	} catch
-		(\Exception \TypeError $exception) {
-			$reply->status = $exception->getCode();
-			$reply->message = $exception->getMessage();
 		}
+	} else {
+		throw (new InvalidArgumentException("Invalid HTTP request", 400));
+	}
+	// catch any exceptions that were thrown and update the status and message state variable fields
+
+
+} catch
+			(\Exception \TypeError $exception) {
+				$reply->status = $exception->getCode();
+				$reply->message = $exception->getMessage();
+			}
+
 header("Content-type: application/json");
 if($reply->data === null) {
 	unset($reply->data);
 }
 // encode and return reply to front end caller
 echo json_encode($reply);
+
+
 
