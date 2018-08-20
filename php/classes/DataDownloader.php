@@ -83,6 +83,7 @@ class DataDownloader {
    /**
     *assigns data from object->features->attributes
     * @param $features
+    * @throw \TypeError RecArea
     **/
    public static function getRecAreaData(\SplFixedArray $features) {
       $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
@@ -103,6 +104,7 @@ class DataDownloader {
          catch (\TypeError $typeError) {
             echo ("input a message here");
          }}
+
    }
    /**
     *
@@ -126,9 +128,10 @@ class DataDownloader {
          }
          //decode the Json file
          $jsonConverted = json_decode($jsonData);
-//         var_dump($jsonConverted); (print this to view what's being pulled from RIDB)
+         //container for rec areas
+         $jsonConverted = $jsonConverted->RECDATA;
          //format
-         $jsonFeatures = $jsonConverted->features;
+         $jsonFeatures = $jsonConverted;
          //create array from the converted Json file
          $features = \SplFixedArray::fromArray($jsonFeatures);
       } catch(\Exception $exception) {
