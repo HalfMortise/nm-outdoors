@@ -18,7 +18,7 @@ use HalfMortise\NmOutdoors\{
 
 //verify the session, stRecArea if not active
 if(session_status() !==PHP_SESSION_ACTIVE) {
-	session_stRecArea();
+	session_start();
 }
 
 //prepare an empty reply

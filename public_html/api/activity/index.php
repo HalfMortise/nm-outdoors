@@ -10,3 +10,9 @@ use HalfMortise\NmOutdoors\{
 	Activity
 };
 
+/**
+ * API for the Review Class
+ *
+ * @author Ryo Lambert <ryolambert@gmail.com>
+ **/
+
