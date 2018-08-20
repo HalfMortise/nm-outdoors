@@ -29,7 +29,7 @@ $reply->data = null;
 
 try {
 	//grab the mySQL connection
-	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutddors.ini");
+	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 
 	//determine which HTTP method was used
 	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
@@ -58,7 +58,7 @@ try {
 
         //get rec area by distance
 		} else if(empty($recAreaLat|| $recAreaLong||$userLat ||$userLong ||$distance) === false) {
-			$reply->data = RecArea::getRecAreaByDistance($pdp,$recAreaLat, $recAreaLong, $userLat, $userLong, $distance);
+			$reply->data = RecArea::getRecAreaByDistance($pdo,$recAreaLat, $recAreaLong, $userLat, $userLong, $distance);
         //return all rec areas in the database
 		} else if(empty($pdo) === false) {
 			$reply->data = RecArea::getAllRecAreas($pdo);
