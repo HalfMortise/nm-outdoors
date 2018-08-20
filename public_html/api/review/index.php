@@ -39,7 +39,7 @@ try{
 	$reviewProfileId = $id = filter_input(INPUT_GET, "reviewProfileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$reviewRecAreaId = $id = filter_input(INPUT_GET, "reviewRecAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	
-	// handle GET request - if id is present, that tweet is returned, otherwise all tweets are returned
+	// handle GET request - if id is present, that review is returned, otherwise all reviews are returned
 	if($method === "GET") {
 
 		//set XSRF cookie
@@ -64,51 +64,110 @@ try{
 				$reply->data = $review;
 			}
 		} else {
-			throw new InvalidArgumentException("incorrect search parameters ", 404);
+			throw new InvalidArgumentException("Incorrect search parameters ", 404);
 		}
+	} else if ($method === "PUT" || $method === "POST") {
+		// enforce the user has a XSRF token
+		verifyXsrf();
+		
+		// enforce the user is signed in
+		if (empty($_SESSION["profile"]) === true) {
+			throw (new \InvalidArgumentException("You must be logged in to post reviews", 401));
+		}
+		
+		$requestContent = file_get_contents("php://input");
+		// Retrieves the JSON package that the front end sent, and stores it in $requestContent. Here we are using file_get_contents("php://input") to get the request from the front end. file_get_contents() is a PHP function that reads a file into a string. The argument for the function, here, is "php://input". This is a read only stream that allows raw data to be read from the front end request which is, in this case, a JSON package.
+		$requestObject = json_decode($requestContent);
+
+		// This Line Then decodes the JSON package and stores that result in $requestObject
+		//make sure review content is available (required field)
+		if (empty($requestObject->reviewContent) === true) {
+			throw (new \InvalidArgumentException("No content for review.", 405));
+		}
+		
+		// make sure review date is accurate (optional field)
+		if (empty($requestObject->reviewDate) === true) {
+			$requestObject->reviewDate = null;
+		}
+			//perform the actual put or post
+	if ($method === "PUT") {
+
+			// retrieve the review to update
+		$review = Review::getReviewByReviewId($pdo, $id);
+		if ($review === null) {
+			throw (new RuntimeException("Review does not exist", 404));
+		}
+
+			//enforce the user is signed in and only trying to edit their own review
+		if (empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $review->getReviewProfileId()->toString()) {
+			throw (new \InvalidArgumentException("You are not allowed to edit this review", 403));
+		}
+
+		// //enforce the end user has a JWT token
+		// validateJwtHeader();
+	
+			// update all attributes
+			//$review->setReviewDate($requestObject->reviewDate);
+		$review->setReviewContent($requestObject->reviewContent);
+		$review->update($pdo);
+			// update reply
+		$reply->message = "Review updated OK";
+	
 		/**
 		 * Post for review
 		 **/
 	} else if($method === "POST") {
-		//enforce that the end user has a XSRF token.
-		verifyXsrf();
-		//enforce the end user has a JWT token
-		validateJwtHeader();
-
-		//decode the response from the front end
-		$requestContent = file_get_contents("php://input");
-		$requestObject = json_decode($requestContent);
-		if(empty($requestObject->reviewProfileId) === true) {
-			throw (new \InvalidArgumentException("no profile linked to the review", 405));
-		}
-		if(empty($requestObject->reviewRecAreaId) === true) {
-			throw (new \InvalidArgumentException("no recreational area linked to the review", 405));
-		}
-		if(empty($requestObject->reviewDateTime) === true) {
-//			$requestObject->reviewDateTime = date("y-m-d H:i:s");
-		}
 
 		// enforce the user is signed in
 		if(empty($_SESSION["profile"]) === true) {
-			throw(new \InvalidArgumentException("you must be logged in to review on recreational area", 403));
+			throw(new \InvalidArgumentException("You must be logged in to review a recreational area", 403));
 		}
+
+		// //enforce the end user has a JWT token
+		// validateJwtHeader();
+
+
+		// create new review and insert into the database
 		$reviewId = generateUuidV4();
 		$review = new Review($reviewId, $_SESSION["profile"]->getProfileId(),$requestObject->reviewRecAreaId, $requestObject->reviewContent, $requestObject->reviewDateTime, $requestObject->reviewRating);
 		$review->insert($pdo);
-		$reply->message = "review posted successfully";
 
-		// if any other HTTP request is sent throw an exception
+		// update reply
+		$reply->message = "Review posted successfully";
+	}
+	// if any other HTTP request is sent throw an exception
+	} else if ($method === "DELETE") {
+
+		//enforce that the end user has a XSRF token.
+		verifyXsrf();
+
+
+		// retrieve the review to be deleted
+		$review = Review::getReviewByReviewId($pdo, $id);
+		if ($review === null) {
+			throw (new RuntimeException("Review does not exist", 404));
+		}
+
+		//enforce the user is signed in and only trying to edit their own review
+		if (empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $review->getReviewProfileId()->toString()) {
+			throw (new \InvalidArgumentException("You are not allowed to delete this review", 403));
+		}
+
+		// //enforce the end user has a JWT token
+		// validateJwtHeader();
+
+		// delete review
+		$review->delete($pdo);
+		// update reply
+		$reply->message = "Review deleted OK";
 	} else {
 		throw new \InvalidArgumentException("invalid http request", 400);
 	}
-	//catch any exceptions that is thrown and update the reply status and message
+// update the $reply->status $reply->message
 } catch(\Exception | \TypeError $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 }
-header("Content-type: application/json");
-if($reply->data === null) {
-	unset($reply->data);
-}
+
 // encode and return reply to front end caller
 echo json_encode($reply);
