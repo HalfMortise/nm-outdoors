@@ -9,6 +9,7 @@ require_once ("/etc/apache2/capstone-mysql/encrypted-config.php");
  * api for signing out
  *
  * @author Gkephart
+ * @author Sheckendorn
  * @version 1.0
  **/
 
