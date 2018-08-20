@@ -62,3 +62,25 @@ try{
 		} else {
 			throw new InvalidArgumentException("incorrect search parameters ", 404);
 		}
+		/**
+		 * Post for review
+		 **/
+	} else if($method === "POST") {
+		//enforce that the end user has a XSRF token.
+		verifyXsrf();
+		//enforce the end user has a JWT token
+		validateJwtHeader();
+
+		//decode the response from the front end
+		$requestContent = file_get_contents("php://input");
+		$requestObject = json_decode($requestContent);
+		if(empty($requestObject->reviewProfileId) === true) {
+			throw (new \InvalidArgumentException("no profile linked to the review", 405));
+		}
+		if(empty($requestObject->reviewRecAreaId) === true) {
+			throw (new \InvalidArgumentException("no recreational area linked to the review", 405));
+		}
+		if(empty($requestObject->reviewDateTime) === true) {
+//			$requestObject->reviewDateTime = date("y-m-d H:i:s");
+		}
+
