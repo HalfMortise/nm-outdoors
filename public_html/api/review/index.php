@@ -38,4 +38,18 @@ try{
 	$reviewRecAreaId = $id = filter_input(INPUT_GET, "reviewRecAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	if($method === "GET") {
 
+		//set XSRF cookie
+		setXsrfCookie();
 
+		//gets a specific review based on its reviewId
+		if(empty($id) === false) {
+			$review = Review::getReviewByReviewId($pdo, $id);
+			if($review !== null) {
+				$reply->data = $review;
+			}
+			//get all the reviews associated with a profileId
+		} else if(empty($reviewProfileId) === false) {
+			$review = Review::getReviewByReviewProfileId($pdo, $reviewProfileId)->toArray();
+			if($review !== null) {
+				$reply->data = $review;
+			}
