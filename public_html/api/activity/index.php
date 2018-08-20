@@ -47,8 +47,9 @@ try{
 			if($activity !== null) {
 				$reply->data = $activity;
 			}
-
-
-
+		} else {
+			throw new InvalidArgumentException("incorrect search parameters ", 404);
 		}
+		}
+}
 }
