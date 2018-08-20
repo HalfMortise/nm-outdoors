@@ -16,9 +16,9 @@ use HalfMortise\NmOutdoors\{
  * @author Ryo Lambert <ryolambert@gmail.com>
  **/
 
-//verify the session, start if not active
+//verify the session, stRecArea if not active
 if(session_status() !==PHP_SESSION_ACTIVE) {
-	session_start();
+	session_stRecArea();
 }
 
 //prepare an empty reply
@@ -34,5 +34,8 @@ try{
 
 	//sanitize the search parameters
 	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
-	$commentProfileId = $id = filter_input(INPUT_GET, "commentProfileId", FILTER_SANITIZE_STRING)
-}
+	$reviewProfileId = $id = filter_input(INPUT_GET, "reviewProfileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$reviewRecAreaId = $id = filter_input(INPUT_GET, "reviewRecAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	if($method === "GET") {
+
+
