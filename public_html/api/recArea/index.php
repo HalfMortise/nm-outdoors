@@ -37,11 +37,11 @@ try {
 	// sanitize input
 	$recAreaId = filter_input(INPUT_GET, "recAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$recAreaName = filter_input(INPUT_GET, "recAreaName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$recAreaLat = filter_input(INPUT_GET, "recAreaLat", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$recAreaLat = filter_input(INPUT_GET, "recAreaLat", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$recAreaLong = filter_input(INPUT_GET, "recAreaLong", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userLat = filter_input(INPUT_GET, "userLat", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userLong = filter_input(INPUT_GET, "userLong", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	$distance = filter_input(INPUT_GET, "distance", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$distance = filter_input(INPUT_GET, "distance", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 
 	// make sure the id is valid for methods that require it
