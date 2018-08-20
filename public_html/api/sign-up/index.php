@@ -11,7 +11,7 @@ use HalfMortise\NmOutdoors\Profile;
 /**
  * api for signing up for NM-Outdoors
  *
- * @author Ryo Lambert <ryolambert@gmail.com>
+ * @author ryolambert <https://github.com/ryolambert>
  * @author Gkephart <GKephart@cnm.edu>
  **/
 

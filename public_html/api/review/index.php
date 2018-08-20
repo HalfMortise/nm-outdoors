@@ -15,7 +15,7 @@ use HalfMortise\NmOutdoors\{
 /**
  * API for the Review Class
  *
- * @author Ryo Lambert <ryolambert@gmail.com>
+ * @author ryolambert <https://github.com/ryolambert>
  **/
 
 //verify the session, start if not active
