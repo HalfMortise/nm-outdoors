@@ -7,7 +7,7 @@ require_once dirname(__DIR__, 3) . "/php/lib/jwt.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
 
 use HalfMortise\NmOutdoors\{
-	Review, Profile, RecArea
+	Review
 };
 
 /**
