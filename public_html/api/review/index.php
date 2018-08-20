@@ -16,7 +16,7 @@ use HalfMortise\NmOutdoors\{
  * @author Ryo Lambert <ryolambert@gmail.com>
  **/
 
-//verify the session, stRecArea if not active
+//verify the session, start if not active
 if(session_status() !==PHP_SESSION_ACTIVE) {
 	session_start();
 }
@@ -86,7 +86,7 @@ try{
 
 		// enforce the user is signed in
 		if(empty($_SESSION["profile"]) === true) {
-			throw(new \InvalidArgumentException("you must be logged in to review on RecArea", 403));
+			throw(new \InvalidArgumentException("you must be logged in to review on recreational area", 403));
 		}
 		$reviewId = generateUuidV4();
 		$review = new Review($reviewId, $_SESSION["profile"]->getProfileId(),$requestObject->reviewRecAreaId, $requestObject->reviewContent, $requestObject->reviewDateTime, $requestObject->reviewRating);
