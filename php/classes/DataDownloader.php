@@ -61,7 +61,7 @@ class DataDownloader {
       }
    }
    public static function compareRecAreaAndDownload() {
-      $recAreaUrl = "http://coagisweb.cabq.gov/arcgis/rest/services/public/PublicArt/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=*&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=4326&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=pjson";
+      $recAreaUrl = "";
       /**
        *run getMetaData and catch exception if the data hasn't changed
        **/
@@ -115,8 +115,10 @@ class DataDownloader {
     *
     **/
    public function readDataJson($url) {
+      $config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
+      $recDotGov = json_decode($config["recDotGov"]);
       // http://php.net/manual/en/function.stream-context-create.php creates a stream for file input
-      $context = stream_context_create(["http" => ["ignore_errors" => true, "method" => "GET"]]);
+      $context = stream_context_create(["http" => ["ignore_errors" => true, "method" => "GET", "header" => "apikey:$recDotGov->apiKey"]]);
       try {
          // http://php.net/manual/en/function.file-get-contents.php file-get-contents returns file in string context
          if(($jsonData = file_get_contents($url, null, $context)) === false) {
