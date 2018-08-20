@@ -11,7 +11,7 @@ use HalfMortise\NmOutdoors\{
 };
 
 /**
- * API for the Review Class
+ * API for the activity Class
  *
  * @author Ryo Lambert <ryolambert@gmail.com>
  **/
@@ -34,9 +34,21 @@ try{
 
 	//sanitize the search parameters
 	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
-	$activityId = $id = filter_input(INPUT_GET, "reviewProfileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$activityId = $id = filter_input(INPUT_GET, "activityId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+	if($method === "GET") {
+
+		//set XSRF cookie
+		setXsrfCookie();
+
+		//gets a specific activity based on its activityId
+		if(empty($id) === false) {
+			$activity = Activity::getActivityByActivityId($pdo, $id);
+			if($activity !== null) {
+				$reply->data = $activity;
+			}
 
 
 
-
+		}
 }

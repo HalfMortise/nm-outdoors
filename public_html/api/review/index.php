@@ -36,6 +36,7 @@ try{
 	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 	$reviewProfileId = $id = filter_input(INPUT_GET, "reviewProfileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$reviewRecAreaId = $id = filter_input(INPUT_GET, "reviewRecAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	
 	if($method === "GET") {
 
 		//set XSRF cookie
