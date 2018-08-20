@@ -126,6 +126,7 @@ class DataDownloader {
          }
          //decode the Json file
          $jsonConverted = json_decode($jsonData);
+//         var_dump($jsonConverted); (print this to view what's being pulled from RIDB)
          //format
          $jsonFeatures = $jsonConverted->features;
          //create array from the converted Json file
