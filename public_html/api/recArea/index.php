@@ -61,7 +61,7 @@ try {
 			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName);
 
 			//get rec area by distance
-		} else if(empty($recAreaLat|| $recAreaLong|| $userLat|| $userLong || $distance === false)) {
+		} else if(empty($recAreaLat|| $recAreaLong|| $userLat|| $userLong || $distance)|| $distance === false) {
 			$reply->data = RecArea::getRecAreaByDistance($pdo, $recAreaLat, $recAreaLong, $userLat, $userLong,$distance);
 			//return all rec areas in the database
 		} else if(empty($pdo) === false) {
