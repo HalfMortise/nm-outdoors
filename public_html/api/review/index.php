@@ -53,3 +53,12 @@ try{
 			if($review !== null) {
 				$reply->data = $review;
 			}
+			//get all the reviews associated with the RecAreaId
+		} else if(empty($reviewRecAreaId) === false) {
+			$review = Review::getReviewByReviewRecAreaId($pdo, $reviewRecAreaId)->toArray();
+			if($review !== null) {
+				$reply->data = $review;
+			}
+		} else {
+			throw new InvalidArgumentException("incorrect search parameters ", 404);
+		}
