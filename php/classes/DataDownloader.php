@@ -52,7 +52,7 @@ class DataDownloader {
       $recArea->insert($this->pdo);
       foreach($apiRecArea->ACTIVITY as $apiActivity) {
       	$currActivity = array_filter($this->activities, function ($mySqlActivity) use ($apiActivity){
-      		return $mySqlActivity->getActivityName() === $apiActivity->recAreaActivityDescription;
+      		return $mySqlActivity->getActivityName() === $apiActivity->RecAreaActivityDescription;
 			});
       	$currActivity = array_shift($currActivity);
       	if ($currActivity !== null){
