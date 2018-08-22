@@ -47,7 +47,8 @@ class DataDownloader {
 
 
    public function getOneRecArea(\stdClass $apiRecArea) : RecArea {
-      $recArea = new RecArea(generateUuidV4());
+      $recArea = new RecArea(generateUuidV4(), $apiRecArea->RecAreaDescription, $apiRecArea->RecAreaDirections, $apiRecArea->RecAreaLatitude, $apiRecArea->RecAreaLongitude, $apiRecArea->RecAreaMapURL, $apiRecArea->RecAreaName);
+      $recArea->insert($this->pdo);
    }
 
 
