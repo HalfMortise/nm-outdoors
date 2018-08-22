@@ -35,6 +35,7 @@ class DataDownloader {
 
 
 
+
    /**
     * Gets the eTag from a file url
     *
@@ -46,7 +47,7 @@ class DataDownloader {
 //TODO: use guzzle??? instead of getMetaData function
 
 
-   public function getOneRecArea(\stdClass $apiRecArea) : RecArea {
+   public function getRecAreaAndActivities(\stdClass $apiRecArea) : void {
       $recArea = new RecArea(generateUuidV4(), $apiRecArea->RecAreaDescription, $apiRecArea->RecAreaDirections, $apiRecArea->RecAreaLatitude, $apiRecArea->RecAreaLongitude, $apiRecArea->RecAreaMapURL, $apiRecArea->RecAreaName);
       $recArea->insert($this->pdo);
    }
