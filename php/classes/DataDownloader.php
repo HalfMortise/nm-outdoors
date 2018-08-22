@@ -7,6 +7,9 @@ require_once(dirname (__DIR__, 1) . "/lib/uuid.php");
 require_once(dirname(__DIR__, 2) . "/vendor/autoload.php");
 require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
 
+use GuzzleHttp\Client;
+
+
 /**
  * This class will download data from  RIDB.Recreation.Gov.
  *
@@ -15,6 +18,21 @@ require_once("/etc/apache2/capstone-mysql/encrypted-config.php");
  *
  **/
 class DataDownloader {
+   /**
+    * @var GuzzleHttp\Client
+    */
+   private $guzzle;
+
+   /**
+    * @var \PDO $pdo
+    */
+   private $pdo;
+
+   public function __construct() {
+      $this->guzzle = new GuzzleHttp\Client();
+      $this->pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
+   }
+
 
 
    /**
@@ -50,7 +68,7 @@ class DataDownloader {
    /**
     *assigns data from object->features->attributes
     * @param $recData
-    * @throw \TypeError RecArea
+    * @throws \TypeError RecArea
     **/
    public static function getRecAreaData(\SplFixedArray $recData) {
       $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
