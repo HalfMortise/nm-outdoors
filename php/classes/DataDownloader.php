@@ -24,51 +24,18 @@ class DataDownloader {
     * @return string $eTag to be compared to previous eTag to determine last download
     * @throws \RuntimeException if stream cant be opened.
     **/
-   public static function getMetaData(string $url, string $eTag) {
-      if($eTag !== "rec area") {
-         throw(new \RuntimeException("not a valid etag", 400));
-      }
-      $options = [];
-      $options['http'] = [];
-//TODO: come back to this section
-      $options["http"]["method"] = "HEAD";
-      $context = stream_context_create($options);
-      $fd = fopen($url, "rb", false, $context);
-      $metaData = stream_get_meta_data($fd);
-      if($fd === false) {
-         throw(new \RuntimeException("unable to open HTTP stream"));
-      }
-      fclose($fd);
-      $header = $metaData["wrapper_data"];
-      $eTag = null;
-      foreach($header as $value) {
-         $explodeETag = explode(":", $value);
-         $findETag = array_search("ETag", $explodeETag);
-         if($findETag !== false) {
-            $eTag = $explodeETag[1];
-         }
-      }
-      if($eTag === null) {
-         throw(new \RuntimeException("etag cannot be found", 404));
-      }
-      $config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
-      $eTags = json_decode($config["etags"]);
-      $previousETag = $eTags->recArea;
-      if($previousETag < $eTag) {
-         return ($eTag);
-      } else {
-         throw(new \OutOfBoundsException("input a message here", 401));
-      }
-   }
+
+//TODO: use guzzle??? instead of getMetaData function
+
    public static function compareRecAreaAndDownload() {
       $recAreaUrl = "https://ridb.recreation.gov/api/v1/recareas?state=NM";
       /**
        *run getMetaData and catch exception if the data hasn't changed
        **/
-      $features = null;
+      $recData = null;
       try {
 //         DataDownloader::getMetaData($recAreaUrl, "rec area");
-         $features = DataDownloader::readDataJson($recAreaUrl);
+         $recData = DataDownloader::readDataJson($recAreaUrl);
 //         $recAreaETag = DataDownloader::getMetaData($recAreaUrl, "rec area");
          $config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 //         $eTags = json_decode($config["etags"]);
@@ -78,17 +45,17 @@ class DataDownloader {
       } catch(\OutOfBoundsException $outOfBoundsException) {
          echo("no new rec area data found");
       }
-      return ($features);
+      return ($recData);
    }
    /**
     *assigns data from object->features->attributes
-    * @param $features
+    * @param $recData
     * @throw \TypeError RecArea
     **/
-   public static function getRecAreaData(\SplFixedArray $features) {
+   public static function getRecAreaData(\SplFixedArray $recData) {
       $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
-      foreach($features as $feature) {
-         var_dump($feature);
+      foreach($recData as $feature) {
+//         var_dump($feature);
          $recAreaId = generateUuidV4();
          $recAreaDescription = $feature->attributes->DESCRIPTION;
          $recAreaDirections = $feature->attributes->DIRECTIONS;
@@ -133,16 +100,16 @@ class DataDownloader {
          //format
          $jsonFeatures = $jsonConverted;
          //create array from the converted Json file
-         $features = \SplFixedArray::fromArray($jsonFeatures);
+         $recData = \SplFixedArray::fromArray($jsonFeatures);
       } catch(\Exception $exception) {
          throw(new \PDOException($exception->getMessage(), 0, $exception));
       }
-      return ($features);
+      return ($recData);
    }
 }
 try {
-   $features = DataDownloader::compareRecAreaAndDownload();
-   DataDownloader::getRecAreaData($features);
+   $recData = DataDownloader::compareRecAreaAndDownload();
+   DataDownloader::getRecAreaData($recData);
 } catch(\Exception $exception) {
    echo $exception->getTraceAsString() . PHP_EOL;
 }
