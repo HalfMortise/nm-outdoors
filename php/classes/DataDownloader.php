@@ -58,10 +58,16 @@ class DataDownloader {
 		}
    }
 
+   public function processJson() : void {
+   	$reply = $this->guzzle->get("recareas.json", ["query" => ["full" => "true", "state" => "NM"]]);
+   	$apiReply = json_decode($reply->getBody());
+   	var_dump($apiReply);
+	}
+
 }
 try {
-   $recData = DataDownloader::compareRecAreaAndDownload();
-   DataDownloader::getRecAreaData($recData);
+	$downloader = new DataDownloader();
+	$downloader->processJson();
 } catch(\Exception $exception) {
    echo $exception->getTraceAsString() . PHP_EOL;
 }
