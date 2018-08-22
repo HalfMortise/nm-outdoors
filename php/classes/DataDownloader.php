@@ -18,6 +18,10 @@ use GuzzleHttp\Client;
  *
  **/
 class DataDownloader {
+	/*
+	 * @var \SplFixedArray
+	 */
+	private $activities;
    /**
     * @var Client
     */
@@ -31,8 +35,8 @@ class DataDownloader {
    public function __construct() {
       $this->guzzle = new Client();
       $this->pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
+      $this->activities = Activity::getAllActivities($this->pdo);
    }
-
 
 
 
@@ -50,18 +54,17 @@ class DataDownloader {
    public function getRecAreaAndActivities(\stdClass $apiRecArea) : void {
       $recArea = new RecArea(generateUuidV4(), $apiRecArea->RecAreaDescription, $apiRecArea->RecAreaDirections, $apiRecArea->RecAreaLatitude, $apiRecArea->RecAreaLongitude, $apiRecArea->RecAreaMapURL, $apiRecArea->RecAreaName);
       $recArea->insert($this->pdo);
+      foreach($apiRecArea->ACTIVITY as $apiActivity) {
+      	$currActivity = array_filter($this->activities, function ($mySqlActivity) use ($apiActivity){
+      		return $mySqlActivity->getActivityName() === $apiActivity->recAreaActivityDescription;
+			});
+      	$currActivity = array_shift($currActivity);
+      	if ($currActivity !== null){
+      		$activityType = new ActivityType($currActivity->getActivityId(), $recArea->getRecAreaId());
+      		$activityType->insert($this->pdo);
+			}
+		}
    }
-
-
-
-
-
-
-
-
-
-
-
 
 
    public static function compareRecAreaAndDownload() {
