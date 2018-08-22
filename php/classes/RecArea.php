@@ -167,6 +167,10 @@ class RecArea implements \JsonSerializable {
 	 * @param string $recAreaDirections
 	 **/
 	public function setRecAreaDirections(string $recAreaDirections): void {
+		$recAreaDirections = filter_var($recAreaDirections, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+		if(empty($recAreaDirections) === true) {
+			$recAreaDirections = null;
+		}
 		$this->recAreaDirections = $recAreaDirections;
 	}
 
@@ -253,6 +257,10 @@ class RecArea implements \JsonSerializable {
 	 * @param mixed $recAreaMapUrl
 	 */
 	public function setRecAreaMapUrl(string $recAreaMapUrl): void {
+		$recAreaMapUrl = filter_var($recAreaMapUrl, FILTER_SANITIZE_URL);
+		if(empty($recAreaMapUrl) === true) {
+			$recAreaMapUrl = null;
+		}
 		if(strlen($recAreaMapUrl) > 255) {
 			throw(new\RangeException("Map Url can't be longer than 255 characters"));
 		}
