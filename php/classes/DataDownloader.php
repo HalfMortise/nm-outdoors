@@ -19,7 +19,7 @@ use GuzzleHttp\Client;
  **/
 class DataDownloader {
 	/*
-	 * @var \SplFixedArray
+	 * @var array
 	 */
 	private $activities;
    /**
@@ -36,7 +36,7 @@ class DataDownloader {
 		$config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
       $this->guzzle = new Client(["base_uri" => "https://ridb.recreation.gov/api/v1/", "headers" => ["apikey" => $config["recgov"]]]);
       $this->pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
-      $this->activities = Activity::getAllActivities($this->pdo);
+      $this->activities = Activity::getAllActivities($this->pdo)->toArray();
    }
 
 
@@ -44,7 +44,11 @@ class DataDownloader {
 
 
    public function getRecAreaAndActivities(\stdClass $apiRecArea) : void {
-      $recArea = new RecArea(generateUuidV4(), $apiRecArea->RecAreaDescription, $apiRecArea->RecAreaDirections, $apiRecArea->RecAreaLatitude, $apiRecArea->RecAreaLongitude, $apiRecArea->RecAreaMapURL, $apiRecArea->RecAreaName);
+   	$imageUrl = "https://bootcamp-coders.cnm.edu/~sheckendorn/nm-outdoors/public_html/images/facepalm.jpg";
+   	if (count($apiRecArea->MEDIA) > 0) {
+   		$imageUrl = $apiRecArea->MEDIA[0]->URL;
+		}
+      $recArea = new RecArea(generateUuidV4(), $apiRecArea->RecAreaDescription, $apiRecArea->RecAreaDirections, $imageUrl, $apiRecArea->RecAreaLatitude, $apiRecArea->RecAreaLongitude, $apiRecArea->RecAreaMapURL, $apiRecArea->RecAreaName);
       $recArea->insert($this->pdo);
       foreach($apiRecArea->ACTIVITY as $apiActivity) {
       	$currActivity = array_filter($this->activities, function ($mySqlActivity) use ($apiActivity){
@@ -61,7 +65,9 @@ class DataDownloader {
    public function processJson() : void {
    	$reply = $this->guzzle->get("recareas.json", ["query" => ["full" => "true", "state" => "NM"]]);
    	$apiReply = json_decode($reply->getBody());
-   	var_dump($apiReply);
+   	foreach($apiReply->RECDATA as $apiRecArea) {
+   		$this->getRecAreaAndActivities($apiRecArea);
+		}
 	}
 
 }
