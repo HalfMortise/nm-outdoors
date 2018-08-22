@@ -33,20 +33,12 @@ class DataDownloader {
    private $pdo;
 
    public function __construct() {
-      $this->guzzle = new Client();
+		$config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
+      $this->guzzle = new Client(["base_uri" => "https://ridb.recreation.gov/api/v1/", "headers" => ["apikey" => $config["recgov"]]]);
       $this->pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
       $this->activities = Activity::getAllActivities($this->pdo);
    }
 
-
-
-   /**
-    * Gets the eTag from a file url
-    *
-    * @param string $url to grab from
-    * @return string $eTag to be compared to previous eTag to determine last download
-    * @throws \RuntimeException if stream cant be opened.
-    **/
 
 //TODO: use guzzle??? instead of getMetaData function
 
@@ -66,27 +58,6 @@ class DataDownloader {
 		}
    }
 
-
-   public static function compareRecAreaAndDownload() {
-      $recAreaUrl = "https://ridb.recreation.gov/api/v1/recareas?state=NM";
-      /**
-       *run getMetaData and catch exception if the data hasn't changed
-       **/
-      $recData = null;
-      try {
-//         DataDownloader::getMetaData($recAreaUrl, "rec area");
-         $recData = DataDownloader::readDataJson($recAreaUrl);
-//         $recAreaETag = DataDownloader::getMetaData($recAreaUrl, "rec area");
-         $config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
-//         $eTags = json_decode($config["etags"]);
-//         $eTags->recArea = $recAreaETag;
-//         $config["etags"] = json_encode($eTags);
-//			writeConfig($config, "/etc/apache2/capstone-mysql/nmoutdoors.ini");
-      } catch(\OutOfBoundsException $outOfBoundsException) {
-         echo("no new rec area data found");
-      }
-      return ($recData);
-   }
 
    /**
     *
