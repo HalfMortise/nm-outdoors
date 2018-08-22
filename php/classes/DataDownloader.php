@@ -19,7 +19,7 @@ use GuzzleHttp\Client;
  **/
 class DataDownloader {
    /**
-    * @var GuzzleHttp\Client
+    * @var Client
     */
    private $guzzle;
 
@@ -29,7 +29,7 @@ class DataDownloader {
    private $pdo;
 
    public function __construct() {
-      $this->guzzle = new GuzzleHttp\Client();
+      $this->guzzle = new Client();
       $this->pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
    }
 
@@ -44,6 +44,23 @@ class DataDownloader {
     **/
 
 //TODO: use guzzle??? instead of getMetaData function
+
+
+   public function getOneRecArea(\stdClass $apiRecArea) : RecArea {
+      $recArea = new RecArea(generateUuidV4());
+   }
+
+
+
+
+
+
+
+
+
+
+
+
 
    public static function compareRecAreaAndDownload() {
       $recAreaUrl = "https://ridb.recreation.gov/api/v1/recareas?state=NM";
@@ -65,32 +82,7 @@ class DataDownloader {
       }
       return ($recData);
    }
-   /**
-    *assigns data from object->features->attributes
-    * @param $recData
-    * @throws \TypeError RecArea
-    **/
-   public static function getRecAreaData(\SplFixedArray $recData) {
-      $pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
-      foreach($recData as $feature) {
-//         var_dump($feature);
-         $recAreaId = generateUuidV4();
-         $recAreaDescription = $feature->attributes->DESCRIPTION;
-         $recAreaDirections = $feature->attributes->DIRECTIONS;
-         $recAreaImageUrl = $feature->attributes->IMAGE_URL;
-         $recAreaLat = $feature->attributes->Y;
-         $recAreaLong = $feature->attributes->X;
-         $recAreaMapUrl = $feature->attributes->MAPURL;
-         $recAreaName = $feature->attributes->NAME;
-         try {
-            $recArea = new RecArea($recAreaId, $recAreaDescription, $recAreaDirections, $recAreaImageUrl, $recAreaLat, $recAreaLong, $recAreaMapUrl, $recAreaName);
-            $recArea->insert($pdo);
-         }
-         catch (\TypeError $typeError) {
-            echo ("input a message here");
-         }}
 
-   }
    /**
     *
     * Decodes Json file, converts to string, sifts through the string and inserts the data into database
