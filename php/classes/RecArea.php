@@ -147,6 +147,7 @@ class RecArea implements \JsonSerializable {
 	 * @throws \TypeError if rec area description is not string
 	 **/
 	public function setRecAreaDescription(string $recAreaDescription): void {
+		$recAreaDescription = filter_var($recAreaDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(strlen($recAreaDescription) > 2048) {
 			throw(new\RangeException("Description can't be longer than 2048 characters"));
 		}
