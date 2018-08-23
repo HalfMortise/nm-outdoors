@@ -49,6 +49,12 @@ class DataDownloader {
    	if (count($apiRecArea->MEDIA) > 0) {
    		$imageUrl = $apiRecArea->MEDIA[0]->URL;
 		}
+		if (empty($apiRecArea->RecAreaLatitude) === true) {
+   		$apiRecArea = null;
+		}
+		if (empty($apiRecArea->RecAreaLongitude) === true) {
+   		$apiRecArea = null;
+		}
       $recArea = new RecArea(generateUuidV4(), $apiRecArea->RecAreaDescription, $apiRecArea->RecAreaDirections, $imageUrl, $apiRecArea->RecAreaLatitude, $apiRecArea->RecAreaLongitude, $apiRecArea->RecAreaMapURL, $apiRecArea->RecAreaName);
       $recArea->insert($this->pdo);
       foreach($apiRecArea->ACTIVITY as $apiActivity) {
