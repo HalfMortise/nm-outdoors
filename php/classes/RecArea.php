@@ -148,7 +148,7 @@ class RecArea implements \JsonSerializable {
 	 **/
 	public function setRecAreaDescription(string $recAreaDescription): void {
 		$recAreaDescription = filter_var($recAreaDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(strlen($recAreaDescription) > 2048) {
+		if(strlen($recAreaDescription) > 4096) {
 			throw(new\RangeException("Description can't be longer than 2048 characters"));
 		}
 

@@ -76,5 +76,6 @@ try {
 	$downloader = new DataDownloader();
 	$downloader->processJson();
 } catch(\Exception $exception) {
+	echo $exception->getMessage() . PHP_EOL;
    echo $exception->getTraceAsString() . PHP_EOL;
 }
