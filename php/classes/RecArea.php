@@ -346,15 +346,7 @@ class RecArea implements \JsonSerializable {
 	 */
 	public function update(\PDO $pdo): void {
 		//create query template for the update method
-		$query = "UPDATE recArea SET recAreaId = :recAreaId,
-	recAreaDescription = :recAreaDescription,
-	recAreaDirections = :recAreaDirections,
-	recAreaImageUrl = :recAreaImageUrl,
-	recAreaLat = :recAreaLat,
-	recAreaLong = :recAreaLong,
-	recAreaMapUrl = :recAreaMapUrl,
-	recAreaName = :recAreaName
-	WHERE recAreaId = :recAreaId";
+		$query = "UPDATE recArea SET recAreaId = :recAreaId, recAreaDescription = :recAreaDescription, recAreaDirections = :recAreaDirections, recAreaImageUrl = :recAreaImageUrl, recAreaLat = :recAreaLat, recAreaLong = :recAreaLong, recAreaMapUrl = :recAreaMapUrl, recAreaName = :recAreaName WHERE recAreaId = :recAreaId";
 		$statement = $pdo->prepare($query);
 		//bind variable to their place in the query template
 		$parameters =
@@ -377,9 +369,7 @@ class RecArea implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		// creating query template
-		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections,
-	recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName 
-	FROM recArea WHERE recAreaId = :recAreaId";
+		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections, recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName FROM recArea WHERE recAreaId = :recAreaId";
 		$statement = $pdo->prepare($query);
 		//binding the recAreaId to the placeholders in the template
 		$parameters = ["recAreaId" => $recAreaId->getBytes()];
@@ -441,6 +431,8 @@ class RecArea implements \JsonSerializable {
 	 * gets the recArea by distance
 	 *
 	 * @param \PDO $pdo PDO connection object
+    * @param float $recAreaLat coordinate of where rec area is
+    * @param float $recAreaLong coordinate of where rec area is
 	 * @param float $userLat latitude coordinate of where user is
 	 * @param float $userLong longitude coordinate of where user is
 	 * @param float $distance distance in miles that the user is searching by
@@ -475,9 +467,7 @@ class RecArea implements \JsonSerializable {
 
 	public static function getAllRecAreas(\PDO $pdo) : \SPLFixedArray {
 		// create query template
-		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections,
-	recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName 
-	FROM recArea";
+		$query = "SELECT recAreaId,recAreaDescription,recAreaDirections, recAreaImageUrl,recAreaLat,recAreaLong,recAreaMapUrl,recAreaName FROM recArea";
 		$statement = $pdo->prepare($query);
 		$statement->execute();
 
