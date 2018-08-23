@@ -80,7 +80,7 @@ class RecArea implements \JsonSerializable {
 	 **/
 
 
-	public function __construct($newRecAreaId, string $newRecAreaDescription, string $newRecAreaDirections, string $newRecAreaImageUrl, float $newRecAreaLat, float $newRecAreaLong, string $newRecAreaMapUrl, string $newRecAreaName) {
+	public function __construct($newRecAreaId, string $newRecAreaDescription, string $newRecAreaDirections, string $newRecAreaImageUrl, float $newRecAreaLat, float $newRecAreaLong, ?string $newRecAreaMapUrl, string $newRecAreaName) {
 
 		try {
 			$this->setRecAreaId($newRecAreaId);
@@ -249,7 +249,7 @@ class RecArea implements \JsonSerializable {
 	/**
 	 * @return mixed
 	 */
-	public function getRecAreaMapUrl(): string {
+	public function getRecAreaMapUrl(): ?string {
 
 		return $this->recAreaMapUrl;
 	}
@@ -260,7 +260,7 @@ class RecArea implements \JsonSerializable {
 	/**
 	 * @param mixed $recAreaMapUrl
 	 */
-	public function setRecAreaMapUrl(string $recAreaMapUrl): void {
+	public function setRecAreaMapUrl(?string $recAreaMapUrl): void {
 		$recAreaMapUrl = filter_var($recAreaMapUrl, FILTER_SANITIZE_URL);
 		if(empty($recAreaMapUrl) === true) {
 			$recAreaMapUrl = null;
