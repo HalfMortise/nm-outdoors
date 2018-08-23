@@ -17,7 +17,7 @@ use HalfMortise\NmOutdoors\{
  **/
 
 //verify the session, start if not active
-if(session_status() !==PHP_SESSION_ACTIVE) {
+if(session_status() !== PHP_SESSION_ACTIVE) {
 	session_start();
 }
 
@@ -26,7 +26,7 @@ $reply = new stdClass();
 $reply->status = 200;
 $reply->data = null;
 
-try{
+try {
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 
 	//determine which HTTP method was used
@@ -42,22 +42,25 @@ try{
 		setXsrfCookie();
 
 		//gets a specific activity based on its activityId
-		if(empty($id) === false) {
-			$activity = Activity::getActivityByActivityId($pdo, $id);
-			if($activity !== null) {
-				$reply->data = $activity;
+		if(empty($activityId) === false) {
+			$activityId = Activity::getActivityByActivityId($pdo, $activityId);
+			if($activityId !== null) {
+				$reply->data = $activityId;
 			}
-		} 
-	} else {
+		} else if(empty($pdo) === false) {
+			$reply->data = Activity::getAllActivities($pdo);
+		} else {
 			throw new InvalidArgumentException("incorrect search parameters ", 404);
 		}
-} catch(\Exception | \TypeError $exception) {
-	$reply->status = $exception->getCode();
-	$reply->message = $exception->getMessage();
-}
+	}
+} catch
+		(\Exception | \TypeError $exception) {
+			$reply->status = $exception->getCode();
+			$reply->message = $exception->getMessage();
+		}
 
 header("Content-type: application/json");
-if($reply->data === null){
+if($reply->data === null) {
 	unset($reply->data);
 }
 
