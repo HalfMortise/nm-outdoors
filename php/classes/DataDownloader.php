@@ -70,11 +70,15 @@ class DataDownloader {
 		$currResult = 0;
 		$numResults = null;
 		do {
-			$reply = $this->guzzle->get("recareas.json", ["query" => ["full" => "true", "state" => "NM"]]);
+			$reply = $this->guzzle->get("recareas.json", ["query" => ["full" => "true", "offset" => $currResult, "state" => "NM"]]);
+			if ($numResults === null) {
+				$numResults = $reply->METADATA->RESULTS->TOTAL_COUNT;
+			}
 			$apiReply = json_decode($reply->getBody());
 			foreach($apiReply->RECDATA as $apiRecArea) {
 				$this->getRecAreaAndActivities($apiRecArea);
 			}
+			$currResult = $currResult + 50;
 		} while($currResult < $numResults);
 	}
 
