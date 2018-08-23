@@ -33,31 +33,40 @@ class DataDownloader {
 	 */
 	private $pdo;
 
+	/*
+	 * constructor for the class
+	 */
+
 	public function __construct() {
 		$config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
+		//connection to the api
 		$this->guzzle = new Client(["base_uri" => "https://ridb.recreation.gov/api/v1/", "headers" => ["apikey" => $config["recgov"]]]);
 		$this->pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 		$this->activities = Activity::getAllActivities($this->pdo)->toArray();
 	}
 
-
-//TODO: use guzzle??? instead of getMetaData function
-
+	/*
+	 * function to call api and pull data and inject into SQL tables for both RecArea and Activity
+	 */
 
 	public function getRecAreaAndActivities(\stdClass $apiRecArea): void {
+		//place holder image in event that api does not provide RecAreaImageUrl
 		$imageUrl = "https://bootcamp-coders.cnm.edu/~sheckendorn/nm-outdoors/public_html/images/facepalm.jpg";
 		if(count($apiRecArea->MEDIA) > 0) {
 			$imageUrl = $apiRecArea->MEDIA[0]->URL;
 		}
+		//excludes from api call the recAreas that do not include lat and long
 		if(empty($apiRecArea->RecAreaLatitude) === true || empty ($apiRecArea->RecAreaLongitude) === true) {
 			return;
 		}
+		//process to inject api data into RecAreaSQL table
 		$recArea = new RecArea(generateUuidV4(), $apiRecArea->RecAreaDescription, $apiRecArea->RecAreaDirections, $imageUrl, $apiRecArea->RecAreaLatitude, $apiRecArea->RecAreaLongitude, $apiRecArea->RecAreaMapURL, $apiRecArea->RecAreaName);
 		$recArea->insert($this->pdo);
 		foreach($apiRecArea->ACTIVITY as $apiActivity) {
 			$currActivity = array_filter($this->activities, function ($mySqlActivity) use ($apiActivity) {
 				return $mySqlActivity->getActivityName() === $apiActivity->RecAreaActivityDescription;
 			});
+			//process to inject api data into Activity SQL table
 			$currActivity = array_shift($currActivity);
 			if($currActivity !== null) {
 				$activityType = new ActivityType($currActivity->getActivityId(), $recArea->getRecAreaId());
@@ -65,6 +74,11 @@ class DataDownloader {
 			}
 		}
 	}
+
+	/*
+	 * incorporates guzzle
+	 * maps to json and loops 50x and then repeats until all data is acquired
+	 */
 
 	public function processJson(): void {
 		$currResult = 0;
@@ -81,10 +95,7 @@ class DataDownloader {
 			$currResult = $currResult + 50;
 		} while($currResult < $numResults);
 	}
-
-
 }
-
 try {
 	$downloader = new DataDownloader();
 	$downloader->processJson();
