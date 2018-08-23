@@ -168,7 +168,7 @@ class RecArea implements \JsonSerializable {
 	 **/
 	public function setRecAreaDirections(string $recAreaDirections): void {
 		$recAreaDirections = filter_var($recAreaDirections, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-		if(empty($recAreaDirections) === true) {
+		if(empty($recAreaDirections) !== false) {
 			$recAreaDirections = null;
 		}
 		$this->recAreaDirections = $recAreaDirections;
