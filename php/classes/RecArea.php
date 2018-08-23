@@ -80,7 +80,7 @@ class RecArea implements \JsonSerializable {
 	 **/
 
 
-	public function __construct($newRecAreaId, string $newRecAreaDescription, string $newRecAreaDirections, string $newRecAreaImageUrl, float $newRecAreaLat, float $newRecAreaLong, ?string $newRecAreaMapUrl, string $newRecAreaName) {
+	public function __construct($newRecAreaId, ?string $newRecAreaDescription, ?string $newRecAreaDirections, ?string $newRecAreaImageUrl, float $newRecAreaLat, float $newRecAreaLong, ?string $newRecAreaMapUrl, string $newRecAreaName) {
 
 		try {
 			$this->setRecAreaId($newRecAreaId);
@@ -117,7 +117,7 @@ class RecArea implements \JsonSerializable {
 	 * @throws \RangeException if the $recAreaId is not positive
 	 * @throws \TypeError if $recAreaId is not unique (valid Uuid)
 	 **/
-	public function setRecAreaId(string $newRecAreaId): void {
+	public function setRecAreaId(?string $newRecAreaId): void {
 
 		try {
 			$uuid = self::validateUuid($newRecAreaId);
@@ -135,7 +135,7 @@ class RecArea implements \JsonSerializable {
 	 * accessor method for rec Area Description
 	 * @return string value of the rec Area Description
 	 **/
-	public function getRecAreaDescription(): string {
+	public function getRecAreaDescription(): ?string {
 		return ($this->recAreaDescription);
 	}
 
@@ -146,7 +146,7 @@ class RecArea implements \JsonSerializable {
 	 * @throws \RangeException if description is longer than 2048 characters
 	 * @throws \TypeError if rec area description is not string
 	 **/
-	public function setRecAreaDescription(string $recAreaDescription): void {
+	public function setRecAreaDescription(?string $recAreaDescription): void {
 		$recAreaDescription = filter_var($recAreaDescription, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(strlen($recAreaDescription) > 4096) {
 			throw(new\RangeException("Description can't be longer than 2048 characters"));
@@ -159,7 +159,7 @@ class RecArea implements \JsonSerializable {
 	 * accessor method for rec area directions
 	 * @return string
 	 **/
-	public function getRecAreaDirections(): string {
+	public function getRecAreaDirections(): ?string {
 		return ($this->recAreaDirections);
 	}
 
@@ -167,7 +167,7 @@ class RecArea implements \JsonSerializable {
 	 * mutator method for rec area directions
 	 * @param string $recAreaDirections
 	 **/
-	public function setRecAreaDirections(string $recAreaDirections): void {
+	public function setRecAreaDirections(?string $recAreaDirections): void {
 		$recAreaDirections = filter_var($recAreaDirections, FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 		if(empty($recAreaDirections) === true) {
 			$recAreaDirections = null;
@@ -182,7 +182,7 @@ class RecArea implements \JsonSerializable {
 	 * accessor method for rec area image url
 	 * @return mixed
 	 **/
-	public function getRecAreaImageUrl(): string {
+	public function getRecAreaImageUrl(): ?string {
 		return $this->recAreaImageUrl;
 	}
 
@@ -192,7 +192,7 @@ class RecArea implements \JsonSerializable {
 	/**
 	 * @param mixed $recAreaImageUrl
 	 */
-	public function setRecAreaImageUrl(string $recAreaImageUrl): void {
+	public function setRecAreaImageUrl(?string $recAreaImageUrl): void {
 		if(strlen($recAreaImageUrl) > 255) {
 			throw(new\RangeException("Image Url can't be longer than 255 characters"));
 		}
@@ -277,7 +277,7 @@ class RecArea implements \JsonSerializable {
 	/**
 	 * @return mixed
 	 */
-	public function getRecAreaName(): string {
+	public function getRecAreaName(): ?string {
 		return $this->recAreaName;
 	}
 
@@ -287,7 +287,7 @@ class RecArea implements \JsonSerializable {
 	/**
 	 * @param mixed $recAreaName
 	 */
-	public function setRecAreaName(string $recAreaName): void {
+	public function setRecAreaName(?string $recAreaName): void {
 		if(strlen($recAreaName) > 255) {
 			throw(new\RangeException("Rec Area name  can't be longer than 255 characters"));
 		}
