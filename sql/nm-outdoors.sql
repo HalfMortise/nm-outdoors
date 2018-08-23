@@ -9,7 +9,7 @@ DROP TABLE IF EXISTS recArea;
 CREATE TABLE recArea (
 	recAreaId BINARY(16) NOT NULL,
 	recAreaDescription VARCHAR (4096),
-	recAreaDirections VARCHAR(512),
+	recAreaDirections VARCHAR(2048),
 	recAreaImageUrl VARCHAR(255),
 	recAreaLat DECIMAL (12, 9),
 	recAreaLong DECIMAL (12, 9),

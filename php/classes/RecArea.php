@@ -172,6 +172,9 @@ class RecArea implements \JsonSerializable {
 		if(empty($recAreaDirections) === true) {
 			$recAreaDirections = null;
 		}
+		if(strlen($recAreaDirections) > 2048) {
+			throw (new\RangeException("Directions can't be longer than 2048 characters"));
+		}
 		$this->recAreaDirections = $recAreaDirections;
 	}
 
