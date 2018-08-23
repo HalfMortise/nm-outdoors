@@ -13,6 +13,7 @@ use GuzzleHttp\Client;
 /**
  * This class will download data from  RIDB.Recreation.Gov.
  *
+ * @author Dylan McDonald dmcdonald21@cnm.edu
  * @author HalfMortise <https://www.github.com/halfmortise>
  * @author SHeckendorn <https://www.github.com/sheckendorn>
  *
