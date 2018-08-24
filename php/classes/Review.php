@@ -237,7 +237,7 @@ class Review implements \JsonSerializable {
 		if($newReviewRating < 1) {
 			throw(new \RangeException("review rating is too small"));
 		}
-		if($newReviewRating >= 5) {
+		if($newReviewRating > 5) {
 
 			throw(new \RangeException("review rating is too large"));
 		}
