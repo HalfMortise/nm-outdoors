@@ -38,7 +38,6 @@ try{
 	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$reviewProfileId = $id = filter_input(INPUT_GET, "reviewProfileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$reviewRecAreaId = $id = filter_input(INPUT_GET, "reviewRecAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
-	var_dump($id);
 	// handle GET request - if id is present, that review is returned, otherwise all reviews are returned
 	if($method === "GET") {
 
@@ -53,7 +52,7 @@ try{
 			}
 			//get all the reviews associated with a profileId
 		} else if(empty($reviewProfileId) === false) {
-			$review = Review::getReviewByReviewProfileId($pdo, $_SESSION["profile"]->getProfileId())->toArray();
+			$review = Review::getReviewByReviewProfileId($pdo, $reviewProfileId)->toArray();
 			if($review !== null) {
 				$reply->data = $review;
 			}
