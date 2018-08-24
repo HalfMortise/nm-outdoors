@@ -306,7 +306,7 @@ class Review implements \JsonSerializable {
 	 * @throws \PDOException when mySQL related errors occur
 	 * @throws \TypeError when a variable is not the correct data type
 	 **/
-	public static function getReviewByReviewId(\PDO $pdo, $reviewId): ?review {
+	public static function getReviewByReviewId(\PDO $pdo, $reviewId): ?Review {
 		// sanitize the reviewId before searching
 		try {
 			$reviewId = self::validateUuid($reviewId);
