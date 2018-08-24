@@ -40,7 +40,7 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	// sanitize input
-	$id = filter_input(INPUT_GET, "profileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profileAtHandle = filter_input(INPUT_GET, "profileAtHandle", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profileEmail = filter_input(INPUT_GET, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
@@ -60,11 +60,6 @@ try {
 			if($profile !== null) {
 				$reply->data = $profile;
 			}
-//		} else if(empty($profileAtHandle) === false) {
-//			$profile = Profile::getProfileByProfileAtHandle($pdo, $profileAtHandle);
-//			if($profile !== null) {
-//				$reply->data = $profile;
-//			}
 		} else if(empty($profileEmail) === false) {
 
 			$profile = Profile::getProfileByProfileEmail($pdo, $profileEmail);
