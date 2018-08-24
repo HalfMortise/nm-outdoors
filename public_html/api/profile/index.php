@@ -40,13 +40,13 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	// sanitize input
-	$profileId = filter_input(INPUT_GET, "profileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$id = filter_input(INPUT_GET, "profileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profileAtHandle = filter_input(INPUT_GET, "profileAtHandle", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$profileEmail = filter_input(INPUT_GET, "profileEmail", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 
 	// make sure the id is valid for methods that require it
-	if(($method === "DELETE" || $method === "PUT") && (empty($ProfileId) === true )) {
+	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true )) {
 		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
 	}
 
@@ -55,8 +55,8 @@ try {
 		setXsrfCookie();
 
 		//gets a post by content
-		if(empty($ProfileId) === false) {
-			$profile = Profile::getProfileByProfileId($pdo, $profileId);
+		if(empty($id) === false) {
+			$profile = Profile::getProfileByProfileId($pdo, $id);
 			if($profile !== null) {
 				$reply->data = $profile;
 			}
@@ -81,7 +81,7 @@ try {
 		//validateJwtHeader();
 
 		//enforce the user is signed in and only trying to edit their own profile
-		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $profileId) {
+		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $id) {
 			throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
 		}
 
@@ -92,7 +92,7 @@ try {
 		$requestObject = json_decode($requestContent);
 
 		//retrieve the profile to be updated
-		$profile = Profile::getProfileByProfileId($pdo, $profileId);
+		$profile = Profile::getProfileByProfileId($pdo, $id);
 		if($profile === null) {
 			throw(new RuntimeException("Profile does not exist", 404));
 		}
@@ -130,13 +130,13 @@ try {
 		//enforce the end user has a JWT token
 		//validateJwtHeader();
 
-		$profile = Profile::getProfileByProfileId($pdo, $profileId);
+		$profile = Profile::getProfileByProfileId($pdo, $id);
 		if($profile === null) {
 			throw (new RuntimeException("Profile does not exist"));
 		}
 
 		//enforce the user is signed in and only trying to edit their own profile
-		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $profileId->getProfileId()->toString()) {
+		if(empty($_SESSION["profile"]) === true || $_SESSION["profile"]->getProfileId()->toString() !== $id->getProfileId()->toString()) {
 			throw(new \InvalidArgumentException("You are not allowed to access this profile", 403));
 		}
 
