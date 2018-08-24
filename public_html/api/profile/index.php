@@ -60,11 +60,11 @@ try {
 			if($profile !== null) {
 				$reply->data = $profile;
 			}
-		} else if(empty($profileAtHandle) === false) {
-			$profile = Profile::getProfileByProfileAtHandle($pdo, $profileAtHandle);
-			if($profile !== null) {
-				$reply->data = $profile;
-			}
+//		} else if(empty($profileAtHandle) === false) {
+//			$profile = Profile::getProfileByProfileAtHandle($pdo, $profileAtHandle);
+//			if($profile !== null) {
+//				$reply->data = $profile;
+//			}
 		} else if(empty($profileEmail) === false) {
 
 			$profile = Profile::getProfileByProfileEmail($pdo, $profileEmail);
