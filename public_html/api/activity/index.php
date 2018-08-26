@@ -33,7 +33,7 @@ try {
 	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	//sanitize the search parameters
-	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+//	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 	$activityId = $id = filter_input(INPUT_GET, "activityId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	if($method === "GET") {
