@@ -43,7 +43,7 @@ try {
 
 		//gets a specific activity based on its activityId
 		if(empty($activityId) === false) {
-			$activityId = Activity::getActivityByActivityId($pdo, $activityId);
+			$activityId = Activity::getActivityByActivityId($pdo, $id);
 			if($activityId !== null) {
 				$reply->data = $activityId;
 			}

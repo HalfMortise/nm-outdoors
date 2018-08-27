@@ -39,6 +39,12 @@ try{
 	$reviewProfileId = filter_input(INPUT_GET, "reviewProfileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$reviewRecAreaId = filter_input(INPUT_GET, "reviewRecAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$reviewContent = filter_input(INPUT_GET, "reviewContent", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
+	//make sure the comment id is valid for methods that require it (required field)
+	if(($method === "DELETE" || $method === "PUT") && empty($id) === true) {
+		throw(new InvalidArgumentException("id cannot be empty", 405));
+	}
+
 	// handle GET request - if id is present, that review is returned, otherwise all reviews are returned
 	if($method === "GET") {
 
@@ -54,16 +60,10 @@ try{
 			//get all the reviews associated with a profileId
 		} else if(empty($reviewProfileId) === false) {
 			$review = Review::getReviewByReviewProfileId($pdo, $reviewProfileId)->toArray();
-			if($review !== null) {
-				$reply->data = $review;
-			}
 			//get all the reviews associated with the RecAreaId
 		} else if(empty($reviewRecAreaId) === false) {
 			$review = Review::getReviewByReviewRecAreaId($pdo, $reviewRecAreaId)->toArray();
-			if($review !== null) {
-				$reply->data = $review;
-			}
-		//adding getAllReviews method
+			//get all the reviews associated with the reviewContent
 		} else {
 			throw new InvalidArgumentException("Incorrect search parameters", 404);
 		}
@@ -108,11 +108,9 @@ try{
 		// validateJwtHeader();
 	
 			// update all attributes
-		$review->setReviewId($requestObject->reviewId);
-		$review->setReviewProfileId($requestObject->reviewProfileId);
-		$review->setReviewRecAreaId($requestObject->reviewRecAreaId);
 		$review->setReviewContent($requestObject->reviewContent);
-		$review->setReviewDateTime($requestObject->reviewDateTime);
+//		$review->setReviewDateTime($requestObject->reviewDateTime);
+		$review->setReviewRating($requestObject->reviewRating);
 		$review->update($pdo);
 
 			// update reply
@@ -131,10 +129,8 @@ try{
 		// //enforce the end user has a JWT token
 		// validateJwtHeader();
 
-
 		// create new review and insert into the database
-		$reviewId = generateUuidV4();
-		$review = new Review($reviewId, $_SESSION["profile"]->getProfileId(),$requestObject->reviewRecAreaId, $requestObject->reviewContent, $requestObject->reviewDateTime, $requestObject->reviewRating);
+		$review = new Review(generateUuidV4(), $_SESSION["profile"]->getProfileId(),$requestObject->reviewRecAreaId, $requestObject->reviewContent, null, $requestObject->reviewRating);
 		$review->insert($pdo);
 
 		// update reply
@@ -145,7 +141,6 @@ try{
 
 		//enforce that the end user has a XSRF token.
 		verifyXsrf();
-
 
 		// retrieve the review to be deleted
 		$review = Review::getReviewByReviewId($pdo, $id);
