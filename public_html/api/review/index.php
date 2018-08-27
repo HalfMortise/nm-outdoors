@@ -38,6 +38,7 @@ try{
 	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$reviewProfileId = filter_input(INPUT_GET, "reviewProfileId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$reviewRecAreaId = filter_input(INPUT_GET, "reviewRecAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$reviewContent = filter_input(INPUT_GET, "reviewContent", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	// handle GET request - if id is present, that review is returned, otherwise all reviews are returned
 	if($method === "GET") {
 
@@ -64,8 +65,8 @@ try{
 			}
 		//adding getAllReviews method
 		} else {
-         $reply->data = Review::getAllReviews($pdo)->toArray();
-      }
+			throw new InvalidArgumentException("Incorrect search parameters", 404);
+		}
 	} else if ($method === "PUT" || $method === "POST") {
 		// enforce the user has a XSRF token
 		verifyXsrf();
@@ -107,9 +108,13 @@ try{
 		// validateJwtHeader();
 	
 			// update all attributes
-			//$review->setReviewDate($requestObject->reviewDate);
+		$review->setReviewId($requestObject->reviewId);
+		$review->setReviewProfileId($requestObject->reviewProfileId);
+		$review->setReviewRecAreaId($requestObject->reviewRecAreaId);
 		$review->setReviewContent($requestObject->reviewContent);
+		$review->setReviewDateTime($requestObject->reviewDateTime);
 		$review->update($pdo);
+
 			// update reply
 		$reply->message = "Review updated OK";
 	
