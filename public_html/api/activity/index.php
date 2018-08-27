@@ -34,20 +34,23 @@ try {
 
 	//sanitize the search parameters
 //	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
-	$activityId = filter_input(INPUT_GET, "activityId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+//	$activityName = filter_input(INPUT_GET, "activityName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+
 
 	if($method === "GET") {
 
 		//set XSRF cookie
 		setXsrfCookie();
 
-		//gets a specific activity based on its activityId
-		if(empty($activityId) === false) {
-			$activityId = Activity::getActivityByActivityId($pdo, $id);
-			if($activityId !== null) {
-				$reply->data = $activityId;
-			}
-		} else if(empty($pdo) === false) {
+		//gets a specific activity based on its id
+		if(empty($id) === false) {
+			$id = Activity::getActivityByActivityId($pdo, $id);
+		}
+//		else if(empty($activityName) === false) {
+//			$activityName = Activity::getActivityByActivityName($pdo, $activityName);
+//	}
+	else if(empty($pdo) === false) {
 			$reply->data = Activity::getAllActivities($pdo);
 		} else {
 			throw new InvalidArgumentException("incorrect search parameters ", 404);
