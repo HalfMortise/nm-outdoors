@@ -34,7 +34,7 @@ try {
 
 	//sanitize the search parameters
 //	$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
-	$activityId = $id = filter_input(INPUT_GET, "activityId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$activityId = filter_input(INPUT_GET, "activityId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 	if($method === "GET") {
 
