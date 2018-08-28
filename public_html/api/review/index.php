@@ -54,9 +54,9 @@ try{
 		//gets a specific review based on its reviewId
 		if(empty($id) === false) {
 			$review = Review::getReviewByReviewId($pdo, $id);
-			if($review !== null) {
-				$reply->data = $review;
-			}
+//			if($review !== null) {
+//				$reply->data = $review;
+//			}
 			//get all the reviews associated with a profileId
 		} else if(empty($reviewProfileId) === false) {
 			$review = Review::getReviewByReviewProfileId($pdo, $reviewProfileId)->toArray();
@@ -64,8 +64,8 @@ try{
 		} else if(empty($reviewRecAreaId) === false) {
 			$review = Review::getReviewByReviewRecAreaId($pdo, $reviewRecAreaId)->toArray();
 			//get all the reviews associated with the reviewContent
-		} else {
-			throw new InvalidArgumentException("Incorrect search parameters", 404);
+		}else {
+			$reply->data = Review::getAllReviews($pdo)->toArray();
 		}
 	} else if ($method === "PUT" || $method === "POST") {
 		// enforce the user has a XSRF token
