@@ -43,6 +43,9 @@ class DataDownloader {
 		$this->guzzle = new Client(["base_uri" => "https://ridb.recreation.gov/api/v1/", "headers" => ["apikey" => $config["recgov"]]]);
 		$this->pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 		$this->activities = Activity::getAllActivities($this->pdo)->toArray();
+		//deleting filled table entries before redownloading/updating
+		$this->pdo->query("DELETE FROM activityType");
+		$this->pdo->query("DELETE FROM recArea");
 	}
 
 	/*
@@ -64,7 +67,7 @@ class DataDownloader {
 		$recArea->insert($this->pdo);
 		foreach($apiRecArea->ACTIVITY as $apiActivity) {
 			$currActivity = array_filter($this->activities, function ($mySqlActivity) use ($apiActivity) {
-				return $mySqlActivity->getActivityName() === $apiActivity->RecAreaActivityDescription;
+				return strtolower($mySqlActivity->getActivityName()) === strtolower($apiActivity->ActivityName);
 			});
 			//process to inject api data into Activity SQL table
 			$currActivity = array_shift($currActivity);
