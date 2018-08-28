@@ -38,7 +38,7 @@ try {
 		$requestObject = json_decode($requestContent);
 
 		//profile username is a required field
-		if(empty($requestObject->profileUserName) === true) {
+		if(empty($requestObject->profileAtHandle) === true) {
 			throw(new \InvalidArgumentException ("Profile username required", 405));
 		}
 
