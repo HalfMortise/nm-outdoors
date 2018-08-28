@@ -38,13 +38,13 @@ export class reviewService {
 		return(this.http.get<Review[]>(this.reviewUrl, {params: new HttpParams().set("reviewProfileId", reviewProfileId)}));
 	}
 
-	// call to the review API and get an array of tweets based off the recAreaId
+	// call to the review API and get an array of reviews based off the recAreaId
 	getReviewbyRecAreaId(reviewRecAreaId : string) : Observable<review[]> {
 		return(this.http.get<Review[]>(this.reviewUrl, {params: new HttpParams().set("reviewRecAreaId", reviewRecAreaId)}));
 	}
 
-	// call to the review API and get an array of reviews based off the reviewContent
-	getReviewByContent(reviewContent : string) : Observable<review[]> {
-		return(this.http.get<Review[]>(this.reviewUrl, {params: new HttpParams().set("reviewContent", reviewContent)}));
-	}
+	// // call to the review API and get an array of reviews based off the reviewContent
+	// getReviewByContent(reviewContent : string) : Observable<review[]> {
+	// 	return(this.http.get<Review[]>(this.reviewUrl, {params: new HttpParams().set("reviewContent", reviewContent)}));
+	// }
 }
