@@ -1,9 +1,9 @@
-/******************************************************************************************************/
-/*	Module name: sign.up.service.ts																							*/
-/* Module description: Service to allow a user to create an account in the web application				*/
-/*	Author: HalfMortise																											*/
-/*	Date: 8/28/2018																												*/
-/******************************************************************************************************/
+/************************************************************************************************************/
+/*	Module name: sign.up.service.ts																									*/
+/* Module description: Service creates a session for a user while signed into account in the web application*/
+/*	Author: HalfMortise																													*/
+/*	Date: 8/28/2018																														*/
+/************************************************************************************************************/
 
 /* Imports */
 
