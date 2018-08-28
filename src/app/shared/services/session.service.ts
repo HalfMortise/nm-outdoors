@@ -1,8 +1,21 @@
+/******************************************************************************************************/
+/*	Module name: sign.up.service.ts																							*/
+/* Module description: Service to allow a user to create an account in the web application				*/
+/*	Author: HalfMortise																											*/
+/*	Date: 8/28/2018																												*/
+/******************************************************************************************************/
+
+/* Imports */
+
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Status} from "../interfaces/status";
 
+/* Injectable metadata */
+
 @Injectable()
+
+/* Service */
 
 export class SessionService {
 
