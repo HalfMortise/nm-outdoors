@@ -1,12 +1,12 @@
 import {Injectable} from "@angular/core";
 
 import {Status} from "../interfaces/status";
-import {review} from "../interfaces/review";
+import {Review} from "../interfaces/review";
 import {Observable} from "rxjs/internal/Observable";
 import {HttpClient} from "@angular/common/http";
 
 @Injectable ()
-export class reviewService {
+export class ReviewService {
 	constructor(protected http : HttpClient) {}
 
 	//define the API endpoint
