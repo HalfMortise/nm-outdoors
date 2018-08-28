@@ -1,5 +1,31 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from "@an"
+import {HttpClient} from "@angular/common/http";
+import {Status} from "../interfaces/status";
+
+@Injectable()
+
+export class SessionService {
+
+	constructor(protected http:HttpClient) {}
+
+	private sessionUrl = "api/earl-grey";
+
+	setSession() {
+
+		return (this.http.get<Status>(this.sessionUrl, {}));
+	}
+}
 
 
-<Board>(this.boardUrl, {params: new HttpParams().set("boardProfileId", boardProfileId)})
+
+
+
+
+
+
+
+
+
+
+
+//<Board>(this.boardUrl, {params: new HttpParams().set("boardProfileId", boardProfileId)})
