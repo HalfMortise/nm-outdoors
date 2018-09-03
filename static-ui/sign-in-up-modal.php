@@ -28,7 +28,7 @@
 			<hr />
 			<br />
 				<h3>Please sign in</h3>
-				<br>
+				<br />
 				<a class="btn btn-primary btn-lg" href="#signin" data-toggle="modal" data-target=".bs-modal-sm">Sign In/Sign Up</a>
 			<br />
 			<hr />
@@ -36,21 +36,21 @@
 
 
 		<!-- Modal Structure -->
-		<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal fade bs-modal-sm" id="sign-in-up-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
 					<br />
-					<div class="bs-example bs-example-tabs">
+					<nav class="bs-example bs-example-tabs">
 						<!-- sets the tabs -->
 						<div id="nav-tab" class="nav nav-tabs" role="tablist">
 							<!-- two tabs: sign in and sign up -->
 							<a class="nav-item nav-link active" href="#signin" data-toggle="tab" role="tab" aria-controls="nav-signin" aria-selected="true">Sign In</a>
 							<a class="nav-item nav-link" href="#signup" data-toggle="tab" role="tab" aria-controls="nav-signup" aria-selected="true">Sign Up</a>
 						</div>
-					</div>
+					</nav>
 					<div class="modal-body">
-						<div id="myTabContent" class="tab-content">
-							<div class="tab-pane fade active in" id="signin">
+						<div id="nav-tabContent" class="tab-content">
+							<div class="tab-pane fade show active" id="signin">
 								<form class="form-horizontal">
 									<fieldset>
 
