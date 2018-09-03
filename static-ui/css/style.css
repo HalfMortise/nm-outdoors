@@ -256,7 +256,6 @@ a:focus {
 	top: 0;
 	left: 0;
 	pointer-events: none;
-	border: 4px solid var(--button-circle);
 	border-radius: 50%;
 	-webkit-box-shadow: 10px 10px 20px -6px rgba(0,0,0,0.75);
 	-moz-box-shadow: 10px 10px 20px -6px rgba(0,0,0,0.75);
