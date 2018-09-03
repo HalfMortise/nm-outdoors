@@ -1,5 +1,13 @@
 /** Main Styling File **/
 
+.about-h3 {
+	text-align: center;
+}
+
+.about-par {
+	text-align: center;
+	width: 50%;
+}
 
 .global-menu__item--navMenu {
 	transition: transform 0.1s, opacity 0.1s;

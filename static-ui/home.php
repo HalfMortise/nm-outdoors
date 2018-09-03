@@ -10,6 +10,8 @@
  This component will require the use of Bootstrap 4, Popper, and JQuery
 
 -->
+
+
 	<div class="container-home">
 		<div class="content">
 			<h1>NM Outdoors</h1>
