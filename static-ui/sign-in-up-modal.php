@@ -35,17 +35,17 @@
 		</div>
 
 
-		<!-- Modal -->
+		<!-- Modal Structure -->
 		<div class="modal fade bs-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 			<div class="modal-dialog modal-sm">
 				<div class="modal-content">
-					<br>
+					<br />
 					<div class="bs-example bs-example-tabs">
+						<!-- sets the tabs -->
 						<div id="nav-tab" class="nav nav-tabs" role="tablist">
-
-							<a class="nav-item nav-link active" href="#signin" id="signin" data-toggle="tab" role="tab" aria-controls="nav-signin" aria-selected="true">Sign In</a>
+							<!-- two tabs: sign in and sign up -->
+							<a class="nav-item nav-link active" href="#signin" data-toggle="tab" role="tab" aria-controls="nav-signin" aria-selected="true">Sign In</a>
 							<a class="nav-item nav-link" href="#signup" data-toggle="tab" role="tab" aria-controls="nav-signup" aria-selected="true">Sign Up</a>
-
 						</div>
 					</div>
 					<div class="modal-body">
@@ -53,6 +53,7 @@
 							<div class="tab-pane fade active in" id="signin">
 								<form class="form-horizontal">
 									<fieldset>
+
 										<!-- Sign In Form -->
 										<!-- Text input-->
 										<div class="control-group">
@@ -71,7 +72,7 @@
 										</div>
 
 
-										<!-- Button -->
+										<!-- Submit Button -->
 										<div class="control-group">
 											<label class="control-label" for="signin"></label>
 											<div class="controls">
@@ -81,13 +82,15 @@
 									</fieldset>
 								</form>
 							</div>
+
+
+							<!-- Sign Up Form -->
+							<!-- Text input-->
+
+
 							<div class="tab-pane fade" id="signup">
 								<form class="form-horizontal">
 									<fieldset>
-										<!-- Sign Up Form -->
-										<!-- Text input-->
-
-										<!-- Text input-->
 										<div class="control-group">
 											<label class="control-label" for="userid">Username:</label>
 											<div class="controls">
