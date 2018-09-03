@@ -1,10 +1,12 @@
-<!--/**
- * this component is the About page which will contain
- * a brief description of the developers and the purpose
- * of the development of the application.
- *
- * This component will require the use of Bootstrap 4 and Popper
- */
+<?php require_once ("head-utils.php");?>
+<?php require_once "navbar.php"; ?>
+<!--
+ this component is the About page which will contain
+ a brief description of the developers and the purpose
+ of the development of the application.
+
+ This component will require the use of Bootstrap 4 and Popper
+
 -->
 
 
@@ -64,4 +66,4 @@
 			</div>
 		</div>
 	</div>
-
+<?php require_once "footer.php"; ?>
