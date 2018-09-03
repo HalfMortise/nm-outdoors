@@ -20,6 +20,12 @@
 	<select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
 		<option selected>Search activities...</option>
 		<option value="1">Biking</option>
+		<option value="2">Camping</option>
+		<option value="3">Fishing</option>
+		<option value="4">Hiking</option>
+		<option value="5">Water Sports</option>
+		<option value="3">Wildlife Viewing</option>
+		<option value="3">Winter Sports</option>
 	</select>
 	<div class="input-group-append">
 		<button class="btn btn-outline-secondary" type="button">Go</button>
