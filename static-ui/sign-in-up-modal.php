@@ -31,8 +31,13 @@
 
 
 //password field
-<label for="inputPassword5">Password</label>
-<input type="password" id="password" class="form-control" aria-describedby="passwordHelpBlock">
-<small id="passwordHelpBlock" class="form-text text-muted">
-Your password must be 8-20 characters long, contain letters, numbers, and special characters.
-</small>
+<form class="form-inline">
+  <div class="form-group">
+    <label for="inputPassword6">Password</label>
+      <input type="password" id="password" class="form-control mx-sm-3" aria-describedby="passwordHelpInline">
+
+    <label for="inputPassword6">Confirm password</label>
+      <input type="password" id="password" class="form-control mx-sm-3" aria-describedby="passwordHelpInline">
+         <small id="passwordHelpInline" class="text-muted">Must be 8-20 characters long.</small>
+  </div>
+</form>
