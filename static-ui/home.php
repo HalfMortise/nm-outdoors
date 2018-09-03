@@ -17,7 +17,7 @@
 <h3>Exploring New Mexico, one trail at a time...</h3>
 
 <div class="input-group">
-	<select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+	<select class="custom-select" id="select-activities" aria-label="Select drop-down menu to search activities">
 		<option selected>Search activities...</option>
 		<option value="1">Biking</option>
 		<option value="2">Camping</option>
