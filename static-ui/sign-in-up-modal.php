@@ -9,23 +9,7 @@
  */
 -->
 
-
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Welcome to Our Page</title>
-
-		<!--Bootstrap 4-->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
-
-	</head>
-	<body>
-
-
-
-
+<!--This button triggers the modal and is not part of the actual component-->
 		<div class="container">
 			<hr />
 			<br />
@@ -35,7 +19,7 @@
 			<br />
 			<hr />
 		</div>
-
+<!--/end button-->
 
 		<!-- Modal Structure -->
 		<div class="modal fade bs-modal-sm" id="sign-in-up-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
@@ -74,7 +58,6 @@
 											</div>
 										</div>
 
-
 										<!-- Submit Button -->
 										<div class="control-group">
 											<label class="control-label" for="signin"></label>
@@ -86,10 +69,8 @@
 								</form>
 							</div>
 
-
 							<!-- Sign Up Form -->
 							<!-- Text input-->
-
 
 							<div class="tab-pane fade" id="signup">
 								<form class="form-horizontal">
@@ -108,7 +89,6 @@
 												<input id="email" class="form-control" type="text" placeholder="" required="required">
 											</div>
 										</div>
-
 
 										<!-- Password input-->
 										<div class="control-group">
@@ -157,7 +137,6 @@
 				</div>
 			</div>
 		</div>
-
 
 		<!--Insert these tags before closing <body> tag: JQuery, Popper, and Bootstrap JS plugins
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
