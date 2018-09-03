@@ -51,6 +51,7 @@
 					<div class="modal-body">
 						<div id="nav-tabContent" class="tab-content">
 							<div class="tab-pane fade show active" id="signin">
+								<h6>Sign into your account here</h6>
 								<form class="form-horizontal">
 									<fieldset>
 
@@ -90,6 +91,7 @@
 
 							<div class="tab-pane fade" id="signup">
 								<form class="form-horizontal">
+									<h6>Sign up for an account here</h6>
 									<fieldset>
 										<div class="control-group">
 											<label class="control-label" for="userid">Username:</label>
