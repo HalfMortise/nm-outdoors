@@ -1,14 +1,23 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bd-example-modal-lg">Large modal</button>
-
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
+<div class="modal" tabindex="-1" role="dialog">
+	<div class="modal-dialog" role="document">
 		<div class="modal-content">
-			<div id="image-review">
-				<img src="">
-				<p class="review-section">Reviews reviews reviews!</p>
+			<div class="modal-header">
+				<h5 class="modal-title">Rec Area Description</h5>
+				<button type="button" class="close" data-dimiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
 			</div>
-			<div id="recAreaDescription">
-				<p>Rec Area Description! It's amazing! You should totally go visit!</p>
+			<div class="modal-body">
+				<div id="review section">
+					<img src="" alt="rec area image">
+					<p>reviews of rec area</p>
+				</div>
+				<div>
+					<p>Rec Area Description here</p>
+				</div>
+			</div>
+			<div>
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
