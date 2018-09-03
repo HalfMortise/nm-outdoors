@@ -10,3 +10,18 @@
  */
 -->
 
+
+<h1>NM Outdoors</h1>
+
+<!-- This will need to be updated, and content added prior to deployment -->
+<h3>Exploring New Mexico, one trail at a time...</h3>
+
+<div class="input-group">
+	<select class="custom-select" id="inputGroupSelect04" aria-label="Example select with button addon">
+		<option selected>Search activities...</option>
+		<option value="1">Biking</option>
+	</select>
+	<div class="input-group-append">
+		<button class="btn btn-outline-secondary" type="button">Go</button>
+	</div>
+</div>
