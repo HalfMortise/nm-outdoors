@@ -11,8 +11,6 @@
 
 -->
 
-<?php require_once ("head-utils.php");?>
-<?php require_once ("navbar.php");?>
 
 <!--This button triggers the modal and is not part of the actual component-->
 		<div class="container">
