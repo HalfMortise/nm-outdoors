@@ -1,9 +1,9 @@
 import {Injectable} from "@angular/core";
-import {HttpClient, HttpParams} from "@angular/common/http";
 
-import {Status} from "../classes/status";
-import {Activity} from "../classes/activity";
-import {Observable} from "rxjs/Observable";
+
+import {Activity} from "../interfaces/activity";
+import {Observable} from "rxjs/internal/Observable";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable ()
 export class ActivityService {
@@ -14,7 +14,7 @@ export class ActivityService {
 	private activityUrl = "api/activity/";
 
 	//call the activity API and get a activity object by its Id
-	getactivity(activityId: string) : Observable<activity> {
+	getActivity(activityId: string) : Observable<activity> {
 		return(this.http.get<activity>(this.activityUrl, {params: new HttpParams().set("id", activityId)}));
 	}
 
