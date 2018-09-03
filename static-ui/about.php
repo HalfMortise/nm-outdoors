@@ -34,3 +34,30 @@
 	</div>
 
 </div>
+
+<div class="card-deck text-center">
+
+	<div class="card">
+		<img class="card-img-top" src="./images/placeholder.jpg" alt="bs-profile-img">
+		<div class="card-body">
+			<h5 class="card-title">Bashir</h5>
+			<p class="card-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
+		</div>
+		<div class="card-footer">
+			<small class="text-muted">Bashir.com</small>
+		</div>
+	</div>
+
+	<div class="card">
+		<img class="card-img-top" src="./images/placeholder.jpg" alt="hm-profile-img">
+		<div class="card-body">
+			<h5 class="card-title">Joy</h5>
+			<p class="card-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
+		</div>
+		<div class="card-footer">
+			<small class="text-muted">HalfMortise.com</small>
+		</div>
+	</div>
+
+</div>
+
