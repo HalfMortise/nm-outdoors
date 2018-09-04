@@ -11,7 +11,22 @@ export class RecAreaService {
 	private recAreaUrl = "api/recArea/";
 
 	//call the recArea API and get rec area object by its id
-	getRecArea(recAreaId: string) : Observable<RecArea>{
+	getRecAreaByRecAreaId(recAreaId: string) : Observable<RecArea>{
+		return(this.http.get<RecArea>(this.recAreaUrl, {params: new HttpParams().set("id", recAreaId)}));
+	}
+
+	//call the recArea API and get rec area object by its name
+	getRecAreaByRecAreaName(recAreaName: string) : Observable<RecArea>{
+		return(this.http.get<RecArea>(this.recAreaUrl, {params: new HttpParams().set("name", recAreaName)}));
+	}
+
+	//call the recArea API and get rec area object by its distance
+	getRecAreaByRecAreaByDistance(recAreaId: string) : Observable<RecArea>{
+		return(this.http.get<RecArea>(this.recAreaUrl, {params: new HttpParams().set("id", recAreaId)}));
+	}
+
+	//call the recArea API and return all rec areas
+	getRecAreas(recAreaId: string) : Observable<RecArea>{
 		return(this.http.get<RecArea>(this.recAreaUrl, {params: new HttpParams().set("id", recAreaId)}));
 	}
 }
