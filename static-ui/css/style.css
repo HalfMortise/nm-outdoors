@@ -9,8 +9,8 @@
 	text-align: center;
 	width: 50%;
 }
-/** End Styling for About components **/
 
+/** End Styling for About components **/
 
 /*****************************************************
 * Global Styles
@@ -59,7 +59,6 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-
 
 /*****************************************************
 * Navigation Styling
@@ -264,7 +263,6 @@ a:focus {
 	fill: var(--path-fill-3);
 }
 
-
 .hamburger {
 	width: 64px;
 	height: 64px;
@@ -278,9 +276,10 @@ a:focus {
 	background-color: var(--button-bg);
 	pointer-events: auto;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-	-webkit-box-shadow: 10px 10px 20px -6px rgba(0,0,0,0.75);
-	-moz-box-shadow: 10px 10px 20px -6px rgba(0,0,0,0.75);
-	box-shadow: 10px 10px 20px -6px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 10px 10px 20px -6px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 10px 10px 20px -6px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 20px -6px rgba(0, 0, 0, 0.75);
+	transform: scale(0.75);
 }
 
 .hamburger::after {
@@ -295,9 +294,9 @@ a:focus {
 	left: 0;
 	pointer-events: none;
 	border-radius: 50%;
-	-webkit-box-shadow: 10px 10px 20px -6px rgba(0,0,0,0.75);
-	-moz-box-shadow: 10px 10px 20px -6px rgba(0,0,0,0.75);
-	box-shadow: 10px 10px 20px -6px rgba(0,0,0,0.75);
+	-webkit-box-shadow: 10px 10px 20px -6px rgba(0, 0, 0, 0.75);
+	-moz-box-shadow: 10px 10px 20px -6px rgba(0, 0, 0, 0.75);
+	box-shadow: 10px 10px 20px -6px rgba(0, 0, 0, 0.75);
 }
 
 .hamburger__line {
@@ -531,7 +530,7 @@ a:focus {
 		position: fixed;
 		top: 0.5em;
 		right: 0.5em;
-		transform: scale(0.75);
+		transform: scale(0.6);
 	}
 
 }
@@ -539,46 +538,57 @@ a:focus {
 /*****************************************************
 * Explore Page Styling
 ******************************************************/
-	* {
-		box-sizing: border-box;
-	}
+* {
+	box-sizing: border-box;
+	transition: .5s;
+}
 
-	/* Create two equal columns that floats next to each other */
-	.col-map {
-		float: left;
-		width: 50%;
-		min-height: 100vh;
-		background-color: #fbd54a;
-	}
+/* Create two equal columns that floats next to each other */
 
-	.col-list {
-		float: right;
-		width: 50%;
-		min-height: 100vh;
-		background-color: #ff9827;
-	}
+.col-map {
+	float: left;
+	width: 50%;
+	min-height: 100vh;
+	background-color: #fbd54a;
+}
 
-	/* Clear floats after the columns */
-	.map-list-container:after {
-		content: "";
-		display: table;
-		clear: both;
-	}
+.col-map-full {
+	width: 100vw;
+	min-height: 100vh;
+	background-color: #fbd54a;
+}
 
+.col-list {
+	float: right;
+	width: 50%;
+	min-height: 100vh;
+	background-color: #ff9827;
+}
 
+.col-list-full {
+	width: 100vw;
+	min-height: 100vh;
+	background-color: #ff9827;
+}
+
+/* Clear floats after the columns */
+.map-list-container:after {
+	content: "";
+	display: table;
+	clear: both;
+}
 
 @media screen and (max-width: 600px) {
 	.col-map {
 		width: 100%;
 		min-height: 50vh;
 	}
+
 	.col-list {
 		width: 100%;
 		min-height: 50vh;
 	}
 }
-
-
 
 .btn {
 	padding: 0.6rem 2rem;
@@ -589,7 +599,7 @@ a:focus {
 .btn-primary {
 	color: #fff;
 	border-radius: 3px;
-	background-image: linear-gradient( 122deg, #21a2c7 0%, #2daa34 100%);
+	background-image: linear-gradient(122deg, #21a2c7 0%, #2daa34 100%);
 	box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.2);
 	font-weight: 500;
 	border: 0;
@@ -603,8 +613,8 @@ a:focus {
 .btn-primary:active,
 .btn-primary:not([disabled]):not(.disabled).active,
 .btn-primary:not([disabled]):not(.disabled):active,
-.show>.btn-primary.dropdown-toggle {
-	background-image: linear-gradient( 122deg, #214991 0%, #206824 100%);
+.show > .btn-primary.dropdown-toggle {
+	background-image: linear-gradient(122deg, #214991 0%, #206824 100%);
 	box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.3);
 	color: #FFF;
 }
@@ -631,6 +641,42 @@ a:focus {
 		position: fixed;
 	}
 
+}
+
+.collapsed {
+	display: none; /* hide it for small displays */
+}
+@media (min-width: 992px) {
+	.collapsed {
+		display: block;
+		margin-left: -25%; /* same width as sidebar */
+	}
+}
+
+#row-main {
+	overflow-x: hidden; /* necessary to hide collapsed sidebar */
+}
+
+#map {
+	-webkit-transition: width 0.3s ease;
+	-moz-transition: width 0.3s ease;
+	-o-transition: width 0.3s ease;
+	transition: width 0.3s ease;
+	background: #f12711;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	height: 100vh;
+
+}
+#list {
+	-webkit-transition: margin 0.3s ease;
+	-moz-transition: margin 0.3s ease;
+	-o-transition: margin 0.3s ease;
+	transition: margin 0.3s ease;
+	background: #00b09b;  /* fallback for old browsers */
+	background: -webkit-linear-gradient(to right, #96c93d, #00b09b);  /* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to right, #96c93d, #00b09b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	height: 100vh;
 }
 
 /*****************************************************
