@@ -6,7 +6,9 @@
 		<p>Map</p>
 	</div>
 	<div class="col-list" id="list">
-		<p>List</p>
+		<div class="row">
+			<div class="col-12"></div>
+		</div>
 	</div>
 </div>
 

@@ -623,7 +623,7 @@ a:focus {
 .btn-view {
 	color: #fff;
 	border-radius: 3px;
-	background-image: linear-gradient(122deg, #21a2c7 0%, #2daa34 100%);
+	background-image: linear-gradient(122deg, #863cc7 0%, #5629aa 100%);
 	box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.2);
 	font-weight: 500;
 	border: 0;
@@ -638,7 +638,7 @@ a:focus {
 .btn-view:not([disabled]):not(.disabled).active,
 .btn-view:not([disabled]):not(.disabled):active,
 .show > .btn-view.dropdown-toggle {
-	background-image: linear-gradient(122deg, #214991 0%, #206824 100%);
+	background-image: linear-gradient(122deg, #91248f 0%, #160c68 100%);
 	box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.3);
 	color: #FFF;
 }
