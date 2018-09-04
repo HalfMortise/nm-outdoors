@@ -4,7 +4,14 @@
 <div>
 <h3>Rating</h3>
 <p>Please leave a rating from 1-5 for this rec Area</p>
+	<span class="fa fa-star checked"></span>
+	<span class="fa fa-star checked"></span>
+	<span class="fa fa-star checked"></span>
+	<span class="fa fa-star"></span>
+	<span class="fa fa-star"></span>
+
 </div>
+<hr>
 <div>
 	<h3>Review</h3>
 	<p>Please leave a review below</p>
