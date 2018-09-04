@@ -544,6 +544,13 @@ a:focus {
 }
 
 /* Create two equal columns that floats next to each other */
+.hide {
+	visibility: hidden;
+}
+
+.show {
+	visibility: visible;
+}
 
 .col-map {
 	float: left;
@@ -572,21 +579,35 @@ a:focus {
 }
 
 /* Clear floats after the columns */
-.map-list-container:after {
-	content: "";
-	display: table;
-	clear: both;
-}
+/*.map-list-container:after {*/
+	/*content: "";*/
+	/*display: table;*/
+	/*clear: both;*/
+/*}*/
 
 @media screen and (max-width: 600px) {
 	.col-map {
-		width: 100%;
+		width: 100vw;
 		min-height: 50vh;
+		background-color: #fbd54a;
+	}
+
+	.col-map-full {
+		width: 100vw;
+		min-height: 100vh;
+		background-color: #fbd54a;
 	}
 
 	.col-list {
-		width: 100%;
+		width: 100vw;
 		min-height: 50vh;
+		background-color: #ff9827;
+	}
+
+	.col-list-full {
+		width: 100vw;
+		min-height: 100vh;
+		background-color: #ff9827;
 	}
 }
 
@@ -643,19 +664,6 @@ a:focus {
 
 }
 
-.collapsed {
-	display: none; /* hide it for small displays */
-}
-@media (min-width: 992px) {
-	.collapsed {
-		display: block;
-		margin-left: -25%; /* same width as sidebar */
-	}
-}
-
-#row-main {
-	overflow-x: hidden; /* necessary to hide collapsed sidebar */
-}
 
 #map {
 	-webkit-transition: width 0.3s ease;
@@ -665,7 +673,6 @@ a:focus {
 	background: #f12711;  /* fallback for old browsers */
 	background: -webkit-linear-gradient(to right, #f5af19, #f12711);  /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to right, #f5af19, #f12711); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-	height: 100vh;
 
 }
 #list {
@@ -676,7 +683,6 @@ a:focus {
 	background: #00b09b;  /* fallback for old browsers */
 	background: -webkit-linear-gradient(to right, #96c93d, #00b09b);  /* Chrome 10-25, Safari 5.1-6 */
 	background: linear-gradient(to right, #96c93d, #00b09b); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-	height: 100vh;
 }
 
 /*****************************************************
