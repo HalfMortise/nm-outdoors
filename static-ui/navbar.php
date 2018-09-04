@@ -24,7 +24,6 @@
 				<a class="global-menu__item global-menu__item--navMenu link_2" href="#2">ABOUT</a>
 				<a class="global-menu__item global-menu__item--navMenu link_3" href="#3">EXPLORE</a>
 				<a class="global-menu__item global-menu__item--navMenu link_4" href="#4">SEARCH</a>
-
 			</div>
 		</div>
 		<svg class="shape-overlays" viewBox="0 0 100 100" preserveAspectRatio="none">
