@@ -14,18 +14,5 @@
 		</div>
 </section>
 
-<section>
-	<div id="review">
-		<h3>My Reviews</h3>
-		<ul>
-			<li>Review goes here</li>
-			<li>Review goes here</li>
-			<li>Review goes here</li>
-			<li>Review goes here</li>
-			<li>Review goes here</li>
-			<li>Review goes here</li>
-		</ul>
-	</div>
-</section>
 
 <?php require_once "footer.php"; ?>
