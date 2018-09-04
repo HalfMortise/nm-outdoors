@@ -11,4 +11,7 @@ export class RecAreaService {
 	private recAreaUrl = "api/recArea/";
 
 	//call the recArea API and get rec area object by its id
+	getRecArea(recAreaId: string) : Observable<RecArea>{
+		return(this.http.get<RecArea(this.recAreaUrl, {params: new HttpParams().set("id", RecArea)}));
+	}
 }
