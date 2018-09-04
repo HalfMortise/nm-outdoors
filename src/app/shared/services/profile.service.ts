@@ -11,6 +11,8 @@ export class ProfileService {
 	private profileUrl = "api/Profile/";
 
 	//call to the Profile API and get profile object by its id
-
+getProfileByProfileId(profileId: string) : Observable<Profile>{
+	return(this.http.get<Profile>(this.profileUrl, {params: new HttpParams().set("id", profileId)}))
+}
 
 }
