@@ -26,4 +26,9 @@ getProfileByProfileId(profileId: string) : Observable<Profile>{
 		return(this.http.post<Status>(this.profileUrl, profile));
 	}
 
+	//call to the Profile API and edit the profile
+	editProfile(profile: Profile) : Observable<Status>{
+		return(this.http.put<Status>(this.profileUrl + profile.profileId, profile));
+	}
+
 }
