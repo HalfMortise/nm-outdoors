@@ -15,4 +15,9 @@ getProfileByProfileId(profileId: string) : Observable<Profile>{
 	return(this.http.get<Profile>(this.profileUrl, {params: new HttpParams().set("id", profileId)}))
 }
 
+//call to the Profile API and get profile object by profile email
+	getProfileByProfileEmail(profileEmail: string) : Observable<Profile>{
+		return(this.http.get<Profile>(this.profileUrl, {params: new HttpParams().set("email", profileEmail )}))
+	}
+
 }
