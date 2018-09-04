@@ -11,7 +11,7 @@
 </div>
 
 
-<button class="btn btn-primary" id="toggle">List/Map</button>
+<button class="btn btn-view" id="toggle">List/Map</button>
 
 
 

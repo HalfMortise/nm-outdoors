@@ -596,6 +596,9 @@ a:focus {
 		width: 100vw;
 		min-height: 100vh;
 		background-color: #fbd54a;
+		top: 0;
+		right: 0;
+		position: fixed;
 	}
 
 	.col-list {
@@ -617,7 +620,7 @@ a:focus {
 	border-radius: 5%;
 }
 
-.btn-primary {
+.btn-view {
 	color: #fff;
 	border-radius: 3px;
 	background-image: linear-gradient(122deg, #21a2c7 0%, #2daa34 100%);
@@ -625,16 +628,16 @@ a:focus {
 	font-weight: 500;
 	border: 0;
 	position: absolute;
-	bottom: 3em;
+	bottom: 4em;
 	right: 2.25em;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary:not([disabled]):not(.disabled).active,
-.btn-primary:not([disabled]):not(.disabled):active,
-.show > .btn-primary.dropdown-toggle {
+.btn-view:hover,
+.btn-view:focus,
+.btn-view:active,
+.btn-view:not([disabled]):not(.disabled).active,
+.btn-view:not([disabled]):not(.disabled):active,
+.show > .btn-view.dropdown-toggle {
 	background-image: linear-gradient(122deg, #214991 0%, #206824 100%);
 	box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.3);
 	color: #FFF;
@@ -647,7 +650,7 @@ a:focus {
 		height: 100%;
 	}
 
-	.btn-primary {
+	.btn-view {
 		position: fixed;
 		bottom: 1em;
 		right: 0.5em;
