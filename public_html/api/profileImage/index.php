@@ -32,7 +32,7 @@ try {
 
 	$config = readConfig("/etc/apache2/capstone-mysql/ddctwitter.ini");
 	$cloudinary = json_decode($config["cloudinary"]);
-	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "api_key" => $cloudinary->apiKey, "api_secret" => $cloudinary->apiSecret]);
+	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "654676448113238" => $cloudinary->apiKey, "JaxXH-tcX7djuPNsJuhJg7WlLGw" => $cloudinary->apiSecret]);
 	// process GET requests
 
 	if($method === "PUT") {
