@@ -31,4 +31,9 @@ getProfileByProfileId(profileId: string) : Observable<Profile>{
 		return(this.http.put<Status>(this.profileUrl + profile.profileId, profile));
 	}
 
+	//call to the Profile API and delete the profile
+	deleteProfile(profileId: Profile) : Observable<Status>{
+		return(this.http.delete<Status>(this.profileUrl + profileId));
+	}
+
 }
