@@ -9,12 +9,10 @@
 	width: 50%;
 }
 
-.global-menu__item--navMenu {
-	transition: transform 0.1s, opacity 0.1s;
-	transform: translateY(100%);
-	transition-timing-function: ease-out;
-}
 
+/*****************************************************
+* Global Styles
+******************************************************/
 
 *,
 *::after,
@@ -23,7 +21,7 @@
 }
 
 html {
-	background: #000;
+	background: #fff;
 }
 
 body {
@@ -36,6 +34,11 @@ body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
+
+/*****************************************************
+* Navigation Styling
+******************************************************/
 
 /* Color schemes */
 
@@ -125,7 +128,9 @@ a:focus {
 }
 
 .global-menu__item--navMenu {
+	transition: transform 0.1s, opacity 0.1s;
 	transform: translateY(100%);
+	transition-timing-function: ease-out;
 }
 
 .global-menu__item:hover {

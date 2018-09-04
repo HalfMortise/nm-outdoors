@@ -1,6 +1,6 @@
 <?php require_once ("head-utils.php");?>
 <?php require_once "navbar.php"; ?>
-<!--
+
  this component is the landing page that will provide the
  user with a brief description of the application as well as
  the option to search for activities (by activity), to sign up
@@ -9,7 +9,6 @@
 
  This component will require the use of Bootstrap 4, Popper, and JQuery
 
--->
 
 
 	<div class="container-home">

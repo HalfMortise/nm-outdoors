@@ -47,7 +47,6 @@
 		</svg>
 </nav>
 
-<script src="js/script.js"></script>
 <script src="js/easings.js"></script>
 <script src="js/overlay.js"></script>
 
