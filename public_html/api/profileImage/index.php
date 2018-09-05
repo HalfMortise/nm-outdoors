@@ -33,6 +33,8 @@ try {
 
 	$config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 	$cloudinary = json_decode($config["cloudinary"]);
+
+	//UPDATE THESE KEYS AFTER ADDING THIS FILE TO .GITIGNORE
 	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "654676448113238" => $cloudinary->apiKey, "JaxXH-tcX7djuPNsJuhJg7WlLGw" => $cloudinary->apiSecret]);
 
 	// process GET requests
