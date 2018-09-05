@@ -1,6 +1,6 @@
 // Angular 6
 import "@angular/platform-browser";
-import "@angular/playform-browser-dynamic";
+import "@angular/platform-browser-dynamic";
 import "@angular/core";
 import "@angular//common";
 import "@angular/router";
