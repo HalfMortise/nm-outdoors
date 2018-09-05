@@ -14,8 +14,8 @@ export class ActivityService {
 	private activityUrl = "api/activity/";
 
 	//call the activity API and get a activity object by its Id
-	getActivity(activityId: string) : Observable<activity> {
-		return(this.http.get<activity>(this.activityUrl, {params: new HttpParams().set("id", activityId)}));
+	getActivity(activityId: string) : Observable<Activity> {
+		return(this.http.get<Activity>(this.activityUrl, {params: new HttpParams().set("id", activityId)}));
 	}
 
 	// //call the activity API and get the activity by activity Name
