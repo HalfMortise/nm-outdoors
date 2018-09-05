@@ -13,7 +13,7 @@ import "jquery";
 import "bootstrap";
 
 //font awesome
-import "@fontawesome/fontawesome";
-import "@fontawesome/fontawesome-free-brands";
-import "@fontawesome/fontawesome-free-regular";
-import "@fontawesome/fontawesome-free-solid";
+import "@fortawesome/fontawesome";
+import "@fortawesome/fontawesome-free-brands";
+import "@fortawesome/fontawesome-free-regular";
+import "@fortawesome/fontawesome-free-solid";
