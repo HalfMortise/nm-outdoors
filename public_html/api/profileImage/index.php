@@ -6,7 +6,7 @@ require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
 require_once dirname(__DIR__, 3) . "/php/lib/jwt.php";
 
-use Edu\Cnm\DataDesign\{
+use Edu\Cnm\DataDesign\ {
 	Tweet, Image
 };
 
@@ -16,6 +16,7 @@ use Edu\Cnm\DataDesign\{
  * @author Marty Bonacci
  * @version 1.0
  */
+
 // start session
 if(session_status() !== PHP_SESSION_ACTIVE) {
 	session_start();
@@ -26,11 +27,11 @@ $reply->status = 200;
 $reply->data = null;
 try {
 	// Grab the MySQL connection
-	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/ddctwitter.ini");
+	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 	//determine which HTTP method is being used
 	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
 
-	$config = readConfig("/etc/apache2/capstone-mysql/ddctwitter.ini");
+	$config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 	$cloudinary = json_decode($config["cloudinary"]);
 	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "654676448113238" => $cloudinary->apiKey, "JaxXH-tcX7djuPNsJuhJg7WlLGw" => $cloudinary->apiSecret]);
 	// process GET requests
