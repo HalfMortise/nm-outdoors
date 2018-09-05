@@ -1,4 +1,4 @@
-<?php require_once ("head-utils.php");?>
+
 
 <nav class="navMenu">
 		<div class="hamburger hamburger--navMenu js-hover">

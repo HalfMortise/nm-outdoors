@@ -1,4 +1,3 @@
-<?php require_once ("head-utils.php");?>
 
 <footer class="bg-dark text-light">
 	<div class="container-fluid mt-4">

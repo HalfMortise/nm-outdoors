@@ -19,8 +19,8 @@ export class ActivityService {
 	}
 
 	//call the activity API and get all activities
-	getAllActivities(activityId: string) : Observable<Activity> {
-		return(this.http.get<Activity>(this.activityUrl));
+	getAllActivities() : Observable<Activity[]> {
+		return(this.http.get<Activity[]>(this.activityUrl));
 	}
 
 	// //call the activity API and get the activity by activity Name
