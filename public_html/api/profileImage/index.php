@@ -13,7 +13,7 @@ use Edu\Cnm\DataDesign\ {
 /**
  * Cloudinary API for Images
  *
- * @author Marty Bonacci
+ * @author Bashir Shafii
  * @version 1.0
  */
 
