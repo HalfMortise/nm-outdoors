@@ -6,8 +6,8 @@ require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
 require_once dirname(__DIR__, 3) . "/php/lib/jwt.php";
 
-use Edu\Cnm\DataDesign\ {
-	Tweet, Image
+use HalfMortise\NmOutdoors {
+	Profile, Image
 };
 
 /**
@@ -34,11 +34,14 @@ try {
 	$config = readConfig("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 	$cloudinary = json_decode($config["cloudinary"]);
 	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "654676448113238" => $cloudinary->apiKey, "JaxXH-tcX7djuPNsJuhJg7WlLGw" => $cloudinary->apiSecret]);
+
 	// process GET requests
 
 	if($method === "PUT") {
+
 		//enforce that the end user has a XSRF token.
 		verifyXsrf();
+
 		// verify the user is logged in
 		if(empty($_SESSION["profile"]) === true) {
 			throw (new \InvalidArgumentException("you must be logged in to post images", 401));
@@ -48,6 +51,7 @@ try {
 
 			// assigning variable to the user profile, add image extension
 			$tempUserFileName = $_FILES["image"]["tmp_name"];
+
 			// upload image to cloudinary and get public id
 			$cloudinaryResult = \Cloudinary\Uploader::upload($tempUserFileName, array("width" => 500, "crop" => "scale"));
 
@@ -61,5 +65,6 @@ try {
 	$reply->message = $exception->getMessage();
 }
 header("Content-Type: application/json");
+
 // encode and return reply to front end caller
 echo json_encode($reply);
