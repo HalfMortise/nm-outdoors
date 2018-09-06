@@ -51,7 +51,7 @@ try {
 //			$activityName = Activity::getActivityByActivityName($pdo, $activityName);
 //	}
 	else if(empty($pdo) === false) {
-			$reply->data = Activity::getAllActivities($pdo);
+			$reply->data = Activity::getAllActivities($pdo)->toArray();
 		} else {
 			throw new InvalidArgumentException("incorrect search parameters ", 404);
 		}

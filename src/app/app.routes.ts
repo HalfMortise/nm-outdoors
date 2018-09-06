@@ -12,6 +12,8 @@ import {SignUpService} from "./shared/services/sign.up.service";
 import {ActivationService} from "./shared/services/activation.service";
 import {AuthService} from "./shared/services/auth.service";
 import {ProfileService} from "./shared/services/profile.service";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 
 
 export const allAppComponents = [HomeComponent];
@@ -22,6 +24,7 @@ export const routes: Routes = [
 const services : any[] = [ActivationService, ActivityService, AuthService, ProfileService, RecAreaService, ReviewService, SessionService, SignInService, SignUpService];
 const providers: any[] = [
 	{provide: APP_BASE_HREF, useValue: window["_base_href"]},
+	{provide: HTTP_INTERCEPTORS, useClass:DeepDiveInterceptor, multi:true}
 ];
 export const appRoutingProviders: any[] = [providers, services];
 
