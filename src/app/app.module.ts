@@ -10,7 +10,7 @@ import {NguiMapModule} from "@ngui/map";
 const moduleDeclarations = [AppComponent];
 
 @NgModule({
-	imports:      [BrowserModule, HttpClientModule, NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyDCqOjDoRFYTgruPdLDmMkEK96hQUEb9XM'}), routing, ReactiveFormsModule],
+	imports:      [BrowserModule, HttpClientModule, NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBMQE2mPIzXsRIbSUWzBUwiJrdrp80Xkqc'}), routing, ReactiveFormsModule],
 	declarations: [...moduleDeclarations, ...allAppComponents],
 	bootstrap:    [AppComponent],
 	providers:    [...appRoutingProviders]
