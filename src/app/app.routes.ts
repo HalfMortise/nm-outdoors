@@ -2,7 +2,8 @@ import {RouterModule, Routes} from "@angular/router";
 // import {SplashComponent} from "./splash/splash.component";
 // import {UserService} from "./shared/services/user.service";
 import {APP_BASE_HREF} from "@angular/common";
-import {HomeComponent} from "./home/home.components";
+import {HomeComponent} from "./home/home.component";
+import {ExploreComponent} from "./explore/explore.component";
 import {ActivityService} from "./shared/services/activity.service";
 import {RecAreaService} from "./shared/services/rec.area.service";
 import {ReviewService} from "./shared/services/review.service";
@@ -16,15 +17,16 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 
 
-export const allAppComponents = [HomeComponent];
+export const allAppComponents = [HomeComponent, ExploreComponent];
 
 export const routes: Routes = [
+	{path: "explore", component: ExploreComponent},
 	{path: "", component: HomeComponent}
 ];
 const services : any[] = [ActivationService, ActivityService, AuthService, ProfileService, RecAreaService, ReviewService, SessionService, SignInService, SignUpService];
 const providers: any[] = [
 	{provide: APP_BASE_HREF, useValue: window["_base_href"]},
-	{provide: HTTP_INTERCEPTORS, useClass:DeepDiveInterceptor, multi:true}
+	{provide: HTTP_INTERCEPTORS, useClass: DeepDiveInterceptor, multi: true}
 ];
 export const appRoutingProviders: any[] = [providers, services];
 
