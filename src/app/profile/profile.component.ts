@@ -7,7 +7,7 @@
 
 /* Imports */
 
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {Review} from "../shared/interfaces/review";
 import {Profile} from "../shared/interfaces/profile";
 
@@ -16,10 +16,12 @@ import {Profile} from "../shared/interfaces/profile";
 /* Component */
 
 @Component({
+	//selector required? refer to recArea-modal
 	template: require("./profile.html")
 })
 
 export class ProfileComponent implements OnInit{
+	@Input() profileId: string;
 	review : Review[];
 	profile: Profile;
 
