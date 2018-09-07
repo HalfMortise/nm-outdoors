@@ -5,7 +5,7 @@ import {ActivatedRoute} from "@angular/router";
 
 @Component ({
 	selector: "recArea-list",
-	template: require("./review-list-post.template.html")
+	template: require("./recArea-list.html")
 })
 
 export class RecAreaListComponent implements OnInit {
