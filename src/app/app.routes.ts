@@ -15,9 +15,10 @@ import {AuthService} from "./shared/services/auth.service";
 import {ProfileService} from "./shared/services/profile.service";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
+import {RecAreaModalComponent} from "./home/recArea-modal.component";
 
 
-export const allAppComponents = [HomeComponent, ExploreComponent];
+export const allAppComponents = [HomeComponent, ExploreComponent, RecAreaModalComponent];
 
 export const routes: Routes = [
 	{path: "explore", component: ExploreComponent},
