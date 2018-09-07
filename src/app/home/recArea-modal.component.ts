@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {RecAreaService} from "../shared/services/rec.area.service";
 import {ReviewService} from "../shared/services/review.service";
 import {RecArea} from "../shared/interfaces/rec.area";
@@ -11,9 +11,9 @@ import {ActivatedRoute} from "@angular/router";
 })
 
 export class RecAreaModalComponent implements OnInit {
-
+	@Input() recAreaId: string;
 	recArea: RecArea = null;
-	review: Review = null;
+	review: Review;
 	reviews: Review[] = [];
 
 	constructor(
@@ -23,11 +23,16 @@ export class RecAreaModalComponent implements OnInit {
 	) {
 	}
 
-	recAreaId = this.route.snapshot.params["recAreaId"];
+	// recAreaId = this.route.snapshot.params["recAreaId"];
 	reviewRecAreaId = this.route.snapshot.params["reviewRecAreaId"];
 
 	ngOnInit() {
 		this.recAreaService.getRecAreaByRecAreaId(this.recAreaId) . subscribe(recArea => this.recArea = recArea);
+		this.loadReviews();
+	}
+
+	loadReviews(): any{
 		this.reviewService.getReviewbyRecAreaId(this.reviewRecAreaId) . subscribe(reviews => this.reviews = reviews);
 	}
+
 }
