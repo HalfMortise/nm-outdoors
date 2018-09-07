@@ -7,3 +7,21 @@
 
 /* Imports */
 
+import {Component, OnInit} from "@angular/core";
+import {Review} from "../shared/interfaces/review";
+import {Profile} from "../shared/interfaces/profile";
+
+
+
+/* Component */
+
+@Component({
+	template: require("./profile.html")
+})
+
+export class ProfileComponent implements OnInit{
+	review : Review[];
+	profile: Profile;
+
+
+}
