@@ -10,6 +10,9 @@
 import {Component, Input, OnInit} from "@angular/core";
 import {Review} from "../shared/interfaces/review";
 import {Profile} from "../shared/interfaces/profile";
+import {ProfileService} from "../shared/services/profile.service";
+import {ReviewService} from "../shared/services/review.service";
+import {ActivatedRoute} from "@angular/router";
 
 
 
@@ -22,8 +25,16 @@ import {Profile} from "../shared/interfaces/profile";
 
 export class ProfileComponent implements OnInit{
 	@Input() profileId: string;
-	review : Review[];
 	profile: Profile;
+	review : Review;
+	reviews : Review[];
 
+	constructor(
+		protected profileService: ProfileService,
+		protected reviewService: ReviewService,
+		protected route: ActivatedRoute
+	) {
+
+	}
 
 }
