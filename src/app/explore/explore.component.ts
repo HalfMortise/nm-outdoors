@@ -12,7 +12,7 @@ export class ExploreComponent implements OnInit{
 	recArea : string = "";
 	recAreas : RecArea[] = [];
 	recAreaSearchForm : FormGroup;
-	detailedRecArea : RecArea = new RecArea(null, null, null, null, null, null, null, null, null);
+	detailedRecArea : RecArea;
 
 
 	constructor(private recAreaService: RecAreaService, private router: Router,private formBuilder: FormBuilder){
