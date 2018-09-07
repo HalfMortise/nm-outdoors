@@ -26,7 +26,7 @@ export class RecAreaService {
 	}
 
 	//call the recArea API and return all rec areas
-	getRecAreas() : Observable<RecArea>{
+	getAllRecAreas() : Observable<RecArea>{
 		return(this.http.get<RecArea>(this.recAreaUrl));
 	}
 }
