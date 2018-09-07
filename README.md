@@ -2,14 +2,13 @@
 ***
 ### Vision:
  
-to create a user friendly website for individuals who enjoy the outdoors and want to easily find trails, parks, etc in the state of NM.
-
+An interactive web application that enables outdoor enthusiasts to search for local recreational areas in the great state of New Mexico, and find activities associated with those sites. Users can also create profiles within the application and leave ratings and comments on recreational areas as a way to contribute information to the local outdoor community.
 
 ### Features:  
 ***
-* Various recreational sites and activies in NM (purpose currently)
+* Various recreational sites and activities in NM (purpose currently)
 
-* Pulls from established recreational sites
+* Pulls data from established recreational sites
 
 * Five star rating system (from users)
 
