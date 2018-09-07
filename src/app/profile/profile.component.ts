@@ -8,41 +8,44 @@
 /* Imports */
 
 import {Component, Input, OnInit} from "@angular/core";
-import {Review} from "../shared/interfaces/review";
 import {Profile} from "../shared/interfaces/profile";
 import {ProfileService} from "../shared/services/profile.service";
-import {ReviewService} from "../shared/services/review.service";
 import {ActivatedRoute} from "@angular/router";
+import {JwtHelperService} from "@auth0/angular-jwt";
+import {Status} from "../shared/interfaces/status";
 
 
 
 /* Component */
 
 @Component({
-	//selector required? refer to recArea-modal
-	template: require("./profile.html")
+	template:`
+	<h1>{{profile.profileAtHandle}}</h1>
+	
+	`
 })
-
 export class ProfileComponent implements OnInit{
-	@Input() profileId: string;
-	profile: Profile;
-	review : Review;
-	reviews : Review[];
 
-	constructor(
-		protected profileService: ProfileService,
-		protected reviewService: ReviewService,
-		protected route: ActivatedRoute
-	) {
+	profile: Profile;
+	status: Status;
+
+	constructor(private profileService: ProfileService, private jwtHelper : JwtHelperService) {}
+
+	ngOnInit(): void {
+		this.currentlySignedIn()
 	}
 
-	profileId = this.route.snapshot.params["profileId"];
-	reviewProfileId = this.route.snapshot.params["reviewProfileId"];
+	currentlySignedIn() : void {
+
+		const decodedJwt = this.jwtHelper.decodeToken(localStorage.getItem('jwt-token'));
+
+		this.profileService.getProfileByProfileId(decodedJwt.auth.profileId)
+			.subscribe(profile => this.profile = profile);
+
+//		this.profileService.editProfile(this.http.put<Status>(this.profileUrl + profile.profileId, profile)) . subscribe(profile => this.profile = profile);
+
+//		this.profileService.deleteProfile(this.http.delete<Status>(this.profileUrl + profile.profileId, profile)) . subscribe(profile => this.profile = profile);
+	}
 
 
 }
-
-
-
-
-
