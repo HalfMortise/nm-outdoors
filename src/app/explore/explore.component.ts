@@ -1,3 +1,10 @@
+/*
+ * TODO: Angular page split, Adjust zoom of map, change Modal button to make it link back to the actual recArea
+ * TODO: RecAreaModal: 1. recAreaImageUrl, 2. recAreaName, 3. recAreaReviewRating total, 4. recAreaDescription, 5. recArea Location (Ngui map set on location data), 4. activities (from activityTypeId/activityId), 5. recArea-review-list, 6. recArea-review-post
+ * TODO: Explore-nav at top of page (to include search filter)
+ *
+ **/
+
 import {Component, OnInit} from "@angular/core";
 import {RecArea} from "../shared/interfaces/rec.area";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
