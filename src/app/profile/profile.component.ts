@@ -34,7 +34,15 @@ export class ProfileComponent implements OnInit{
 		protected reviewService: ReviewService,
 		protected route: ActivatedRoute
 	) {
-
 	}
 
+	profileId = this.route.snapshot.params["profileId"];
+	reviewProfileId = this.route.snapshot.params["reviewProfileId"];
+
+
 }
+
+
+
+
+
