@@ -17,6 +17,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 import {RecAreaModalComponent} from "./explore/recArea-modal.component";
 import {ProfileComponent} from "./profile/profile.component";
+import {RecAreaListComponent} from "./explore/recArea-list.component";
 
 
 export const allAppComponents = [HomeComponent, ExploreComponent, RecAreaModalComponent];
