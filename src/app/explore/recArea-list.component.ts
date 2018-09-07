@@ -2,10 +2,20 @@ import {Component, Input, OnInit} from "@angular/core";
 import {RecAreaService} from "../shared/services/rec.area.service";
 import {RecArea} from "../shared/interfaces/rec.area";
 import {ActivatedRoute} from "@angular/router";
+import {NgxPaginationModule} from 'ngx-pagination';
+import {BrowserModule} from "@angular/platform-browser"; // <-- import the module
+
+
+@NgModule({
+	imports: [BrowserModule, NgxPaginationModule], // <-- include it in your app module
+	declarations: [RecAreaListComponent],
+	bootstrap: [RecAreaListComponent]
+})
 
 @Component ({
 	selector: "recArea-list",
 	template: require("./recArea-list.html")
+
 })
 
 export class RecAreaListComponent implements OnInit {
