@@ -12,7 +12,7 @@ import {Status} from "../../interfaces/status";
 import {Router} from "@angular/router";
 import {SignUpService} from "../../services/sign.up.service";
 import {SignUp} from "../../interfaces/sign.up";
-import {BrowserModule, ReactiveFormsModule} from "@angular/platform-browser";
+import {BrowserModule} from "@angular/platform-browser";
 
 
 
@@ -21,7 +21,7 @@ declare let $: any;
 
 
 @NgModule({
-	imports: [BrowserModule, FormsModule, ReactiveFormsModule],
+	imports: [BrowserModule, FormsModule],
 })
 
 // set the template url and the selector for the ng-powered HTML tag
