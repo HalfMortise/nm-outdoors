@@ -9,11 +9,12 @@
 import {Component} from "@angular/core";
 
 
-
-
 /* Component */
 @Component({
 	template: require("./about.html"),
 	selector: "about"
 })
 
+export class HomeComponent {
+
+}
