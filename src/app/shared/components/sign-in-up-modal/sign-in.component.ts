@@ -18,7 +18,7 @@ declare var $: any;
 
 @Component({
 	template: require( "./sign-in-up-modal.html"),
-	selector: "signin"
+	selector: "sign-in"
 })
 
 export class SignInComponent {
