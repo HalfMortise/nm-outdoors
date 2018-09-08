@@ -20,6 +20,8 @@ import {ProfileComponent} from "./profile/profile.component";
 import {RecAreaListComponent} from "./explore/recArea-list.component";
 
 
+
+
 export const allAppComponents = [HomeComponent, ExploreComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent];
 
 export const routes: Routes = [

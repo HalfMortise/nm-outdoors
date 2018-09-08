@@ -46,17 +46,20 @@
 								<!-- Sign In Form -->
 								<!-- Text input-->
 								<div class="control-group">
-									<label class="control-label" for="at-handle">Name:</label>
+									<label class="control-label" for="signin-email">Email:</label>
 									<div class="controls">
-										<input id="at-handle" type="text" class="form-control input-medium" placeholder="" required="required">
+										<input id="signin-email" type="email" class="form-control input-medium" placeholder="" required [(ngModel)]=signin.profileEmail
+												 #profileEmail="ngModel">
 									</div>
 								</div>
 
 								<!-- Password input-->
 								<div class="control-group">
-									<label class="control-label" for="password">Password:</label>
+									<label class="control-label" for="signin-password">Password:</label>
 									<div class="controls">
-										<input required="required" id="password" class="form-control input-medium" type="password" placeholder="********">
+										<input id="signin-password" class="form-control input-medium" type="password" required
+												 [(ngModel)]="signin.profilePassword" #profilePassword="ngModel"
+												 placeholder="********">
 									</div>
 								</div>
 
@@ -64,11 +67,22 @@
 								<div class="control-group">
 									<label class="control-label" for="signin"></label>
 									<div class="controls">
-										<button id="signin" name="signin" class="btn btn-success">Sign In</button>
+										<button type="submit" id="submit" required
+												  [(ngModel)]="signin.profilePassword" #profilePassword="ngModel"
+												 name="signin" class="btn btn-success">Sign In</button>
 									</div>
 								</div>
 							</fieldset>
 						</form>
+
+						//alert area for status messages
+						<div *ngIf="status !== null" class="alert alert-dismissible" [ngClass]="status.type" role="alert">
+							<button type="button" class="close" aria-label="Close" (click)="status = null;"><span
+								aria-hidden="true">&times;</span></button>
+							{{ status.message }}
+						</div>
+
+
 					</div>
 
 					<!-- Sign Up Form -->
