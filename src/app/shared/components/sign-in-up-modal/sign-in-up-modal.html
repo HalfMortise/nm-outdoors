@@ -1,15 +1,10 @@
 <!--
-
  this component is the modal that will "pop up" when a user elects
  to either sign up for a profile or sign into a profile.
  It will contain two tabs: Left will be for sign-in,
  Right will be for sign-up
-
  This component will require the use of Bootstrap 4, Popper, and JQuery
-
 -->
-
-
 <!--This button triggers the modal and is not part of the actual component-->
 <div class="container">
 	<hr />
@@ -21,7 +16,6 @@
 	<hr />
 </div>
 <!--/end button-->
-
 <!-- Modal Structure -->
 <div class="modal fade bs-modal-sm" id="sign-in-up-modal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-sm">
@@ -39,109 +33,65 @@
 				<div id="nav-tabContent" class="tab-content">
 					<div class="tab-pane fade show active" id="signin">
 						<h6>Sign into your account here</h6>
-						<form #signInForm="ngForm" class="form-horizontal" name="signInForm" id="signInForm" novalidate
-								(ngSubmit)="signIn();">
+						<form class="form-horizontal">
 							<fieldset>
-
 								<!-- Sign In Form -->
 								<!-- Text input-->
 								<div class="control-group">
-									<label class="control-label" for="signin-email">Email:</label>
-									<div class="controls">
-										<input id="signin-email" type="email" class="form-control input-medium" placeholder="" required [(ngModel)]=signin.profileEmail
-												 #profileEmail="ngModel">
-									</div>
-								</div>
-
-								<!-- Password input-->
-								<div class="control-group">
-									<label class="control-label" for="signin-password">Password:</label>
-									<div class="controls">
-										<input id="signin-password" class="form-control input-medium" type="password" required
-												 [(ngModel)]="signin.profilePassword" #profilePassword="ngModel"
-												 placeholder="********">
-									</div>
-								</div>
-
-								<!-- Submit Button -->
-								<div class="control-group">
-									<label class="control-label" for="signin"></label>
-									<div class="controls">
-										<button type="submit" id="submit" required
-												  [(ngModel)]="signin.profilePassword" #profilePassword="ngModel"
-												 name="signin" class="btn btn-success">Sign In</button>
-									</div>
-								</div>
-							</fieldset>
-						</form>
-
-						<!--alert area for status messages-->
-						<div *ngIf="status !== null" class="alert alert-dismissible" [ngClass]="status.type" role="alert">
-							<button type="button" class="close" aria-label="Close" (click)="status = null;"><span
-								aria-hidden="true">&times;</span></button>
-							{{ status.message }}
-						</div>
-					</div>
-
-					<!-- Sign Up Form -->
-					<!-- Text input-->
-
-					<div class="tab-pane fade" id="signup">
-						<form class="form-horizontal" [formGroup]="signUpForm" (ngSubmit)="createSignUp();" novalidate>
-							<h6>Sign up for an account here</h6>
-							<fieldset>
-								<div class="control-group">
-									<label for="atHandle" class="control-label">Username:</label>
-									<div class="controls">
-										<input id="atHandle" name="atHandle" class="form-control" formControlName="atHandle" type="text" placeholder="" required="required">
-									</div>
-								</div>
-
-								<!-- alerts for when atHandle provided does not meet requirements -->
-								<div class="alert alert-danger" *ngIf="signUpForm.controls.atHandle?.invalid && signUpForm.controls.atHandle?.touched">
-									<p *ngIf="signUpForm.controls.atHandle?.errors.maxlength">Username is too long</p>
-									<p *ngIf="signUpForm.controls.atHandle?.errors.required">Username is required</p>
-								</div>
-
-								<div class="control-group">
 									<label class="control-label" for="email">Email:</label>
 									<div class="controls">
-										<input id="email" class="form-control" formControlName="email" type="text" placeholder="" required="required">
+										<input id="email" type="text" class="form-control input-medium" placeholder="" required="required">
 									</div>
 								</div>
-
-								<!-- alerts for when email provided does not meet requirements -->
-								<div class="alert alert-danger" *ngIf="signUpForm.controls.email?.invalid && signUpForm.controls.email?.touched">
-									<p *ngIf="signUpForm.controls.email?.errors.maxlength">Email is too long</p>
-									<p *ngIf="signUpForm.controls.email?.errors.required">A valid email address is required</p>
-								</div>
-
 								<!-- Password input-->
 								<div class="control-group">
 									<label class="control-label" for="password">Password:</label>
 									<div class="controls">
-										<input id="password" name="password" class="form-control" formControlName="password" type="password" placeholder="********" required="required">
+										<input required="required" id="password" class="form-control input-medium" type="password" placeholder="********">
 									</div>
 								</div>
-
-								<!-- alert for when password is not provided -->
-								<div class="alert alert-danger" *ngIf="signUpForm.controls.password?.invalid && signUpForm.controls.password?.touched">
-									<p *ngIf="signUpForm.controls.password?.errors.required">Valid password required</p>
+								<!-- Submit Button -->
+								<div class="control-group">
+									<label class="control-label" for="signin"></label>
+									<div class="controls">
+										<button id="signin" name="signin" class="btn btn-success">Sign In</button>
+									</div>
 								</div>
-
+							</fieldset>
+						</form>
+					</div>
+					<!-- Sign Up Form -->
+					<!-- Text input-->
+					<div class="tab-pane fade" id="signup">
+						<form class="form-horizontal">
+							<h6>Sign up for an account here</h6>
+							<fieldset>
+								<div class="control-group">
+									<label class="control-label" for="atHandle">Username:</label>
+									<div class="controls">
+										<input id="atHandle" name="atHandle" class="form-control" type="text" placeholder="" required="required">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label" for="email">Email:</label>
+									<div class="controls">
+										<input id="email" class="form-control" type="text" placeholder="" required="required">
+									</div>
+								</div>
+								<!-- Password input-->
+								<div class="control-group">
+									<label class="control-label" for="password">Password:</label>
+									<div class="controls">
+										<input id="password" name="password" class="form-control" type="password" placeholder="********" required="required">
+									</div>
+								</div>
 								<!-- Text input-->
 								<div class="control-group">
-									<label class="control-label" for="passwordConfirm">Confirm Password:</label>
+									<label class="control-label" for="confirmPassword">Confirm Password:</label>
 									<div class="controls">
-										<input id="passwordConfirm" class="form-control" formControlName="passwordConfirm" type="password" placeholder="********" required="required">
+										<input id="confirmPassword" class="form-control" type="password" placeholder="********" required="required">
 									</div>
 								</div>
-
-								<!-- alert for when password is not provided -->
-								<div class="alert alert-danger" *ngIf="signUpForm.controls.passwordConfirm?.invalid && signUpForm.controls.passwordConfirm?.touched">
-									<p *ngIf="signUpForm.controls.email?.errors.required">Please confirm password</p>
-								</div>
-
 								<!-- Multiple Radios (inline) -->
 								<!-- Replace with reCAPTCHA? -->
 								<br>
@@ -154,7 +104,6 @@
 											<input type="radio" name="humancheck" id="humancheck-1" value="human">I'm Human</label>
 									</div>
 								</div>
-
 								<!-- Button -->
 								<div class="control-group">
 									<label class="control-label" for="confirmsignup"></label>
@@ -167,11 +116,8 @@
 					</div>
 				</div>
 			</div>
-			<div *ngIf="status !== null" class="alert alert-dismissible" [ngClass]="status.type" role="alert">
-				<button type="button" class="close" aria-label="Close" (click)="status = null;"><span
-					aria-hidden="true">&times;</span></button>
-				{{ status.message }}
-
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
 		</div>
 	</div>
