@@ -12,6 +12,7 @@ import {Status} from "../../interfaces/status";
 import {SignInService} from "../../services/sign.in.service";
 import {Router} from "@angular/router";
 import {CookieService} from "ng2-cookies";
+import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
 
 //declare for JQuery
 declare var $: any;

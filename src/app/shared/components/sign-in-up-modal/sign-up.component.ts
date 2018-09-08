@@ -7,7 +7,7 @@
 
 /* Imports */
 import {Component, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
 import {Status} from "../../interfaces/status";
 import {Router} from "@angular/router";
 import {SignUpService} from "../../services/sign.up.service";
