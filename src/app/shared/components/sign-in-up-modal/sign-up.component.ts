@@ -6,3 +6,48 @@
 /******************************************************************************************************/
 
 /* Imports */
+
+
+
+//declare $ for good old jquery
+import {Component, OnInit} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Status} from "../../interfaces/status";
+import {Router} from "@angular/router";
+import {SignUpService} from "../../services/sign.up.service";
+import {SignUp} from "../../interfaces/sign.up";
+
+declare let $: any;
+
+// set the template url and the selector for the ng powered html tag
+@Component({
+	template: require
+	("./sign-in-up-modal.html"),
+	selector: "sign-up"
+})
+export class SignUpComponent implements OnInit{
+
+	//
+	signUpForm : FormGroup;
+	status : Status = {status : null, message: null, type: null};
+
+
+
+	constructor(private formBuilder : FormBuilder, private router: Router, private signUpService: SignUpService) {}
+
+	ngOnInit()  : void {
+		this.signUpForm = this.formBuilder.group({
+			atHandle: ["", [Validators.maxLength(32), Validators.required]],
+			email: ["", [Validators.maxLength(128), Validators.required]],
+			phoneNumber: ["", [Validators.maxLength(32)]],
+			password:["", [Validators.maxLength(48), Validators.required]],
+			passwordConfirm:["", [Validators.maxLength(48), Validators.required]]
+
+		});
+
+		this.status = {status : null, message: null, type: null}
+
+	}
+
+
+}
