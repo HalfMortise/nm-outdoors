@@ -6,11 +6,11 @@ import {NgxPaginationModule} from 'ngx-pagination';
 import {BrowserModule} from "@angular/platform-browser"; // <-- import the module
 
 
-@NgModule({
-	imports: [BrowserModule, NgxPaginationModule], // <-- include it in your app module
-	declarations: [RecAreaListComponent],
-	bootstrap: [RecAreaListComponent]
-})
+// @module({
+// 	imports: [BrowserModule, NgxPaginationModule], // <-- include it in your app module
+// 	declarations: [RecAreaListComponent],
+// 	bootstrap: [RecAreaListComponent]
+// })
 
 @Component ({
 	selector: "recArea-list",
