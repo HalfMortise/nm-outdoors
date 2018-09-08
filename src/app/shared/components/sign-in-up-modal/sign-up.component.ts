@@ -6,16 +6,23 @@
 /******************************************************************************************************/
 
 /* Imports */
-import {Component, OnInit} from "@angular/core";
+import {Component, NgModule, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
 import {Status} from "../../interfaces/status";
 import {Router} from "@angular/router";
 import {SignUpService} from "../../services/sign.up.service";
 import {SignUp} from "../../interfaces/sign.up";
+import {BrowserModule, ReactiveFormsModule} from "@angular/platform-browser";
+
 
 
 //declare $ for good old jquery
 declare let $: any;
+
+
+@NgModule({
+	imports: [BrowserModule, FormsModule, ReactiveFormsModule],
+})
 
 // set the template url and the selector for the ng-powered HTML tag
 @Component({
@@ -46,7 +53,7 @@ export class SignUpComponent implements OnInit{
 
 	}
 
-	createSignUp(): void {
+	createProfile(): void {
 
 		let signUp : SignUp = { profileAtHandle: this.signUpForm.value.atHandle, profileEmail: this.signUpForm.value.email, profilePassword: this.signUpForm.value.password, profilePasswordConfirm: this.signUpForm.value.passwordConfirm};
 
