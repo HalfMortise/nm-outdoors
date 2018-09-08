@@ -24,7 +24,7 @@ declare var $: any;
 })
 
 export class SignInComponent {
-	@ViewChild("signInForm") signInForm: FormsModule;
+	@ViewChild("signInForm") signInForm: FormGroup;
 
 	signin: SignIn = {profileEmail: null, profilePassword: null};
 	status: Status = {status: null, type: null, message: null};
