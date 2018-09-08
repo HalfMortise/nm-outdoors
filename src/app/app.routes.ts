@@ -27,6 +27,8 @@ export const allAppComponents = [HomeComponent, ExploreComponent, RecAreaModalCo
 export const routes: Routes = [
 	{path: "recArea", component: RecAreaListComponent},
 	{path: "explore", component: ExploreComponent},
+	{path: "sign-in-up-modal", component: SignUpComponent},
+	{path: "sign-in-up-modal", component: SignInComponent},
 	{path: "", component: HomeComponent}
 ];
 const services : any[] = [ActivationService, ActivityService, AuthService, ProfileService, RecAreaService, ReviewService, SessionService, SignInService, SignUpService];
