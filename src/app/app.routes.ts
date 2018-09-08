@@ -18,8 +18,10 @@ import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 import {RecAreaModalComponent} from "./explore/recArea-modal.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {RecAreaListComponent} from "./explore/recArea-list.component";
-
-
+import {SignInComponent} from "./shared/components/sign-in-up-modal/sign-in.component";
+import {SignUpComponent} from "./shared/components/sign-in-up-modal/sign-up.component";
+import {SignInService} from "./shared/services/sign.in.service";
+import {SignUpService} from "./shared/services/sign.up.service";
 
 
 export const allAppComponents = [HomeComponent, ExploreComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent];
