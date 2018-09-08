@@ -33,7 +33,7 @@
 				<div id="nav-tabContent" class="tab-content">
 					<div class="tab-pane fade show active" id="signIn">
 						<h6>Sign into your account here</h6>
-						<form class="form-horizontal" name="signInForm" id="signInForm" novalidate (ngSubmit)="signIn();">
+						<form #signInForm="ngForm" class="form-horizontal" name="signInForm" id="signInForm" novalidate (ngSubmit)="signIn();">
 							<fieldset>
 								<!-- Sign In Form -->
 								<!-- Text input-->
@@ -46,9 +46,10 @@
 								</div>
 								<!-- Password input-->
 								<div class="control-group">
-									<label class="control-label" for="password">Password:</label>
+									<label class="control-label" for="signin-password">Password:</label>
 									<div class="controls">
-										<input required="required" id="password" class="form-control input-medium" type="password" placeholder="********">
+										<input id="signin-password" class="form-control input-medium" type="password" name="signin-password" required
+												 [(ngModel)]="signin.profilePassword" #profilePassword="ngModel" placeholder="********">
 									</div>
 								</div>
 								<!-- Submit Button -->
