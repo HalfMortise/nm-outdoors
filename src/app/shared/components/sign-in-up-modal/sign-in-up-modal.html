@@ -87,37 +87,59 @@
 					<!-- Text input-->
 
 					<div class="tab-pane fade" id="signup">
-						<form class="form-horizontal">
+						<form class="form-horizontal" [formGroup]="signUpForm" (ngSubmit)="createSignUp();" novalidate>
 							<h6>Sign up for an account here</h6>
 							<fieldset>
 								<div class="control-group">
-									<label class="control-label" for="userid">Username:</label>
+									<label for="atHandle" class="control-label">Username:</label>
 									<div class="controls">
-										<input id="userid" name="userid" class="form-control" type="text" placeholder="" required="required">
+										<input id="atHandle" name="atHandle" class="form-control" formControlName="atHandle" type="text" placeholder="" required="required">
 									</div>
 								</div>
 
+								<!-- alerts for when atHandle provided does not meet requirements -->
+								<div class="alert alert-danger" *ngIf="signUpForm.controls.atHandle?.invalid && signUpForm.controls.atHandle?.touched">
+									<p *ngIf="signUpForm.controls.atHandle?.errors.maxlength">Username is too long</p>
+									<p *ngIf="signUpForm.controls.atHandle?.errors.required">Username is required</p>
+								</div>
+
 								<div class="control-group">
-									<label class="control-label" for="Email">Email:</label>
+									<label class="control-label" for="email">Email:</label>
 									<div class="controls">
-										<input id="email" class="form-control" type="text" placeholder="" required="required">
+										<input id="email" class="form-control" formControlName="email" type="text" placeholder="" required="required">
 									</div>
+								</div>
+
+								<!-- alerts for when email provided does not meet requirements -->
+								<div class="alert alert-danger" *ngIf="signUpForm.controls.email?.invalid && signUpForm.controls.email?.touched">
+									<p *ngIf="signUpForm.controls.email?.errors.maxlength">Email is too long</p>
+									<p *ngIf="signUpForm.controls.email?.errors.required">A valid email address is required</p>
 								</div>
 
 								<!-- Password input-->
 								<div class="control-group">
 									<label class="control-label" for="password">Password:</label>
 									<div class="controls">
-										<input id="password" name="password" class="form-control" type="password" placeholder="********" required="required">
+										<input id="password" name="password" class="form-control" formControlName="password" type="password" placeholder="********" required="required">
 									</div>
+								</div>
+
+								<!-- alert for when password is not provided -->
+								<div class="alert alert-danger" *ngIf="signUpForm.controls.password?.invalid && signUpForm.controls.password?.touched">
+									<p *ngIf="signUpForm.controls.password?.errors.required">Valid password required</p>
 								</div>
 
 								<!-- Text input-->
 								<div class="control-group">
-									<label class="control-label" for="reenterpassword">Re-Enter Password:</label>
+									<label class="control-label" for="passwordConfirm">Confirm Password:</label>
 									<div class="controls">
-										<input id="reenterpassword" class="form-control" type="password" placeholder="********" required="required">
+										<input id="passwordConfirm" class="form-control" formControlName="passwordConfirm" type="password" placeholder="********" required="required">
 									</div>
+								</div>
+
+								<!-- alert for when password is not provided -->
+								<div class="alert alert-danger" *ngIf="signUpForm.controls.passwordConfirm?.invalid && signUpForm.controls.passwordConfirm?.touched">
+									<p *ngIf="signUpForm.controls.email?.errors.required">Please confirm password</p>
 								</div>
 
 								<!-- Multiple Radios (inline) -->
@@ -145,8 +167,11 @@
 					</div>
 				</div>
 			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			<div *ngIf="status !== null" class="alert alert-dismissible" [ngClass]="status.type" role="alert">
+				<button type="button" class="close" aria-label="Close" (click)="status = null;"><span
+					aria-hidden="true">&times;</span></button>
+				{{ status.message }}
+
 			</div>
 		</div>
 	</div>
