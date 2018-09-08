@@ -25,8 +25,8 @@
 				<!-- sets the tabs -->
 				<div id="nav-tab" class="nav nav-tabs" role="tablist">
 					<!-- two tabs: sign in and sign up -->
-					<a class="nav-item nav-link active" href="#signin" data-toggle="tab" role="tab" aria-controls="nav-signin" aria-selected="true">Sign In</a>
-					<a class="nav-item nav-link" href="#signup" data-toggle="tab" role="tab" aria-controls="nav-signup" aria-selected="true">Sign Up</a>
+					<a class="nav-item nav-link active" href="#sign-in" data-toggle="tab" role="tab" aria-controls="nav-sign-in" aria-selected="true">Sign In</a>
+					<a class="nav-item nav-link" href="#sign-up" data-toggle="tab" role="tab" aria-controls="nav-sign-up" aria-selected="true">Sign Up</a>
 				</div>
 			</nav>
 			<div class="modal-body">
@@ -40,7 +40,7 @@
 								<div class="control-group">
 									<label class="control-label" for="email">Email:</label>
 									<div class="controls">
-										<input id="signin-email" type="email" name="signin-email" class="form-control input-medium" placeholder="" required [(ngModel)]=signin.profileEmail
+										<input id="sign-in-email" type="email" name="sign-in-email" class="form-control input-medium" placeholder="" required [(ngModel)]=signin.profileEmail
 												 #profileEmail="ngModel">
 									</div>
 								</div>
@@ -48,15 +48,15 @@
 								<div class="control-group">
 									<label class="control-label" for="signin-password">Password:</label>
 									<div class="controls">
-										<input id="signin-password" class="form-control input-medium" type="password" name="signin-password" required
+										<input id="sign-in-password" class="form-control input-medium" type="password" name="signin-password" required
 												 [(ngModel)]="signin.profilePassword" #profilePassword="ngModel" placeholder="********">
 									</div>
 								</div>
 								<!-- Submit Button -->
 								<div class="control-group">
-									<label class="control-label" for="signin"></label>
+									<label class="control-label" for="sign-in"></label>
 									<div class="controls">
-										<button id="signin" name="signin" class="btn btn-success">Sign In</button>
+										<button id="sign-in" name="sign-in" class="btn btn-success">Sign In</button>
 									</div>
 								</div>
 							</fieldset>
@@ -64,7 +64,7 @@
 					</div>
 					<!-- Sign Up Form -->
 					<!-- Text input-->
-					<div class="tab-pane fade" id="signup">
+					<div class="tab-pane fade" id="sign-up">
 						<form class="form-horizontal">
 							<h6>Sign up for an account here</h6>
 							<fieldset>
@@ -108,9 +108,9 @@
 								</div>
 								<!-- Button -->
 								<div class="control-group">
-									<label class="control-label" for="confirmsignup"></label>
+									<label class="control-label" for="confirm-sign-up"></label>
 									<div class="controls">
-										<button id="confirmsignup" name="confirmsignup" class="btn btn-success">Sign Up</button>
+										<button id="confirm-sign-up" name="confirm-sign-up" class="btn btn-success">Sign Up</button>
 									</div>
 								</div>
 							</fieldset>
