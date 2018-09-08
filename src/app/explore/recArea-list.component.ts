@@ -3,7 +3,6 @@ import {RecAreaService} from "../shared/services/rec.area.service";
 import {RecArea} from "../shared/interfaces/rec.area";
 import {ActivatedRoute} from "@angular/router";
 import {NgxPaginationModule} from 'ngx-pagination';
-import {BrowserModule} from "@angular/platform-browser"; // <-- import the module
 
 
 // @module({
@@ -14,7 +13,7 @@ import {BrowserModule} from "@angular/platform-browser"; // <-- import the modul
 
 @Component ({
 	selector: "recArea-list",
-	template: require("./recArea-list.html")
+	template: require("./recArea-list.html"), 
 
 })
 
@@ -22,6 +21,7 @@ export class RecAreaListComponent implements OnInit {
 	@Input() recAreaId: string;
 	recArea: RecArea = null;
 	recAreas: RecArea[] = [];
+
 
 	constructor(
 		protected recAreaService: RecAreaService,
