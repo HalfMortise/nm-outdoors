@@ -6,7 +6,6 @@
 /******************************************************************************************************/
 
 /* Imports */
-
 import {Component, ViewChild} from "@angular/core";
 import {SignIn} from "../../interfaces/sign.in";
 import {Status} from "../../interfaces/status";
@@ -14,8 +13,10 @@ import {SignInService} from "../../services/sign.in.service";
 import {Router} from "@angular/router";
 import {CookieService} from "ng2-cookies";
 
+//declare for JQuery
 declare var $: any;
 
+// set the template url and the selector for the ng-powered HTML tag
 @Component({
 	template: require( "./sign-in-up-modal.html"),
 	selector: "sign-in"
