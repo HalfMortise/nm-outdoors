@@ -39,7 +39,8 @@
 				<div id="nav-tabContent" class="tab-content">
 					<div class="tab-pane fade show active" id="signin">
 						<h6>Sign into your account here</h6>
-						<form class="form-horizontal">
+						<form #signInForm="ngForm" class="form-horizontal" name="signInForm" id="signInForm" novalidate
+								(ngSubmit)="signIn();">
 							<fieldset>
 
 								<!-- Sign In Form -->
