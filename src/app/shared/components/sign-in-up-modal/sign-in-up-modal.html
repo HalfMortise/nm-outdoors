@@ -31,16 +31,17 @@
 			</nav>
 			<div class="modal-body">
 				<div id="nav-tabContent" class="tab-content">
-					<div class="tab-pane fade show active" id="signin">
+					<div class="tab-pane fade show active" id="signIn">
 						<h6>Sign into your account here</h6>
-						<form class="form-horizontal">
+						<form class="form-horizontal" name="signInForm" id="signInForm" novalidate (ngSubmit)="signIn();">
 							<fieldset>
 								<!-- Sign In Form -->
 								<!-- Text input-->
 								<div class="control-group">
 									<label class="control-label" for="email">Email:</label>
 									<div class="controls">
-										<input id="email" type="text" class="form-control input-medium" placeholder="" required="required">
+										<input id="signin-email" type="email" name="signin-email" class="form-control input-medium" placeholder="" required [(ngModel)]=signin.profileEmail
+												 #profileEmail="ngModel">
 									</div>
 								</div>
 								<!-- Password input-->
