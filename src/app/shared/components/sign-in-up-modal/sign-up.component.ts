@@ -19,11 +19,15 @@ import {BrowserModule} from "@angular/platform-browser";
 //declare $ for good old jquery
 declare let $: any;
 
-//Commenting out for now, as it doesn't seem to have an effect on the "Template parse errors:
-// There is no directive with "exportAs" set to "ngForm" "
-// @NgModule({
-// 	imports: [BrowserModule, FormsModule],
-// })
+
+@NgModule({
+	imports: [BrowserModule, FormsModule],
+	declarations: [SignUpComponent],
+	bootstrap: [SignUpComponent]
+})
+
+
+
 
 // set the template url and the selector for the ng-powered HTML tag
 @Component({
