@@ -6,6 +6,7 @@ import {Review} from "../shared/interfaces/review";
 import {Observable} from "rxjs";
 
 
+
 /*component*/
 
 @Component({
@@ -17,7 +18,7 @@ import {Observable} from "rxjs";
 export class ReviewPostComponent implements OnInit{
 	reviews: Review;
 
-	constructor(){
+	constructor(protected reviewService: ReviewService){
 
 
 
