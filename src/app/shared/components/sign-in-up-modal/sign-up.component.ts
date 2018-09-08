@@ -49,5 +49,21 @@ export class SignUpComponent implements OnInit{
 
 	}
 
+	createSignUp(): void {
 
+		let signUp : SignUp = { profileAtHandle: this.signUpForm.value.atHandle, profileEmail: this.signUpForm.value.email, profilePassword: this.signUpForm.value.password, profilePasswordConfirm: this.signUpForm.value.passwordConfirm};
+
+		this.signUpService.createProfile(signUp)
+			.subscribe(status => {
+				this.status = status;
+
+				if(this.status.status === 200) {
+					alert(status.message);
+					setTimeout(function() {
+						$("#sign-in-up-modal").modal('hide');
+					}, 500);
+					this.router.navigate([""]);
+				}
+			});
+	}
 }
