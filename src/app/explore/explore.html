@@ -1,19 +1,62 @@
 <h2>MAP BRUH 🤷‍♂️🤦‍♂️</h2>
 <div class="map-list-container">
-	<div class="col-map" id="map">
-		<p>Map</p>
-	</div>
-	<div class="col-list" id="list">
-		<div class="row">
-			<div class="col-12"></div>
-		</div>
-	</div>
+	<split [direction]="direction">
+		<split-area size="50">
+			<ngui-map zoom="13" center="Albuquerque, New Mexico" mapTypeId="terrain">
+			<!--<marker *ngFor="let recArea of recAreas" [position]="[recArea.recAreaLatitude, recArea.recAreaLongitude]"-->
+					  <!--(click)="clicked($event, recArea)"></marker>-->
+
+			<!--<info-window id="detailedRecArea">-->
+				<!--<div>-->
+					<!--{{detailedRecArea.recAreaName}}-->
+					<!--<a [routerLink]="'/recArea/' + detailedRecArea.recAreaId">Check out this recArea</a>-->
+				<!--</div>-->
+
+			<!--</info-window>-->
+			</ngui-map>
+		</split-area>
+		<split-area size="50">
+			<div class="row">
+
+						<div class="searchContain col-md-6 no-gutters">
+
+							<form class="form-inline" [formGroup]="recAreaSearchForm" (submit)="getRecAreaByRecAreaName()">
+								<input class="form-control userSearch" type="search" placeholder="Search by name"
+										 formControlName="recAreaSearchName" aria-label="Search">
+								<button class="submitSearch" type="submit"><i class="fas fa-search"></i></button>
+								<button class="submitSearch2" type="button" (click)="showrecAreas()">RESET</button>
+							</form>
+						</div>
+					</div>
+		</split-area>
+	</split>
 </div>
 
 
-<button class="btn btn-view" id="toggle">List/Map</button>
-<ngui-map zoom="13" center="Albuquerque, New Mexico" mapTypeId="terrain">
-
-</ngui-map>
-
 <recArea-modal></recArea-modal>
+
+
+<!--<div *ngIf="detailedRecArea.recAreaId !== null" >-->
+
+<!--<h1 class="rounded-top">{{detailedRecArea.recAreaName}}</h1>-->
+
+<!--<button class="btn btn-block" (clicked)="goTorecArea()">Go to Page</button>-->
+
+<!--</div>-->
+
+<!--<div class="map-list-container">-->
+	<!--<div class="col-map" id="map">-->
+		<!--<ngui-map zoom="10" center="Albuquerque, New Mexico" mapTypeId="terrain">-->
+
+		<!--</ngui-map>-->
+	<!--</div>-->
+	<!--<div class="col-list" id="list">-->
+		<!--<div class="row">-->
+			<!--<div class="col-12"></div>-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</div>-->
+
+
+<!--<button class="btn btn-view" id="toggle">List/Map</button>-->
+<button class="btn btn-view" id="toggle" (click)="direction = (direction === 'horizontal') ? 'vertical' : 'horizontal'">{{ 'Toggle direction: "' + direction + '"' }}</button>
