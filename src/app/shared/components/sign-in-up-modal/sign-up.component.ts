@@ -6,10 +6,6 @@
 /******************************************************************************************************/
 
 /* Imports */
-
-
-
-//declare $ for good old jquery
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Status} from "../../interfaces/status";
@@ -17,14 +13,16 @@ import {Router} from "@angular/router";
 import {SignUpService} from "../../services/sign.up.service";
 import {SignUp} from "../../interfaces/sign.up";
 
+
+//declare $ for good old jquery
 declare let $: any;
 
-// set the template url and the selector for the ng powered html tag
+// set the template url and the selector for the ng-powered HTML tag
 @Component({
-	template: require
-	("./sign-in-up-modal.html"),
+	template: require ("./sign-in-up-modal.html"),
 	selector: "sign-up"
 })
+
 export class SignUpComponent implements OnInit{
 
 	//
