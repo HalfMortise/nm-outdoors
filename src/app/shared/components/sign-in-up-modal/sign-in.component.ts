@@ -24,7 +24,7 @@ declare var $: any;
 })
 
 export class SignInComponent {
-	@ViewChild("signInForm") signInForm: FormGroup;
+	@ViewChild("signInForm") signInForm: any;
 
 	signin: SignIn = {profileEmail: null, profilePassword: null};
 	status: Status = {status: null, type: null, message: null};
@@ -43,8 +43,8 @@ export class SignInComponent {
 
 			if(status.status === 200) {
 
-				this.router.navigate(["profile-page"]);
-				//location.reload(true);
+				this.router.navigate(["/profile-page"]);
+
 				this.signInForm.reset();
 				setTimeout(1000,function(){$("#sign-in-up-modal").modal('hide');});
 			} else {
