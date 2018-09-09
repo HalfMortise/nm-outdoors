@@ -32,7 +32,7 @@ try{
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 
 	//determine which HTTP method was used
-	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
+	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER ["HTTP_X_HTTP_METHOD"]: $_SERVER["REQUEST_METHOD"];
 
 	//sanitize the search parameters
 	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
