@@ -35,7 +35,7 @@ try {
 	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
 
 	// sanitize input
-	$recAreaId = filter_input(INPUT_GET, "recAreaId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$recAreaId = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$recAreaName = filter_input(INPUT_GET, "recAreaName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$recAreaLat = filter_input(INPUT_GET, "recAreaLat", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$recAreaLong = filter_input(INPUT_GET, "recAreaLong", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -45,7 +45,7 @@ try {
 
 
 	// make sure the id is valid for methods that require it
-	if(($method === "DELETE" || $method === "PUT") && (empty($recAreaId) === true)) {
+	if(($method === "DELETE" || $method === "PUT") && (empty($id) === true)) {
 		throw(new InvalidArgumentException("id cannot be empty or negative", 405));
 	}
 
@@ -54,8 +54,8 @@ try {
 		setXsrfCookie();
 
 		//gets rec area by Id
-		if(empty($recAreaId) === false) {
-			$reply->data = RecArea::getRecAreaByRecAreaId($pdo, $recAreaId);
+		if(empty($id) === false) {
+			$reply->data = RecArea::getRecAreaByRecAreaId($pdo, $id);
 			//get rec area by name
 		} else if(empty($recAreaName) === false) {
 			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName);
