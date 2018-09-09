@@ -26,6 +26,7 @@ import {SignUpComponent} from "./shared/components/sign-in-up-modal/sign-up.comp
 export const allAppComponents = [HomeComponent, ExploreComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent];
 
 export const routes: Routes = [
+	{path: "recAreaModal/:recAreaId", component: RecAreaModalComponent},
 	{path: "recArea", component: RecAreaListComponent},
 	{path: "explore", component: ExploreComponent},
 	{path: "sign-in-up-modal", component: SignUpComponent},

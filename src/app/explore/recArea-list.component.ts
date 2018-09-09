@@ -35,6 +35,6 @@ export class RecAreaListComponent implements OnInit {
 	}
 
 	loadRecAreas(): any {
-		this.recAreaService.getAllRecAreas() . subscribe(recAreas => this.recArea = recAreas);
+		this.recAreaService.getAllRecAreas() . subscribe(recAreas => this.recAreas = recAreas);
 	}
 }

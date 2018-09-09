@@ -30,7 +30,7 @@ export class ReviewService {
 
 	// call to the review API and get a review object based on its Id
 	getReview(reviewId : string) : Observable<Review> {
-		return(this.http.get<Review>(this.reviewUrl, {params: new HttpParams().set("id", reviewId)}));
+		return(this.http.get<Review>(this.reviewUrl + reviewId));
 	}
 
 	// call to the review API and get an array of reviews based off the profileId

@@ -34,7 +34,7 @@ export class ExploreComponent implements OnInit{
 
 	showRecAreas() : void {
 		this.recAreaService.getAllRecAreas()
-			.subscribe(recAreas => this.recArea = recAreas);
+			.subscribe(recAreas => this.recAreas = recAreas);
 	}
 
 	clicked({target: marker} : any, recArea : RecArea) {
@@ -42,10 +42,9 @@ export class ExploreComponent implements OnInit{
 		marker.nguiMapComponent.openInfoWindow('detailedRecArea', marker);
 	}
 
-	getAllRecAreas() : void {
-		this.recAreaService.getAllRecAreas().subscribe(reply =>{
-			this.recAreas=[];
-			this.recAreaSearchForm.reset();
-		});
-	}
+	// getAllRecAreas() : void {
+	// 	this.recAreaService.getAllRecAreas().subscribe(reply =>{
+	// 		this.recAreaSearchForm.reset();
+	// 	});
+	// }
 }

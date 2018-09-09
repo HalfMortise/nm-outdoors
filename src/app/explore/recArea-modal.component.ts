@@ -11,28 +11,25 @@ import {ActivatedRoute} from "@angular/router";
 })
 
 export class RecAreaModalComponent implements OnInit {
-	@Input() recAreaId: string;
-	recArea: RecArea = null;
-	review: Review;
-	reviews: Review[] = [];
+	recArea: RecArea;
+	// review: Review;
+	// reviews: Review[] = [];
 
 	constructor(
 		protected recAreaService: RecAreaService,
-		protected reviewService: ReviewService,
+		// protected reviewService: ReviewService,
 		protected route: ActivatedRoute
 	) {
 	}
 
-	// recAreaId = this.route.snapshot.params["recAreaId"];
-	reviewRecAreaId = this.route.snapshot.params["reviewRecAreaId"];
+	recAreaId = this.route.snapshot.params["recAreaId"];
+	// reviewRecAreaId = this.route.snapshot.params["reviewRecAreaId"];
 
 	ngOnInit() {
-		this.recAreaService.getRecAreaByRecAreaId(this.recAreaId) . subscribe(recArea => this.recArea = recArea);
-		this.loadReviews();
+		this.loadRecArea();
 	}
 
-	loadReviews(): any{
-		this.reviewService.getReviewbyRecAreaId(this.reviewRecAreaId) . subscribe(reviews => this.reviews = reviews);
+	loadRecArea() {
+		this.recAreaService.getRecAreaByRecAreaId(this.recAreaId).subscribe(reply => {this.recArea = reply});
 	}
-
 }
