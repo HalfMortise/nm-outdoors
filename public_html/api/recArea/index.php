@@ -76,10 +76,10 @@ try {
 
 
 } catch
-			(\Exception \TypeError $exception) {
-				$reply->status = $exception->getCode();
-				$reply->message = $exception->getMessage();
-			}
+(\Exception \TypeError $exception) {
+	$reply->status = $exception->getCode();
+	$reply->message = $exception->getMessage();
+}
 
 header("Content-type: application/json");
 if($reply->data === null) {
@@ -87,6 +87,3 @@ if($reply->data === null) {
 }
 // encode and return reply to front end caller
 echo json_encode($reply);
-
-
-
