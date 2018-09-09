@@ -18,10 +18,8 @@
 				<div class="modal-body">
 					<img src="{{recArea.recAreaImageUrl}}" alt="rec area image">
 					<p>{{recArea.recAreaDescription}}</p>
-					<div id="review section" *ngFor="let review of reviews">
-						<p>{{review.reviewContent}}</p>
-					</div>
 				</div>
+				<review-post></review-post>
 			</div>
 		</div>
 	</div>
