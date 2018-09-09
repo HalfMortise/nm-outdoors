@@ -24,7 +24,7 @@ import {ReviewPostComponent} from "./reviewpost/review.post.component";
 
 
 
-export const allAppComponents = [HomeComponent, ExploreComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent];
+export const allAppComponents = [HomeComponent, ExploreComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent,ReviewPostComponent];
 
 export const routes: Routes = [
 	{path:"review", component: ReviewPostComponent},
