@@ -2,6 +2,9 @@
 	<div>
 		<div class="container">
 			<ul class="recArea-list">
+				<div class="text-center">
+					<pagination-controls (pageChange)="page = $event"></pagination-controls>
+				</div>
 				<li class="searchForm" routerLink="/recArea/{{recArea.recAreaId}}" *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
 					<div class="col">
 						<ul>
@@ -19,8 +22,6 @@
 				</li>
 			</ul>
 		</div>
-		<div class="text-center">
-			<pagination-controls (pageChange)="page = $event"></pagination-controls>
-		</div>
+
 	</div>
 </main>
