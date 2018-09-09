@@ -1,10 +1,22 @@
-import {Component} from "@angular/core";
-
-
+import {Component, OnInit} from "@angular/core";
+import {Status} from "./shared/interfaces/status";
+import {SessionService} from "./shared/services/session.service";
 
 @Component({
 	selector: "nm-outdoors",
 	template: require("./app.component.html")
 })
+export class AppComponent implements OnInit{
 
-export class AppComponent {}
+	status: Status = null;
+
+	constructor(protected sessionService: SessionService) {
+
+	}
+
+	ngOnInit(){
+		this.sessionService.setSession()
+			.subscribe(status => this.status = status);
+	}
+
+}

@@ -20,14 +20,12 @@ import {ProfileComponent} from "./profile/profile.component";
 import {RecAreaListComponent} from "./explore/recArea-list.component";
 import {SignInComponent} from "./shared/components/sign-in-up-modal/sign-in.component";
 import {SignUpComponent} from "./shared/components/sign-in-up-modal/sign-up.component";
-import {ReviewPostComponent} from "./reviewpost/review.post.component";
 
 
 
-export const allAppComponents = [HomeComponent, ExploreComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent,ReviewPostComponent];
+export const allAppComponents = [HomeComponent, ExploreComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent];
 
 export const routes: Routes = [
-	{path:"review", component: ReviewPostComponent},
 	{path: "recAreaModal/:recAreaId", component: RecAreaModalComponent},
 	{path: "recArea", component: RecAreaListComponent},
 	{path: "explore", component: ExploreComponent},

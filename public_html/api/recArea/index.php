@@ -32,10 +32,10 @@ try {
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
 
 	//determine which HTTP method was used
-	$method = $_SERVER["HTTP_X_HTTP_METHOD"] ?? $_SERVER["REQUEST_METHOD"];
+	$method = array_key_exists("HTTP_X_HTTP_METHOD", $_SERVER) ? $_SERVER["HTTP_X_HTTP_METHOD"] : $_SERVER["REQUEST_METHOD"];
 
 	// sanitize input
-	$recAreaId = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$recAreaName = filter_input(INPUT_GET, "recAreaName", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$recAreaLat = filter_input(INPUT_GET, "recAreaLat", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$recAreaLong = filter_input(INPUT_GET, "recAreaLong", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
@@ -58,15 +58,15 @@ try {
 			$reply->data = RecArea::getRecAreaByRecAreaId($pdo, $id);
 			//get rec area by name
 		} else if(empty($recAreaName) === false) {
-			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName);
+			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName)->toArray();
 
 			//get rec area by distance
 		} else if(empty($recAreaLat|| $recAreaLong|| $userLat|| $userLong || $distance)|| $distance === false) {
-			$reply->data = RecArea::getRecAreaByDistance($pdo, 36.245525,-106.427714, 35.159, -106.5761, 75.531951);//$recAreaLat, $recAreaLong,  $userLat,  $userLong,  $distance);
+			$reply->data = RecArea::getRecAreaByDistance($pdo, 36.245525,-106.427714, 35.159, -106.5761, 75.531951)->toArray();//$recAreaLat, $recAreaLong,  $userLat,  $userLong,  $distance);
 
 			//return all rec areas in the database
 		} else if(empty($pdo) === false) {
-			$reply->data = RecArea::getAllRecAreas($pdo);
+			$reply->data = RecArea::getAllRecAreas($pdo)->toArray();
 
 		}
 	} else {
