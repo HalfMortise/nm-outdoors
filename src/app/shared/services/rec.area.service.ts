@@ -12,21 +12,21 @@ export class RecAreaService {
 
 	//call the recArea API and get rec area object by its id
 	getRecAreaByRecAreaId(recAreaId: string) : Observable<RecArea>{
-		return(this.http.get<RecArea>(this.recAreaUrl, {params: new HttpParams().set("id", recAreaId)}));
+		return(this.http.get<RecArea>(this.recAreaUrl + recAreaId));
 	}
 
 	//call the recArea API and get rec area object by its name
-	getRecAreaByRecAreaName(recAreaName: string) : Observable<RecArea>{
-		return(this.http.get<RecArea>(this.recAreaUrl, {params: new HttpParams().set("name", recAreaName)}));
+	getRecAreaByRecAreaName(recAreaName: string) : Observable<RecArea[]>{
+		return(this.http.get<RecArea[]>(this.recAreaUrl, {params: new HttpParams().set("recAreaName", recAreaName)}));
 	}
 
 	//call the recArea API and get rec area object by its distance
-	getRecAreaByRecAreaByDistance(recAreaId: string) : Observable<RecArea>{
-		return(this.http.get<RecArea>(this.recAreaUrl, {params: new HttpParams().set("id", recAreaId)}));
+	getRecAreaByDistance(distance: string) : Observable<RecArea[]>{
+		return(this.http.get<RecArea[]>(this.recAreaUrl, {params: new HttpParams().set("distance", distance)}));
 	}
 
 	//call the recArea API and return all rec areas
-	getAllRecAreas() : Observable<RecArea>{
-		return(this.http.get<RecArea>(this.recAreaUrl));
+	getAllRecAreas() : Observable<RecArea[]>{
+		return(this.http.get<RecArea[]>(this.recAreaUrl));
 	}
 }
