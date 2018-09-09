@@ -6,13 +6,13 @@
 /******************************************************************************************************/
 
 /* Imports */
-import {Component, ViewChild} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {SignIn} from "../../interfaces/sign.in";
 import {Status} from "../../interfaces/status";
 import {SignInService} from "../../services/sign.in.service";
 import {Router} from "@angular/router";
 import {CookieService} from "ng2-cookies";
-import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 //declare for JQuery
 declare var $: any;
@@ -23,14 +23,21 @@ declare var $: any;
 	selector: "sign-in"
 })
 
-export class SignInComponent {
-	@ViewChild("signInForm") signInForm: any;
+export class SignInComponent implements OnInit{
+	signInForm: FormGroup;
 
-	signin: SignIn = {profileEmail: null, profilePassword: null};
-	status: Status = {status: null, type: null, message: null};
+	signin: SignIn;
+	status: Status = null;
 
 	//cookie: any = {};
-	constructor(private SignInService: SignInService, private router: Router, private cookieService : CookieService) {
+	constructor(private SignInService: SignInService, private router: Router, private cookieService : CookieService, protected fb: FormBuilder) {
+	}
+
+	ngOnInit(): void {
+		this.signInForm = this.fb.group({
+			email: ["", [Validators.maxLength(128), Validators.required]],
+			password: ["", [Validators.maxLength(97), Validators.required]]
+		});
 	}
 
 

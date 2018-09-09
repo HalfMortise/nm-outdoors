@@ -6,28 +6,16 @@
 /******************************************************************************************************/
 
 /* Imports */
-import {Component, NgModule, OnInit} from "@angular/core";
-import {FormBuilder, FormGroup, FormsModule, Validators} from "@angular/forms";
+import {Component, OnInit} from "@angular/core";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Status} from "../../interfaces/status";
 import {Router} from "@angular/router";
 import {SignUpService} from "../../services/sign.up.service";
 import {SignUp} from "../../interfaces/sign.up";
-import {BrowserModule} from "@angular/platform-browser";
-
 
 
 //declare $ for good old jquery
 declare let $: any;
-
-
-@NgModule({
-	imports: [BrowserModule, FormsModule],
-	declarations: [SignUpComponent],
-	bootstrap: [SignUpComponent]
-})
-
-
-
 
 // set the template url and the selector for the ng-powered HTML tag
 @Component({
@@ -38,14 +26,18 @@ declare let $: any;
 export class SignUpComponent implements OnInit{
 
 	//
-	signUpForm : FormGroup;
-	status : Status = {status : null, message: null, type: null};
+	signUpForm: FormGroup;
+	status: Status = null;
 
 
 
-	constructor(private formBuilder : FormBuilder, private router: Router, private signUpService: SignUpService) {}
+	constructor(
+		protected formBuilder : FormBuilder,
+		private router: Router,
+		private signUpService: SignUpService
+	) {}
 
-	ngOnInit()  : void {
+	ngOnInit() :void {
 		this.signUpForm = this.formBuilder.group({
 			atHandle: ["", [Validators.maxLength(32), Validators.required]],
 			email: ["", [Validators.maxLength(128), Validators.required]],
@@ -53,12 +45,9 @@ export class SignUpComponent implements OnInit{
 			passwordConfirm:["", [Validators.maxLength(97), Validators.required]]
 
 		});
-
-		this.status = {status : null, message: null, type: null}
-
 	}
 
-	createProfile(): void {
+	signUpProfile(): void {
 
 		let signUp : SignUp = { profileAtHandle: this.signUpForm.value.atHandle, profileEmail: this.signUpForm.value.email, profilePassword: this.signUpForm.value.password, profilePasswordConfirm: this.signUpForm.value.passwordConfirm};
 
