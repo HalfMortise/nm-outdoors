@@ -28,4 +28,9 @@
 
 </div>
 
+<div>
+	<p id="content">This is an awesome rec Area</p>
+	<p id="date"> August 18th, 2018</p>
+</div>
+
 <?php require_once "footer.php"; ?>

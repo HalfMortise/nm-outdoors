@@ -19,7 +19,7 @@
 		<div>
 			<h3>Review</h3>
 			<p>Please leave a review below</p>
-			<form action="#">
+			<form [formGroup]="reviewForm" (submit)="createAreaForm();" novalidate>
 	<textarea name="review" id="review" cols="30" rows="10">
 
 	</textarea>
@@ -31,5 +31,11 @@
 			<button type="submit">Reset</button>
 
 		</div>
+
+		<div>
+			<p id="content">This is an awesome rec Area</p>
+			<p id="date"> August 18th, 2018</p>
+		</div>
+
 	</body>
 </html>
