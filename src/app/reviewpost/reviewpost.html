@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Leave a Rating and Review</title>
-	</head>
-	<body >
+
 		<div>
 			<h3>Rating</h3>
 			<p>Please leave a rating from 1-5 for this rec Area</p>
@@ -19,7 +13,7 @@
 		<div>
 			<h3>Review</h3>
 			<p>Please leave a review below</p>
-			<form action="#">
+			<form [formGroup]="reviewForm">
 	<textarea name="review" id="review" cols="30" rows="10">
 
 	</textarea>
@@ -31,5 +25,3 @@
 			<button type="submit">Reset</button>
 
 		</div>
-	</body>
-</html>
