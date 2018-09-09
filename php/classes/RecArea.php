@@ -365,7 +365,7 @@ class RecArea implements \JsonSerializable {
 		$statement->execute($parameters);
 	}
 
-	public static function getRecAreaByRecAreaId(\PDO $pdo, $recAreaId): ? recArea {
+	public static function getRecAreaByRecAreaId(\PDO $pdo, $recAreaId): ?recArea {
 		//sanitize the recAreaId before searching
 		try {
 			$recAreaId = self::validateUuid($recAreaId);
@@ -435,8 +435,8 @@ class RecArea implements \JsonSerializable {
 	 * gets the recArea by distance
 	 *
 	 * @param \PDO $pdo PDO connection object
-    * @param float $recAreaLat coordinate of where rec area is
-    * @param float $recAreaLong coordinate of where rec area is
+	 * @param float $recAreaLat coordinate of where rec area is
+	 * @param float $recAreaLong coordinate of where rec area is
 	 * @param float $userLat latitude coordinate of where user is
 	 * @param float $userLong longitude coordinate of where user is
 	 * @param float $distance distance in miles that the user is searching by
