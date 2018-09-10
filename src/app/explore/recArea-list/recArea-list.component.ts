@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {RecAreaService} from "../shared/services/rec.area.service";
-import {RecArea} from "../shared/interfaces/rec.area";
+import {RecAreaService} from "../../shared/services/rec.area.service";
+import {RecArea} from "../../shared/interfaces/rec.area";
 import {ActivatedRoute} from "@angular/router";
 import {NgxPaginationModule} from 'ngx-pagination';
 
