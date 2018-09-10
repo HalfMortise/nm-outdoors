@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from "@angular/core";
+import {Component, Input, OnChanges, SimpleChanges} from "@angular/core";
 import {RecAreaService} from "../../shared/services/rec.area.service";
 import {ReviewService} from "../../shared/services/review.service";
 import {RecArea} from "../../shared/interfaces/rec.area";
@@ -10,7 +10,7 @@ import {ActivatedRoute} from "@angular/router";
 	template: require("./recArea-modal.template.html")
 })
 
-export class RecAreaModalComponent implements OnInit {
+export class RecAreaModalComponent implements OnChanges {
 	recArea: RecArea;
 	// review: Review;
 	// reviews: Review[] = [];
@@ -25,8 +25,12 @@ export class RecAreaModalComponent implements OnInit {
 	recAreaId = this.route.snapshot.params["recAreaId"];
 	// reviewRecAreaId = this.route.snapshot.params["reviewRecAreaId"];
 
-	ngOnInit() {
-		this.loadRecArea();
+	ngOnChanges(changes: SimpleChanges) {
+		for (let propName in changes) {
+			if (propName === "recArea") {
+				this.loadRecArea();
+			}
+		}
 	}
 
 	loadRecArea() {
