@@ -1,4 +1,4 @@
-@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 /** Main Styling File **/
 
@@ -693,7 +693,7 @@ footer {
 	position: fixed;
 }
 
-@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 
 
