@@ -23,7 +23,7 @@ export class ExploreComponent implements OnInit{
 	direction: string = 'horizontal';
 
 
-	constructor(private recAreaService: RecAreaService, private router: Router,private formBuilder: FormBuilder){
+	constructor(private recAreaService: RecAreaService, private router: Router, private formBuilder: FormBuilder){
 	}
 
 	ngOnInit() : void {
@@ -38,9 +38,12 @@ export class ExploreComponent implements OnInit{
 			.subscribe(recAreas => this.recAreas = recAreas);
 	}
 
-	clicked({target: marker} : any, recArea : RecArea) {
-		this.detailedRecArea = recArea;
+	clicked({target: marker} : any) {
 		marker.nguiMapComponent.openInfoWindow('detailedRecArea', marker);
+	}
+
+	displayRecArea(recArea : RecArea) {
+		this.recArea = recArea;
 	}
 
 	// getAllRecAreas() : void {

@@ -4,26 +4,18 @@
 		<split-area size="50">
 			<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
 				<marker *ngFor="let recArea of recAreas" [position]="[recArea.recAreaLat, recArea.recAreaLong]"
-				(click)="clicked($event, recArea)"></marker>
-				<!--<info-window id="detailedRecArea">-->
-				<!--<div>-->
-				<!--{{detailedRecArea.recAreaName}}-->
+				(click)="clicked($event)" (click)="displayRecArea(recArea)"></marker>
+				<info-window id="detailedRecArea">
+				{{recArea.recAreaId}}
 				<!--<a [routerLink]="'/recArea/' + detailedRecArea.recAreaId">Check out this recArea</a>-->
-				<!--</div>-->
-				<!--</info-window>-->
+				</info-window>
 			</ngui-map>
 		</split-area>
+
 		<split-area size="50">
-			<div class="row">
-				<div class="searchContain col-md-6 no-gutters">
-					<form class="form-inline" [formGroup]="recAreaSearchForm" (submit)="getRecAreaByRecAreaName()">
-						<input class="form-control userSearch" type="search" placeholder="Search by name"
-								 formControlName="recAreaSearchName" aria-label="Search">
-						<button class="submitSearch" type="submit"><i class="fas fa-search"></i></button>
-						<button class="submitSearch2" type="button" (click)="showRecAreas()">RESET</button>
-					</form>
-				</div>
-			</div>
+			<!--<div class="row">-->
+				<!--<p>{{recArea.recAreaName}}</p>-->
+			<!--</div>-->
 		</split-area>
 	</split>
 </div>
