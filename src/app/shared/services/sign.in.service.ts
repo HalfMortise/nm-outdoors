@@ -12,7 +12,7 @@ export class SignInService {
 	}
 
 	private signInUrl = "api/sign-in/";
-	private signOutUrl = "api/sign-out";
+	private signOutUrl = "api/sign-out/";
 
 	//perform the post to initiate sign in
 	postSignIn(signIn:SignIn) : Observable<Status> {

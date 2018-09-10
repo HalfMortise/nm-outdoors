@@ -21,7 +21,7 @@ export class SessionService {
 
 	constructor(protected http:HttpClient) {}
 
-	private sessionUrl = "api/earl-grey";
+	private sessionUrl = "api/earl-grey/";
 
 	setSession() {
 
