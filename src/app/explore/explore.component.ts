@@ -19,7 +19,7 @@ export class ExploreComponent implements OnInit{
 	recArea : RecArea;
 	recAreas : RecArea[] = [];
 	recAreaSearchForm : FormGroup;
-	detailedRecArea : RecArea;
+	detailedRecArea : RecArea = {recAreaId : "", recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
 	direction: string = 'horizontal';
 
 
