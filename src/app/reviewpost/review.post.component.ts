@@ -20,7 +20,7 @@ import {Status} from "../shared/interfaces/status";
 })
 
 export class ReviewPostComponent implements OnInit{
-	reviews: Review [] = [];
+	reviews: any[];
 	recAreaId = this.route.snapshot.params["recAreaId"];
 	recArea: RecArea;
 	status: Status;
@@ -34,7 +34,7 @@ export class ReviewPostComponent implements OnInit{
 
 	}
 	ngOnInit(){
-		this.recAreaService.getRecAreaByRecAreaId(this.recAreaId).subscribe(recArea => this.recArea = recArea);
+		this.recAreaService.getRecAreaByRecAreaId(this.recAreaId).subscribe(reply => this.recArea = reply);
 		this.reviewForm = this.formBuilder.group({
 			reviewText: ["",[Validators.maxLength(512), Validators.required]]
 		} );
@@ -42,7 +42,7 @@ export class ReviewPostComponent implements OnInit{
 	}
 
 	loadReviews(): any {
-		this.reviewService.getReviewbyRecAreaId(this.recAreaId).subscribe(reviews => this.reviews = reviews);
+		this.reviewService.getReviewByRecAreaId(this.recAreaId).subscribe(reviews => this.reviews = reviews);
 
 	}
     createAreaForm(): any {
