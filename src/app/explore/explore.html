@@ -5,7 +5,7 @@
 			<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
 				<marker *ngFor="let mapRecArea of recAreas" [position]="[mapRecArea.recAreaLat, mapRecArea.recAreaLong]"
 				(click)="clicked($event)" (click)="displayRecArea(detailedRecArea)"></marker>
-				<info-window>
+				<info-window id="info-window">
 				<!--{{recArea.recAreaId}}-->
 				<a [routerLink]="'/recArea/' + detailedRecArea.recAreaId">Check out this recArea</a>
 				</info-window>
