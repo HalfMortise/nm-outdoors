@@ -13,13 +13,12 @@ import {SignInService} from "../../services/sign.in.service";
 import {Router} from "@angular/router";
 import {CookieService} from "ng2-cookies";
 
-
 //declare for JQuery
 declare var $: any;
 
 // set the template url and the selector for the ng-powered HTML tag
 @Component ({
-	template: require("./sign-in.template.html"),
+	template: require("./sign-in.html"),
 	selector: "sign-in"
 })
 
@@ -42,7 +41,7 @@ export class SignInComponent {
 			console.log(status.status);
 
 			if(this.status.status === 200) {
-				this.router.navigate(["/profile-page/"]);
+				this.router.navigate(["/profile-page"]);
 
 			} else {
 				alert("Email or password is incorrect. Please try again.")
