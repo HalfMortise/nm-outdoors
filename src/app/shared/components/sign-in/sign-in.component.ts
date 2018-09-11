@@ -6,7 +6,7 @@
 /******************************************************************************************************/
 
 /* Imports */
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, ViewChild} from "@angular/core";
 import {SignIn} from "../../interfaces/sign.in";
 import {Status} from "../../interfaces/status";
 import {SignInService} from "../../services/sign.in.service";
