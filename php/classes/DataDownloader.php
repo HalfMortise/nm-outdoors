@@ -54,7 +54,7 @@ class DataDownloader {
 
 	public function getRecAreaAndActivities(\stdClass $apiRecArea): void {
 		//place holder image in event that api does not provide RecAreaImageUrl
-		$imageUrl = "https://bootcamp-coders.cnm.edu/~sheckendorn/nm-outdoors/public_html/images/facepalm.jpg";
+		$imageUrl = "https://bootcamp-coders.cnm.edu/~sheckendorn/nm-outdoors/public_html/images/replacement%20image.jpg";
 		if(count($apiRecArea->MEDIA) > 0) {
 			$imageUrl = $apiRecArea->MEDIA[0]->URL;
 		}
