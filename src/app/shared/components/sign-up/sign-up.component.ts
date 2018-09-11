@@ -14,6 +14,7 @@ import {SignUpService} from "../../services/sign.up.service";
 import {SignUp} from "../../interfaces/sign.up";
 
 
+
 //declare $ for good old jquery
 declare let $: any;
 
