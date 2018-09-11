@@ -47,7 +47,7 @@ export class SignUpComponent implements OnInit{
 		});
 	}
 
-	signUpProfile(): void {
+	createSignUp(): void {
 
 		let signUp : SignUp = { profileAtHandle: this.signUpForm.value.atHandle, profileEmail: this.signUpForm.value.email, profilePassword: this.signUpForm.value.password, profilePasswordConfirm: this.signUpForm.value.passwordConfirm};
 
@@ -58,9 +58,9 @@ export class SignUpComponent implements OnInit{
 				if(this.status.status === 200) {
 					alert(status.message);
 					setTimeout(function() {
-						$("#sign-in-modal").modal('hide');
+						$("#sign-up-modal").modal('hide');
 					}, 500);
-					this.router.navigate([""]);
+					this.router.navigate(["/profile-page"]);
 				}
 			});
 	}
