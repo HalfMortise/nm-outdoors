@@ -6,38 +6,29 @@
 /******************************************************************************************************/
 
 /* Imports */
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {SignIn} from "../../interfaces/sign.in";
 import {Status} from "../../interfaces/status";
 import {SignInService} from "../../services/sign.in.service";
 import {Router} from "@angular/router";
 import {CookieService} from "ng2-cookies";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 //declare for JQuery
 declare var $: any;
 
 // set the template url and the selector for the ng-powered HTML tag
-@Component({
-	template: require( "./sign-in.html"),
+@Component ({
+	template: require("./sign-in.html"),
 	selector: "sign-in"
 })
 
-export class SignInComponent implements OnInit{
-	signInForm: FormGroup;
+export class SignInComponent {
+	@ViewChild("signInForm") signInForm: any;
 
-	signin: SignIn;
-	status: Status = null;
+	signin: SignIn = {profileEmail: null, profilePassword: null};
+	status: Status = {status: null, type: null, message: null};
 
-	//cookie: any = {};
-	constructor(private SignInService: SignInService, private router: Router, private cookieService : CookieService, protected fb: FormBuilder) {
-	}
-
-	ngOnInit(): void {
-		this.signInForm = this.fb.group({
-			email: ["", [Validators.maxLength(128), Validators.required]],
-			password: ["", [Validators.maxLength(97), Validators.required]]
-		});
+	constructor(private SignInService: SignInService, private router: Router, private cookieService : CookieService) {
 	}
 
 
@@ -47,15 +38,13 @@ export class SignInComponent implements OnInit{
 		this.SignInService.postSignIn(this.signin).subscribe(status => {
 			this.status = status;
 
+			console.log(status.status);
 
-			if(status.status === 200) {
-
+			if(this.status.status === 200) {
 				this.router.navigate(["/profile-page"]);
 
-				this.signInForm.reset();
-				setTimeout(1000,function(){$("#sign-in-modal").modal('hide');});
 			} else {
-				console.log("failed login")
+				alert("Email or password is incorrect. Please try again.")
 			}
 		});
 	}
