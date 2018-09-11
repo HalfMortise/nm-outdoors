@@ -39,17 +39,17 @@ export class SignUpComponent implements OnInit{
 
 	ngOnInit() :void {
 		this.signUpForm = this.formBuilder.group({
-			atHandle: ["", [Validators.maxLength(32), Validators.required]],
-			email: ["", [Validators.maxLength(128), Validators.required]],
-			password:["", [Validators.maxLength(97), Validators.required]],
-			passwordConfirm:["", [Validators.maxLength(97), Validators.required]]
+			profileAtHandle: ["", [Validators.maxLength(32), Validators.required]],
+			profileEmail: ["", [Validators.maxLength(128), Validators.required]],
+			profilePassword:["", [Validators.maxLength(97), Validators.required]],
+			profilePasswordConfirm:["", [Validators.maxLength(97), Validators.required]]
 
 		});
 	}
 
 	createSignUp(): void {
 
-		let signUp : SignUp = { profileAtHandle: this.signUpForm.value.atHandle, profileEmail: this.signUpForm.value.email, profilePassword: this.signUpForm.value.password, profilePasswordConfirm: this.signUpForm.value.passwordConfirm};
+		let signUp : SignUp = { profileAtHandle: this.signUpForm.value.profileAtHandle, profileEmail: this.signUpForm.value.profileEmail, profilePassword: this.signUpForm.value.profilePassword, profilePasswordConfirm: this.signUpForm.value.profilePasswordConfirm};
 
 		this.signUpService.createProfile(signUp)
 			.subscribe(status => {
