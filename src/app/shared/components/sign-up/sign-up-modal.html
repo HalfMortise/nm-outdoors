@@ -1,108 +1,108 @@
-<!--
- this component is the modal that will "pop up" when a user elects
- to either sign up for a profile or sign into a profile.
- It will contain two tabs: Left will be for sign-in,
- Right will be for sign-up
- This component will require the use of Bootstrap 4, Popper, and JQuery
--->
-<!-- TODO: Angularify the tags; customize the sign up form; update path in component so it can find me -->
-<main>
-	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">New message</h5>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">
-					<form>
-						<div class="form-group">
-							<label for="recipient-name" class="col-form-label">Recipient:</label>
-							<input type="text" class="form-control" id="recipient-name">
-						</div>
-						<div class="form-group">
-							<label for="message-text" class="col-form-label">Message:</label>
-							<textarea class="form-control" id="message-text"></textarea>
-						</div>
-					</form>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Send message</button>
-				</div>
-			</div>
-		</div>
-	</div>
-</main>
+<!--&lt;!&ndash;-->
+ <!--this component is the modal that will "pop up" when a user elects-->
+ <!--to either sign up for a profile or sign into a profile.-->
+ <!--It will contain two tabs: Left will be for sign-in,-->
+ <!--Right will be for sign-up-->
+ <!--This component will require the use of Bootstrap 4, Popper, and JQuery-->
+<!--&ndash;&gt;-->
+<!--&lt;!&ndash; TODO: Angularify the tags; customize the sign up form; update path in component so it can find me &ndash;&gt;-->
+<!--<main>-->
+	<!--<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">-->
+		<!--<div class="modal-dialog" role="document">-->
+			<!--<div class="modal-content">-->
+				<!--<div class="modal-header">-->
+					<!--<h5 class="modal-title" id="exampleModalLabel">New message</h5>-->
+					<!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+						<!--<span aria-hidden="true">&times;</span>-->
+					<!--</button>-->
+				<!--</div>-->
+				<!--<div class="modal-body">-->
+					<!--<form>-->
+						<!--<div class="form-group">-->
+							<!--<label for="recipient-name" class="col-form-label">Recipient:</label>-->
+							<!--<input type="text" class="form-control" id="recipient-name">-->
+						<!--</div>-->
+						<!--<div class="form-group">-->
+							<!--<label for="message-text" class="col-form-label">Message:</label>-->
+							<!--<textarea class="form-control" id="message-text"></textarea>-->
+						<!--</div>-->
+					<!--</form>-->
+				<!--</div>-->
+				<!--<div class="modal-footer">-->
+					<!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+					<!--<button type="button" class="btn btn-primary">Send message</button>-->
+				<!--</div>-->
+			<!--</div>-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</main>-->
 
 
 
 
-<!-- Modal Structure -->
-<div class="modal fade bs-modal-sm" id="sign-in-up-modal" tabindex="-1" role="dialog"
-	  aria-labelledby="mySmallModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-sm">
-		<div class="modal-content">
-			<div class="modal-body">
-				<div id="nav-tabContent" class="tab-content">
-					<!-- Sign Up Form -->
-					<!-- Text input-->
-					<form [formGroup]="signUpForm" novalidate>
-						<div class="tab-pane fade form-control" id="sign-up">
+<!--&lt;!&ndash; Modal Structure &ndash;&gt;-->
+<!--<div class="modal fade bs-modal-sm" id="sign-in-up-modal" tabindex="-1" role="dialog"-->
+	  <!--aria-labelledby="mySmallModalLabel" aria-hidden="true">-->
+	<!--<div class="modal-dialog modal-sm">-->
+		<!--<div class="modal-content">-->
+			<!--<div class="modal-body">-->
+				<!--<div id="nav-tabContent" class="tab-content">-->
+					<!--&lt;!&ndash; Sign Up Form &ndash;&gt;-->
+					<!--&lt;!&ndash; Text input&ndash;&gt;-->
+					<!--<form [formGroup]="signUpForm" novalidate>-->
+						<!--<div class="tab-pane fade form-control" id="sign-up">-->
 
-							<h6>Sign up for an account here</h6>
-							<fieldset>
-								<div class="control-group">
-									<label class="control-label" for="atHandle">Username:</label>
-									<div class="controls">
-										<input id="atHandle" name="atHandle" class="input-group" type="text" placeholder=""
-												 required="required">
-									</div>
-								</div>
-								<div class="control-group">
-									<label class="control-label" for="email">Email:</label>
-									<div class="controls">
-										<input id="email" class="input-group" type="text" placeholder="" required="required">
-									</div>
-								</div>
-								<!-- Password input-->
-								<div class="control-group">
-									<label class="control-label" for="password">Password:</label>
-									<div class="controls">
-										<input id="password" name="password" class="input-group" type="password"
-												 placeholder="********" required="required">
-									</div>
-								</div>
-								<!-- Text input-->
-								<div class="control-group">
-									<label class="control-label" for="confirmPassword">Confirm Password:</label>
-									<div class="controls">
-										<input id="confirmPassword" class="input-group" type="password" placeholder="********"
-												 required="required">
-									</div>
-								</div>
+							<!--<h6>Sign up for an account here</h6>-->
+							<!--<fieldset>-->
+								<!--<div class="control-group">-->
+									<!--<label class="control-label" for="atHandle">Username:</label>-->
+									<!--<div class="controls">-->
+										<!--<input id="atHandle" name="atHandle" class="input-group" type="text" placeholder=""-->
+												 <!--required="required">-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--<div class="control-group">-->
+									<!--<label class="control-label" for="email">Email:</label>-->
+									<!--<div class="controls">-->
+										<!--<input id="email" class="input-group" type="text" placeholder="" required="required">-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--&lt;!&ndash; Password input&ndash;&gt;-->
+								<!--<div class="control-group">-->
+									<!--<label class="control-label" for="password">Password:</label>-->
+									<!--<div class="controls">-->
+										<!--<input id="password" name="password" class="input-group" type="password"-->
+												 <!--placeholder="********" required="required">-->
+									<!--</div>-->
+								<!--</div>-->
+								<!--&lt;!&ndash; Text input&ndash;&gt;-->
+								<!--<div class="control-group">-->
+									<!--<label class="control-label" for="confirmPassword">Confirm Password:</label>-->
+									<!--<div class="controls">-->
+										<!--<input id="confirmPassword" class="input-group" type="password" placeholder="********"-->
+												 <!--required="required">-->
+									<!--</div>-->
+								<!--</div>-->
 
-								<!-- reCAPTCHA -->
-								<br />
-								<div class="g-recaptcha" data-sitekey="6LdKfG8UAAAAALQclWc2Mm5-iiauFbb30zWNNHVa"></div>
+								<!--&lt;!&ndash; reCAPTCHA &ndash;&gt;-->
+								<!--<br />-->
+								<!--<div class="g-recaptcha" data-sitekey="6LdKfG8UAAAAALQclWc2Mm5-iiauFbb30zWNNHVa"></div>-->
 
-								<!-- Button -->
-								<div class="control-group">
-									<label class="control-label" for="confirmSignup"></label>
-									<div class="controls">
-										<button id="confirmSignup" name="confirmSignup" class="btn btn-success" (click)="createProfile();">Sign Up</button>
-									</div>
-								</div>
-							</fieldset>
-						</div>
-					</form>
-			</div>
-		</div>
-		<div class="modal-footer">
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		</div>
-	</div>
-</div>
-</div>
+								<!--&lt;!&ndash; Button &ndash;&gt;-->
+								<!--<div class="control-group">-->
+									<!--<label class="control-label" for="confirmSignup"></label>-->
+									<!--<div class="controls">-->
+										<!--<button id="confirmSignup" name="confirmSignup" class="btn btn-success" (click)="createProfile();">Sign Up</button>-->
+									<!--</div>-->
+								<!--</div>-->
+							<!--</fieldset>-->
+						<!--</div>-->
+					<!--</form>-->
+			<!--</div>-->
+		<!--</div>-->
+		<!--<div class="modal-footer">-->
+			<!--<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>-->
+		<!--</div>-->
+	<!--</div>-->
+<!--</div>-->
+<!--</div>-->
