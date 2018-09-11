@@ -1,10 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<title>Title</title>
-	</head>
-	<body>
-		
-	</body>
-</html>
+<main>
+	<form [formGroup]="signIn" (ngSubmit)="createProfile()" class="form-control-md mt-5" id="sign-in">
+		<div class="container">
+			<div class="row justify-content-md-center">
+				<div class="col-md-6">
+					<h1 class="text-center mb-5">Sign In</h1>
+				</div><!--col-md-6-->
+			</div>
+			<!-- Email input -->
+			<div class="row justify-content-md-center control-group">
+				<label class="form-group col-md-2 control-label" for="email-form">Email:</label>
+				<div class="controls">
+					<input id="email-form" type="text" class="input-group input-medium" placeholder="" required="required">
+				</div>
+			</div>
+			<!-- Password input -->
+			<div class="row justify-content-md-center control-group">
+				<label class="form-group col-md-2 control-label" for="email-form">Password:</label>
+				<div class="controls">
+					<input id="password-form" type="text" class="input-group input-medium" placeholder="********" required="required">
+				</div>
+			</div>
+
+			<!-- reCAPTCHA -->
+			<br />
+			<div class="g-recaptcha" data-sitekey="6LdKfG8UAAAAALQclWc2Mm5-iiauFbb30zWNNHVa"></div>
+
+			<!-- Reset and Submit buttons -->
+			<div class="row justify-content-md-center mt-3 mb-5">
+				<div class="form-group col-md-6">
+					<button
+						type="reset"
+						class="btn btn-warning text-light">
+						<i class="fas fa-undo"></i>&nbsp;&nbsp;Reset</button>
+					<button
+						type="submit"
+						class="btn btn-primary text-light mr-3"
+						(click)="signIn();">
+						<i class="fas fa-edit"></i>&nbsp;&nbsp;Sign In</button>
+				</div><!--form-group col-md-6-->
+			</div><!--row justify-content-md-center-->
+		</div><!--container-->
+	</form>
+</main>
