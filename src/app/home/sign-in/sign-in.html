@@ -1,3 +1,5 @@
+<!--TODO: rename createProfile-->
+
 <main>
 	<form [formGroup]="signIn" (ngSubmit)="createProfile()" class="form-control-md mt-5" id="sign-in">
 		<div class="container">
@@ -37,7 +39,7 @@
 						class="btn btn-primary text-light mr-3"
 						(click)="signIn();">
 						<i class="fas fa-edit"></i>&nbsp;&nbsp;Sign In</button>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signUpModal" data-whatever="@signUpModal">Sign up for an account</button>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-sm" data-whatever="@signUpModal">Sign up for an account</button>
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 		</div><!--container-->
