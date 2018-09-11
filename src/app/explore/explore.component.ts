@@ -5,11 +5,12 @@
  *
  **/
 
-import {Component, OnInit} from "@angular/core";
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {RecArea} from "../shared/interfaces/rec.area";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {RecAreaService} from "../shared/services/rec.area.service";
+import {RecAreaModalComponent} from "./recArea-modal/recArea-modal.component";
 
 @Component({
 	template: require("./explore.html")
@@ -22,6 +23,7 @@ export class ExploreComponent implements OnInit{
 	detailedRecArea : RecArea = {recAreaId : "", recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
 	direction: string = 'horizontal';
 
+	@ViewChild(RecAreaModalComponent) recAreaModalComponent : RecAreaModalComponent;
 
 	constructor(private recAreaService: RecAreaService, private router: Router, private formBuilder: FormBuilder){
 	}
@@ -45,6 +47,7 @@ export class ExploreComponent implements OnInit{
 
 	displayRecArea(detailedRecArea : RecArea) {
 		this.detailedRecArea = detailedRecArea;
+		this.recAreaModalComponent.recArea = detailedRecArea;
 	}
 
 	// getAllRecAreas() : void {

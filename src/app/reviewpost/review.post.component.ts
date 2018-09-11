@@ -22,7 +22,7 @@ import {Status} from "../shared/interfaces/status";
 export class ReviewPostComponent implements OnInit{
 	reviews: any[];
 	recAreaId = this.route.snapshot.params["recAreaId"];
-	recArea: RecArea;
+	recArea: RecArea = {recAreaId : "", recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
 	status: Status;
 	review: Review;
 	reviewForm: FormGroup;
@@ -34,16 +34,19 @@ export class ReviewPostComponent implements OnInit{
 
 	}
 	ngOnInit(){
-		this.recAreaService.getRecAreaByRecAreaId(this.recAreaId).subscribe(reply => this.recArea = reply);
-		this.reviewForm = this.formBuilder.group({
-			reviewText: ["",[Validators.maxLength(512), Validators.required]]
-		} );
-   this.loadReviews();
+		if(this.recAreaId !== undefined) {
+      this.recAreaService.getRecAreaByRecAreaId(this.recAreaId).subscribe(reply => this.recArea = reply);
+      this.reviewForm = this.formBuilder.group({
+        reviewText: ["", [Validators.maxLength(512), Validators.required]]
+      });
+      this.loadReviews();
+    }
 	}
 
 	loadReviews(): any {
-		this.reviewService.getReviewByRecAreaId(this.recAreaId).subscribe(reviews => this.reviews = reviews);
-
+		if(this.recAreaId !== undefined) {
+     	 this.reviewService.getReviewByRecAreaId(this.recAreaId).subscribe(reviews => this.reviews = reviews);
+    }
 	}
     createAreaForm(): any {
 		let review: Review = {

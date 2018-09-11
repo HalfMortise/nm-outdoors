@@ -19,7 +19,6 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 export class RecAreaListComponent implements OnInit {
 	@Input() recAreaId: string;
-	recArea: RecArea = null;
 	recAreas: RecArea[] = [];
 
 
@@ -30,7 +29,6 @@ export class RecAreaListComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		this.recAreaService.getRecAreaByRecAreaId(this.recAreaId) . subscribe(recAreas => this.recArea = recAreas);
 		this.loadRecAreas();
 	}
 
