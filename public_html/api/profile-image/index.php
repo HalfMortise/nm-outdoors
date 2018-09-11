@@ -35,7 +35,7 @@ try {
 	$cloudinary = json_decode($config["cloudinary"]);
 
 	//UPDATE THESE KEYS AFTER ADDING THIS FILE TO .GITIGNORE
-	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "654676448113238" => $cloudinary->apiKey, "JaxXH-tcX7djuPNsJuhJg7WlLGw" => $cloudinary->apiSecret]);
+	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "774547866314647" => $cloudinary->apiKey, "acF6L0CeMIZ7VBcQJVyl4ohmet8" => $cloudinary->apiSecret]);
 
 	// process GET requests
 
