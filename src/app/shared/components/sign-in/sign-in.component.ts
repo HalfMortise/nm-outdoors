@@ -11,7 +11,6 @@ import {SignIn} from "../../interfaces/sign.in";
 import {Status} from "../../interfaces/status";
 import {SignInService} from "../../services/sign.in.service";
 import {Router} from "@angular/router";
-import {CookieService} from "ng2-cookies";
 
 //declare for JQuery
 declare var $: any;
@@ -28,7 +27,7 @@ export class SignInComponent {
 	signin: SignIn = {profileEmail: null, profilePassword: null};
 	status: Status = {status: null, type: null, message: null};
 
-	constructor(private SignInService: SignInService, private router: Router, private cookieService : CookieService) {
+	constructor(private SignInService: SignInService, private router: Router) {
 	}
 
 
