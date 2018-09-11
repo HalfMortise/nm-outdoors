@@ -26,7 +26,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {RecAreaListComponent} from "./explore/recArea-list/recArea-list.component";
 import {SignInComponent} from "./shared/components/sign-in/sign-in.component";
 import {SignUpComponent} from "./shared/components/sign-up/sign-up.component";
-import {ReviewPostComponent} from "./reviewpost/review.post.component";
+import {ReviewPostComponent} from "./reviewpost/review-post.component";
 import {MainNavComponent} from "./shared/components/main-nav/main-nav.component";
 
 
@@ -34,7 +34,7 @@ import {MainNavComponent} from "./shared/components/main-nav/main-nav.component"
 export const allAppComponents = [HomeComponent, ExploreComponent, MainNavComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent, ReviewPostComponent];
 
 export const routes: Routes = [
-	{path:"review/:reviewRecAreaId", component: ReviewPostComponent},
+	{path:"review-post", component: ReviewPostComponent},
 	{path: "recAreaModal/:recAreaId", component: RecAreaModalComponent},
 	{path: "recArea", component: RecAreaListComponent},
 	{path: "explore", component: ExploreComponent},
