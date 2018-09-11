@@ -7,11 +7,16 @@
 
 /* Imports */
 import {Component} from "@angular/core";
+import {Router} from "@angular/router";
 
 
 /* Component */
 @Component({
 	template: require("./about.template.html"),
+	selector: "about"
 })
 
-export class HomeComponent {}
+export class AboutComponent {
+	constructor(protected router: Router) {
+	}
+}
