@@ -42,8 +42,8 @@ export class ExploreComponent implements OnInit{
 		marker.nguiMapComponent.openInfoWindow('detailedRecArea', marker);
 	}
 
-	displayRecArea(recArea : RecArea) {
-		this.recArea = recArea;
+	displayRecArea(detailedRecArea : RecArea) {
+		this.detailedRecArea = detailedRecArea;
 	}
 
 	// getAllRecAreas() : void {
