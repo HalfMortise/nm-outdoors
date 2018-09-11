@@ -18,7 +18,7 @@ declare var $: any;
 
 // set the template url and the selector for the ng-powered HTML tag
 @Component ({
-	template: require("./sign-in.html"),
+	template: require("./sign-in.template.html"),
 	selector: "sign-in"
 })
 
