@@ -8,10 +8,10 @@
 /* Imports */
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Status} from "../../shared/interfaces/status";
+import {Status} from "../../interfaces/status";
 import {Router} from "@angular/router";
-import {SignUpService} from "../../shared/services/sign.up.service";
-import {SignUp} from "../../shared/interfaces/sign.up";
+import {SignUpService} from "../../services/sign.up.service";
+import {SignUp} from "../../interfaces/sign.up";
 
 
 //declare $ for good old jquery

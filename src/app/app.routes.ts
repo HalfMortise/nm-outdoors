@@ -18,8 +18,8 @@ import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 import {RecAreaModalComponent} from "./explore/recArea-modal/recArea-modal.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {RecAreaListComponent} from "./explore/recArea-list/recArea-list.component";
-import {SignInComponent} from "./home/sign-in/sign-in.component";
-import {SignUpComponent} from "./home/sign-up/sign-up.component";
+import {SignInComponent} from "./shared/components/sign-in/sign-in.component";
+import {SignUpComponent} from "./shared/components/sign-up/sign-up.component";
 import {ReviewPostComponent} from "./reviewpost/review.post.component";
 
 
