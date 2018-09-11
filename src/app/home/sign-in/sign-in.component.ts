@@ -7,9 +7,9 @@
 
 /* Imports */
 import {Component, OnInit} from "@angular/core";
-import {SignIn} from "../../interfaces/sign.in";
-import {Status} from "../../interfaces/status";
-import {SignInService} from "../../services/sign.in.service";
+import {SignIn} from "../../shared/interfaces/sign.in";
+import {Status} from "../../shared/interfaces/status";
+import {SignInService} from "../../shared/services/sign.in.service";
 import {Router} from "@angular/router";
 import {CookieService} from "ng2-cookies";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
@@ -19,7 +19,7 @@ declare var $: any;
 
 // set the template url and the selector for the ng-powered HTML tag
 @Component({
-	template: require( "./sign-in-up-modal.html"),
+	template: require( "../../shared/components/sign-in-up-modal/sign-in-up-modal.html"),
 	selector: "sign-in"
 })
 
@@ -53,7 +53,7 @@ export class SignInComponent implements OnInit{
 				this.router.navigate(["/profile-page"]);
 
 				this.signInForm.reset();
-				setTimeout(1000,function(){$("#sign-in-up-modal").modal('hide');});
+				setTimeout(1000,function(){$("#sign-in-modal").modal('hide');});
 			} else {
 				console.log("failed login")
 			}

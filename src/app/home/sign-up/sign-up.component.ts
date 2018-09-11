@@ -8,10 +8,10 @@
 /* Imports */
 import {Component, OnInit} from "@angular/core";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {Status} from "../../interfaces/status";
+import {Status} from "../../shared/interfaces/status";
 import {Router} from "@angular/router";
-import {SignUpService} from "../../services/sign.up.service";
-import {SignUp} from "../../interfaces/sign.up";
+import {SignUpService} from "../../shared/services/sign.up.service";
+import {SignUp} from "../../shared/interfaces/sign.up";
 
 
 //declare $ for good old jquery
@@ -19,7 +19,7 @@ declare let $: any;
 
 // set the template url and the selector for the ng-powered HTML tag
 @Component({
-	template: require ("./sign-in-up-modal.html"),
+	template: require ("../../shared/components/sign-in-up-modal/sign-in-up-modal.html"),
 	selector: "sign-up"
 })
 
@@ -58,7 +58,7 @@ export class SignUpComponent implements OnInit{
 				if(this.status.status === 200) {
 					alert(status.message);
 					setTimeout(function() {
-						$("#sign-in-up-modal").modal('hide');
+						$("#sign-in-modal").modal('hide');
 					}, 500);
 					this.router.navigate([""]);
 				}

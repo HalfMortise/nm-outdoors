@@ -18,8 +18,8 @@ import {DeepDiveInterceptor} from "./shared/interceptors/deep.dive.interceptor";
 import {RecAreaModalComponent} from "./explore/recArea-modal/recArea-modal.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {RecAreaListComponent} from "./explore/recArea-list/recArea-list.component";
-import {SignInComponent} from "./shared/components/sign-in-up-modal/sign-in.component";
-import {SignUpComponent} from "./shared/components/sign-in-up-modal/sign-up.component";
+import {SignInComponent} from "./home/sign-in/sign-in.component";
+import {SignUpComponent} from "./home/sign-up/sign-up.component";
 import {ReviewPostComponent} from "./reviewpost/review.post.component";
 
 
@@ -31,8 +31,8 @@ export const routes: Routes = [
 	{path: "recAreaModal/:recAreaId", component: RecAreaModalComponent},
 	{path: "recArea", component: RecAreaListComponent},
 	{path: "explore", component: ExploreComponent},
-	{path: "sign-in-up-modal", component: SignUpComponent},
-	{path: "sign-in-up-modal", component: SignInComponent},
+	{path: "sign-in-modal", component: SignUpComponent},
+	{path: "sign-in-modal", component: SignInComponent},
 	{path: "", component: HomeComponent}
 ];
 const services : any[] = [ActivationService, ActivityService, AuthService, ProfileService, RecAreaService, ReviewService, SessionService, SignInService, SignUpService];

@@ -7,6 +7,7 @@ import {allAppComponents, appRoutingProviders, routing} from "./app.routes";
 import {ReactiveFormsModule} from "@angular/forms";
 import {NguiMapModule} from "@ngui/map";
 import {NgxPaginationModule} from "ngx-pagination";
+
 // import { AgmCoreModule } from '@agm/core';
 
 
