@@ -11,7 +11,7 @@ import {Component} from "@angular/core";
 
 /* Component */
 @Component({
-	template: require("./about.html"),
+	template: require("./about.template.html"),
 })
 
 export class HomeComponent {}

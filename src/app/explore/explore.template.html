@@ -4,10 +4,9 @@
 		<split-area size="50">
 			<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
 				<marker *ngFor="let mapRecArea of recAreas" [position]="[mapRecArea.recAreaLat, mapRecArea.recAreaLong]"
-				(click)="clicked($event)" (click)="displayRecArea(detailedRecArea)"></marker>
-				<info-window id="detailedRecArea">
-				<!--{{recArea.recAreaId}}-->
-				<a [routerLink]="'/recArea/' + detailedRecArea.recAreaId">Check out this recArea</a>
+				(click)="displayRecArea(detailedRecArea)"></marker>
+				<info-window id="#recAreaModal">
+				<!--<a [routerLink]="'/recArea/' + detailedRecArea.recAreaId">Check out this recArea</a>-->
 				</info-window>
 			</ngui-map>
 		</split-area>

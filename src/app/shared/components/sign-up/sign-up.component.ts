@@ -19,7 +19,7 @@ declare let $: any;
 
 // set the template url and the selector for the ng-powered HTML tag
 @Component({
-	template: require ("./shared/sign-up/sign-up-modal.html"),
+	template: require ("./sign-up-modal.template.html"),
 	selector: "sign-up"
 })
 
@@ -47,7 +47,7 @@ export class SignUpComponent implements OnInit{
 		});
 	}
 
-	createSignUp(): void {
+	signUpProfile(): void {
 
 		let signUp : SignUp = { profileAtHandle: this.signUpForm.value.atHandle, profileEmail: this.signUpForm.value.email, profilePassword: this.signUpForm.value.password, profilePasswordConfirm: this.signUpForm.value.passwordConfirm};
 
@@ -58,9 +58,9 @@ export class SignUpComponent implements OnInit{
 				if(this.status.status === 200) {
 					alert(status.message);
 					setTimeout(function() {
-						$("#sign-up-modal").modal('hide');
+						$("#sign-in-modal").modal('hide');
 					}, 500);
-					this.router.navigate(["/profile-page"]);
+					this.router.navigate([""]);
 				}
 			});
 	}

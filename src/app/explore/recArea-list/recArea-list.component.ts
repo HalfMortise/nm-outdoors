@@ -13,7 +13,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
 
 @Component ({
 	selector: "recArea-list",
-	template: require("./recArea-list.html"), 
+	template: require("./recArea-list.template.html"),
 
 })
 

@@ -14,7 +14,7 @@ import {Status} from "../shared/interfaces/status";
 /*component*/
 
 @Component({
-	template: require("./reviewpost.html"),
+	template: require("./reviewpost.template.html"),
 	selector: "review-post"
 
 })

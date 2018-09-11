@@ -1,0 +1,31 @@
+<main>
+		<div class="container">
+			<div class="row">
+
+				<div class="col-12">
+					<div class="text-center">
+						<pagination-controls (pageChange)="page = $event"></pagination-controls>
+					</div>
+					<ul class="recArea-list">
+						<li class="searchForm" routerLink="/recArea/{{recArea.recAreaId}}"
+							 *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
+							<div class="col">
+								<ul>
+									<li>{{recArea.recAreaName}}</li>
+								</ul>
+								<img src="{{recArea.recAreaImageUrl}}" alt="rec area image">
+							</div>
+							<div class="">
+								<ul>
+									<li>{{recArea.recAreaDescription}}</li>
+									<li>{{recArea.recAreaDirections}}</li>
+								</ul>
+								<img src="{{recArea.recAreaMapUrl}}">
+							</div>
+						</li>
+					</ul>
+
+				</div>
+			</div>
+		</div>
+</main>

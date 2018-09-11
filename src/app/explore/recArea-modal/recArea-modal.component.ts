@@ -1,4 +1,4 @@
-import {Component, Input} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {RecAreaService} from "../../shared/services/rec.area.service";
 import {ReviewService} from "../../shared/services/review.service";
 import {RecArea} from "../../shared/interfaces/rec.area";
@@ -11,16 +11,19 @@ import {ActivatedRoute} from "@angular/router";
 })
 
 export class RecAreaModalComponent {
-	recArea: RecArea;
-
-	// review: Review;
-	// reviews: Review[] = [];
+	recArea: RecArea = {recAreaId : "", recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
+	review: Review;
+	reviews: Review[] = [];
 
 	constructor(
 		protected recAreaService: RecAreaService,
 		// protected reviewService: ReviewService,
 		protected route: ActivatedRoute
 	) {
+}
+
+ngOnit (): void {
+
 }
 
 	recAreaId = this.route.snapshot.params["recAreaId"];

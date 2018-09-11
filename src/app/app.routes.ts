@@ -31,7 +31,7 @@ export const routes: Routes = [
 	// {path: "about", component: AboutComponent},
 	{path:"review/:reviewRecAreaId", component: ReviewPostComponent},
 	{path: "recAreaModal/:recAreaId", component: RecAreaModalComponent},
-	{path: "recArea", component: RecAreaListComponent},
+	{path: "recArea/:recAreaId", component: RecAreaListComponent},
 	{path: "explore", component: ExploreComponent},
 	// {path: "sign-in-modal", component: SignUpComponent},
 	// {path: "sign-in-modal", component: SignInComponent},

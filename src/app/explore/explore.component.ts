@@ -13,7 +13,7 @@ import {RecAreaService} from "../shared/services/rec.area.service";
 import {RecAreaModalComponent} from "./recArea-modal/recArea-modal.component";
 
 @Component({
-	template: require("./explore.html")
+	template: require("./explore.template.html")
 })
 
 export class ExploreComponent implements OnInit{
@@ -41,7 +41,7 @@ export class ExploreComponent implements OnInit{
 	}
 
 	clicked({target: marker} : any) {
-		// this.recArea = marker;
+		this.detailedRecArea = marker;
 		marker.nguiMapComponent.openInfoWindow('detailedRecArea', marker);
 	}
 
