@@ -19,7 +19,7 @@ declare var $: any;
 
 // set the template url and the selector for the ng-powered HTML tag
 @Component({
-	template: require( "../../shared/components/sign-in-up-modal/sign-in-up-modal.html"),
+	template: require( "../../home/sign-in/sign-in.html"),
 	selector: "sign-in"
 })
 
