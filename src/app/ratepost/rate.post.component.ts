@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 
 @Component({
 	selector: 'app-rating',
-	templateUrl: './ratepost.html',
+	templateUrl: './ratepost.template.html',
 
 })
 export class RatingComponent implements OnInit {
