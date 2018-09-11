@@ -48,7 +48,9 @@ export class ReviewPostComponent implements OnInit{
      	 this.reviewService.getReviewByRecAreaId(this.recAreaId).subscribe(reviews => this.reviews = reviews);
     }
 	}
-    createAreaForm(): any {
+
+	//recArea review form that exists in review-post.template.html
+    recAreaReviewForm(): any {
 		let review: Review = {
 			reviewId: null,
 			reviewProfileId: null,
