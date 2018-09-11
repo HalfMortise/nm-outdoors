@@ -1,0 +1,17 @@
+
+
+		<div>
+			<h3>Review</h3>
+			<p>Please leave a review below</p>
+				<form #reviewForm="ngForm" (ngSubmit)="recAreaReviewForm()">
+					<textarea name="review" id="review" cols="30" rows="10"></textarea>
+				<button type="submit" class="btn btn-warning text-light">Submit</button>
+				<button type="submit" class="btn btn-warning text-light">Edit</button>
+				<button type="submit" class="btn btn-warning text-light">Delete</button>
+					<button type="reset" class="btn btn-warning text-light"><i class="fas fa-undo"></i>Reset</button>
+				</form>
+		</div>
+
+		<div id="review-section" *ngFor="let review of reviews">
+			<p>{{review.reviewContent}}</p>
+		</div>
