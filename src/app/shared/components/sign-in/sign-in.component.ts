@@ -6,12 +6,13 @@
 /******************************************************************************************************/
 
 /* Imports */
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, ViewChild} from "@angular/core";
 import {SignIn} from "../../interfaces/sign.in";
 import {Status} from "../../interfaces/status";
 import {SignInService} from "../../services/sign.in.service";
 import {Router} from "@angular/router";
 import {CookieService} from "ng2-cookies";
+
 
 //declare for JQuery
 declare var $: any;
@@ -41,7 +42,7 @@ export class SignInComponent {
 			console.log(status.status);
 
 			if(this.status.status === 200) {
-				this.router.navigate(["/profile-page"]);
+				this.router.navigate(["/profile-page/"]);
 
 			} else {
 				alert("Email or password is incorrect. Please try again.")
