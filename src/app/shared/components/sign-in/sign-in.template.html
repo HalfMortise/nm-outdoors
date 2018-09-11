@@ -15,16 +15,14 @@
 			<div class="row justify-content-md-center control-group">
 				<label class="form-group col-md-2 control-label" for="email-form">Email:</label>
 				<div class="controls">
-					<input id="email-form" type="text" class="input-group input-medium" placeholder="" required [(ngModel)]=signin.profileEmail
-							 #profileEmail="ngModel">
+					<input id="email-form" type="text" class="input-group input-medium" placeholder="" required="required">
 				</div>
 			</div>
 			<!-- Password input -->
 			<div class="row justify-content-md-center control-group">
 				<label class="form-group col-md-2 control-label" for="password-form">Password:</label>
 				<div class="controls">
-					<input id="password-form" type="text" class="input-group input-medium" placeholder="********" required [(ngModel)]=signin.profilePassword
-							 #profilePassword="ngModel">
+					<input id="password-form" type="text" class="input-group input-medium" placeholder="********" required="required">
 				</div>
 			</div>
 
@@ -38,7 +36,7 @@
 					<button type="reset" class="btn btn-warning text-light"><i class="fas fa-undo"></i>Reset</button>
 					<button type="submit" class="btn btn-primary text-light mr-3" (click)="signIn();">
 						<i class="fas fa-edit"></i>Sign In</button>
-					<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-modal-sm" data-whatever="@signUpModal">Sign up for an account</button>
+					<!--<a data-toggle="modal" data-target="#sign-up-modal">Sign Up</a>-->
 				</div><!--form-group col-md-6-->
 			</div><!--row justify-content-md-center-->
 		</div><!--container-->

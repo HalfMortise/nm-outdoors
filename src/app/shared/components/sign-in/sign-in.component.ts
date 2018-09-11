@@ -22,13 +22,16 @@ declare var $: any;
 })
 
 export class SignInComponent {
-	@ViewChild("signInForm") signInForm: any;
+	@ViewChild("signInForm")
 
+	signInForm: any;
 	signin: SignIn = {profileEmail: null, profilePassword: null};
 	status: Status = {status: null, type: null, message: null};
 
-	constructor(private SignInService: SignInService, private router: Router) {
-	}
+	constructor(
+		private SignInService: SignInService,
+		private router: Router
+	)	{}
 
 
 
