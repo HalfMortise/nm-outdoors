@@ -20,6 +20,10 @@ export class RecAreaService {
 		return(this.http.get<RecArea[]>(this.recAreaUrl, {params: new HttpParams().set("recAreaName", recAreaName)}));
 	}
 
+	getRecAreaByActivityId(activityId: string) :Observable<RecArea[]>{
+		return(this.http.get<RecArea[]>(this.recAreaUrl, {params: new HttpParams().set("activityId", activityId)}));
+	}
+
 	//call the recArea API and get rec area object by its distance
 	getRecAreaByDistance(distance: string) : Observable<RecArea[]>{
 		return(this.http.get<RecArea[]>(this.recAreaUrl, {params: new HttpParams().set("distance", distance)}));
