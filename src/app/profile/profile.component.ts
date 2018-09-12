@@ -13,36 +13,73 @@ import {ProfileService} from "../shared/services/profile.service";
 import {ActivatedRoute} from "@angular/router";
 import {JwtHelperService} from "@auth0/angular-jwt";
 import {Status} from "../shared/interfaces/status";
-
-
+import {AuthService} from "../shared/services/auth.service";
+import {Review} from "../shared/interfaces/review";
+import {ReviewService} from "../shared/services/review.service";
+import {RecAreaService} from "../shared/services/rec.area.service";
+import {RecArea} from "../shared/interfaces/rec.area";
 
 /* Component */
 
 @Component({
-	template: require ("./profile.template.html")
+	template: require("./profile.template.html")
 })
-export class ProfileComponent implements OnInit{
+export class ProfileComponent implements OnInit {
 
-	profile: Profile;
+	profile: Profile = {
+		profileId: "",
+		profileActivationToken: "",
+		profileAtHandle: "",
+		profileEmail: "",
+		profileHash: "",
+		profileImageUrl: ""
+	};
+
+	// profiles: Profile[] = [];
+
+	detailedReview: Review = {
+		reviewId: "",
+		reviewProfileId: "",
+		reviewRecAreaId: "",
+		reviewContent: "",
+		reviewDateTime: "",
+		reviewRating: null
+	};
+
+	recArea: RecArea;
+	review: Review;
+	reviews: Review[] = [];
 	status: Status;
 
-	constructor(private profileService: ProfileService, private jwtHelper : JwtHelperService) {}
+
+	constructor(
+		private profileService: ProfileService,
+		private recAreaService: RecAreaService,
+		private reviewService: ReviewService,
+		private jwtHelper: JwtHelperService,
+		private authService: AuthService,
+		protected route: ActivatedRoute
+	) {}
 
 	ngOnInit(): void {
-		// this.currentlySignedIn()
+		this.currentUser()
 	}
 
-	// currentlySignedIn() : void {
-	//
-	// 	const decodedJwt = this.jwtHelper.decodeToken(localStorage.getItem('jwt-token'));
-	//
-	// 	this.profileService.getProfileByProfileId(decodedJwt.auth.profileId)
-	// 		.subscribe(profile => this.profile = profile);
+	profileId = this.route.snapshot.params["profileId"];
 
-//		this.profileService.editProfile(this.http.put<Status>(this.profileUrl + profile.profileId, profile)) . subscribe(profile => this.profile = profile);
+	reviewId = this.route.snapshot.params["reviewId"];
 
-//		this.profileService.deleteProfile(this.http.delete<Status>(this.profileUrl + profile.profileId, profile)) . subscribe(profile => this.profile = profile);
-// 	}
+	currentUser(): void {
 
+		let isLoggedIn: boolean = this.authService.loggedIn();
 
+		console.log(isLoggedIn);
+
+		if(isLoggedIn) {}
+
+		let profileId = this.authService.decodeJwt().auth.profileId;
+
+		this.profileService.getProfileByProfileId(profileId).subscribe(reply => this.profile = reply);
+
+	}
 }
