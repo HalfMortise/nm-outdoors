@@ -20,8 +20,7 @@ export class RecAreaModalComponent implements OnChanges {
 		protected recAreaService: RecAreaService,
 		// protected reviewService: ReviewService,
 		protected route: ActivatedRoute
-	) {
-}
+	) {}
 
 	ngOnChanges() {
 		this.loadRecArea();
