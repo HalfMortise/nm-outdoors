@@ -19,10 +19,7 @@ import {Status} from "../shared/interfaces/status";
 /* Component */
 
 @Component({
-	template:`
-	<h1>{{profile.profileAtHandle}}</h1>
-	
-	`
+	template: require ("./profile.template.html")
 })
 export class ProfileComponent implements OnInit{
 
@@ -32,20 +29,20 @@ export class ProfileComponent implements OnInit{
 	constructor(private profileService: ProfileService, private jwtHelper : JwtHelperService) {}
 
 	ngOnInit(): void {
-		this.currentlySignedIn()
+		// this.currentlySignedIn()
 	}
 
-	currentlySignedIn() : void {
-
-		const decodedJwt = this.jwtHelper.decodeToken(localStorage.getItem('jwt-token'));
-
-		this.profileService.getProfileByProfileId(decodedJwt.auth.profileId)
-			.subscribe(profile => this.profile = profile);
+	// currentlySignedIn() : void {
+	//
+	// 	const decodedJwt = this.jwtHelper.decodeToken(localStorage.getItem('jwt-token'));
+	//
+	// 	this.profileService.getProfileByProfileId(decodedJwt.auth.profileId)
+	// 		.subscribe(profile => this.profile = profile);
 
 //		this.profileService.editProfile(this.http.put<Status>(this.profileUrl + profile.profileId, profile)) . subscribe(profile => this.profile = profile);
 
 //		this.profileService.deleteProfile(this.http.delete<Status>(this.profileUrl + profile.profileId, profile)) . subscribe(profile => this.profile = profile);
-	}
+// 	}
 
 
 }
