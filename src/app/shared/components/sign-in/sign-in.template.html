@@ -13,22 +13,24 @@
 			</div>
 			<!-- Email input -->
 			<div class="row justify-content-md-center control-group">
-				<label class="form-group col-md-2 control-label" for="email-form">Email:</label>
+				<label class="form-group col-md-2 control-label" for="profileEmail">Email:</label>
 				<div class="controls">
-					<input id="email-form" type="text" class="input-group input-medium" placeholder="" required="required">
+					<!-- NgModel bringing it back to the component and tying in the signin object -->
+					<input id="profileEmail" type="email" name="profileEmail" [(ngModel)]="signin.profileEmail" #profileEmail="ngModel" class="input-group input-medium" placeholder="" required="required">
 				</div>
 			</div>
 			<!-- Password input -->
 			<div class="row justify-content-md-center control-group">
-				<label class="form-group col-md-2 control-label" for="password-form">Password:</label>
+				<label class="form-group col-md-2 control-label" for="profilePassword">Password:</label>
 				<div class="controls">
-					<input id="password-form" type="password" class="input-group input-medium" placeholder="********" required="required">
+					<!-- NgModel bringing it back to the component and tying in the signin object -->
+					<input id="profilePassword" type="password" name="profilePassword" [(ngModel)]="signin.profilePassword" #profilePassword="ngModel" class="input-group input-medium" placeholder="********" required="required">
 				</div>
 			</div>
 
-			<!-- reCAPTCHA -->
-			<br />
-			<div class="g-recaptcha" data-sitekey="6LdKfG8UAAAAALQclWc2Mm5-iiauFbb30zWNNHVa"></div>
+			<!--&lt;!&ndash; reCAPTCHA &ndash;&gt;-->
+			<!--<br />-->
+			<!--<div class="g-recaptcha" data-sitekey="6LdKfG8UAAAAALQclWc2Mm5-iiauFbb30zWNNHVa"></div>-->
 
 			<!-- Reset and Submit buttons -->
 			<div class="row justify-content-md-center mt-3 mb-5">
