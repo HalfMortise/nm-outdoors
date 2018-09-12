@@ -397,7 +397,7 @@ class RecArea implements \JsonSerializable {
 		// create query template
 		$query = "SELECT recAreaId, recAreaDescription, recAreaDirections, recAreaImageUrl, recAreaLat, recAreaLong, recAreaMapUrl, recAreaName FROM recArea WHERE recAreaName = :recAreaName";
 		$statement = $pdo->prepare($query);
-		// bind the recArea distance to the place holder in the template
+		// bind the recArea name to the place holder in the template
 		$parameters = ["recAreaName" => $recAreaName];
 		$statement->execute($parameters);
 		// build an array of recArea
@@ -417,7 +417,40 @@ class RecArea implements \JsonSerializable {
 	}
 
 
+public static function getRecAreaByActivityId(\PDO $pdo, string $activityId) {
 
+		//sanitize the activityId before searching
+	try {
+		$activityId = self::validateUuid($activityId);
+	} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+		throw(new \PDOException($exception->getMessage(), 0, $exception));
+	}
+		//create query template
+		$query = "SELECT area.recAreaId, area.recAreaDescription, area.recAreaDirections, area.recAreaImageUrl, area.recAreaLat, area.recAreaLong, area.recAreaMapUrl, area.recAreaName FROM activity INNER JOIN activityType AS type on activity.activityId = type.activityTypeActivityId
+INNER JOIN recArea as area on area.recAreaId = type.activityTypeRecAreaId
+WHERE activity.activityId = :activityId";
+		$statement = $pdo->prepare($query);
+
+		//bind the activityId to the place holder in the template
+		$parameters = ["activityId" => $activityId];
+		$statement->execute($parameters);
+		//build an array of activity Id's
+		$recAreas = new \SplFixedArray($statement->rowCount());
+		var_dump($statement->rowCount());
+		$statement->setFetchMode(\PDO::FETCH_ASSOC);
+		while(($row = $statement->fetch()) !== false) {
+			try {
+				var_dump($row);
+				$recArea = new recArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
+				$recAreas[$recAreas->key()] = $recArea;
+				$recAreas->next();
+			} catch(\Exception $exception) {
+				// if the row couldn't be converted, rethrow it
+				throw(new \PDOException($exception->getMessage(), 0, $exception));
+			}
+		}
+		return($recAreas);
+	}
 
 
 

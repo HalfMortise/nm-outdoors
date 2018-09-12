@@ -42,6 +42,7 @@ try {
 	$userLat = filter_input(INPUT_GET, "userLat", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$userLong = filter_input(INPUT_GET, "userLong", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 	$distance = filter_input(INPUT_GET, "distance", FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_NO_ENCODE_QUOTES);
+	$activityId = filter_input(INPUT_GET, "activityId", FILTER_SANITIZE_STRING, FILTER_FLAG_NO_ENCODE_QUOTES);
 
 
 	// make sure the id is valid for methods that require it
@@ -59,10 +60,12 @@ try {
 			//get rec area by name
 		} else if(empty($recAreaName) === false) {
 			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName)->toArray();
-
+			//get recArea by activityId
+		} else if(empty($activityId) === false) {
+			$reply->data = RecArea::getRecAreaByActivityId($pdo, $activityId);
 			//get rec area by distance
-		} else if(empty($recAreaLat|| $recAreaLong|| $userLat|| $userLong || $distance)|| $distance === false) {
-			$reply->data = RecArea::getRecAreaByDistance($pdo, 36.245525,-106.427714, 35.159, -106.5761, 75.531951)->toArray();//$recAreaLat, $recAreaLong,  $userLat,  $userLong,  $distance);
+		} else if(empty($recAreaLat || $recAreaLong || $userLat || $userLong || $distance) || $distance === false) {
+			$reply->data = RecArea::getRecAreaByDistance($pdo, 36.245525, -106.427714, 35.159, -106.5761, 75.531951)->toArray();//$recAreaLat, $recAreaLong,  $userLat,  $userLong,  $distance);
 
 			//return all rec areas in the database
 		} else if(empty($pdo) === false) {
@@ -74,9 +77,7 @@ try {
 	}
 	// catch any exceptions that were thrown and update the status and message state variable fields
 
-
-} catch
-(\Exception \TypeError $exception) {
+} catch(\Exception \TypeError $exception) {
 	$reply->status = $exception->getCode();
 	$reply->message = $exception->getMessage();
 }
