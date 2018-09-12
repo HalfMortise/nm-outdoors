@@ -62,7 +62,7 @@ try {
 			$reply->data = RecArea::getRecAreaByRecAreaName($pdo, $recAreaName)->toArray();
 			//get recArea by activityId
 		} else if(empty($activityId) === false) {
-			$reply->data = RecArea::getRecAreaByActivityId($pdo, $activityId);
+			$reply->data = RecArea::getRecAreaByActivityId($pdo, $activityId)->toArray();
 			//get rec area by distance
 		} else if(empty($recAreaLat || $recAreaLong || $userLat || $userLong || $distance) || $distance === false) {
 			$reply->data = RecArea::getRecAreaByDistance($pdo, 36.245525, -106.427714, 35.159, -106.5761, 75.531951)->toArray();//$recAreaLat, $recAreaLong,  $userLat,  $userLong,  $distance);
