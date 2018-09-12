@@ -43,7 +43,7 @@ export class SignInComponent {
 			console.log(status.status);
 
 			if(this.status.status === 200) {
-				this.router.navigate(["/profile-page"]);
+				this.router.navigate(["/profile"]);
 
 			} else {
 				alert("Email or password is incorrect. Please try again.")
