@@ -13,7 +13,8 @@
 			</div>
 			</div>
 		</split-area>
-		<split-area *ngIf="detailedRecArea.recAreaId !== null">
+		<split-area>
+			<div *ngIf="detailedRecArea.recAreaId !== null">
 			<div class="container-fluid recArea-panel">
 				<div class="row align-content-center justify-content-center">
 
@@ -33,6 +34,7 @@
 						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 		</split-area>
 	</split>

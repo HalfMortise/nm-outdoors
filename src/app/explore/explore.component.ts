@@ -20,7 +20,7 @@ export class ExploreComponent implements OnInit{
 	recArea : RecArea;
 	recAreas : RecArea[] = [];
 	recAreaSearchForm : FormGroup;
-	detailedRecArea : RecArea = {recAreaId : "", recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
+	detailedRecArea : RecArea = {recAreaId : null, recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
 	direction: string = 'horizontal';
 
 	@ViewChild(RecAreaModalComponent) recAreaModalComponent : RecAreaModalComponent;
