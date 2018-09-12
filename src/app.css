@@ -52,7 +52,8 @@ html {
 }
 
 body {
-	font-family: 'Roboto Mono', monospace;
+	font-family: "Times New Roman", monospace;
+	font-size: 1.5em;
 	min-height: 100vh;
 	color: #57585c;
 	color: var(--color-text);
