@@ -15,6 +15,7 @@ import {Observable} from "rxjs/internal/Observable";
  *
  * this interceptor will use the HttpResponse to return either the data or the status message
  **/
+
 @Injectable()
 export class DeepDiveInterceptor implements HttpInterceptor {
 
@@ -29,12 +30,22 @@ export class DeepDiveInterceptor implements HttpInterceptor {
 		// hand off to the next interceptor
 		return(next.handle(request).pipe(map((event: HttpEvent<any>) => {
 			// if this is an HTTP Response, from Angular...
-			if(event instanceof HttpResponse) {
+			if(event instanceof HttpResponse && event.body !== null) {
 				// create an event to return (by default, return the same event)
 				let dataEvent = event;
 
 				// if the API is successful...
 				if(event.status === 200) {
+					// extract the JWT Header and put it in local storage
+					if(localStorage.getItem("jwt-token") === null) {
+						let jwtToken = event.headers.getAll("X-JWT-TOKEN");
+
+						if(jwtToken !== null) {
+							let token : string = jwtToken[0];
+							console.log(token);
+							localStorage.setItem("jwt-token", token.toString());
+						}
+					}
 
 					// extract the data or message from the response body
 					let body = event.body;
@@ -56,6 +67,6 @@ export class DeepDiveInterceptor implements HttpInterceptor {
 				}
 				return(dataEvent);
 			}
-		})));
+		})))
 	}
 }
