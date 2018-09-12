@@ -42,8 +42,8 @@
 						<div class="col-12 opacity-visible">
 							<form class="form-inline" [formGroup]="recAreaSearchForm" (submit)="getRecAreaByRecAreaName()">
 								<input class="form-control userSearch" type="search" placeholder="Search by name" formControlName="recAreaSearchName" aria-label="Search">
-								<button class="submitSearch" type="submit"><i class="fas fa-search"></i></button>
-								<button class="submitSearch2" type="button" (click)="showRecAreas()">RESET</button>
+								<button class="btn btn-info" type="submit"><i class="fas fa-search"></i></button>
+								<button class="btn btn-danger" type="button" (click)="showRecAreas()">RESET</button>
 							</form>
 							<div class="text-center">
 								<pagination-controls (pageChange)="page = $event"></pagination-controls>
