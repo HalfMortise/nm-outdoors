@@ -7,11 +7,23 @@ import {allAppComponents, appRoutingProviders, routing} from "./app.routes";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NguiMapModule} from "@ngui/map";
 import {NgxPaginationModule} from "ngx-pagination";
+import {JwtModule} from "@auth0/angular-jwt";
 
 // import { AgmCoreModule } from '@agm/core';
 
 
 const moduleDeclarations = [AppComponent];
+
+const jwtHelper = JwtModule.forRoot({
+	config:{
+		tokenGetter: ()=>{
+			return localStorage.getItem("jwt-token");
+		},
+		skipWhenExpired:true,
+		whitelistedDomains: ["localhost:7272", "https://bootcamp-coders.cnm.edu/"],
+		headerName:"X-JWT-TOKEN",
+		authScheme: ""
+	}});
 
 @NgModule({
 	imports:      [
@@ -19,10 +31,12 @@ const moduleDeclarations = [AppComponent];
 		BrowserModule,
 		FormsModule,
 		HttpClientModule,
+		jwtHelper,
 		NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBMQE2mPIzXsRIbSUWzBUwiJrdrp80Xkqc'}),
 		routing,
 		ReactiveFormsModule,
-		NgxPaginationModule],
+		NgxPaginationModule
+	],
 	declarations: [...moduleDeclarations, ...allAppComponents],
 	bootstrap:    [AppComponent],
 	providers:    [...appRoutingProviders]
