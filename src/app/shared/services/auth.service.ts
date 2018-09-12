@@ -33,7 +33,7 @@ export class AuthService {
 		let isLoggedIn : boolean = this.loggedIn();
 
 		if (!isLoggedIn) {
-			return false;
+			return "nope";
 		}
 
 		return this.jwtHelperService.decodeToken(this.token);
