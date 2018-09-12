@@ -59,9 +59,12 @@ export class ReviewPostComponent implements OnInit{
 			reviewDateTime : null,
 			reviewRating: null
 		};
-		 this.reviewService.createReview(review).subscribe(status => this.status = status);
-		  if(this.status.status === 200){
-		  	this.loadReviews();
-		  }
+		 this.reviewService.createReview(review).subscribe(status =>{
+		 	this.status = status;
+			 if(this.status.status === 200){
+				 this.loadReviews();
+			 }
+		 });
+
 	 }
 }
