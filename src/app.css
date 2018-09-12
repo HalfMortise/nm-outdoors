@@ -263,12 +263,13 @@ ngui-map {
 }
 
 .div-wrapper {
-	height: 80vh;
+	height: 100%;
 	width: 70vw;
 }
 
 .ngui-map-container {
 	position: absolute;
+	top: 5vh;
 	bottom: 0;
 	right: 0;
 	left: 0;
@@ -290,4 +291,11 @@ ngui-map {
 
 .top {
 	position: fixed;
+}
+
+.navbar-brand,
+.navbar-nav li a {
+	line-height: 5vh;
+	height: 5vh;
+	padding-top: 0;
 }
