@@ -20,7 +20,7 @@ export class RecAreaService {
 		return(this.http.get<RecArea[]>(this.recAreaUrl, {params: new HttpParams().set("recAreaName", recAreaName)}));
 	}
 
-	getRecAreaByActivityId(activityId: string) :Observable<RecArea[]>{
+	getRecAreaByActivityId(activityId: string) : Observable<RecArea[]>{
 		return(this.http.get<RecArea[]>(this.recAreaUrl, {params: new HttpParams().set("activityId", activityId)}));
 	}
 
