@@ -29,21 +29,22 @@ import {SignUpComponent} from "./shared/components/sign-up/sign-up.component";
 import {ReviewPostComponent} from "./reviewpost/review-post.component";
 import {MainNavComponent} from "./shared/components/main-nav/main-nav.component";
 import {AboutComponent} from "./about/about.component";
+import {AreaComponent} from "./area/area.component";
 
 
 
-export const allAppComponents = [HomeComponent, AboutComponent, ExploreComponent, MainNavComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent, ReviewPostComponent];
+export const allAppComponents = [HomeComponent, AboutComponent, AreaComponent, ExploreComponent, MainNavComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent, ReviewPostComponent];
 
 export const routes: Routes = [
 	{path: "about", component: AboutComponent},
 	{path: "review-post", component: ReviewPostComponent},
-	{path: "recAreaModal/:recAreaId", component: RecAreaModalComponent},
+	{path: "area/:recAreaId", component: AreaComponent},
 	{path: "recArea", component: RecAreaListComponent},
 	{path: "explore", component: ExploreComponent},
 	{path: "sign-up-modal", component: SignUpComponent},
 	{path: "sign-in", component: SignInComponent},
 	{path: "", component: HomeComponent},
-	{path: "profile-page", component: ProfileComponent}
+	{path: "profile", component: ProfileComponent}
 ];
 const services : any[] = [ActivationService, ActivityService, AuthService, ProfileService, RecAreaService, ReviewService, SessionService, SignInService, SignUpService];
 const providers: any[] = [

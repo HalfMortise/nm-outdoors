@@ -1,0 +1,20 @@
+<div *ngIf="recArea">
+	<div>
+		<div>
+			<div>
+				<div>
+					<h5>{{recArea.recAreaName}}</h5>
+				</div>
+				<div>
+					<img src="{{recArea.recAreaImageUrl}}" alt="rec area image">
+					<p>{{recArea.recAreaDescription}}</p>
+					<p>{{recArea.recAreaDirections}}</p>
+					<p>{{recArea.recAreaLat}}</p>
+					<p>{{recArea.recAreaLong}}</p>
+					<p>{{recArea.recAreaMapUrl}}</p>
+				</div>
+				<review-post></review-post>
+			</div>
+		</div>
+	</div>
+</div>
