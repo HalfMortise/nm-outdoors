@@ -299,3 +299,8 @@ ngui-map {
 	height: 5vh;
 	padding-top: 0;
 }
+
+.area-wrapper {
+	overflow: scroll;
+	height: 90vh;
+}
