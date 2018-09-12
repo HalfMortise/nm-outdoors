@@ -37,7 +37,8 @@ export class ReviewPostComponent implements OnInit{
 		if(this.recAreaId !== undefined) {
       this.recAreaService.getRecAreaByRecAreaId(this.recAreaId).subscribe(reply => this.recArea = reply);
       this.reviewForm = this.formBuilder.group({
-        reviewText: ["", [Validators.maxLength(512), Validators.required]]
+        reviewText: ["", [Validators.maxLength(512), Validators.required]],
+			reviewRating: ["", [Validators.required]]
       });
       this.loadReviews();
     }
@@ -57,7 +58,7 @@ export class ReviewPostComponent implements OnInit{
 			reviewRecAreaId: this.recAreaId,
 			reviewContent: this.reviewForm.value.reviewText,
 			reviewDateTime : null,
-			reviewRating: 1
+			reviewRating: this.reviewForm.value.reviewRating,
 		};
 		 this.reviewService.createReview(review).subscribe(status =>{
 		 	this.status = status;

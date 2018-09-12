@@ -8,6 +8,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NguiMapModule} from "@ngui/map";
 import {NgxPaginationModule} from "ngx-pagination";
 import {JwtModule} from "@auth0/angular-jwt";
+import {BarRatingModule} from "ngx-bar-rating";
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -31,6 +32,7 @@ const jwtHelper = JwtModule.forRoot({
 		BrowserModule,
 		FormsModule,
 		HttpClientModule,
+		BarRatingModule,
 		jwtHelper,
 		NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBMQE2mPIzXsRIbSUWzBUwiJrdrp80Xkqc'}),
 		routing,
