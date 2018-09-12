@@ -432,15 +432,14 @@ WHERE activity.activityId = :activityId";
 		$statement = $pdo->prepare($query);
 
 		//bind the activityId to the place holder in the template
-		$parameters = ["activityId" => $activityId];
+		$parameters = ["activityId" => $activityId->getBytes()];
 		$statement->execute($parameters);
 		//build an array of activity Id's
 		$recAreas = new \SplFixedArray($statement->rowCount());
-		var_dump($statement->rowCount());
+		$statement->rowCount();
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while(($row = $statement->fetch()) !== false) {
 			try {
-				var_dump($row);
 				$recArea = new recArea($row["recAreaId"], $row["recAreaDescription"], $row["recAreaDirections"], $row["recAreaImageUrl"], $row["recAreaLat"], $row["recAreaLong"], $row["recAreaMapUrl"], $row["recAreaName"]);
 				$recAreas[$recAreas->key()] = $recArea;
 				$recAreas->next();
