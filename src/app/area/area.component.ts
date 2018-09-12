@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges} from "@angular/core";
+import {Component, Input, OnInit} from "@angular/core";
 import {RecAreaService} from "../shared/services/rec.area.service";
 import {ReviewService} from "../shared/services/review.service";
 import {RecArea} from "../shared/interfaces/rec.area";
@@ -9,7 +9,7 @@ import {ActivatedRoute} from "@angular/router";
   template: require("./area.template.html")
 })
 
-export class AreaComponent implements OnChanges {
+export class AreaComponent implements OnInit {
   recArea: RecArea = {recAreaId : "", recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
   recAreas: RecArea[] = [];
   review: Review;
@@ -22,7 +22,7 @@ export class AreaComponent implements OnChanges {
   ) {
   }
 
-  ngOnChanges() {
+  ngOnInit() {
     this.loadRecArea();
   }
 
