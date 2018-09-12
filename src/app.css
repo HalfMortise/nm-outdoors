@@ -60,6 +60,7 @@ body {
 	background-color: var(--color-bg);
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	overflow: hidden;
 }
 
 /*****************************************************
@@ -545,6 +546,23 @@ a:focus {
 	transition: .5s;
 }
 
+.overflow-hidden {
+	overflow: hidden;
+}
+
+.recArea-list {
+	height: 80vh;
+	overflow-y: auto;
+	position: relative;
+	background-color: #FFE53B;
+	background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
+	opacity: 0.9;
+}
+
+.recArea-list .opacity-visible {
+	opacity: 1 !important;
+}
+
 /* Create two equal columns that floats next to each other */
 .hide {
 	visibility: hidden;
@@ -693,8 +711,6 @@ footer {
 	position: fixed;
 }
 
-@import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
 
 
 /*****************************************************
@@ -706,22 +722,36 @@ footer {
 	margin: 50px 0;
 }
 
-agm-map {
-	height: 800px ;
+ngui-map {
+	min-height: 100%;
 }
 
-split-area {
-	height: 100vh;
-	width: 50vw;
+.div-wrapper {
+	position:relative;
+	height: 100%;
+	width: 100%;
 }
-@media (max-width: 800px) {
-	split-area {
-		height: 50vh;
-		width: 100vw;
-	}
+
+.ngui-map-container {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
 }
+
+/*split-area {*/
+	/*height: 100vh;*/
+	/*width: 50vw;*/
+/*}*/
+/*@media (max-width: 800px) {*/
+	/*split-area {*/
+		/*height: 50vh;*/
+		/*width: 100vw;*/
+	/*}*/
+/*}*/
 @media (max-width: 960px) {
-	agm-map {
+	ngui-map {
 		height: 50vh; } }
 
 /*.storelocator-panel {*/

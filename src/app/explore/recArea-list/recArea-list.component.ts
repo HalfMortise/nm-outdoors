@@ -22,6 +22,7 @@ export class RecAreaListComponent implements OnInit {
 	recAreas: RecArea[] = [];
 
 
+
 	constructor(
 		protected recAreaService: RecAreaService,
 		protected route: ActivatedRoute

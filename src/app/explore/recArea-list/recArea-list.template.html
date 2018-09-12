@@ -1,30 +1,27 @@
 <main>
-		<div class="container">
-			<div class="row">
+		<div class="container-fluid recArea-list">
+			<div class="row align-content-center justify-content-center">
 
-				<div class="col-12">
+				<div class="col-12 opacity-visible">
 					<div class="text-center">
 						<pagination-controls (pageChange)="page = $event"></pagination-controls>
 					</div>
-					<ul class="recArea-list">
-						<li class="searchForm" routerLink="/recArea/{{recArea.recAreaId}}"
+						<div class="searchForm col-12 align-content-center" data-toggle="modal" data-target="#recAreaModal"
 							 *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
-							<div class="col">
-								<ul>
-									<li>{{recArea.recAreaName}}</li>
-								</ul>
-								<img src="{{recArea.recAreaImageUrl}}" alt="rec area image">
-							</div>
-							<div class="">
+							<div class="row">
+								<div class="col-6">
+									<h3>{{recArea.recAreaName}}</h3>
+								<img class="img-fluid" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
+								</div>
+							<div class="col-6">
 								<ul>
 									<li>{{recArea.recAreaDescription}}</li>
 									<li>{{recArea.recAreaDirections}}</li>
 								</ul>
 								<img src="{{recArea.recAreaMapUrl}}">
 							</div>
-						</li>
-					</ul>
-
+							</div>
+						</div>
 				</div>
 			</div>
 		</div>

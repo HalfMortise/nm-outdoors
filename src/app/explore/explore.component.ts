@@ -47,7 +47,7 @@ export class ExploreComponent implements OnInit{
 
 	displayRecArea(detailedRecArea : RecArea) {
 		this.detailedRecArea = detailedRecArea;
-		this.recAreaModalComponent.recArea = detailedRecArea;
+		this.recAreaModalComponent.recModal = detailedRecArea;
 	}
 
 	// getAllRecAreas() : void {
