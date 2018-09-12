@@ -9,11 +9,11 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 export class ProfileService {
 	constructor(protected http: HttpClient) {}
 	//api endpoint
-	private profileUrl = "api/Profile/";
+	private profileUrl = "api/profile/";
 
 	//call to the Profile API and get profile object by its id
 getProfileByProfileId(profileId: string) : Observable<Profile>{
-	return(this.http.get<Profile>(this.profileUrl, {params: new HttpParams().set("id", profileId)}));
+	return(this.http.get<Profile>(this.profileUrl + profileId));
 }
 
 //call to the Profile API and get profile object by profile email
