@@ -5,7 +5,7 @@
 			<div class="ngui-map-container">
 			<div class="div-wrapper">
 			<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
-				<marker *ngFor="let mapRecArea of recAreas" [position]="[mapRecArea.recAreaLat, mapRecArea.recAreaLong]" data-toggle="modal" data-target="#recAreaModal" (click)="clicked($event)" (click)="displayRecArea(mapRecArea)"></marker>
+				<marker *ngFor="let mapRecArea of recAreas" [position]="[mapRecArea.recAreaLat, mapRecArea.recAreaLong]" (click)="clicked(mapRecArea)"></marker>
 				<info-window id="#recAreaInfo">
 					<h5>Test Info Window</h5>
 				</info-window>
@@ -13,27 +13,23 @@
 			</div>
 			</div>
 		</split-area>
-
-		<split-area>
+🤷‍♂️
+		<split-area *ngIf="detailedRecArea.recAreaId !== null">
 			<div class="container-fluid recArea-panel">
 				<div class="row align-content-center justify-content-center">
 
 					<div class="col-12 opacity-visible">
-						<div class="text-center">
-							<pagination-controls (pageChange)="page = $event"></pagination-controls>
-						</div>
-						<div class="searchForm col-12" data-toggle="modal" data-target="#recAreaModal"
-							  *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
+						<div class="searchForm col-12">
 							<div class="row">
 								<div class="col-12">
-									<h3>{{recArea.recAreaName}}</h3>
-									<img class="img-fluid" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
+									<h3>{{detailedRecArea.recAreaName}}</h3>
+									<img class="img-fluid" src="{{detailedRecArea.recAreaImageUrl}}" alt="rec area image">
 								</div>
 								<ul>
-									<li>{{recArea.recAreaDescription}}</li>
-									<li>{{recArea.recAreaDirections}}</li>
+									<li>{{detailedRecArea.recAreaDescription}}</li>
+									<li>{{detailedRecArea.recAreaDirections}}</li>
 								</ul>
-								<img src="{{recArea.recAreaMapUrl}}">
+								<img src="{{detailedRecArea.recAreaMapUrl}}">
 							</div>
 						</div>
 					</div>
@@ -47,9 +43,9 @@
 <recArea-modal></recArea-modal>
 
 
-<!--<div *ngIf="detailedRecArea.recAreaId !== null" >-->
+<!--<div *ngIf="detaileddetailedRecArea.recAreaId !== null" >-->
 
-<!--<h1 class="rounded-top">{{detailedRecArea.recAreaName}}</h1>-->
+<!--<h1 class="rounded-top">{{detaileddetailedRecArea.recAreaName}}</h1>-->
 
 <!--<button class="btn btn-block" (clicked)="goTorecArea()">Go to Page</button>-->
 

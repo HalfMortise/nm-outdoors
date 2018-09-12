@@ -352,8 +352,7 @@ ngui-map {
 }
 
 .ngui-map-container {
-	width: 100vw;
-	position: relative;
+	position: absolute;
 	top: 0;
 	bottom: 0;
 	right: 0;
