@@ -1,13 +1,13 @@
 <h2>MAP BRUH 🤷‍♂️🤦‍♂️</h2>
 <div class="map-list-container">
 	<split [direction]="direction">
-		<split-area size="50" class="col-map">
+		<split-area size="50" >
 			<div class="ngui-map-container">
 			<div class="div-wrapper">
 			<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
-				<marker *ngFor="let mapRecArea of recAreas" [position]="[mapRecArea.recAreaLat, mapRecArea.recAreaLong]" data-toggle="modal" data-target="#recAreaModal"></marker>
-				<info-window id="#recAreaModal">
-				<!--<a [routerLink]="'/recArea/' + detailedRecArea.recAreaId">Check out this recArea</a>-->
+				<marker *ngFor="let mapRecArea of recAreas" [position]="[mapRecArea.recAreaLat, mapRecArea.recAreaLong]" data-toggle="modal" data-target="#recAreaModal" (click)="clicked($event)" (click)="displayRecArea(mapRecArea)"></marker>
+				<info-window id="#recAreaInfo">
+					<h5>Test Info Window</h5>
 				</info-window>
 			</ngui-map>
 			</div>
