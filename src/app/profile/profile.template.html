@@ -1,15 +1,45 @@
 
 <div id="profile" class="card text-center container-fluid mt-4">
 	<h5 class="card-header">Welcome back!</h5>
-	<img class="profileImageUrl" src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.rnG1ojcmwebKASg3fRu2rwHaHa%26pid%3D15.1&f=1">
+	<img class="profileImageUrl img-fluid rounded-circle" src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.rnG1ojcmwebKASg3fRu2rwHaHa%26pid%3D15.1&f=1">
 	<div class="card-body">
-		<h5 class="card-title">Username</h5>
-		<p class="card-text">Email</p>
-		<ul class="list-group list-group-flush">
-			<li class="list-group-item">Review 1</li>
-			<li class="list-group-item">Review 2</li>
-			<li class="list-group-item">Review 3</li>
-		</ul>
-		<a href="#" class="btn btn-primary">Go somewhere</a>
+		<h5 class="card-title">{{profile.profileAtHandle}}</h5>
+		<p class="card-text">{{profile.profileEmail}}</p>
+
+
+		<!--<ul class="list-group list-group-flush" *ngFor="let review of reviews">-->
+			<!--<li class="list-group-item">Review{{review.reviewRecAreaId}}</li>-->
+			<!--<li class="list-group-item">Review{{review.reviewRecAreaId}}</li>-->
+			<!--<li class="list-group-item">Review{{review.reviewRecAreaId}}</li>-->
+		<!--</ul>-->
+
+
+
+		<div class="col-12 opacity-visible">
+			<div class="text-center">
+				<pagination-controls (pageChange)="page = $event"></pagination-controls>
+			</div>
+			<div class="" *ngFor="let review of reviews | paginate: { itemsPerPage: 3, currentPage: page }">
+				<div class="row">
+					<div class="col-12">
+						<h3>{{review.rec}}</h3>
+						<img class="img-fluid" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
+					</div>
+					<ul>
+						<li>{{review.reviewContent}}</li>
+						<li>{{review.reviewRating}}</li>
+						<li>{{review.reviewDateTime}}</li>
+					</ul>
+					<img src="{{recArea.recAreaMapUrl}}">
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+		<!-- Sign Out -->
+		<a href="#" class="btn btn-secondary">Sign Out</a>
 	</div>
 </div>
