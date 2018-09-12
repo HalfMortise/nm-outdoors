@@ -43,7 +43,7 @@ export const routes: Routes = [
 	{path: "explore", component: ExploreComponent},
 	{path: "sign-up-modal", component: SignUpComponent},
 	{path: "sign-in", component: SignInComponent},
-	{path: "profile-page", component: ProfileComponent},
+	{path: "profile", component: ProfileComponent},
 	{path: "", component: HomeComponent}
 ];
 const services : any[] = [ActivationService, ActivityService, AuthService, ProfileService, RecAreaService, ReviewService, SessionService, SignInService, SignUpService];
