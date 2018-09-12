@@ -152,7 +152,7 @@ html {
 }
 
 body {
-	font-family: "Times New Roman", monospace;
+	font-family: "Verdana", monospace;
 	font-size: 1.5em;
 	min-height: 100vh;
 	color: #57585c;
@@ -177,7 +177,7 @@ body {
 
 .recArea-panel {
 	height: 100vh;
-	width: 30vw;
+	width: 50vw;
 	overflow-y: auto;
 	background-color: #FFE53B;
 	background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
@@ -347,13 +347,13 @@ ngui-map {
 }
 
 .div-wrapper {
-	position:relative;
 	height: 100vh;
 	width: 70vw;
 }
 
 .ngui-map-container {
-	position: absolute;
+	width: 100vw;
+	position: relative;
 	top: 0;
 	bottom: 0;
 	right: 0;
