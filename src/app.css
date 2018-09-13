@@ -250,14 +250,14 @@ ngui-map {
 }
 
 /*split-area {*/
-	/*height: 100vh;*/
-	/*width: 50vw;*/
+/*height: 100vh;*/
+/*width: 50vw;*/
 /*}*/
 /*@media (max-width: 800px) {*/
-	/*split-area {*/
-		/*height: 50vh;*/
-		/*width: 100vw;*/
-	/*}*/
+/*split-area {*/
+/*height: 50vh;*/
+/*width: 100vw;*/
+/*}*/
 /*}*/
 @media (max-width: 960px) {
 	ngui-map {
@@ -296,9 +296,9 @@ ngui-map {
 
 /*.navbar, .navbar-brand,*/
 /*.navbar-nav li a {*/
-	/*line-height: 5vh;*/
-	/*height: 5vh;*/
-	/*padding-top: 0;*/
+/*line-height: 5vh;*/
+/*height: 5vh;*/
+/*padding-top: 0;*/
 /*}*/
 
 .custom-toggler.navbar-toggler {
