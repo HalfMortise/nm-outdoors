@@ -20,15 +20,15 @@ export class HomeComponent implements OnInit{
 	getAllActivities() {
 		this.activityService.getAllActivities().subscribe(reply => this.activities = reply);
 	}
-	this.loadSearchResults();
+	// this.loadSearchResults();
 }
 
-loadSearchResults() {
-	this.activityParameter = this.route.snapshot.params["activityParameter"];
-	this.activityValue = this.route.snapshot.params["activityValue"];
-	if(this.activityParameter === "activityStatus"){
-		this.loadStatus(this.activityValue);
-	} else if(this.activityParameter === "Wild Life Viewing"){
-		this.load
-	}
-}
+// loadSearchResults() {
+// 	this.activityParameter = this.route.snapshot.params["activityParameter"];
+// 	this.activityValue = this.route.snapshot.params["activityValue"];
+// 	if(this.activityParameter === "activityStatus"){
+// 		this.loadStatus(this.activityValue);
+// 	} else if(this.activityParameter === "Wild Life Viewing"){
+// 		this.load
+// 	}
+// }
