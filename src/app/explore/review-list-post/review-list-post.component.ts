@@ -11,7 +11,7 @@ import {ReviewService} from "../../shared/services/review.service";
 	selector: "review-list",
 })
 
-export class RecAreaListComponent implements OnInit {
+export class ReviewListPostComponent implements OnInit {
 	@Input() recAreaId: string;
 	recAreas: RecArea[] = [];
 	recArea: RecArea;
