@@ -4,8 +4,8 @@
 			<div class="ngui-map-container">
 			<div class="div-wrapper">
 			<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
-				<marker *ngFor="let detailedRecArea of recAreas" [position]="[detailedRecArea.recAreaLat, detailedRecArea.recAreaLong]" (click)="clicked(detailedRecArea)"></marker>
-				<info-window id="#recAreaInfo">
+				<marker *ngFor="let detailedRecArea of recAreas" [position]="[detailedRecArea.recAreaLat, detailedRecArea.recAreaLong]" (click)="clicked(detailedRecArea)" (click)="displayRecArea(detailedRecArea)"></marker>
+				<info-window id="recAreaInfo">
 					<h5>Test Info Window</h5>
 				</info-window>
 			</ngui-map>
