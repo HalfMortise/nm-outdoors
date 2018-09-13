@@ -5,6 +5,8 @@ import {RecArea} from "../../shared/interfaces/rec.area";
 import {ProfileService} from "../../shared/services/profile.service";
 import {Review} from "../../shared/interfaces/review";
 import {ReviewService} from "../../shared/services/review.service";
+import {FormGroup} from "@angular/forms";
+import {Status} from "../../shared/interfaces/status";
 
 @Component({
 	template: require("./review-list-post.html"),
@@ -12,11 +14,12 @@ import {ReviewService} from "../../shared/services/review.service";
 })
 
 export class ReviewListPostComponent implements OnInit {
-	@Input() recAreaId: string;
-	recAreas: RecArea[] = [];
-	recArea: RecArea;
-	reviews: Review[] = [];
 	review: Review;
+	reviews: Review[] = [];
+	reviewForm: FormGroup;
+	recAreaId = this.route.snapshot.params["recAreaId"];
+	recArea: RecArea = {recAreaId : "", recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
+	status: Status;
 
 
 
