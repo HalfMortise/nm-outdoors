@@ -7,7 +7,8 @@ import {Review} from "../../shared/interfaces/review";
 import {ReviewService} from "../../shared/services/review.service";
 
 @Component({
-	template: require("./review-list-post.html")
+	template: require("./review-list-post.html"),
+	selector: "review-list",
 })
 
 export class RecAreaListComponent implements OnInit {
