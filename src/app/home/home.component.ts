@@ -34,25 +34,16 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit() {
 		this.getAllActivities();
-		this.loadSearchResults();
 	}
 
 	getAllActivities() {
 		this.activityService.getAllActivities().subscribe(reply => this.activities = reply);
 	}
 
-
-	loadSearchResults() {
-		if(this.activityParameter === "id") {
-			this.loadRecAreas(this.activityValue);
-		}
-	};
-
-
-	loadRecAreas(activityId: string){
-		this.recAreaService.getRecAreaByActivityId(activityId).subscribe(recAreas => this.recAreas = recAreas);
-
+	getSearchResults() {
+		this.recAreaService.getRecAreaByActivityId(this.searchValue).subscribe(recAreas => this.recAreas = recAreas);
 	}
+
 
 	setSearchValue(activityId: string) {
 		this.searchValue = activityId;
