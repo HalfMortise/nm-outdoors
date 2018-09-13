@@ -6,7 +6,8 @@
 			<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
 				<marker *ngFor="let detailedRecArea of recAreas" [position]="[detailedRecArea.recAreaLat, detailedRecArea.recAreaLong]" (click)="clicked($event)" (click)="displayRecArea(detailedRecArea)"></marker>
 				<info-window id="recAreaInfo">
-					<h5>Test Info Window</h5>
+					<h5>{{detailedRecArea.recAreaName}}</h5>
+					<br>
 				</info-window>
 			</ngui-map>
 			</div>
@@ -18,7 +19,7 @@
 				<div class="row align-content-center justify-content-center">
 					<div class="col-12 opacity-visible">
 						<div class="searchForm col-12">
-							<button class="submitSearch2" type="button" (click)="resetRecArea()">BACK</button>
+							<button class="btn btn-warning btn-lg text-center" type="button" (click)="resetRecArea()">BACK</button>
 							<div class="row justify-content-center align-content-center">
 								<div class="col-12">
 									<h3>{{detailedRecArea.recAreaName}}</h3>
