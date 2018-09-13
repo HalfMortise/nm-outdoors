@@ -10,20 +10,20 @@
 			<form [formGroup] ="reviewForm" (ngSubmit)="recAreaReviewForm()" novalidate>
 
 				<fieldset class="rating">
-					<input type="radio" formControlName="reviewRating"  value="5"/>
-					<label title="Rocks!"  >5 stars</label>
-
-					<input type="radio" formControlName="reviewRating" value="4"/>
-					<label title="Pretty good" >4 stars</label>
-
-					<input type="radio" formControlName="reviewRating" value="3"/>
-					<label title="Meh" >3 stars</label>
+					<input type="radio" formControlName="reviewRating"  value="1"/>
+					<label title="Sucks big time">⭐</label>
 
 					<input type="radio" formControlName="reviewRating" value="2"/>
-					<label title="Kinda bad" >2 stars</label>
+					<label title="Kinda bad" >⭐⭐</label>
 
-					<input type="radio" formControlName="reviewRating" value="1"/>
-					<label title="Sucks big time" >1 star</label>
+					<input type="radio" formControlName="reviewRating" value="3"/>
+					<label title="Meh" >⭐⭐⭐</label>
+
+					<input type="radio" formControlName="reviewRating" value="4"/>
+					<label title="Pretty good" >⭐⭐⭐⭐</label>
+
+					<input type="radio" formControlName="reviewRating" value="5"/>
+					<label title="Rocks!" >⭐⭐⭐⭐⭐</label>
 				</fieldset>
 
 
@@ -31,8 +31,7 @@
 				<button type="submit" class="btn btn-warning text-light">Submit</button>
 				<button type="reset" class="btn btn-warning text-light"><i class="fas fa-undo"></i>Reset</button>
 				</form>
-
-
+	  </div>
 		<!--&lt;!&ndash;<div id="review-section" *ngFor="let review of reviews">&ndash;&gt;-->
 			<!--<p>{{review.reviewContent}}</p>-->
 		<!--</div>-->
