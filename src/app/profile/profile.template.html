@@ -1,9 +1,9 @@
 
 <div id="profile" class="card text-center container-fluid mt-4">
-	<h5 class="card-header">Welcome back!</h5>
+	<h5 class="card-header">Welcome back, {{profile.profileAtHandle}}!</h5>
 	<img class="profileImageUrl img-fluid rounded-circle" src="https://proxy.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.rnG1ojcmwebKASg3fRu2rwHaHa%26pid%3D15.1&f=1">
 	<div class="card-body">
-		<h5 class="card-title">{{profile.profileAtHandle}}</h5>
+		<h5 class="card-title"></h5>
 		<p class="card-text">{{profile.profileEmail}}</p>
 
 
@@ -19,10 +19,10 @@
 			<div class="text-center">
 				<pagination-controls (pageChange)="page = $event"></pagination-controls>
 			</div>
-			<div class="" *ngFor="let review of reviews | paginate: { itemsPerPage: 3, currentPage: page }">
+			<div class="displayReviews" *ngFor="let review of reviews | paginate: { itemsPerPage: 3, currentPage: page }">
 				<div class="row">
 					<div class="col-12">
-						<h3>{{review.rec}}</h3>
+						<h3>{{review.recAreaId}}</h3>
 						<img class="img-fluid" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
 					</div>
 					<ul>
