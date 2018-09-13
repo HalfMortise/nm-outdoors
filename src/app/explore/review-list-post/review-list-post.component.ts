@@ -1,7 +1,7 @@
 import {Component, Input, OnInit} from "@angular/core";
-import {RecAreaService} from "../shared/services/rec.area.service";
+import {RecAreaService} from "../../shared/services/rec.area.service";
 import {ActivatedRoute, Route, Router} from "@angular/router";
-import {RecArea} from "../shared/interfaces/rec.area";
+import {RecArea} from "../../shared/interfaces/rec.area";
 import {ProfileService} from "../../shared/services/profile.service";
 import {Review} from "../../shared/interfaces/review";
 import {ReviewService} from "../../shared/services/review.service";
