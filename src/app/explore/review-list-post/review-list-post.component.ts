@@ -5,7 +5,7 @@ import {RecArea} from "../../shared/interfaces/rec.area";
 import {ProfileService} from "../../shared/services/profile.service";
 import {Review} from "../../shared/interfaces/review";
 import {ReviewService} from "../../shared/services/review.service";
-import {Profile} from "../../shared/interfaces/profile";
+
 
 @Component({
 	template: require("./review-list-post.html"),
@@ -17,7 +17,7 @@ export class ReviewListPostComponent implements OnInit {
 	reviews: Review[] = [];
 	recAreaId = this.route.snapshot.params["recAreaId"];
 	recArea: RecArea = {recAreaId : "", recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
-	profile: Profile = {profileId: "", profileAtHandle: "", profileImageUrl: ""};
+
 
 
 
