@@ -5,7 +5,6 @@ import {RecArea} from "../../shared/interfaces/rec.area";
 import {ProfileService} from "../../shared/services/profile.service";
 import {Review} from "../../shared/interfaces/review";
 import {ReviewService} from "../../shared/services/review.service";
-import {FormGroup} from "@angular/forms";
 import {Status} from "../../shared/interfaces/status";
 
 @Component({
@@ -16,10 +15,8 @@ import {Status} from "../../shared/interfaces/status";
 export class ReviewListPostComponent implements OnInit {
 	review: Review;
 	reviews: Review[] = [];
-	reviewForm: FormGroup;
 	recAreaId = this.route.snapshot.params["recAreaId"];
 	recArea: RecArea = {recAreaId : "", recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
-	status: Status;
 
 
 
@@ -27,7 +24,7 @@ export class ReviewListPostComponent implements OnInit {
 		protected recAreaService: RecAreaService,
 		protected reviewService: ReviewService,
 		protected profileService: ProfileService,
-		protected route: ActivatedRoute
+		protected route: ActivatedRoute,
 	) {
 	}
 
@@ -36,6 +33,8 @@ export class ReviewListPostComponent implements OnInit {
 	}
 
 	loadReviews(): any {
-		this.recAreaService.getAllReviews() . subscribe(reviews => this.reviews = reviews);
+		if(this.recAreaId !== undefined) {
+			this.reviewService.getReviewByRecAreaId(this.recAreaId).subscribe(reviews => this.reviews = reviews);
+		}
 	}
 }
