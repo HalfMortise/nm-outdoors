@@ -20,7 +20,7 @@
 	<!-- First card deck with SH and RL -->
 	<div class="card-deck text-center">
 		<div class="card">
-			<img class="card-img-top" src="../src/app/about/sh.jpg" alt="sh-profile-img">
+			<img class="card-img-top" src="../src/app/about/images/sh.jpg" alt="sh-profile-img">
 			<div class="card-body">
 				<h5 class="card-title">Sarah</h5>
 				<p class="card-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
@@ -45,7 +45,7 @@
 <!-- Second card deck with BS and HM -->
 	<div class="card-deck text-center">
 		<div class="card">
-			<img class="card-img-top" src="../src/app/about/bs.jpg" alt="bs-profile-img">
+			<img class="card-img-top" src="../src/app/about/images/bs.jpg" alt="bs-profile-img">
 			<div class="card-body">
 				<h5 class="card-title">Bashir</h5>
 				<p class="card-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
@@ -56,7 +56,7 @@
 		</div>
 
 		<div class="card">
-			<img class="card-img-top" src="../src/app/about/hm.jpg" alt="hm-profile-img">
+			<img class="card-img-top" src="../src/app/about/images/hm.jpg" alt="hm-profile-img">
 			<div class="card-body">
 				<h5 class="card-title">Joy</h5>
 				<p class="card-text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative thinking to further the overall value proposition. Organically grow the holistic world view of disruptive innovation via workplace diversity and empowerment.</p>
