@@ -32,7 +32,6 @@
 
 			<div class="input-group">
 				<select #outdoorActivity class="custom-select" aria-label="Select drop-down menu to search activities" (change)="setSearchValue(outdoorActivity.value)">
-					<option selected value="">----You can do better than @mdav----</option>
 					<option *ngFor="let activity of activities" [value]="activity.activityId">{{activity.activityName}}
 					</option>
 				</select>
