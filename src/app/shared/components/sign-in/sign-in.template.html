@@ -3,45 +3,32 @@
  to access their profile via the landing (home) page or nav.
 -->
 
+
 <main>
 	<form #signInForm="ngForm" (ngSubmit)="signIn()" class="form-horizontal form-control-md mt-5" id="signInForm" novalidate>
 		<div class="container">
-			<div class="row justify-content-md-center">
-				<div class="col-md-6">
-					<h1 class="text-center mb-5">Sign In</h1>
-				</div><!--col-md-6-->
-			</div>
-			<!-- Email input -->
-			<div class="row justify-content-md-center control-group">
-				<label class="form-group col-md-2 control-label" for="profileEmail">Email:</label>
-				<div class="controls">
-					<!-- NgModel bringing it back to the component and tying in the signin object -->
-					<input id="profileEmail" type="email" name="profileEmail" [(ngModel)]="signin.profileEmail" #profileEmail="ngModel" class="input-group input-medium" placeholder="" required="required">
+			<div class="row">
+				<div class="col-md-4 offset-md-4">
+					<div class="card text-center card  bg-default mb-3">
+						<div class="card-header">
+							<h2 class="text-center mt-3 mb-3">Sign In</h2>
+						</div>
+						<div class="card-body">
+							<label class="form-group control-label" for="profileEmail">Email:</label>
+							<input id="profileEmail" type="email" name="profileEmail" [(ngModel)]="signin.profileEmail" #profileEmail="ngModel" class="input-group input-medium" placeholder="" required="required">
+							<br />
+							<label class="form-group control-label" for="profilePassword">Password:</label>
+							<input id="profilePassword" type="password" name="profilePassword" [(ngModel)]="signin.profilePassword" #profilePassword="ngModel" class="input-group input-medium" placeholder="********" required="required">
+						</div>
+						<div class="card-footer text-muted">
+							<button type="reset" class="btn btn-warning text-light"><i class="fas fa-undo"></i>Reset</button>
+							<button type="submit" class="btn btn-primary text-light mr-3" (click)="signIn();">
+								<i class="fas fa-edit"></i>Sign In</button>
+						</div>
+					</div>
 				</div>
 			</div>
-			<!-- Password input -->
-			<div class="row justify-content-md-center control-group">
-				<label class="form-group col-md-2 control-label" for="profilePassword">Password:</label>
-				<div class="controls">
-					<!-- NgModel bringing it back to the component and tying in the signin object -->
-					<input id="profilePassword" type="password" name="profilePassword" [(ngModel)]="signin.profilePassword" #profilePassword="ngModel" class="input-group input-medium" placeholder="********" required="required">
-				</div>
-			</div>
-
-			<!--&lt;!&ndash; reCAPTCHA &ndash;&gt;-->
-			<!--<br />-->
-			<!--<div class="g-recaptcha" data-sitekey="6LdKfG8UAAAAALQclWc2Mm5-iiauFbb30zWNNHVa"></div>-->
-
-			<!-- Reset and Submit buttons -->
-			<div class="row justify-content-md-center mt-3 mb-5">
-				<div class="form-group col-md-6">
-					<button type="reset" class="btn btn-warning text-light"><i class="fas fa-undo"></i>Reset</button>
-					<button type="submit" class="btn btn-primary text-light mr-3" (click)="signIn();">
-						<i class="fas fa-edit"></i>Sign In</button>
-					<!--<a data-toggle="modal" data-target="#sign-up-modal">Sign Up</a>-->
-				</div><!--form-group col-md-6-->
-			</div><!--row justify-content-md-center-->
-		</div><!--container-->
+		</div>
 	</form>
 </main>
 
