@@ -31,11 +31,13 @@
 			<h3>Exploring New Mexico, one trail at a time...</h3>
 
 			<div class="input-group">
-				<select class="custom-select" aria-label="Select drop-down menu to search activities">
-					<option *ngFor="let activity of activities"> {{activity.activityName}}</option>
+				<select #outdoorActivity class="custom-select" aria-label="Select drop-down menu to search activities" (change)="setSearchValue(outdoorActivity.value)">
+					<option selected value="">----You can do better than @mdav----</option>
+					<option *ngFor="let activity of activities" [value]="activity.activityId">{{activity.activityName}}
+					</option>
 				</select>
 				<div class="input-group-append">
-					<button class="btn btn-outline-secondary" type="button">Go</button>
+					<button class="btn btn-outline-secondary" type="button" (click)="getSearchResults();">Go</button>
 				</div>
 			</div>
 			<sign-in></sign-in>
