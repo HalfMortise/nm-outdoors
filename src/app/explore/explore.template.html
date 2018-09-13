@@ -8,10 +8,17 @@
 							<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
 								<marker *ngFor="let detailedRecArea of recAreas"
 										  [position]="[detailedRecArea.recAreaLat, detailedRecArea.recAreaLong]"
-										  (click)="clicked($event)" (click)="displayRecArea(detailedRecArea)"></marker>
+										  (click)="clicked($event)" (click)="displayRecArea(detailedRecArea)" [icon]="{
+         url: 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png',
+         anchor: [16,16],
+         size: [32,32],
+         scaledSize: [32,32]
+       }"></marker>
 								<info-window id="recAreaInfo">
 									<h5>{{detailedRecArea.recAreaName}}</h5>
 									<br>
+									<a class="btn btn-info btn-sm" target="_blank"
+										href="https://www.google.com/maps/dir/?api=1&destination={{detailedRecArea.recAreaLat}}+{{detailedRecArea.recAreaLong}}">Directions</a>
 								</info-window>
 							</ngui-map>
 						</div>
@@ -36,7 +43,7 @@
 												<li>{{detailedRecArea.recAreaDescription}}</li>
 												<li>{{detailedRecArea.recAreaDirections}}</li>
 											</ul>
-											<a routerLink="/area/{{detailedRecArea.recAreaId}}">Check Out This Area! </a>
+											<button class="btn btn-info btn-lg" routerLink="/area/{{detailedRecArea.recAreaId}}">Check Out This Area! </button>
 											<img src="{{detailedRecArea.recAreaMapUrl}}">
 										</div>
 									</div>

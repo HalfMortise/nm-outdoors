@@ -70,6 +70,10 @@ export class ExploreComponent implements OnInit{
 		this.detailedRecArea = this.clearedRecArea;
 		// this.nguiMapComponent.closeInfoWindow('recAreaInfo', marker);
 	}
+
+	directionsClick() {
+		this.router.navigate(["https://www.google.com/maps/dir/?api=1&destination=" + this.detailedRecArea.recAreaLat + this.detailedRecArea.recAreaLong]);
+	}
 	//Search Functions
 
   // getSearchResults() {
