@@ -12,6 +12,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Route, Router} from "@angular/router";
 import {RecAreaService} from "../shared/services/rec.area.service";
 import {RecAreaModalComponent} from "./recArea-modal/recArea-modal.component";
+import {AreaComponent} from "../area/area.component";
 
 @Component({
 	template: require("./explore.template.html")

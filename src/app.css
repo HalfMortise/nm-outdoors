@@ -99,10 +99,11 @@ body {
 	background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
 	opacity: 0.9;
 	right: 0;
-	top: 5vh;
-	bottom: 10vh;
+	top: 0;
+	bottom: 0;
 	float: right;
-	margin-bottom: 15vh;
+	margin-bottom: 5vh;
+	padding: 5% 5% 15% 5%;
 }
 .recArea-list {
 	overflow-y: auto;
@@ -180,7 +181,7 @@ body {
 	html,
 	body {
 		width: 100vw;
-		height: 100%;
+		height: 100vh;
 	}
 
 	.btn-view {
@@ -191,10 +192,10 @@ body {
 	}
 
 	footer {
-		max-height: 0.25em;
-		background-color: #333;
+		background-image: linear-gradient( 122deg, #24b3ad 0%, #00e27b 100%);
 		width: 100vw;
 		bottom: 0;
+		height: 5vh;
 		position: fixed;
 	}
 
@@ -225,9 +226,10 @@ body {
 * Footer Styling
 ******************************************************/
 footer {
-	background-color: #333;
+	background-image: linear-gradient( 122deg, #24b3ad 0%, #00e27b 100%);
 	width: 100vw;
 	bottom: 0;
+	height: 5vh;
 	position: fixed;
 }
 
@@ -237,7 +239,7 @@ ngui-map {
 
 .div-wrapper {
 	height: 100%;
-	width: 70vw;
+	width: 60vw;
 }
 
 .ngui-map-container {
@@ -266,12 +268,17 @@ ngui-map {
 	position: fixed;
 }
 
-.navbar-brand,
+.navbar, .navbar-brand,
 .navbar-nav li a {
 	line-height: 5vh;
 	height: 5vh;
 	padding-top: 0;
 }
+
+.navbar {
+	background-image: linear-gradient( 122deg, #24b3ad 0%, #00e27b 100%);
+}
+
 
 .area-wrapper {
 	overflow: scroll;
