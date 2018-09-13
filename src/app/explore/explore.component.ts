@@ -22,6 +22,8 @@ export class ExploreComponent implements OnInit{
 	recAreas : RecArea[] = [];
 	recAreaSearchForm : FormGroup;
 	detailedRecArea : RecArea = {recAreaId : null, recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
+
+	clearedRecArea : RecArea = {recAreaId : null, recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
 	direction: string = 'horizontal';
 	recAreaParameter: string;
 	recAreaValue: string;
@@ -52,16 +54,21 @@ export class ExploreComponent implements OnInit{
 			.subscribe(recAreas => this.recAreas = recAreas);
 	}
 
-	clicked(marker : RecArea) {
-		this.detailedRecArea = marker;
+	displayRecArea(detailedRecArea : RecArea) {
+		this.detailedRecArea = detailedRecArea;
 	}
 
-	displayRecArea({target: marker} : any, recArea : RecArea) {
-		this.detailedRecArea = recArea;
-		marker.nguiMapComponent.openInfoWindow('rec', marker);
+	clicked({target: marker} : any, detailedRecArea : RecArea) {
+		this.detailedRecArea = detailedRecArea;
+		marker.nguiMapComponent.openInfoWindow('recAreaInfo', marker);
 
 	}
 
+	//resets Rec Area Selection
+	resetRecArea() {
+		this.detailedRecArea = this.clearedRecArea;
+		// this.nguiMapComponent.closeInfoWindow('recAreaInfo', marker);
+	}
 	//Search Functions
 
   // getSearchResults() {
