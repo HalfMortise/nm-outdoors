@@ -1,14 +1,12 @@
 <div *ngIf="recArea">
 	<div class="area-wrapper m-5">
-
+		<div class="container-fluid">
 			<div class="row align-content-center justify-content-center ">
 				<div class="col-10 col-md-5">
 					<h2 class="rec-area-name">{{recArea.recAreaName}}</h2>
 					<img class="rec-area-image img-fluid rounded mx-auto d-block shadow" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
 					<p class="rec-area-par-details mt-3">{{recArea.recAreaDescription}}</p>
 					<p class="rec-area-par-details">{{recArea.recAreaDirections}}</p>
-					<p class="rec-area-par-details">Latitude:&nbsp;{{recArea.recAreaLat}}</p>
-					<p class="rec-area-par-details">Longitude:&nbsp;{{recArea.recAreaLong}}</p>
 					<p class="rec-area-par-details">{{recArea.recAreaMapUrl}}</p>
 				</div>
 
@@ -26,5 +24,6 @@
 					<!--<reviews-list></reviews-list>-->
 				</div>
 			</div>
+		</div>
 	</div>
 </div>

@@ -9,7 +9,7 @@
 								<marker *ngFor="let detailedRecArea of recAreas"
 										  [position]="[detailedRecArea.recAreaLat, detailedRecArea.recAreaLong]"
 										  (click)="clicked($event)" (click)="displayRecArea(detailedRecArea)" [icon]="{
-         url: 'https://cdn4.iconfinder.com/data/icons/small-n-flat/24/map-marker-512.png',
+         url: 'https://git.xhost.io/uploads/-/system/project/avatar/36/map-marker-icon.png',
          anchor: [16,16],
          size: [32,32],
          scaledSize: [32,32]
@@ -17,7 +17,7 @@
 								<info-window id="recAreaInfo">
 									<h5>{{detailedRecArea.recAreaName}}</h5>
 									<br>
-									<a class="btn btn-info btn-sm" target="_blank"
+									<a class="btn btn-info btn-sm text-center" target="_blank"
 										href="https://www.google.com/maps/dir/?api=1&destination={{detailedRecArea.recAreaLat}}+{{detailedRecArea.recAreaLong}}">Directions</a>
 								</info-window>
 							</ngui-map>
@@ -26,11 +26,11 @@
 				</split-area>
 				<split-area>
 					<div *ngIf="detailedRecArea.recAreaId !== null">
-						<div class="container-fluid recArea-panel">
+						<div class="container-fluid recArea-panel shadow">
 							<div class="row align-content-center justify-content-center">
 								<div class="col-12 opacity-visible">
 									<div class="searchForm col-12">
-										<button class="btn btn-warning btn-lg text-center" type="button" (click)="resetRecArea()">
+										<button class="btn btn-warning btn-lg float-right" type="button" (click)="resetRecArea()">
 											BACK
 										</button>
 										<div class="row justify-content-center align-content-center">
