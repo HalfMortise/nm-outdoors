@@ -28,7 +28,12 @@ export class ReviewPostComponent implements OnInit{
 	reviewForm: FormGroup;
 
 
-	constructor(protected reviewService: ReviewService, protected recAreaService: RecAreaService, protected route: ActivatedRoute, protected formBuilder: FormBuilder){
+	constructor(
+		protected reviewService: ReviewService,
+		protected recAreaService: RecAreaService,
+		protected route: ActivatedRoute,
+		protected formBuilder: FormBuilder
+	){
 
 
 
@@ -55,6 +60,8 @@ export class ReviewPostComponent implements OnInit{
 		let review: Review = {
 			reviewId: null,
 			reviewProfileId: null,
+			profileAtHandle: null,
+			profileImageUrl: null,
 			reviewRecAreaId: this.recAreaId,
 			reviewContent: this.reviewForm.value.reviewText,
 			reviewDateTime : null,
