@@ -7,16 +7,16 @@
 					<pagination-controls (pageChange)="page = $event"></pagination-controls>
 				</div>
 				<div class="searchForm col-12" routerLink="/recArea/{{review.reviewRecAreaId}}"
-					  *ngFor="let review of reviews | paginate: { itemsPerPage: 10, currentPage: page }">
+					  *ngFor="let tempReview of tempReviews | paginate: { itemsPerPage: 10, currentPage: page }">
 					<div class="row">
 						<div class="col-12">
-							<h3>{{profile.profileAtHandle}}</h3>
-							<img class="img-fluid" src="{{profile.profileImageUrl}}" alt="user image">
-							<p>{{review.reviewDateTime}}</p>
+							<h3>{{tempReview.profileAtHandle}}</h3>
+							<img class="img-fluid" src="{{tempReview.profileImageUrl}}" alt="user image">
+							<p>{{tempReview.review.reviewDateTime}}</p>
 						</div>
 						<div>
-							<p>{{review.reviewRating}}</p>
-							<p>{{review.reviewContent}}</p>
+							<p>{{tempReview.review.reviewRating}}</p>
+							<p>{{tempReview.review.reviewContent}}</p>
 						</div>
 					</div>
 				</div>

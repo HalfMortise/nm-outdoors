@@ -39,8 +39,8 @@ export class ReviewService {
 	}
 
 	// call to the review API and get an array of reviews based off the recAreaId
-	getReviewByRecAreaId(reviewRecAreaId : string) : Observable<Review[]> {
-		return(this.http.get<Review[]>(this.reviewUrl, {params: new HttpParams().set("reviewRecAreaId", reviewRecAreaId)}));
+	getReviewByRecAreaId(reviewRecAreaId : string) : Observable<any[]> {
+		return(this.http.get<any[]>(this.reviewUrl, {params: new HttpParams().set("reviewRecAreaId", reviewRecAreaId)}));
 	}
 
 	// // call to the review API and get an array of reviews based off the reviewContent

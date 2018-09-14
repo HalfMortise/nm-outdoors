@@ -30,10 +30,11 @@ import {ReviewPostComponent} from "./reviewpost/review-post.component";
 import {MainNavComponent} from "./shared/components/main-nav/main-nav.component";
 import {AboutComponent} from "./about/about.component";
 import {AreaComponent} from "./area/area.component";
+import {ReviewListPostComponent} from "./explore/review-list-post/review-list-post.component";
 
 
 
-export const allAppComponents = [HomeComponent, AboutComponent, AreaComponent, ExploreComponent, MainNavComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent, ReviewPostComponent];
+export const allAppComponents = [HomeComponent, AboutComponent, AreaComponent, ExploreComponent, MainNavComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent, ReviewPostComponent, ReviewListPostComponent];
 
 export const routes: Routes = [
 	{path: "about", component: AboutComponent},

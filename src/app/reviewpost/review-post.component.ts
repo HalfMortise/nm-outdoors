@@ -66,6 +66,8 @@ export class ReviewPostComponent implements OnInit{
 			reviewContent: this.reviewForm.value.reviewText,
 			reviewDateTime : null,
 			reviewRating: this.reviewForm.value.reviewRating,
+			profileAtHandle: null,
+			profileImageUrl: null
 		};
 		 this.reviewService.createReview(review).subscribe(status =>{
 		 	this.status = status;

@@ -43,7 +43,9 @@ export class ProfileComponent implements OnInit {
 		reviewRecAreaId: "",
 		reviewContent: "",
 		reviewDateTime: "",
-		reviewRating: null
+		reviewRating: null,
+		profileAtHandle: null,
+		profileImageUrl: null
 	};
 
 	recArea: RecArea;
