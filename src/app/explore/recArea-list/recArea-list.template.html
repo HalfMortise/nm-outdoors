@@ -1,26 +1,28 @@
 <main>
-		<div class="container-fluid recArea-list">
-			<div class="row align-content-center justify-content-center">
+	<div class="container recArea-list">
+		<div class="row align-content-center justify-content-center">
 
-				<div class="col-12 opacity-visible">
-					<div class="text-center">
-						<pagination-controls (pageChange)="page = $event"></pagination-controls>
-					</div>
-						<div class="searchForm col-12" routerLink="/area/{{recArea.recAreaId}}"
-							 *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
-							<div class="row">
-								<div class="col-12">
-									<h3>{{recArea.recAreaName}}</h3>
-								<img class="img-fluid" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
-								</div>
-								<ul>
-									<li>{{recArea.recAreaDescription}}</li>
-									<li>{{recArea.recAreaDirections}}</li>
-								</ul>
-								<img src="{{recArea.recAreaMapUrl}}">
-							</div>
-							</div>
+			<div class="col-12 opacity-visible">
+				<div class="text-center">
+					<pagination-controls (pageChange)="page = $event"></pagination-controls>
+				</div>
+				<div class="searchForm col-12" routerLink="/area/{{recArea.recAreaId}}"
+					  *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
+					<div class="row">
+						<div class="col-12">
+							<h3 class="card-title">{{recArea.recAreaName}}</h3>
+							<img class="img-fluid rounded mx-auto d-block shadow" src="{{recArea.recAreaImageUrl}}"
+								  alt="Image of {{recArea.recAreaName}}">
+							<br/>
+							<h4><strong><u>Description:</u></strong> </h4>
+								<p>{{recArea.recAreaDescription}}</p>
+							<h4><strong><u>Direction:</u></strong></h4>
+								<p>{{recArea.recAreaDirections}}</p>
+							<img src="{{recArea.recAreaMapUrl}}">
 						</div>
+					</div>
 				</div>
 			</div>
+		</div>
+	</div>
 </main>

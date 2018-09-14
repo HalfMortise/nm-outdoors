@@ -417,14 +417,14 @@ class RecArea implements \JsonSerializable {
 	}
 
 
-public static function getRecAreaByActivityId(\PDO $pdo, string $activityId) {
+	public static function getRecAreaByActivityId(\PDO $pdo, string $activityId) {
 
 		//sanitize the activityId before searching
-	try {
-		$activityId = self::validateUuid($activityId);
-	} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
-		throw(new \PDOException($exception->getMessage(), 0, $exception));
-	}
+		try {
+			$activityId = self::validateUuid($activityId);
+		} catch(\InvalidArgumentException | \RangeException | \Exception | \TypeError $exception) {
+			throw(new \PDOException($exception->getMessage(), 0, $exception));
+		}
 		//create query template
 		$query = "SELECT area.recAreaId, area.recAreaDescription, area.recAreaDirections, area.recAreaImageUrl, area.recAreaLat, area.recAreaLong, area.recAreaMapUrl, area.recAreaName FROM activity INNER JOIN activityType AS type on activity.activityId = type.activityTypeActivityId
 INNER JOIN recArea as area on area.recAreaId = type.activityTypeRecAreaId
