@@ -3,7 +3,7 @@
 
 
 
-     <div>
+     <div class="review-rate-element mt-5">
 			<h3>Review and Rating </h3>
 			<p>Please leave a rating and review below</p>
 
@@ -28,9 +28,10 @@
 
 
 				<textarea formControlName="reviewText" name="review" id="review" cols="30" rows="10"></textarea>
-				<button type="submit" class="btn btn-warning text-light">Submit</button>
-				<button type="reset" class="btn btn-warning text-light"><i class="fas fa-undo"></i>Reset</button>
-				</form>
+				<br />
+				<button type="reset" class="btn btn-warning text-light review-rate-element-buttons"><i class="fas fa-undo"></i>Reset</button>
+				<button type="submit" class="btn btn-warning text-light review-rate-element-buttons">Submit</button>
+			</form>
 	  </div>
 		<!--&lt;!&ndash;<div id="review-section" *ngFor="let review of reviews">&ndash;&gt;-->
 			<!--<p>{{review.reviewContent}}</p>-->
