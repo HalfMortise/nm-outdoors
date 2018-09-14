@@ -35,12 +35,21 @@
 					<option *ngFor="let activity of activities" [value]="activity.activityId">{{activity.activityName}}
 					</option>
 				</select>
-				<div class="input-group-append">
-					<button class="btn btn-outline-secondary" type="button" (click)="getSearchResults();">Go</button>
+				<div class="btn-group">
+					<button class="btn btn-info dropdown-toggle" data-toggle="dropdown" type="button" (click)="getSearchResults();">Go</button>
 				</div>
 			</div>
-			<sign-in></sign-in>
-			<sign-up></sign-up>
+
+			<!-- Sign In Module -->
+			<section class="container-fluid">
+				<sign-in></sign-in>
+			</section>
+
+			<!-- Sign Up Modal -->
+			<section class="container-fluid">
+				<sign-up></sign-up>
+			</section>
+
 			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#sign-up-modal">Sign up for an
 				account
 			</button>
