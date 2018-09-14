@@ -4,8 +4,8 @@
 			<div class="row align-content-center justify-content-center ">
 				<div class="col-10 col-md-5">
 					<h2 class="rec-area-name">{{recArea.recAreaName}}</h2>
-					<img class="rec-area-image rounded mx-auto d-block shadow" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
-					<p class="rec-area-par-details">{{recArea.recAreaDescription}}</p>
+					<img class="rec-area-image img-fluid rounded mx-auto d-block shadow" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
+					<p class="rec-area-par-details mt-3">{{recArea.recAreaDescription}}</p>
 					<p class="rec-area-par-details">{{recArea.recAreaDirections}}</p>
 					<p class="rec-area-par-details">Latitude:&nbsp;{{recArea.recAreaLat}}</p>
 					<p class="rec-area-par-details">Longitude:&nbsp;{{recArea.recAreaLong}}</p>
@@ -15,14 +15,14 @@
 				<!-- Tags to external elements -->
 				<div class="col-10 col-md-5">
 						<div class="area-page-map">
-					<ngui-map class="mt-5" zoom="10" center="{{recArea.recAreaLat}}, {{recArea.recAreaLong}}">
+					<ngui-map class="mt-5 shadow" zoom="10" center="{{recArea.recAreaLat}}, {{recArea.recAreaLong}}">
 						<marker position="{{recArea.recAreaLat}}, {{recArea.recAreaLong}}">
 
 						</marker>
 					</ngui-map>
-							<button class="btn btn-success btn-lg float-right " routerLink="/explore/">BACK</button>
+							<button class="btn btn-success btn-lg float-right mt-3" routerLink="/explore/">BACK</button>
 					</div>
-					<review-post></review-post>
+					<review-post class="mt-2"></review-post>
 					<!--<reviews-list></reviews-list>-->
 				</div>
 			</div>
