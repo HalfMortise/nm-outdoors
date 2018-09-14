@@ -33,11 +33,9 @@ export class ReviewPostComponent implements OnInit{
 		protected recAreaService: RecAreaService,
 		protected route: ActivatedRoute,
 		protected formBuilder: FormBuilder
-	){
+	){}
 
 
-
-	}
 	ngOnInit(){
 		if(this.recAreaId !== undefined) {
       this.recAreaService.getRecAreaByRecAreaId(this.recAreaId).subscribe(reply => this.recArea = reply);
@@ -46,14 +44,14 @@ export class ReviewPostComponent implements OnInit{
 			reviewRating: ["", [Validators.required]]
       });
       this.loadReviews();
-    }
-	}
+    }}
+
 
 	loadReviews(): any {
 		if(this.recAreaId !== undefined) {
      	 this.reviewService.getReviewByRecAreaId(this.recAreaId).subscribe(reviews => this.reviews = reviews);
-    }
-	}
+    }}
+
 
 	//recArea review form that exists in review-post.template.html
     recAreaReviewForm(): any {
@@ -69,12 +67,12 @@ export class ReviewPostComponent implements OnInit{
 			profileAtHandle: null,
 			profileImageUrl: null
 		};
+
 		 this.reviewService.createReview(review).subscribe(status =>{
 		 	this.status = status;
 			 if(this.status.status === 200){
 				 this.loadReviews();
 			 }
 		 });
-
 	 }
 }
