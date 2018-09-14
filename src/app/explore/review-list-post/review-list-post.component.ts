@@ -15,7 +15,7 @@ export class ReviewListPostComponent implements OnInit {
 	review: Review;
 	reviews: Review[] = [];
 	recAreaId = this.route.snapshot.params["recAreaId"];
-	recArea: RecArea = {recAreaId : "", recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
+	recArea: RecArea = {recAreaId : null, recAreaDescription : null, recAreaDirections : null, recAreaImageUrl : null, recAreaLat : null, recAreaLong : null, recAreaMapUrl : null, recAreaName : null};
 
 
 
