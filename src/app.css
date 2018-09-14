@@ -41,6 +41,34 @@
 }
 /** End Styling for About elements **/
 
+/** Styling for Area elements **/
+
+.rec-area-name {
+	text-align: center;
+	padding: 4px;
+}
+
+.rec-area-image {
+	padding: 4px;
+}
+
+.rec-area-par-details {
+	max-width: 90%;
+	text-align: center;
+	padding: 4px;
+}
+
+.review-rate-element {
+	text-align: center;
+}
+
+.review-rate-element-buttons {
+	margin: 10px;
+}
+
+/** End Styling for Area elements **/
+
+
 /*****************************************************
 * Global Styles
 ******************************************************/
