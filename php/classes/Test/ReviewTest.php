@@ -275,19 +275,24 @@ class ReviewTest extends NmOutdoorsTest {
 		$this->assertCount(1, $results);
 
 		// enforce no other objects are bleeding into the test
-		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Review", $results);
+//		$this->assertContainsOnlyInstancesOf("HalfMortise\\NmOutdoors\\Review", $results);
 
 		// grab the result from the array and validate it
+
 		$pdoReview = $results[0];
-		$this->assertEquals($pdoReview->getReviewId(), $reviewId);
-		$this->assertEquals($pdoReview->getReviewProfileId(), $this->profile->getProfileId());
-		$this->assertEquals($pdoReview->getReviewRecAreaId(), $this->recArea->getRecAreaId());
-		$this->assertEquals($pdoReview->getReviewContent(), $this->VALID_REVIEWCONTENT);
+		$pdoProfile = $results[0];
+
+		$this->assertEquals($pdoReview->review->getReviewId(), $reviewId);
+		$this->assertEquals($pdoReview->review->getReviewProfileId(), $this->profile->getProfileId());
+		$this->assertEquals($pdoReview->review->getReviewRecAreaId(), $this->recArea->getRecAreaId());
+		$this->assertEquals($pdoReview->review->getReviewContent(), $this->VALID_REVIEWCONTENT);
+		$this->assertEquals($pdoProfile->profileAtHandle, $this->profile->getProfileAtHandle());
+		$this->assertEquals($pdoProfile->profileImageUrl, $this->profile->getProfileImageUrl());
 
 		//format the date too seconds since the beginning of time to avoid round off error
-		$this->assertEquals($pdoReview->getReviewDateTime()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
+		$this->assertEquals($pdoReview->review->getReviewDateTime()->getTimestamp(), $this->VALID_REVIEWDATETIME->getTimestamp());
 
-		$this->assertEquals($pdoReview->getReviewRating(), $this->VALID_REVIEWRATING);
+		$this->assertEquals($pdoReview->review->getReviewRating(), $this->VALID_REVIEWRATING);
 	}
 
 	/**

@@ -351,7 +351,7 @@ class Review implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//create query template
-		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime,reviewRating FROM review WHERE reviewRecAreaId = :reviewRecAreaId";
+		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime,reviewRating, profileAtHandle, profileImageUrl FROM review INNER JOIN profile ON review.reviewProfileId = profile.profileId WHERE reviewRecAreaId = :reviewRecAreaId";
 		$statement = $pdo->prepare($query);
 		//bind the review id to the place holder in the template
 		$parameters = ["reviewRecAreaId" => $reviewRecAreaId->getBytes()];
@@ -361,8 +361,8 @@ class Review implements \JsonSerializable {
 		$statement->setFetchMode(\PDO::FETCH_ASSOC);
 		while (($row = $statement->fetch()) !== false) {
 			try {
-				$review = new review($row["reviewId"], $row["reviewProfileId"], $row["reviewRecAreaId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
-				$reviews[$reviews->key()] = $review;
+				$review = new Review($row["reviewId"], $row["reviewProfileId"], $row["reviewRecAreaId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
+				$reviews[$reviews->key()] = (object)["review" => $review, "profileAtHandle" => $row["profileAtHandle"], "profileImageUrl" => $row["profileImageUrl"]];
 				$reviews->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
@@ -409,6 +409,7 @@ class Review implements \JsonSerializable {
 		}
 		return ($reviews);
 	}
+
 
 	/**
 	 * gets all Reviews
