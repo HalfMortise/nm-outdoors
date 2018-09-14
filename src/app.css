@@ -20,13 +20,24 @@
 
 
 /** Styling for About elements **/
+.about-content {
+
+}
+
 .about-h3 {
 	text-align: center;
+	padding: 14px;
 }
 
 .about-par {
 	text-align: center;
-	width: 50%;
+	width: 55%;
+}
+
+.card-img-top {
+	box-shadow: 4px 4px 6px 2px #aaa;
+	margin: 20px;
+	width: 80%;
 }
 /** End Styling for About elements **/
 
