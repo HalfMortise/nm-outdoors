@@ -5,6 +5,4 @@ export interface Review {
 	reviewContent: string;
 	reviewDateTime: string;
 	reviewRating: number;
-	profileAtHandle: string;
-	profileImageUrl: string;
 }
