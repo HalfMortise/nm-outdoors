@@ -30,15 +30,18 @@
 }
 
 .about-par {
+	font-size: 14px;
 	text-align: center;
-	width: 55%;
+	width: 60%;
 }
 
 .card-img-top {
 	box-shadow: 4px 4px 6px 2px #aaa;
 	margin: 20px;
-	width: 80%;
+	width: 50%;
 }
+
+
 /** End Styling for About elements **/
 
 /** Styling for Area elements **/
