@@ -15,7 +15,7 @@ import {Status} from "../../shared/interfaces/status";
 })
 
 export class ReviewListPostComponent implements OnInit {
-	review: Review = {reviewId: null, reviewProfileId: null, reviewRecAreaId: null, reviewContent: null, reviewDateTime: null, reviewRating: null, profileAtHandle: null, profileImageUrl: null};
+	review: Review = {reviewId: null, reviewProfileId: null, reviewRecAreaId: null, reviewContent: null, reviewDateTime: null, reviewRating: null};
 	reviews: Review[] = [];
 	recAreaId = this.route.snapshot.params["recAreaId"];
 	recArea: RecArea = {recAreaId : null, recAreaDescription : null, recAreaDirections : null, recAreaImageUrl : null, recAreaLat : null, recAreaLong : null, recAreaMapUrl : null, recAreaName : null};
