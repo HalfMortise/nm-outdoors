@@ -5,6 +5,7 @@ import {Review} from "../interfaces/review";
 import {Observable} from "rxjs/internal/Observable";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ReviewList} from "../interfaces/review-list";
+import {ReviewProfile} from "../interfaces/review-profile";
 
 @Injectable ()
 export class ReviewService {
@@ -35,8 +36,8 @@ export class ReviewService {
 	}
 
 	// call to the review API and get an array of reviews based off the profileId
-	getReviewbyProfileId(reviewProfileId : string) : Observable<Review[]> {
-		return(this.http.get<Review[]>(this.reviewUrl, {params: new HttpParams().set("reviewProfileId", reviewProfileId)}));
+	getReviewbyProfileId(reviewProfileId : string) : Observable<ReviewProfile[]> {
+		return(this.http.get<ReviewProfile[]>(this.reviewUrl, {params: new HttpParams().set("reviewProfileId", reviewProfileId)}));
 	}
 
 	// call to the review API and get an array of reviews based off the recAreaId
