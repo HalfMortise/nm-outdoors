@@ -19,18 +19,19 @@
 			<div class="text-center">
 				<pagination-controls (pageChange)="page = $event"></pagination-controls>
 			</div>
-			<div class="displayReviews" *ngFor="let tempReview of reviewList | paginate: { itemsPerPage: 3, currentPage: page }">
+			<div class="area-wrapper">
+			<div class="displayReviews" *ngFor="let tempReview of reviews | paginate: { itemsPerPage: 3, currentPage: page }">
 				<div class="row">
 					<div class="col-12">
-						<h3>{{review.recAreaId}}</h3>
-						<img class="img-fluid" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
-						<p>{{recArea.recAreaName}}</p>
+						<h3>{{tempReview.recAreaName}}</h3>
+						<img class="img-fluid" [src]="tempReview.recAreaImageUrl" alt="rec area image">
 					</div>
-					<ul>
-						<li>{{review.reviewContent}}</li>
-						<li>{{review.reviewRating}}</li>
-						<li>{{review.reviewDateTime}}</li>
-					</ul>
+						<ul>
+							<li>{{tempReview.review.reviewContent}}</li>
+							<li>{{tempReview.review.reviewRating}}</li>
+							<li>{{tempReview.review.reviewDateTime | date: "short"}}</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

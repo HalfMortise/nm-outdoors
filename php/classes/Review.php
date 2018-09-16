@@ -400,7 +400,7 @@ class Review implements \JsonSerializable {
 		while (($row = $statement->fetch()) !== false) {
 			try {
 				$review = new review($row["reviewId"], $row["reviewProfileId"], $row["reviewRecAreaId"], $row["reviewContent"], $row["reviewDateTime"], $row["reviewRating"]);
-				$reviews[$reviews->key()] = $review;
+				$reviews[$reviews->key()] = (object) ["review" => $review, "recAreaImageUrl" => $row["recAreaImageUrl"], "recAreaName" => $row["recAreaName"]];
 				$reviews->next();
 			} catch(\Exception $exception) {
 				// if the row couldn't be converted, rethrow it
