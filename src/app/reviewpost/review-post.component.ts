@@ -9,6 +9,8 @@ import {RecArea} from "../shared/interfaces/rec.area";
 import {ActivatedRoute, Params} from "@angular/router";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Status} from "../shared/interfaces/status";
+import {Profile} from "../shared/interfaces/profile";
+import {ReviewList} from "../shared/interfaces/review-list";
 
 
 /*component*/
@@ -26,6 +28,8 @@ export class ReviewPostComponent implements OnInit{
 	status: Status;
 	review: Review;
 	reviewForm: FormGroup;
+	profile: Profile;
+	reviewList: ReviewList[] = [];
 
 
 	constructor(
@@ -48,9 +52,8 @@ export class ReviewPostComponent implements OnInit{
 
 
 	loadReviews(): any {
-		if(this.recAreaId !== undefined) {
-     	 this.reviewService.getReviewByRecAreaId(this.recAreaId).subscribe(reviews => this.reviews = reviews);
-    }}
+	this.reviewService.getReviewByRecAreaId(this.recAreaId).subscribe(reply => this.reviewList = reply)
+	}
 
 
 	//recArea review form that exists in review-post.template.html
@@ -58,8 +61,6 @@ export class ReviewPostComponent implements OnInit{
 		let review: Review = {
 			reviewId: null,
 			reviewProfileId: null,
-			profileAtHandle: null,
-			profileImageUrl: null,
 			reviewRecAreaId: this.recAreaId,
 			reviewContent: this.reviewForm.value.reviewText,
 			reviewDateTime : null,
