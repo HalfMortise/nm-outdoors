@@ -5,6 +5,7 @@
     "phpunit/phpunit": "@stable",
     "swiftmailer/swiftmailer": "@stable",
     "lcobucci/jwt": "3.2",
+    "cloudinary/cloudinary_php": "@stable",
     "ramsey/uuid": "@stable",
     "phpdocumentor/phpdocumentor": "dev-master"
   },
