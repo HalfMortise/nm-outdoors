@@ -389,7 +389,7 @@ class Review implements \JsonSerializable {
 			throw(new \PDOException($exception->getMessage(), 0, $exception));
 		}
 		//create query template
-		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime,reviewRating, recAreaId, recAreaImageUrl, recAreaName FROM review INNER JOIN recArea ON review.reviewRecAreaId = recArea.recAreaId WHERE reviewProfileId = :reviewProfileId";
+		$query = "SELECT reviewId, reviewProfileId, reviewRecAreaId, reviewContent, reviewDateTime,reviewRating, recAreaImageUrl, recAreaName FROM review INNER JOIN recArea ON review.reviewRecAreaId = recArea.recAreaId WHERE reviewProfileId = :reviewProfileId";
 		$statement = $pdo->prepare($query);
 		//bind the review id to the place holder in the template
 		$parameters = ["reviewProfileId" => $reviewProfileId->getBytes()];
