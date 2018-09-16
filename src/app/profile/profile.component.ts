@@ -18,6 +18,7 @@ import {Review} from "../shared/interfaces/review";
 import {ReviewService} from "../shared/services/review.service";
 import {RecAreaService} from "../shared/services/rec.area.service";
 import {RecArea} from "../shared/interfaces/rec.area";
+import {ReviewProfile} from "../shared/interfaces/review-profile";
 
 /* Component */
 
@@ -45,10 +46,10 @@ export class ProfileComponent implements OnInit {
 		reviewDateTime: "",
 		reviewRating: null,
 	};
-
+	profileId : string;
 	recArea: RecArea;
 	review: Review;
-	reviews: Review[] = [];
+	reviews : ReviewProfile[] = [];
 	status: Status;
 
 
@@ -62,7 +63,8 @@ export class ProfileComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
-		this.currentUser()
+		this.currentUser();
+		this.getReviewsByProfileId();
 	}
 
 
@@ -74,9 +76,13 @@ export class ProfileComponent implements OnInit {
 
 		if(isLoggedIn) {}
 
-		let profileId = this.authService.decodeJwt().auth.profileId;
+		this.profileId = this.authService.decodeJwt().auth.profileId;
 
-		this.profileService.getProfileByProfileId(profileId).subscribe(reply => this.profile = reply);
+		this.profileService.getProfileByProfileId(this.profileId).subscribe(reply => this.profile = reply);
 
+	}
+
+	getReviewsByProfileId() {
+		this.reviewService.getReviewbyProfileId(this.profileId).subscribe(reply => this.reviews = reply);
 	}
 }

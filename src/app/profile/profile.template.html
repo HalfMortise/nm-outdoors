@@ -19,7 +19,7 @@
 			<div class="text-center">
 				<pagination-controls (pageChange)="page = $event"></pagination-controls>
 			</div>
-			<div class="displayReviews" *ngFor="let review of reviews | paginate: { itemsPerPage: 3, currentPage: page }">
+			<div class="displayReviews" *ngFor="let tempReview of reviewList | paginate: { itemsPerPage: 3, currentPage: page }">
 				<div class="row">
 					<div class="col-12">
 						<h3>{{review.recAreaId}}</h3>
