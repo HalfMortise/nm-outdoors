@@ -62,7 +62,7 @@ try{
 			$review = Review::getReviewByReviewProfileId($pdo, $reviewProfileId)->toArray();
 			//get all the reviews associated with the RecAreaId
 		} else if(empty($reviewRecAreaId) === false) {
-			$review = Review::getReviewByReviewRecAreaId($pdo, $reviewRecAreaId)->toArray();
+			$reply-> data = Review::getReviewByReviewRecAreaId($pdo, $reviewRecAreaId)->toArray();
 			//get all the reviews associated with the reviewContent
 		}else {
 			$reply->data = Review::getAllReviews($pdo)->toArray();
