@@ -65,9 +65,6 @@ export class ProfileComponent implements OnInit {
 		this.currentUser()
 	}
 
-	profileId = this.route.snapshot.params["profileId"];
-
-	reviewId = this.route.snapshot.params["reviewId"];
 
 	currentUser(): void {
 
