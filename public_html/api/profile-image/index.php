@@ -6,9 +6,7 @@ require_once dirname(__DIR__, 3) . "/php/lib/xsrf.php";
 require_once dirname(__DIR__, 3) . "/php/lib/uuid.php";
 require_once dirname(__DIR__, 3) . "/php/lib/jwt.php";
 
-use HalfMortise\NmOutdoors {
-	Profile, Image
-};
+use HalfMortise\NmOutdoors\Profile;
 
 /**
  * Cloudinary API for Images
@@ -25,6 +23,7 @@ if(session_status() !== PHP_SESSION_ACTIVE) {
 $reply = new StdClass();
 $reply->status = 200;
 $reply->data = null;
+
 try {
 	// Grab the MySQL connection
 	$pdo = connectToEncryptedMySQL("/etc/apache2/capstone-mysql/nmoutdoors.ini");
@@ -35,11 +34,11 @@ try {
 	$cloudinary = json_decode($config["cloudinary"]);
 
 	//UPDATE THESE KEYS AFTER ADDING THIS FILE TO .GITIGNORE
-	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, "774547866314647" => $cloudinary->apiKey, "acF6L0CeMIZ7VBcQJVyl4ohmet8" => $cloudinary->apiSecret]);
+	\Cloudinary::config(["cloud_name" => $cloudinary->cloudName, $cloudinary->apiKey, $cloudinary->apiSecret]);
 
 	// process GET requests
 
-	if($method === "PUT") {
+	if($method === "POST") {
 
 		//enforce that the end user has a XSRF token.
 		verifyXsrf();
