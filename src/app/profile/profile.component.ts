@@ -19,6 +19,8 @@ import {ReviewService} from "../shared/services/review.service";
 import {RecAreaService} from "../shared/services/rec.area.service";
 import {RecArea} from "../shared/interfaces/rec.area";
 import {ReviewProfile} from "../shared/interfaces/review-profile";
+import {FileUploader} from "ng2-file-upload";
+import {Cookie} from "ng2-cookies";
 
 /* Component */
 
@@ -37,7 +39,6 @@ export class ProfileComponent implements OnInit {
 	};
 
 	// profiles: Profile[] = [];
-
 	detailedReview: Review = {
 		reviewId: "",
 		reviewProfileId: "",
@@ -51,6 +52,14 @@ export class ProfileComponent implements OnInit {
 	review: Review;
 	reviews : ReviewProfile[] = [];
 	status: Status;
+	public uploader: FileUploader = new FileUploader({
+		itemAlias: "temp",
+		url: "./api/image",
+		headers: [
+			{name: "X-JWT-TOKEN", value: window.localStorage.getItem("jwt-token")},
+			{name: "X-XSRF-TOKEN", value: Cookie.get("XSRF-TOKEN")},
+		]
+	});
 
 
 	constructor(
@@ -71,18 +80,21 @@ export class ProfileComponent implements OnInit {
 	currentUser(): void {
 
 		let isLoggedIn: boolean = this.authService.loggedIn();
-
-		console.log(isLoggedIn);
-
-		if(isLoggedIn) {}
-
+		// console.log(isLoggedIn);
+		if(isLoggedIn) {
 		this.profileId = this.authService.decodeJwt().auth.profileId;
-
 		this.profileService.getProfileByProfileId(this.profileId).subscribe(reply => this.profile = reply);
-
+		}
 	}
 
 	getReviewsByProfileId() {
 		this.reviewService.getReviewbyProfileId(this.profileId).subscribe(reply => this.reviews = reply);
+	}
+
+	uploadImage(): void {
+		this.uploader.uploadAll();
+		this.uploader.onSuccessItem = () => {
+			console.log("Image successfully uploaded");
+		}
 	}
 }
