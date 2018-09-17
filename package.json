@@ -57,7 +57,7 @@
     "@fortawesome/fontawesome-free-brands": "^5.0.13",
     "@fortawesome/fontawesome-free-regular": "^5.0.13",
     "@fortawesome/fontawesome-free-solid": "^5.0.13",
-    "@types/node": "^10.9.4",
+    "@types/node": "^10.10.1",
     "ajv": "^6.4.0",
     "awesome-typescript-loader": "^5.2.1",
     "bootstrap": "^4.1.3",
