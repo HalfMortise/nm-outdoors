@@ -18,48 +18,70 @@ import {AreaComponent} from "../area/area.component";
 	template: require("./explore.template.html")
 })
 
-export class ExploreComponent implements OnInit{
-	recArea : RecArea;
-	recAreas : RecArea[] = [];
-	recAreaSearchForm : FormGroup;
-	detailedRecArea : RecArea = {recAreaId : null, recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
+export class ExploreComponent implements OnInit {
+	recArea: RecArea;
+	recAreas: RecArea[] = [];
+	recAreaSearchForm: FormGroup;
+	detailedRecArea: RecArea = {
+		recAreaId: null,
+		recAreaDescription: "",
+		recAreaDirections: "",
+		recAreaImageUrl: "",
+		recAreaLat: "",
+		recAreaLong: "",
+		recAreaMapUrl: "",
+		recAreaName: ""
+	};
 
-	clearedRecArea : RecArea = {recAreaId : null, recAreaDescription : "", recAreaDirections : "", recAreaImageUrl : "", recAreaLat : "", recAreaLong : "", recAreaMapUrl : "", recAreaName : ""};
+	clearedRecArea: RecArea = {
+		recAreaId: null,
+		recAreaDescription: "",
+		recAreaDirections: "",
+		recAreaImageUrl: "",
+		recAreaLat: "",
+		recAreaLong: "",
+		recAreaMapUrl: "",
+		recAreaName: ""
+	};
 	direction: string = 'horizontal';
 	recAreaParameter: string;
 	recAreaValue: string;
-  status: Status = {status: null, message: null, type: null};
-  searchParameters : any[] = [
-    {"parameter" : "name"},
-    // {"parameter" : "activity"},
-		{"parameter" : "description"},
-    {"parameter" : "status"},
-  ];
+	status: Status = {status: null, message: null, type: null};
+	searchParameters: any[] = [
+		{"parameter": "name"},
+		// {"parameter" : "activity"},
+		{"parameter": "description"},
+		{"parameter": "status"},
+	];
+	private _opened: boolean = true;
+	private _toggleSidebar() {
+		this._opened = !this._opened;
+	}
 
-	@ViewChild(RecAreaModalComponent) recAreaModalComponent : RecAreaModalComponent;
+	@ViewChild(RecAreaModalComponent) recAreaModalComponent: RecAreaModalComponent;
 
-	constructor(private recAreaService: RecAreaService, private router: Router, private formBuilder: FormBuilder){
+	constructor(private recAreaService: RecAreaService, private router: Router, private formBuilder: FormBuilder) {
 		router.onSameUrlNavigation = "reload";
 	}
 
-	ngOnInit() : void {
+	ngOnInit(): void {
 		this.showRecAreas();
 		this.recAreaSearchForm = this.formBuilder.group({
-			recAreaSearchName: ["",[Validators.maxLength(140), Validators.minLength(1)]]
+			recAreaSearchName: ["", [Validators.maxLength(140), Validators.minLength(1)]]
 		});
 		// this.loadSearchResults();
 	}
 
-	showRecAreas() : void {
+	showRecAreas(): void {
 		this.recAreaService.getAllRecAreas()
 			.subscribe(recAreas => this.recAreas = recAreas);
 	}
 
-	displayRecArea(detailedRecArea : RecArea) {
+	displayRecArea(detailedRecArea: RecArea) {
 		this.detailedRecArea = detailedRecArea;
 	}
 
-	clicked({target: marker} : any, detailedRecArea : RecArea) {
+	clicked({target: marker}: any, detailedRecArea: RecArea) {
 		this.detailedRecArea = detailedRecArea;
 		marker.nguiMapComponent.openInfoWindow('recAreaInfo', marker);
 
@@ -68,65 +90,66 @@ export class ExploreComponent implements OnInit{
 	//resets Rec Area Selection
 	resetRecArea() {
 		this.detailedRecArea = this.clearedRecArea;
-		// this.nguiMapComponent.closeInfoWindow('recAreaInfo', marker);
+		// marker.nguiMapComponent.closeInfoWindow('recAreaInfo', marker);
 	}
 
 	directionsClick() {
 		this.router.navigate(["https://www.google.com/maps/dir/?api=1&destination=" + this.detailedRecArea.recAreaLat + this.detailedRecArea.recAreaLong]);
 	}
+
 	//Search Functions
 
-  // getSearchResults() {
-  //   let searchParameter = this.recAreaSearchForm.value.searchParameter;
-  //   let searchContent = this.recAreaSearchForm.value.searchContent;
-  //   this.router.navigate(["/search", "explore" + searchParameter.charAt(0).toUpperCase() + searchParameter.substring(1), searchContent])
-  //     .then(() => this.loadSearchResults());
-  //   // this.router.navigate(["search", this.searchForm.value.searchParameter, this.searchForm.value.searchContent])
-  // }
+	// getSearchResults() {
+	//   let searchParameter = this.recAreaSearchForm.value.searchParameter;
+	//   let searchContent = this.recAreaSearchForm.value.searchContent;
+	//   this.router.navigate(["/search", "explore" + searchParameter.charAt(0).toUpperCase() + searchParameter.substring(1), searchContent])
+	//     .then(() => this.loadSearchResults());
+	//   // this.router.navigate(["search", this.searchForm.value.searchParameter, this.searchForm.value.searchContent])
+	// }
 	//
-  // loadSearchResults() {
-  //   this.recAreaParameter = this.route.snapshot.params["recAreaParameter"];
-  //   this.recAreaValue = this.route.snapshot.params["recAreaValue"];
-  //   if(this.recAreaParameter === "recAreaStatus"){
-  //   	this.loadStatus(this.recAreaValue);
+	// loadSearchResults() {
+	//   this.recAreaParameter = this.route.snapshot.params["recAreaParameter"];
+	//   this.recAreaValue = this.route.snapshot.params["recAreaValue"];
+	//   if(this.recAreaParameter === "recAreaStatus"){
+	//   	this.loadStatus(this.recAreaValue);
 	// 	} else if(this.)
-  //   // if(this.recAreaParameter === "recAreaStatus"){
-  //   //   this.loadStatus(this.recAreaValue);
-  //   // } else if(this.recAreaParameter === "recAreaActivity"){
-  //   //   this.loadActivity(this.recAreaValue);
-  //   // } else if(this.recAreaParameter === "recAreaGender"){
-  //   //   this.loadGender(this.recAreaValue);
-  //   // } else if(this.recAreaParameter === "recAreaSpecies"){
-  //   //   this.loadSpecies(this.recAreaValue);
-  //   // }
-  // }
+	//   // if(this.recAreaParameter === "recAreaStatus"){
+	//   //   this.loadStatus(this.recAreaValue);
+	//   // } else if(this.recAreaParameter === "recAreaActivity"){
+	//   //   this.loadActivity(this.recAreaValue);
+	//   // } else if(this.recAreaParameter === "recAreaGender"){
+	//   //   this.loadGender(this.recAreaValue);
+	//   // } else if(this.recAreaParameter === "recAreaSpecies"){
+	//   //   this.loadSpecies(this.recAreaValue);
+	//   // }
+	// }
 	//
-  // // loadActivity(recAreaActivity: string){
-  // //   this.recAreaService.getRecAreaByRecAreaActivity(recAreaActivity).subscribe(recArea => this.recArea = recAreas);
-  // // }
+	// // loadActivity(recAreaActivity: string){
+	// //   this.recAreaService.getRecAreaByRecAreaActivity(recAreaActivity).subscribe(recArea => this.recArea = recAreas);
+	// // }
 	//
-  // loadGender(recAreaGender: string){
-  //   this.recAreaService.getrecAreaByrecAreaGender(recAreaGender).subscribe(recAreas => this.recAreas = recAreas);
-  // }
+	// loadGender(recAreaGender: string){
+	//   this.recAreaService.getrecAreaByrecAreaGender(recAreaGender).subscribe(recAreas => this.recAreas = recAreas);
+	// }
 	//
-  // loadSpecies(recAreaSpecies: string){
-  //   if(recAreaSpecies === "8472") {
-  //     alert("THE WEAK SHALL PERISH");
-  //   }
-  //   this.recAreaService.getrecAreaByrecAreaSpecies(recAreaSpecies).subscribe(recAreas => this.recAreas = recAreas);
-  // }
+	// loadSpecies(recAreaSpecies: string){
+	//   if(recAreaSpecies === "8472") {
+	//     alert("THE WEAK SHALL PERISH");
+	//   }
+	//   this.recAreaService.getrecAreaByrecAreaSpecies(recAreaSpecies).subscribe(recAreas => this.recAreas = recAreas);
+	// }
 	//
-  // loadStatus(recAreaStatus: string){
-  //   this.recAreaService.getrecAreaByrecAreaStatus(recAreaStatus).subscribe(recAreas => this.recAreas = recAreas);
-  // }
+	// loadStatus(recAreaStatus: string){
+	//   this.recAreaService.getrecAreaByrecAreaStatus(recAreaStatus).subscribe(recAreas => this.recAreas = recAreas);
+	// }
 
-  getRecAreaByRecAreaName() : void {
+	getRecAreaByRecAreaName(): void {
 
-    this.recAreaService.getRecAreaByRecAreaName(this.recAreaSearchForm.value.recAreaName).subscribe(reply =>{
-      this.recAreas=reply;
-      this.recAreaSearchForm.reset();
-    });
-  }
+		this.recAreaService.getRecAreaByRecAreaName(this.recAreaSearchForm.value.recAreaName).subscribe(reply => {
+			this.recAreas = reply;
+			this.recAreaSearchForm.reset();
+		});
+	}
 
 	// getAllRecAreas() : void {
 	// 	this.recAreaService.getAllRecAreas().subscribe(reply =>{

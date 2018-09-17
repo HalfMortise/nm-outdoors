@@ -96,11 +96,6 @@ html {
 
 }
 
-@media (max-width: 75em) {
-	html {
-		font-size: 70%;
-	}
-}
 
 @media (max-width: 56.25em) {
 	html {
@@ -130,17 +125,21 @@ body {
 * Explore Page Styling
 ******************************************************/
 * {
-	box-sizing: border-box;
-	transition: .5s;
-}
+	 box-sizing: border-box;
+	 transition: .25s;
+ }
 
 .overflow-hidden {
 	overflow: hidden;
 }
 
+.img-info {
+	height: 5em;
+	width: 8em;
+}
+
 .recArea-panel {
 	height: 100vh;
-	width: 40vw;
 	overflow-y: auto;
 	background-color: #FFE53B;
 	background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
@@ -222,6 +221,38 @@ body {
 		min-height: 100vh;
 		background-color: #ff9827;
 	}
+
+	.recArea-panel {
+		height: 100vh;
+		width: 100vw;
+		overflow-y: auto;
+		background-color: #FFE53B;
+		background-image: linear-gradient(147deg, #FFE53B 0%, #FF2525 74%);
+		opacity: 0.9;
+		right: 0;
+		top: 0;
+		bottom: 0;
+		float: right;
+		margin-bottom: 5vh;
+		padding: 5% 5% 15% 5%;
+	}
+
+	ngui-map {
+		min-height: 100vh;
+	}
+
+	.div-wrapper {
+		height: 100%;
+		width: 100%;
+	}
+
+	.ngui-map-container {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+	}
 }
 
 @media screen and (max-width: 55em) {
@@ -241,12 +272,37 @@ body {
 	footer {
 		width: 100vw;
 		bottom: 0;
-		height: 5vh;
 		position: fixed;
 	}
 
 }
 
+.btn {
+	padding: 0.6rem 2rem;
+	margin: 5px;
+	border-radius: 5%;
+}
+.btn-view {
+	color: #fff;
+	border-radius: 3px;
+	background-image: linear-gradient(122deg, #21a2c7 0%, #2daa34 100%);
+	box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.2);
+	font-weight: 500;
+	border: 0;
+	position: absolute;
+	bottom: 5em;
+	right: 2.25em;
+}
+.btn-view:hover,
+.btn-view:focus,
+.btn-view:active,
+.btn-view:not([disabled]):not(.disabled).active,
+.btn-view:not([disabled]):not(.disabled):active,
+.show > .btn-view.dropdown-toggle {
+	background-image: linear-gradient(122deg, #214991 0%, #206824 100%);
+	box-shadow: 0px 9px 32px 0px rgba(0, 0, 0, 0.3);
+	color: #FFF;
+}
 
 #map {
 	-webkit-transition: width 0.3s ease;
@@ -275,7 +331,6 @@ footer {
 	background-image: linear-gradient( 122deg, #00c064 0%, #26aca6 100%);
 	width: 100vw;
 	bottom: 0;
-	height: 5vh;
 	position: fixed;
 }
 
@@ -285,7 +340,7 @@ ngui-map {
 
 .div-wrapper {
 	height: 100%;
-	width: 60vw;
+	width: 100%;
 }
 
 .ngui-map-container {
@@ -296,16 +351,16 @@ ngui-map {
 	left: 0;
 }
 
-/*split-area {*/
-/*height: 100vh;*/
-/*width: 50vw;*/
-/*}*/
-/*@media (max-width: 800px) {*/
-/*split-area {*/
-/*height: 50vh;*/
-/*width: 100vw;*/
-/*}*/
-/*}*/
+split-area {
+height: 100vh;
+width: 50vw;
+}
+@media (max-width: 800px) {
+split-area {
+height: 50vh;
+width: 100vw;
+}
+}
 @media (max-width: 960px) {
 	ngui-map {
 		height: 50vh; } }

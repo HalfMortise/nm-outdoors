@@ -1,8 +1,7 @@
 <section class="home-wrapper">
-	<div class="absolute-wrapper">
-		<div class="map-list-container">
-			<split [direction]="direction">
-				<split-area>
+			<split>
+				<split-area [size]="null">
+					<div class="container">
 					<div class="ngui-map-container">
 						<div class="div-wrapper">
 							<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
@@ -16,6 +15,8 @@
        }"></marker>
 								<info-window id="recAreaInfo">
 									<h5>{{detailedRecArea.recAreaName}}</h5>
+									<img class="img-info rounded shadow" src="{{detailedRecArea.recAreaImageUrl}}"
+										  alt="Image of {{detailedRecArea.recAreaName}}">
 									<br>
 									<a class="btn btn-info btn-sm text-center" target="_blank"
 										href="https://www.google.com/maps/dir/?api=1&destination={{detailedRecArea.recAreaLat}}+{{detailedRecArea.recAreaLong}}">Directions</a>
@@ -23,8 +24,9 @@
 							</ngui-map>
 						</div>
 					</div>
+					</div>
 				</split-area>
-				<split-area>
+				<split-area [visible]="_opened" [size]="null">
 					<div *ngIf="detailedRecArea.recAreaId !== null">
 						<div class="container-fluid recArea-panel shadow">
 							<div class="row align-content-center justify-content-center">
@@ -85,8 +87,6 @@
 					</div>
 				</split-area>
 			</split>
-		</div>
-	</div>
 </section>
 
 
@@ -112,5 +112,5 @@
 <!--</div>-->
 
 
-<!--&lt;!&ndash;<button class="btn btn-view" id="toggle">List/Map</button>&ndash;&gt;-->
+<button class="btn btn-view" (click)="_toggleSidebar()">List/Map</button>
 <!--<button class="btn btn-view" id="toggle" (click)="direction = (direction === 'horizontal') ? 'vertical' : 'horizontal'">{{ 'Toggle direction: "' + direction + '"' }}</button>-->
