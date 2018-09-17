@@ -2,6 +2,12 @@
 
 /** Main Styling File **/
 
+/** Styling for review post section **/
+
+.user-image {
+	width: 50px;
+
+}
 /** Styling for Profile elements **/
 
 .card {
