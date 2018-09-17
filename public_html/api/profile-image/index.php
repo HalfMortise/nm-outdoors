@@ -45,10 +45,14 @@ try {
 
 		// verify the user is logged in
 		if(empty($_SESSION["profile"]) === true) {
-			throw (new \InvalidArgumentException("you must be logged in to post images", 401));
+         throw (new \InvalidArgumentException("you must be logged in to post images", 401));
+      }
 
 			// grab the user using the session
-
+       $profile = Profile::getProfileByProfileId($pdo, $_SESSION["profile"]->getProfileId());
+        if(empty($profile) === true) {
+           throw new \InvalidArgumentException("you must be logged in to post images", 401);
+        }
 
 			// assigning variable to the user profile, add image extension
 			$tempUserFileName = $_FILES["image"]["tmp_name"];
@@ -56,9 +60,15 @@ try {
 			// upload image to cloudinary and get public id
 			$cloudinaryResult = \Cloudinary\Uploader::upload($tempUserFileName, array("width" => 500, "crop" => "scale"));
 
-			//use the setProfileImageUrl() to set the image url
+			// use the setProfileImageUrl() to set the image url
+         $profile->setProfileImageUrl($cloudinaryResult["secure_url"]);
+
 			//update the profile and attach a reply message
-		}
+		$profile->update($pdo);
+
+		//message to convey successful image upload
+		$reply->message="Profile image uploaded successfully";
+
 	}
 } catch
 (Exception $exception) {
