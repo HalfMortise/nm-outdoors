@@ -1,92 +1,96 @@
 <section class="home-wrapper">
-			<split>
-				<split-area [size]="null">
-					<div class="container">
-					<div class="ngui-map-container">
-						<div class="div-wrapper">
-							<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
-								<marker *ngFor="let detailedRecArea of recAreas"
-										  [position]="[detailedRecArea.recAreaLat, detailedRecArea.recAreaLong]"
-										  (click)="clicked($event)" (click)="displayRecArea(detailedRecArea)" [icon]="{
+	<div class="ngui-map-container">
+		<div class="div-wrapper">
+			<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
+				<marker *ngFor="let detailedRecArea of recAreas"
+						  [position]="[detailedRecArea.recAreaLat, detailedRecArea.recAreaLong]"
+						  (click)="clicked($event)" (click)="displayRecArea(detailedRecArea)" [icon]="{
          url: 'https://git.xhost.io/uploads/-/system/project/avatar/36/map-marker-icon.png',
          anchor: [16,16],
          size: [32,32],
          scaledSize: [32,32]
        }"></marker>
-								<info-window id="recAreaInfo">
-									<h5>{{detailedRecArea.recAreaName}}</h5>
-									<img class="img-info rounded shadow" src="{{detailedRecArea.recAreaImageUrl}}"
+				<info-window id="recAreaInfo">
+								<div class="card-info card-cascade wider">
+									<img class="img-info card-img-top" src="{{detailedRecArea.recAreaImageUrl}}"
 										  alt="Image of {{detailedRecArea.recAreaName}}">
-									<br>
-									<a class="btn btn-info btn-sm text-center" target="_blank"
-										href="https://www.google.com/maps/dir/?api=1&destination={{detailedRecArea.recAreaLat}}+{{detailedRecArea.recAreaLong}}">Directions</a>
-								</info-window>
-							</ngui-map>
-						</div>
-					</div>
-					</div>
-				</split-area>
-				<split-area [visible]="_opened" [size]="null">
-					<div *ngIf="detailedRecArea.recAreaId !== null">
-						<div class="container-fluid recArea-panel shadow">
-							<div class="row align-content-center justify-content-center">
-								<div class="col-12 opacity-visible">
-									<div class="searchForm col-12">
-										<button class="btn btn-warning btn-lg float-right" type="button" (click)="resetRecArea()">
-											BACK
-										</button>
-										<div class="row justify-content-center align-content-center">
-											<div class="col-12">
-												<h3>{{detailedRecArea.recAreaName}}</h3>
-												<img class="img-fluid" src="{{detailedRecArea.recAreaImageUrl}}"
-													  alt="rec area image">
-											</div>
-											<ul>
-												<li>{{detailedRecArea.recAreaDescription}}</li>
-												<li>{{detailedRecArea.recAreaDirections}}</li>
-											</ul>
-											<button class="btn btn-info btn-lg" routerLink="/area/{{detailedRecArea.recAreaId}}">Check Out This Area! </button>
-											<img src="{{detailedRecArea.recAreaMapUrl}}">
-										</div>
+									<button class="btn-floating btn-action ml-auto mr-4 mdb-color darken-2" routerLink="/area/{{detailedRecArea.recAreaId}}">
+									<i class="fa fa-chevron-right pl-1"></i>
+									</button>
+
+									<div class="card-body">
+										<h4 class="card-title">{{detailedRecArea.recAreaName}}</h4>
+										<p class="card-text"></p>
+										<a class="btn btn-info btn-sm -align-right" target="_blank"
+											href="https://www.google.com/maps/dir/?api=1&destination={{detailedRecArea.recAreaLat}}+{{detailedRecArea.recAreaLong}}">Directions</a>
 									</div>
 								</div>
+				</info-window>
+			</ngui-map>
+		</div>
+	</div>
+	<div class="col-list" [ngClass]="{'hide': _opened}">
+		<div *ngIf="detailedRecArea.recAreaId !== null">
+			<div class="container-fluid recArea-panel shadow">
+				<div class="row align-content-center justify-content-center">
+					<div class="col-12 opacity-visible">
+						<div class="searchForm col-12">
+							<button class="btn btn-primary btn-lg float-right" type="button" (click)="resetRecArea()">
+								BACK
+							</button>
+							<div class="row justify-content-center align-content-center">
+								<div class="col-12">
+									<h3>{{detailedRecArea.recAreaName}}</h3>
+									<img class="img-fluid" src="{{detailedRecArea.recAreaImageUrl}}"
+										  alt="rec area image">
+								</div>
+								<ul>
+									<li>{{detailedRecArea.recAreaDescription}}</li>
+									<li>{{detailedRecArea.recAreaDirections}}</li>
+								</ul>
+								<button class="btn btn-info btn-lg" routerLink="/area/{{detailedRecArea.recAreaId}}">Check Out
+									This Area!
+								</button>
+								<img src="{{detailedRecArea.recAreaMapUrl}}">
 							</div>
 						</div>
 					</div>
-					<div *ngIf="detailedRecArea.recAreaId === null">
-						<div class="container-fluid recArea-panel">
-							<div class="row align-content-center justify-content-center">
-								<div class="col-12 opacity-visible">
-									<form class="form-inline" [formGroup]="recAreaSearchForm"
-											(submit)="getRecAreaByRecAreaName()">
-										<input class="form-control userSearch" type="search" placeholder="Search by name"
-												 formControlName="recAreaSearchName" aria-label="Search">
-										<button class="btn btn-info" type="submit"><i class="fas fa-search"></i></button>
-										<button class="btn btn-danger" type="button" (click)="showRecAreas()">RESET</button>
-									</form>
-									<div class="text-center">
-										<pagination-controls (pageChange)="page = $event"></pagination-controls>
-									</div>
-									<div class="searchForm col-12" routerLink="/area/{{recArea.recAreaId}}"
-										  *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
-										<div class="row">
-											<div class="col-12">
-												<h3>{{recArea.recAreaName}}</h3>
-												<img class="img-fluid" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
-											</div>
-											<ul>
-												<li>{{recArea.recAreaDescription}}</li>
-												<li>{{recArea.recAreaDirections}}</li>
-											</ul>
-											<img src="{{recArea.recAreaMapUrl}}">
-										</div>
-									</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="detailedRecArea.recAreaId === null">
+			<div class="container-fluid recArea-panel">
+				<div class="row align-content-center justify-content-center">
+					<div class="col-12 opacity-visible">
+						<form class="form-inline" [formGroup]="recAreaSearchForm"
+								(submit)="getRecAreaByRecAreaName()">
+							<input class="form-control userSearch" type="search" placeholder="Search by name"
+									 formControlName="recAreaSearchName" aria-label="Search">
+							<button class="btn btn-info" type="submit"><i class="fas fa-search"></i></button>
+							<button class="btn btn-danger" type="button" (click)="showRecAreas()">RESET</button>
+						</form>
+						<div class="text-center">
+							<pagination-controls (pageChange)="page = $event"></pagination-controls>
+						</div>
+						<div class="searchForm col-12" routerLink="/area/{{recArea.recAreaId}}"
+							  *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
+							<div class="row">
+								<div class="col-12">
+									<h3>{{recArea.recAreaName}}</h3>
+									<img class="img-fluid" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
 								</div>
+								<ul>
+									<li>{{recArea.recAreaDescription}}</li>
+									<li>{{recArea.recAreaDirections}}</li>
+								</ul>
+								<img src="{{recArea.recAreaMapUrl}}">
 							</div>
 						</div>
 					</div>
-				</split-area>
-			</split>
+				</div>
+			</div>
+		</div>
+	</div>
 </section>
 
 
