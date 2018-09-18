@@ -108,6 +108,20 @@
 	padding: 4px;
 }
 
+.rec-area-list-name {
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+	padding: 10px;
+	font-size: 20px;
+}
+
+.rec-area-list-details {
+	font-family: 'Montserrat', sans-serif;
+	padding: 6px;
+	font-size: 14px;
+	max-width: 70%;
+}
+
 .review-rate-element {
 	text-align: center;
 }
