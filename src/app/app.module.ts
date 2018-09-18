@@ -9,6 +9,7 @@ import {NgxPaginationModule} from "ngx-pagination";
 import {JwtModule} from "@auth0/angular-jwt";
 // import {SidebarModule} from "ng-sidebar";
 import {AngularSplitModule} from "angular-split";
+import {FileUploadModule} from "ng2-file-upload";
 
 // import { AgmCoreModule } from '@agm/core';
 
@@ -35,7 +36,8 @@ const jwtHelper = JwtModule.forRoot({
 		NguiMapModule.forRoot({apiUrl: 'https://maps.google.com/maps/api/js?key=AIzaSyBMQE2mPIzXsRIbSUWzBUwiJrdrp80Xkqc'}),
 		routing,
 		ReactiveFormsModule,
-		NgxPaginationModule
+		NgxPaginationModule,
+		FileUploadModule
 	],
 	declarations: [...moduleDeclarations, ...allAppComponents],
 	bootstrap:    [AppComponent],
