@@ -4,7 +4,6 @@ import {RouterModule, Routes} from "@angular/router";
 import {APP_BASE_HREF} from "@angular/common";
 import {AuthGuardService as AuthGuard} from "./shared/services/auth-guard.service";
 
-
 /*Service Imports*/
 import {ActivityService} from "./shared/services/activity.service";
 import {RecAreaService} from "./shared/services/rec.area.service";
