@@ -2,6 +2,11 @@
 
 /** Main Styling File **/
 
+/** Styling for Home/Landing page elements **/
+
+
+
+/** Styling for Home/Landing page elements **/
 /** Styling for review post section **/
 
 .user-image {
@@ -23,8 +28,6 @@
 }
 
 /** End Styling for Profile elements **/
-
-
 /** Styling for About elements **/
 .about-content {
 
@@ -49,7 +52,6 @@
 
 
 /** End Styling for About elements **/
-
 /** Styling for Area elements **/
 
 .rec-area-name {
@@ -75,17 +77,14 @@
 }
 
 /** End Styling for Area elements **/
-
 /** Styling for Footer elements **/
 
 .footer-brand {
 	width: 50px;
+	padding: 6px;
 }
 
 /** End Styling for Footer elements **/
-
-
-
 /*****************************************************
 * Global Styles
 ******************************************************/
