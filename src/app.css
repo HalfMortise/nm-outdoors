@@ -4,6 +4,16 @@
 	/** Main Styling File **/
 
 /** Styling for Home/Landing page elements **/
+.header-image {
+	width: 100%;
+	box-shadow: 2px 2px 6px 6px #aaa;
+	margin-bottom: 15px;
+}
+
+.home-container {
+	max-width: 100%;
+}
+
 .home-content {
 	font-family: 'Montserrat', sans-serif;
 }
@@ -11,13 +21,32 @@
 .home-content h1 {
 	font-size: 40px;
 	color: #5B7B87;
+	text-align: center;
+	margin-top: 30px;
+}
+
+.home-content p {
+	text-align: center;
+	padding: 20px;
+	max-width: 80%;
+}
+
+.adventure {
+	font-family: 'Montserrat', sans-serif;
+	font-size: 18px;
+	color: #5B7B87;
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 15px;
+	max-width: 50%;
 }
 
 .custom-select {
 	height: 100%;
+	max-width: 50%;
 }
 
-/** Styling for Home/Landing page elements **/
+/** End Styling for Home/Landing page elements **/
 /** Styling for review post section **/
 
 .user-image {
@@ -383,7 +412,7 @@ ngui-map {
 * Footer Styling
 ******************************************************/
 footer {
-	/*background-image: linear-gradient( 122deg, #00c064 0%, #26aca6 100%);*/
+	background-image: linear-gradient(122deg, #81A0B9 0%, #668CAA 100%);
 	width: 100vw;
 	bottom: 0;
 	position: fixed;
@@ -438,6 +467,10 @@ width: 100vw;
 
 .main-nav-list {
 	font-family: 'Montserrat', sans-serif;
+	color: #5B7D87;
+}
+
+.nav-link {
 }
 
 .navbar-toggler-icon {
@@ -446,7 +479,7 @@ width: 100vw;
 }
 
 .navbar-dark {
-	background-color: #56B1BF;
+	background-image: linear-gradient(122deg, #81A0B9 0%, #668CAA 100%);
 }
 
 .area-wrapper {
