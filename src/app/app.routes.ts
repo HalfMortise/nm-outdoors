@@ -2,6 +2,8 @@ import {RouterModule, Routes} from "@angular/router";
 // import {SplashComponent} from "./splash/splash.component";
 // import {UserService} from "./shared/services/user.service";
 import {APP_BASE_HREF} from "@angular/common";
+import {AuthGuardService as AuthGuard} from "./shared/services/auth-guard.service";
+
 
 /*Service Imports*/
 import {ActivityService} from "./shared/services/activity.service";
@@ -13,6 +15,7 @@ import {SignUpService} from "./shared/services/sign.up.service";
 import {ActivationService} from "./shared/services/activation.service";
 import {AuthService} from "./shared/services/auth.service";
 import {ProfileService} from "./shared/services/profile.service";
+import {AuthGuardService} from "./shared/services/auth-guard.service";
 
 /*Interceptor Imports*/
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
@@ -33,8 +36,20 @@ import {AreaComponent} from "./area/area.component";
 import {ReviewListPostComponent} from "./explore/review-list-post/review-list-post.component";
 
 
-
-export const allAppComponents = [HomeComponent, AboutComponent, AreaComponent, ExploreComponent, MainNavComponent, RecAreaModalComponent, ProfileComponent, RecAreaListComponent, SignInComponent, SignUpComponent, ReviewPostComponent, ReviewListPostComponent];
+export const allAppComponents = [
+	HomeComponent,
+	AboutComponent,
+	AreaComponent,
+	ExploreComponent,
+	MainNavComponent,
+	RecAreaModalComponent,
+	ProfileComponent,
+	RecAreaListComponent,
+	SignInComponent,
+	SignUpComponent,
+	ReviewPostComponent,
+	ReviewListPostComponent
+];
 
 export const routes: Routes = [
 	{path: "about", component: AboutComponent},
@@ -45,13 +60,28 @@ export const routes: Routes = [
 	{path: "sign-up-modal", component: SignUpComponent},
 	{path: "sign-in", component: SignInComponent},
 	{path: "profile", component: ProfileComponent},
+	{path: "profile/:id", component: ProfileComponent, canActivate: [AuthGuard]},
 	{path: "", component: HomeComponent}
 ];
-const services : any[] = [ActivationService, ActivityService, AuthService, ProfileService, RecAreaService, ReviewService, SessionService, SignInService, SignUpService];
+
+const services : any[] = [
+	ActivationService,
+	ActivityService,
+	AuthService,
+	AuthGuardService,
+	ProfileService,
+	RecAreaService,
+	ReviewService,
+	SessionService,
+	SignInService,
+	SignUpService
+];
+
 const providers: any[] = [
 	{provide: APP_BASE_HREF, useValue: window["_base_href"]},
 	{provide: HTTP_INTERCEPTORS, useClass: DeepDiveInterceptor, multi: true}
 ];
+
 export const appRoutingProviders: any[] = [providers, services];
 
 export const routing = RouterModule.forRoot(routes);
