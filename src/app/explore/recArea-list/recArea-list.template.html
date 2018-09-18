@@ -7,7 +7,7 @@
 					<pagination-controls (pageChange)="page = $event"></pagination-controls>
 				</div>
 				<div class="searchForm col-12" routerLink="/area/{{recArea.recAreaId}}"
-					  *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
+					  *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 3, currentPage: page }">
 					<div class="row">
 						<div class="col-12">
 							<h3 class="card-title">{{recArea.recAreaName}}</h3>
