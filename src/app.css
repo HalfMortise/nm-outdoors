@@ -116,6 +116,12 @@
 	margin: 10px;
 }
 
+.pagination-control {
+	text-align: center;
+	font-family: 'Montserrat', sans-serif;
+	font-size: 14px;
+}
+
 /** End Styling for Area elements **/
 /** Styling for Footer elements **/
 

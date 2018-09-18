@@ -1,14 +1,14 @@
 <main>
-	<div class="container recArea-list mt-4 mb-4">
+	<div class="container-fluid recArea-list mt-4 mb-4">
 		<div class="row align-content-center justify-content-center">
 			<div class="col-12 opacity-visible">
 				<div class="searchForm col-12" routerLink="/area/{{recArea.recAreaId}}"
 					  *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 1, currentPage: page }">
-					<div class="row">
-						<div class="text-center">
+					<div class="container-fluid justify-content-center">
+						<div class="pagination-control text-center">
 							<pagination-controls (pageChange)="page = $event"></pagination-controls>
 						</div>
-						<div class="col-12">
+						<div class="container-fluid justify-content-center col-12">
 							<h3 class="card-title">{{recArea.recAreaName}}</h3>
 							<img class="img-fluid rounded mx-auto d-block shadow" src="{{recArea.recAreaImageUrl}}"
 								  alt="Image of {{recArea.recAreaName}}">
@@ -19,7 +19,7 @@
 								<p>{{recArea.recAreaDirections}}</p>
 							<!--<img src="{{recArea.recAreaMapUrl}}">-->
 						</div>
-						<div class="text-center">
+						<div class="pagination-control text-center">
 							<pagination-controls (pageChange)="page = $event"></pagination-controls>
 						</div>
 					</div>
