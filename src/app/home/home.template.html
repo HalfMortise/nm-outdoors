@@ -11,27 +11,32 @@
 
 
 <script src="../app.routes.ts"></script>
-<div class="container area-wrapper">
-	<div class="row justify-content-center">
-		<div class="col-md-6 col-12 p-5">
+<div>
+	<img class="header-image img-fluid" src="https://res.cloudinary.com/dtgmpzuvt/image/upload/v1537302360/header-image.jpg">
+</div>
+
+
+<div class="home-container container-fluid area-wrapper">
+	<div class="justify-content-center">
+		<div class="">
 			<div class="container-home">
 				<div class="home-content">
 					<h1>NM Outdoors</h1>
-					<p>
+					<p class="container-fluid">
 						Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches
 						to corporate strategy foster collaborative thinking to further the overall value proposition.
 						Organically grow the holistic world view of disruptive innovation via workplace diversity and
 						empowerment.
 					</p>
 				</div>
-				<div class="image-box"></div>
+				<!--<div class="image-box"></div>-->
 			</div>
 
 
 			<!-- This will need to be updated, and content added prior to deployment -->
-			<h3>Find Your Next Adventure</h3>
+			<h3 class="adventure container-fluid">Find Your Next Adventure</h3>
 
-			<div class="input-group">
+			<div class="container-fluid input-group justify-content-center">
 				<select #outdoorActivity class="custom-select" aria-label="Select drop-down menu to search activities" (change)="setSearchValue(outdoorActivity.value)">
 					<option selected value="">-Search Activities-</option>
 					<option *ngFor="let activity of activities" [value]="activity.activityId">{{activity.activityName}}
@@ -52,7 +57,7 @@
 
 		</div>
 
-		<div class="col-md-6 col-12 mt-4">
+		<div class="">
 			<recArea-list [recAreas]="recAreas"></recArea-list>
 
 		</div>
