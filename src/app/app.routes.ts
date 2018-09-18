@@ -15,6 +15,8 @@ import {ActivationService} from "./shared/services/activation.service";
 import {AuthService} from "./shared/services/auth.service";
 import {ProfileService} from "./shared/services/profile.service";
 import {AuthGuardService} from "./shared/services/auth-guard.service";
+import {SignOutService} from "./shared/services/sign.out.service";
+
 
 /*Interceptor Imports*/
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
@@ -73,7 +75,8 @@ const services : any[] = [
 	ReviewService,
 	SessionService,
 	SignInService,
-	SignUpService
+	SignUpService,
+	SignOutService
 ];
 
 const providers: any[] = [
