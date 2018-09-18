@@ -1,8 +1,17 @@
 @import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
 
-/** Main Styling File **/
+	/** Main Styling File **/
 
 /** Styling for Home/Landing page elements **/
+.home-content {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.home-content h1 {
+	font-size: 40px;
+	color: #5B7B87;
+}
 
 .custom-select {
 	height: 100%;
@@ -374,7 +383,7 @@ ngui-map {
 * Footer Styling
 ******************************************************/
 footer {
-	background-image: linear-gradient( 122deg, #00c064 0%, #26aca6 100%);
+	/*background-image: linear-gradient( 122deg, #00c064 0%, #26aca6 100%);*/
 	width: 100vw;
 	bottom: 0;
 	position: fixed;
@@ -419,13 +428,25 @@ width: 100vw;
 /*****************************************************
 * NavBar Styling
 ******************************************************/
+.main-nav {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-brand {
+	font-size: 24px;
+}
+
+.main-nav-list {
+	font-family: 'Montserrat', sans-serif;
+}
+
 .navbar-toggler-icon {
 	float: right;
 	right: 0;
 }
 
 .navbar-dark {
-	background-image: linear-gradient( 122deg, #00c064 0%, #26aca6 100%);
+	background-color: #56B1BF;
 }
 
 .area-wrapper {
