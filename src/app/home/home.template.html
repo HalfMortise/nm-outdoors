@@ -33,7 +33,7 @@
 
 			<div class="input-group">
 				<select #outdoorActivity class="custom-select" aria-label="Select drop-down menu to search activities" (change)="setSearchValue(outdoorActivity.value)">
-					<option selected value="">----Search Activities----</option>
+					<option selected value="">-Search Activities-</option>
 					<option *ngFor="let activity of activities" [value]="activity.activityId">{{activity.activityName}}
 					</option>
 				</select>
@@ -42,10 +42,10 @@
 				</div>
 			</div>
 
-			<!-- Sign In Module -->
-			<section class="container-fluid home-sign-in">
-				<sign-in></sign-in>
-			</section>
+			<!--&lt;!&ndash; Sign In Module &ndash;&gt;-->
+			<!--<section class="container-fluid home-sign-in">-->
+				<!--<sign-in></sign-in>-->
+			<!--</section>-->
 
 			<!-- Sign Up Modal -->
 			<section class="container-fluid justify-content-center">
