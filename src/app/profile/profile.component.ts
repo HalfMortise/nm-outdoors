@@ -52,13 +52,14 @@ export class ProfileComponent implements OnInit {
 	review: Review;
 	reviews : ReviewProfile[] = [];
 	status: Status;
-	public uploader: FileUploader = new FileUploader({
-		itemAlias: "temp",
-		url: "./api/image",
+	uploader: FileUploader = new FileUploader({
+		itemAlias: "image",
+		url: "./api/profile-image/",
 		headers: [
 			{name: "X-JWT-TOKEN", value: window.localStorage.getItem("jwt-token")},
 			{name: "X-XSRF-TOKEN", value: Cookie.get("XSRF-TOKEN")},
-		]
+		],
+		additionalParameter: {}
 	});
 
 
