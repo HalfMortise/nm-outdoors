@@ -29,11 +29,11 @@
 
 
 			<!-- This will need to be updated, and content added prior to deployment -->
-			<h3>Exploring New Mexico, one trail at a time...</h3>
+			<h3>Find Your Next Adventure</h3>
 
 			<div class="input-group">
 				<select #outdoorActivity class="custom-select" aria-label="Select drop-down menu to search activities" (change)="setSearchValue(outdoorActivity.value)">
-					<option selected value="">----Pick An Activity----</option>
+					<option selected value="">----Search Activities----</option>
 					<option *ngFor="let activity of activities" [value]="activity.activityId">{{activity.activityName}}
 					</option>
 				</select>
