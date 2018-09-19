@@ -50,9 +50,12 @@
 
 .user-image {
 	width: 50px;
-
 }
 /** Styling for Profile elements **/
+
+.profile-elements {
+	font-family: 'Montserrat', sans-serif;
+}
 
 .card {
 	max-width: 90%;
@@ -64,6 +67,12 @@
 	width: 100px;
 	padding: 2px;
 	margin-left: 6px;
+}
+
+.hr-style {
+	max-width: 60%;
+	padding: 10px;
+
 }
 
 /** End Styling for Profile elements **/
@@ -138,6 +147,12 @@
 
 .review-rate-element {
 	text-align: center;
+}
+
+.review-rate-list-elements {
+	font-family: 'Montserrat', sans-serif;
+	text-align: center;
+	list-style-type:none;
 }
 
 .review-rate-element-buttons {

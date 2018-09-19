@@ -1,10 +1,11 @@
 
-<div id="profile" class="card text-center container-fluid mt-4">
-	<h5 class="card-header">Welcome back, {{profile.profileAtHandle}}!</h5>
+<div id="profile" class="profile-elements card text-center container-fluid mt-4">
+	<h3 class="welcome-card-header background-none">Welcome back, {{profile.profileAtHandle}}!</h3>
 	<img src="{{profile.profileImageUrl}}" class="profile-image img-fluid rounded-circle"/>
 
 		<input
 			type="file"
+			class="justify-content-center"
 			accept="image/*"
 			name="temp"
 			id="temp"
@@ -28,7 +29,7 @@
 	<div class="card-body">
 		<h5 class="card-title"></h5>
 		<p class="card-text">{{profile.profileEmail}}</p>
-
+<hr class="hr-style"/>
 
 		<!--<ul class="list-group list-group-flush" *ngFor="let review of reviews">-->
 			<!--<li class="list-group-item">Review{{review.reviewRecAreaId}}</li>-->
@@ -37,18 +38,18 @@
 		<!--</ul>-->
 
 
-		<div class="col-12 opacity-visible">
-			<div class="text-center">
-				<pagination-controls (pageChange)="page = $event"></pagination-controls>
+		<div class="container-fluid text-center col-12 opacity-visible">
+			<div class="container-fluid text-center justify-content-center">
+				<pagination-controls class="pagination-control" (pageChange)="page = $event"></pagination-controls>
 			</div>
-			<div class="area-wrapper">
+			<div class="area-wrapper text-center justify-content-center">
 			<div class="displayReviews" *ngFor="let tempReview of reviews | paginate: { itemsPerPage: 3, currentPage: page }">
 				<div class="row">
 					<div class="col-12">
 						<h3>{{tempReview.recAreaName}}</h3>
 						<img class="img-fluid" [src]="tempReview.recAreaImageUrl" alt="rec area image">
 					</div>
-						<ul>
+						<ul class="review-rate-list-elements container-fluid justify-content-center mb-10">
 							<li>{{tempReview.review.reviewContent}}</li>
 							<li>{{tempReview.review.reviewRating}} stars</li>
 							<li>{{tempReview.review.reviewDateTime | date: "short"}}</li>
