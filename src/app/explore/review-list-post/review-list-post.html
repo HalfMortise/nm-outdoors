@@ -1,10 +1,10 @@
 <main>
-	<div class="container-fluid">
+	<div class="review-list-post-container container-fluid">
 		<div class="row align-content-center justify-content-center">
 
 			<div class="col-12 opacity-visible">
 				<div class="text-center">
-					<pagination-controls (pageChange)="page = $event"></pagination-controls>
+					<pagination-controls class="pagination-control" (pageChange)="page = $event"></pagination-controls>
 				</div>
 				<div class="searchForm col-12" routerLink="/recArea/{{review.reviewRecAreaId}}"
 					  *ngFor="let tempReview of tempReviews | paginate: { itemsPerPage: 10, currentPage: page }">
