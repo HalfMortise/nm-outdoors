@@ -84,26 +84,24 @@
 /** End Styling for Explore elements**/
 /** Styling for About elements **/
 
-/*.about-h3 {*/
-/**/
-/*text-align: center;*/
-/*padding: 14px;*/
+.about-h3 {
+text-align: center;
+padding: 14px;
 /*color: #5B7B87;*/
-/*font-size: 25px;*/
-/*}*/
+font-size: 25px;
+}
 
-/*.about-par {*/
-/**/
-/*font-size: 14px;*/
-/*text-align: center;*/
-/*width: 60%;*/
-/*}*/
+.about-par {
+font-size: 14px;
+text-align: center;
+width: 60%;
+}
 
-/*.card-img-top {*/
-/*box-shadow: 4px 4px 6px 2px #aaa;*/
-/*margin: 20px;*/
-/*max-width: 200px;*/
-/*}*/
+.about-card-img-top {
+box-shadow: 4px 4px 6px 2px #aaa;
+margin: 20px;
+max-width: 200px;
+}
 
 /*.card-deck {*/
 /**/
