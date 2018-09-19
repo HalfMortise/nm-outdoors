@@ -1,22 +1,23 @@
 <div *ngIf="recArea">
 	<div class="area-wrapper m-5">
 		<div class="container-fluid">
-			<div class="row align-content-center justify-content-center ">
+			<div class="master-area-style row align-content-center justify-content-center ">
+
 				<div class="col-10 col-md-5">
 					<h2 class="rec-area-name">{{recArea.recAreaName}}</h2>
 					<img class="rec-area-image img-fluid mx-auto d-block shadow" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
-					<p class="rec-area-par-details mt-3">{{recArea.recAreaDescription}}</p>
-					<p class="rec-area-par-details">{{recArea.recAreaDirections}}</p>
-					<p class="rec-area-par-details">{{recArea.recAreaMapUrl}}</p>
+					<h4 class="details-title"><u>Description:</u></h4>
+					<p class="container-fluid rec-area-par-details mt-3">{{recArea.recAreaDescription}}</p>
+					<h4 class="details-title"><u>Directions:</u></h4>
+					<p class="container-fluid rec-area-par-details">{{recArea.recAreaDirections}}</p>
+					<!--<p class="rec-area-par-details">{{recArea.recAreaMapUrl}}</p>--><!--No more MAPURL-->
 				</div>
 
 				<!-- Tags to external elements -->
 				<div class="col-10 col-md-5">
 						<div class="area-page-map">
 					<ngui-map class="mt-5 shadow" zoom="10" center="{{recArea.recAreaLat}}, {{recArea.recAreaLong}}">
-						<marker position="{{recArea.recAreaLat}}, {{recArea.recAreaLong}}">
-
-						</marker>
+						<marker position="{{recArea.recAreaLat}}, {{recArea.recAreaLong}}"></marker>
 					</ngui-map>
 							<button class="btn btn-success btn-lg float-right mt-3" routerLink="/explore/">BACK</button>
 					</div>
