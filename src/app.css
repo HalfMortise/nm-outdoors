@@ -73,22 +73,28 @@
 /*}*/
 
 .about-h3 {
+	font-family: 'Montserrat', sans-serif;
 	text-align: center;
 	padding: 14px;
+	color: #5B7B87;
 }
 
 .about-par {
+	font-family: 'Montserrat', sans-serif;
 	font-size: 14px;
 	text-align: center;
 	width: 60%;
 }
 
-/*.card-img-top {*/
-	/*box-shadow: 4px 4px 6px 2px #aaa;*/
-	/*margin: 20px;*/
-	/*width: 50%;*/
-/*}*/
+.card-img-top {
+	box-shadow: 4px 4px 6px 2px #aaa;
+	margin: 20px;
+	max-width: 200px;
+}
 
+.card-deck {
+	font-family: 'Montserrat', sans-serif;
+}
 
 /** End Styling for About elements **/
 /** Styling for Area elements **/
