@@ -1,5 +1,5 @@
-<section class="home-wrapper master-explore-style">
-	<div class="ngui-map-container">
+<section class="home-wrapper">
+	<div class="ngui-map-container"><!--Maps-->
 		<div class="div-wrapper">
 			<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
 				<marker *ngFor="let detailedRecArea of recAreas"
@@ -11,79 +11,141 @@
          scaledSize: [32,32]
        }"></marker>
 				<info-window id="recAreaInfo">
-								<div class="card-info card-cascade wider">
-									<img class="img-info card-img-top" src="{{detailedRecArea.recAreaImageUrl}}"
-										  alt="Image of {{detailedRecArea.recAreaName}}">
-									<button class="btn-floating btn-action ml-auto mr-4 mdb-color darken-2" routerLink="/area/{{detailedRecArea.recAreaId}}">
-									<i class="fa fa-chevron-right pl-1"></i>
-									</button>
+					<div class="card-wrapper z-depth-2 d-flex align-items-stretch">
+						<div class="card-info card-cascade wider">
+							<img class="img-info card-img-top" src="{{detailedRecArea.recAreaImageUrl}}"
+								  alt="Image of {{detailedRecArea.recAreaName}}">
+							<button class="btn-floating btn-action ml-auto mr-4 mdb-color darken-2 hoverable"
+									  routerLink="/area/{{detailedRecArea.recAreaId}}">
+								<i class="fa fa-chevron-right pl-1"></i>
+							</button>
 
-									<div class="card-body">
-										<h4 class="card-title">{{detailedRecArea.recAreaName}}</h4>
-										<p class="card-text"></p>
-										<a class="btn btn-info btn-sm -align-right" target="_blank"
-											href="https://www.google.com/maps/dir/?api=1&destination={{detailedRecArea.recAreaLat}}+{{detailedRecArea.recAreaLong}}">Directions</a>
-									</div>
-								</div>
+							<div class="card-body">
+								<h4 class="card-title text-light ml-2 mt-2">{{detailedRecArea.recAreaName}}</h4>
+								<p class="card-text"></p>
+								<a class="btn btn-tshadow btn-warning btn-sm ml-2 hoverable" target="_blank"
+									href="https://www.google.com/maps/dir/?api=1&destination={{detailedRecArea.recAreaLat}}+{{detailedRecArea.recAreaLong}}">DIRECTIONS</a>
+							</div>
+						</div>
+					</div>
 				</info-window>
 			</ngui-map>
 		</div>
-	</div>
-	<div class="col-list" [ngClass]="{'hide': _opened}">
+	</div><!--Maps Close-->
+
+	<!--Side Bar 1 RecArea Focused-->
+	<div class="col-list" [ngClass]="{'hide': !_opened}">
 		<div *ngIf="detailedRecArea.recAreaId !== null">
 			<div class="container-fluid recArea-panel shadow">
-				<div class="row align-content-center justify-content-center">
+				<div class="row align-items-center justify-content-center">
+
 					<div class="col-12 opacity-visible">
 						<div class="searchForm col-12">
-							<button class="btn btn-primary btn-lg float-right" type="button" (click)="resetRecArea()">
+							<button class="btn btn-tshadow btn-primary btn-back" type="button" (click)="resetRecArea()">
 								BACK
 							</button>
-							<div class="row justify-content-center align-content-center">
-								<div class="col-12">
-									<h3>{{detailedRecArea.recAreaName}}</h3>
-									<img class="img-fluid" src="{{detailedRecArea.recAreaImageUrl}}"
-										  alt="rec area image">
+							<div class="card-focus z-depth-3 mt-5">
+								<img routerLink="/area/{{detailedRecArea.recAreaId}}" class="img-explore card-img-top"
+									  src="{{detailedRecArea.recAreaImageUrl}}" alt="rec area image">
+
+								<div class="card-body mx-2">
+									<h4 class="card-title">{{detailedRecArea.recAreaName}}</h4>
+									<!--<star-rating [starType]="svg" [rating]="{{detailedRecArea.}}"></star-rating>-->
+									<hr/>
+									<div class="card-text">
+										<h5><strong><u>Description:</u></strong></h5>
+										<p>{{detailedRecArea.recAreaDescription}}</p>
+										<h5><strong><u>Directions:</u></strong></h5>
+										<p>{{detailedRecArea.recAreaDirections}}</p>
+									</div>
 								</div>
-								<ul class="explore-rec-area-details">
-									<li>{{detailedRecArea.recAreaDescription}}</li>
-									<li>{{detailedRecArea.recAreaDirections}}</li>
-								</ul>
-								<button class="btn btn-info btn-lg" routerLink="/area/{{detailedRecArea.recAreaId}}">Check Out
-									This Area!
-								</button>
-								<!--<img src="{{detailedRecArea.recAreaMapUrl}}">--><!--No more MAPURL-->
+								<!-- Link -->
+								<div class="btn-group mx-4 my-2">
+									<a routerLink="/area/{{detailedRecArea.recAreaId}}"
+										class="btn btn-tshadow btn-success btn-sm">LEARN MORE <i
+										class="fa fa-angle-double-right"></i></a>
+									<a class="btn btn-tshadow btn-info btn-sm d-inline" target="_blank"
+										href="{{detailedRecArea.recAreaMapUrl}}">LOCAL MAP</a>
+									<a class="btn btn-tshadow btn-warning btn-sm" target="_blank"
+										href="https://www.google.com/maps/dir/?api=1&destination={{detailedRecArea.recAreaLat}}+{{detailedRecArea.recAreaLong}}">DIRECTIONS</a>
+							</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</div><!--Side Bar 1 RecArea Focused-->
+
+		<!-- Side Bar RecAreas List Full-->
 		<div *ngIf="detailedRecArea.recAreaId === null">
 			<div class="container-fluid recArea-panel">
-				<div class="row align-content-center justify-content-center">
+				<div class="row align-items-center justify-content-center">
 					<div class="col-12 opacity-visible">
-						<form class="form-inline" [formGroup]="recAreaSearchForm"
-								(submit)="getRecAreaByRecAreaName()">
-							<input class="form-control userSearch" type="search" placeholder="Search by name"
-									 formControlName="recAreaSearchName" aria-label="Search">
-							<button class="btn btn-info" type="submit"><i class="fas fa-search"></i></button>
-							<button class="btn btn-danger" type="button" (click)="showRecAreas()">RESET</button>
-						</form>
-						<div class="text-center container-fluid justify-content-center">
-							<pagination-controls class="pagination-control" (pageChange)="page = $event"></pagination-controls>
+						<div class="row align-items-center justify-content-center">
+							<div class="col-md-6 col-12">
+								<form class="form-inline">
+									<select #outdoorActivity class="custom-select"
+											  aria-label="Select dropF-down menu to search activities"
+											  (change)="setSearchValue(outdoorActivity.value)">
+										<option selected value="">----Pick An Activity----</option>
+										<option *ngFor="let activity of activities" [value]="activity.activityId">
+											{{activity.activityName}}
+										</option>
+									</select>
+									<div class="input-group-append">
+										<button class="btn btn-tshadow btn-info" type="button" (click)="getSearchResults();">Go
+										</button>
+									</div>
+								</form>
+							</div>
+							<div class="col-md-6 col-12">
+								<form class="form-inline" [formGroup]="recAreaSearchForm"
+										(submit)="getRecAreaByRecAreaName()">
+									<input class="form-control userSearch" type="search" placeholder="Search by name"
+											 formControlName="recAreaSearchName" aria-label="Search">
+									<button class="btn btn-tshadow btn-info" type="submit"><i class="fas fa-search"></i></button>
+									<button class="btn btn-tshadow btn-danger" type="button" (click)="showRecAreas()">RESET
+									</button>
+								</form>
+							</div>
 						</div>
-						<div class="searchForm col-12" routerLink="/area/{{recArea.recAreaId}}"
+						<div class="text-center">
+							<pagination-controls (pageChange)="page = $event"></pagination-controls>
+						</div>
+						<div class="row card-group">
+							<div class="recAreaSearchForm col-md-6 col-12 d-flex align-items-stretch"
 							  *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
-							<div class="row">
-								<div class="col-12">
-									<h3>{{recArea.recAreaName}}</h3>
-									<img class="img-fluid" src="{{recArea.recAreaImageUrl}}" alt="rec area image">
+								<div class="card-explore z-depth-3 mt-5">
+
+									<img routerLink="/area/{{recArea.recAreaId}}" class="img-explore card-img-top"
+										  src="{{recArea.recAreaImageUrl}}" alt="rec area image">
+									<!--<button class="btn-floating btn-action ml-auto mr-4 mdb-color darken-2" routerLink="/area/{{recArea.recAreaId}}">-->
+									<!--<i class="fa fa-chevron-right pl-1"></i>-->
+									<!--</button>-->
+
+									<div class="card-body">
+										<h4 class="card-title">{{recArea.recAreaName}}</h4>
+										<!--<star-rating [starType]="svg" [rating]="{{recArea.}}"></star-rating>-->
+										<hr/>
+										<div class="card-text">
+											<h5><strong><u>Description:</u></strong></h5>
+											<p>{{recArea.recAreaDescription}}</p>
+											<h5><u>Directions:</u></h5>
+											<p>{{recArea.recAreaDirections}}</p>
+										</div>
+									</div>
+									<!-- Link -->
+									<div class="col-md-12">
+										<div class="btn-group my-auto align-content-center">
+											<a routerLink="/area/{{recArea.recAreaId}}" class="btn btn-tshadow btn-success btn-sm">LEARN
+												MORE <i class="fa fa-angle-double-right"></i></a>
+											<a class="btn btn-tshadow btn-info btn-sm" target="_blank"
+												href="{{recArea.recAreaMapUrl}}">LOCAL MAP</a>
+											<a class="btn btn-tshadow btn-warning btn-sm" target="_blank"
+												href="https://www.google.com/maps/dir/?api=1&destination={{recArea.recAreaLat}}+{{recArea.recAreaLong}}">DIRECTIONS</a>
+										</div>
 								</div>
-								<ul>
-									<li>{{recArea.recAreaDescription}}</li>
-									<li>{{recArea.recAreaDirections}}</li>
-								</ul>
-								<!--<img src="{{recArea.recAreaMapUrl}}">--><!--No more MAPURL-->
+								</div>
 							</div>
 						</div>
 					</div>
@@ -93,28 +155,5 @@
 	</div>
 </section>
 
-
-<!--<div *ngIf="detaileddetailedRecArea.recAreaId !== null" >-->
-
-<!--<h1 class="rounded-top">{{detaileddetailedRecArea.recAreaName}}</h1>-->
-
-<!--<button class="btn btn-block" (clicked)="goTorecArea()">Go to Page</button>-->
-
-<!--</div>-->
-
-<!--<div class="map-list-container">-->
-<!--<div class="col-map" id="map">-->
-<!--<ngui-map zoom="10" center="Albuquerque, New Mexico" mapTypeId="terrain">-->
-
-<!--</ngui-map>-->
-<!--</div>-->
-<!--<div class="col-list" id="list">-->
-<!--<div class="row">-->
-<!--<div class="col-12"></div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-
-
-<button class="btn btn-view" (click)="_toggleSidebar()">List/Map</button>
-<!--<button class="btn btn-view" id="toggle" (click)="direction = (direction === 'horizontal') ? 'vertical' : 'horizontal'">{{ 'Toggle direction: "' + direction + '"' }}</button>-->
+<button class="btn btn-tshadow btn-view z-depth-2 hoverable" (click)="_toggleSidebar()">TOGGLE LIST</button>
+<!--<button class="btn btn-tshadow btn-view" id="toggle" (click)="direction = (direction === 'horizontal') ? 'vertical' : 'horizontal'">{{ 'Toggle direction: "' + direction + '"' }}</button>-->

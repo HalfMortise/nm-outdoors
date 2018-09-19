@@ -7,8 +7,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {NguiMapModule} from "@ngui/map";
 import {NgxPaginationModule} from "ngx-pagination";
 import {JwtModule} from "@auth0/angular-jwt";
-// import {SidebarModule} from "ng-sidebar";
-import {AngularSplitModule} from "angular-split";
 import {FileUploadModule} from "ng2-file-upload";
 
 // import { AgmCoreModule } from '@agm/core';
@@ -28,7 +26,6 @@ const jwtHelper = JwtModule.forRoot({
 
 @NgModule({
 	imports:      [
-		AngularSplitModule,
 		BrowserModule,
 		FormsModule,
 		HttpClientModule,
@@ -37,7 +34,7 @@ const jwtHelper = JwtModule.forRoot({
 		routing,
 		ReactiveFormsModule,
 		NgxPaginationModule,
-		FileUploadModule
+    FileUploadModule,
 	],
 	declarations: [...moduleDeclarations, ...allAppComponents],
 	bootstrap:    [AppComponent],
