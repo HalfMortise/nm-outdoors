@@ -76,10 +76,18 @@
 }
 
 /** End Styling for Profile elements **/
-/** Styling for About elements **/
-/*.about-content {*/
 
-/*}*/
+/** Styling for Explore elements**/
+
+.explore-rec-area-details {
+	font-family: 'Montserrat', sans-serif;
+	list-style-type:none;
+
+}
+
+/** End Styling for Explore elements**/
+/** Styling for About elements **/
+
 
 .about-h3 {
 	font-family: 'Montserrat', sans-serif;
@@ -166,7 +174,10 @@
 
 .master-area-style {
 	font-family: 'Montserrat', sans-serif;
+}
 
+.master-explore-style {
+	font-family: 'Montserrat', sans-serif;
 }
 
 .pagination-control {

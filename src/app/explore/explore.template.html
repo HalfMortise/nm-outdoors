@@ -1,4 +1,4 @@
-<section class="home-wrapper">
+<section class="home-wrapper master-explore-style">
 	<div class="ngui-map-container">
 		<div class="div-wrapper">
 			<ngui-map zoom="8" center="Albuquerque, New Mexico" mapTypeId="terrain">
@@ -44,14 +44,14 @@
 									<img class="img-fluid" src="{{detailedRecArea.recAreaImageUrl}}"
 										  alt="rec area image">
 								</div>
-								<ul>
+								<ul class="explore-rec-area-details">
 									<li>{{detailedRecArea.recAreaDescription}}</li>
 									<li>{{detailedRecArea.recAreaDirections}}</li>
 								</ul>
 								<button class="btn btn-info btn-lg" routerLink="/area/{{detailedRecArea.recAreaId}}">Check Out
 									This Area!
 								</button>
-								<img src="{{detailedRecArea.recAreaMapUrl}}">
+								<!--<img src="{{detailedRecArea.recAreaMapUrl}}">--><!--No more MAPURL-->
 							</div>
 						</div>
 					</div>
@@ -69,8 +69,8 @@
 							<button class="btn btn-info" type="submit"><i class="fas fa-search"></i></button>
 							<button class="btn btn-danger" type="button" (click)="showRecAreas()">RESET</button>
 						</form>
-						<div class="text-center">
-							<pagination-controls (pageChange)="page = $event"></pagination-controls>
+						<div class="text-center container-fluid justify-content-center">
+							<pagination-controls class="pagination-control" (pageChange)="page = $event"></pagination-controls>
 						</div>
 						<div class="searchForm col-12" routerLink="/area/{{recArea.recAreaId}}"
 							  *ngFor="let recArea of recAreas | paginate: { itemsPerPage: 10, currentPage: page }">
@@ -83,7 +83,7 @@
 									<li>{{recArea.recAreaDescription}}</li>
 									<li>{{recArea.recAreaDirections}}</li>
 								</ul>
-								<img src="{{recArea.recAreaMapUrl}}">
+								<!--<img src="{{recArea.recAreaMapUrl}}">--><!--No more MAPURL-->
 							</div>
 						</div>
 					</div>
